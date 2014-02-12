@@ -1,0 +1,304 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:The {bf:if} Command Versus the {bf:if} Qualifier}{break}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}Let's return to the {view `""SMCL/Concepts/Explicit Subscripting.smcl"##loop"':loop from the module on explicit subscripting}:
+
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}display "`var'"{txt}{p_end}
+{pmore}{cmd}display `var'[597]{txt}{p_end}
+{pmore}{cmd}display `var'[598]{txt}{p_end}
+{pmore}{cmd}display{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/if.do" 1"':Click here to execute.}
+
+{marker loop}{...}
+{pstd}We probably don't want to see all this output.
+Instead, we could use the {help ifcmd:{bf:if} command} to show only differences:
+
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}if `var'[597] != `var'[598] {{txt}{p_end}
+{pmore2}{cmd}display "The two observations of 1802011 differ on `var'."{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/if.do" 2"':Click here to execute.}
+
+{pstd}You may never have seen {cmd:if} used this way.
+This is the {cmd:if} command,
+different from the {help if:{bf:if} "qualifier"} that you've all seen.
+The {cmd:if} command is a stand-alone command;
+it's not tacked on to the end of another command.
+It evaluates a logical expression, and then if (and only if) the expression is true,
+it executes the block of commands that follows it.
+This block is enclosed by the braces {cmd}{{txt} and {cmd}}{txt}
+(as with {view `""SMCL/Concepts/For-Loops and Macros.smcl""':{bf:foreach}}).
+Above, the block contains just one command: {cmd:display}.
+
+{pstd}In contrast, the {cmd:if} qualifier is appended to commands that allow it, and means
+that the command should limit itself to observations that satisfy the condition
+that follows {cmd:if}.
+
+{pstd}We could try rewriting the loop using the {cmd:if} qualifier:
+
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}display "The two observations of 1802011 differ on `var'." if `var'[597] != `var'[598]{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/if.do" 3"':Click here to execute.}
+
+{pstd}Oops. Why didn't that work? It's because {cmd:display} doesn't allow the {cmd:if}
+qualifier. This is because {cmd:display} doesn't do work with any observations, so
+it doesn't make sense to limit its effects to a subset of them.
+
+{pstd}To tell whether a command allows the {cmd:if} qualifier, look at its help file.
+If it does, you'll see [{it:{help if}}] on the first line of the Syntax section.
+For example,
+look at {helpb display:help display}:
+there's no [{it:{help if}}].
+Now look at {helpb summarize:help summarize}: it's
+there. Even without looking at the help file, most of the time you should be
+able to figure it out conceptually by asking whether it makes sense to limit the
+command to a subset of the data. While this doesn't make sense for {cmd:display},
+it does for {cmd:summarize}.
+
+{pstd}Let's look at another example highlighting the difference between the {cmd:if}
+command and the {cmd:if} qualifier. Say we want to summarize the variable {cmd:age} for
+men ({cmd:sex == 1}):
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+summarize age if sex == 1
+{txt}{sf}{ul off}{...}
+
+{pstd}Here we've used the {cmd:if} qualifier (after {cmd:summarize}) rather than the {cmd:if}
+command (which would have come before {cmd:summarize}) because we just want the {cmd:if}
+to limit the command to a subset (observations for which {cmd:sex == 1}). This is exactly
+the function of the {cmd:if} qualifier. Compare this with:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+if 1 + 1 == 2 {{break}
+{p_end}{pmore}summarize age{break}{p_end}{pstd}
+}
+{txt}{sf}{ul off}{...}
+
+{pstd}The logical expression {cmd:1 + 1 == 2} is evaluated as true, so the {cmd:summarize} command is executed.
+But the subset of the data that {cmd:summarize} uses isn't limited in any way.
+
+{pstd}What would happen if you executed the following:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+if sex == 1 {{break}
+{p_end}{pmore}summarize age{break}{p_end}{pstd}
+}
+{txt}{sf}{ul off}{...}
+
+{pstd}The {cmd:if} command evaluates a logical expression,
+and here compares {it:one} value of {cmd:sex} {hline 2} not the entire variable {hline 2}
+with another value, {cmd:1}.
+If {cmd:sex} here doesn't represent the entire variable {cmd:sex}, what is it?
+The {cmd:if} command requires it to be a single value,
+so it assumes you meant the first observation of {cmd:sex}.
+So the above {cmd:if} block is the same as:
+
+{pstd}{cmd}if sex[1] == 1 {{txt}{p_end}
+{pmore}{cmd}summarize age{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/if.do" 4"':Click here to execute.}
+
+{pstd}This means that {cmd:summarize age} (without any subset limitations) will be
+executed if and only if the first observation of the variable {cmd:sex} equals {cmd:1}. This
+isn't what we're trying to do.
+
+{pstd}If you're wondering in a given situation whether to use the {cmd:if} command or the
+{cmd:if} qualifier, first, chances are you want the {cmd:if} qualifier. If you want to
+limit a command's effects to a subset of the data, that's the {cmd:if} qualifier.
+If instead you want to execute a block of commands if and only if a logical
+expression is true, that's the {cmd:if} command. Time for a pop quiz:
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}Which {cmd:if} should be used: the {cmd:if} command or the {cmd:if} qualifier?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}List the genders of respondents less than {cmd:30}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Determine the number of values of {cmd:sex} that are less than {cmd:0}
+and save it in a local.
+If this number is greater than {cmd:0}, {cmd:summarize sex}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}{help tabulate oneway:Tabulate} the occupation frequencies of women.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(d)}
+
+{pstd}Determine the number of values of {cmd:sex} that are less than {cmd:0}
+and save it in a local.
+If this number is greater than {cmd:0},
+list the values of {cmd:hhid} for which {cmd:sex} is less than {cmd:0}.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}Above, we used the {cmd:if} command to {cmd:display} under certain conditions:
+
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}if `var'[597] != `var'[598] {{txt}{p_end}
+{pmore2}{cmd}display "The two observations of 1802011 differ on `var'."{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/if.do" 5"':Click here to execute.}
+
+{pstd}A question before an exercise: Do you remember where {cmd:597} and {cmd:598} came from?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{pstd}These are the observation numbers of the two observations with {cmd:hhid "1802011"}.
+We know them from {cmd:list} and {cmd:browse} in the module on
+{view `""SMCL/Tasks/Unique IDs and Duplicates.smcl"##list"':unique IDs and duplicates}.
+
+{pstd}Touching on {view `""SMCL/Concepts/For-Loops and Macros.smcl"##style"':style} again,
+notice above that for every left brace, I indented once.
+My code stays indented until the right brace.
+Thus, it's easy to tell what's in the loop and what's not, and what's in the {cmd:if} block and what's not.
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}For the following questions, be sure to have the (fully) duplicated {bf:hhid} observations dropped:
+
+{pstd}{bf:{stata `"duplicates drop"'}}{p_end}
+
+{pstd}{bf:(a)}
+
+{pstd}There are two observations with {cmd:hhid "1813023"}.
+If they differ on the variable {cmd:surveyid},
+have Stata display {cmd:"Difference!"}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}What are all the variables
+on which the observations with {cmd:hhid "1813023"} differ?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Get Stata to count the number of variables
+on which the observations with {cmd:hhid "1813023"} differ.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {bf:More on if}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} For more on the difference between the {cmd:if} command and {cmd:if} qualifier, see {browse "http://www.stata.com/support/faqs/programming/if-command-versus-if-qualifier/":this}}{c |}{p_end}
+{p2col:{c |} {browse "http://www.stata.com/support/faqs/programming/if-command-versus-if-qualifier/":StataCorp FAQ}.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+
+{hline}
+
+{pstd}Problem Set: {view `""SMCL/Problem sets/Concepts/if - problem set.smcl""':The {bf:if} Command Versus the {bf:if} Qualifier}{break}
+
+{pstd}Next: {view `""SMCL/Concepts/Big N.smcl""':{bf:_N}}{break}
+Previous: {view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
+{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}

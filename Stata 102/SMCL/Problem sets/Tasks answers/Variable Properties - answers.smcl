@@ -1,0 +1,270 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Variable Properties}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q5"':Question 5}{break}
+{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q6"':Question 6}{break}
+{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q7"':Question 7}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} Consider the problem of renaming the same variables
+multiple times with different prefixes.
+First, assign the prefix {cmd:base_} (for "baseline") to all variables.
+Then rename variables with the prefix {cmd:mid_} instead.
+Finally, rename with the prefix {cmd:end_}.
+
+{pstd}What variable(s) would you not want to rename in this fashion?
+{txt}{sf}{ul off}{...}
+
+{pstd}If you're using Stata 12 or higher,
+the improved {cmd:rename} is one way to add the {cmd:base_} prefix:
+
+{pstd}{bf:{stata `"rename * base_*"'}}{p_end}
+
+{pstd}{cmd:renpfix} is an option for all versions:
+
+{pstd}{bf:{stata `"renpfix "" base_"'}}{p_end}
+
+{pstd}All variables now have the {cmd:base_} prefix.
+As we add the {cmd:mid_} prefix,
+we must remember that the variables do have a prefix, {cmd:base_},
+rather than no prefix at all.
+
+{pstd}{cmd:* Stata 12 or higher}{p_end}
+{pstd}{bf:{stata `"rename base_* mid_*"'}}{p_end}
+
+{pstd}{cmd:* Stata 11 or below}{p_end}
+{pstd}{bf:{stata `"renpfix base_ mid_"'}}{p_end}
+
+{pstd}Finaly, changing the prefix from {cmd:mid_} to {cmd:end_}:
+
+{pstd}{cmd:* Stata 12 or higher}{p_end}
+{pstd}{bf:{stata `"rename mid_* end_*"'}}{p_end}
+
+{pstd}{cmd:* Stata 11 or below}{p_end}
+{pstd}{bf:{stata `"renpfix mid_ end_"'}}{p_end}
+
+{pstd}You probably would not want to rename {cmd:hhid} in this way.
+{cmd:hhid} should be constant across all rounds of a survey,
+so attaching a round prefix to it would be superflous.
+Further, renaming it in this way could impede merging.
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} In this dataset, a number of variables end with {cmd:_1} or {cmd:_2}.
+But imagine you instead prefer these variables
+to begin with {cmd:first_} and {cmd:second_}, respectively.
+How would you go about doing this?
+{txt}{sf}{ul off}{...}
+
+{pstd}First, it would be useful to see all variables whose names contain {cmd:"_"}:
+
+{pstd}{bf:{stata `"describe *_*, fullnames"'}}{p_end}
+
+{pstd}In Stata 12 and higher, you can use {cmd:rename} to rename groups of variables:
+
+{pstd}{bf:{stata `"rename (*_1 *_2) (first_* second_*)"'}}{p_end}
+
+{pstd}If you are using Stata 11 or lower,
+one option is repeated uses of the user-written program {cmd:renvars}:
+
+{pstd}{bf:{stata `"renvars *_1, prefix(first_)"'}}{p_end}
+{pstd}{bf:{stata `"renvars *_1, postsub(_1)"'}}{p_end}
+
+{pstd}{bf:{stata `"renvars *_2, prefix(second_)"'}}{p_end}
+{pstd}{bf:{stata `"renvars *_2, postsub(_2)"'}}{p_end}
+
+{pstd}Once you're done, check that all variables have been renamed correctly:
+
+{pstd}{bf:{stata `"describe *_*, fullnames"'}}{p_end}
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} Variables {cmd:robberyyn}, {cmd:assaultyn} and {cmd:falsecaseyn}
+share the same value label, which has been removed for this problem set.
+In one line of code,
+label the values of all three variables with the existing value label {cmd:yesno}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"label values robberyyn assaultyn falsecaseyn yesno"'}}{p_end}
+
+{hline}{marker q4}
+
+{pstd}{bf:Answer to Question 4}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} For the variable {cmd:educ},
+{it}{...} why are some values labeled while others are apparently not?
+{it}{...} You can see this as follows:
+
+{pstd}{bf:{stata `"tabulate educ"'}}{p_end}
+
+{pstd}{it}{...} {bf:Hint:} begin by determining the value label using {cmd:describe}.
+{txt}{sf}{ul off}{...}
+
+{pstd}This indicates that the value label of {cmd:educ} is {cmd:standard}:
+
+{pstd}{bf:{stata `"describe educ"'}}{p_end}
+
+{pstd}To see the contents of {cmd:standard}:
+
+{pstd}{bf:{stata `"label list standard"'}}{p_end}
+
+{pstd}Since the survey question for {cmd:educ} asks for the highest standard reached,
+values {cmd:1} through {cmd:12} are self-explanatory.
+Text is needed to interpret values {cmd:0} and {cmd:13} through {cmd:16},
+so the value label {cmd:standard} was defined for only those values.
+
+{hline}{marker q5}
+
+{pstd}{bf:Answer to Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} When you create a new variable,
+{it}{...} you often want to immediately assign it a value label.
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}First create a new variable named {cmd:over40}
+that equals {cmd:1} if {cmd:age} is greater than {cmd:40},
+and {cmd:0} if it is not.
+
+{pstd}How would you go about checking that you have created the variable correctly?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"generate over40 = 0 if age != ."'}}{p_end}
+{pstd}{bf:{stata `"replace  over40 = 1 if age > 40 & age != ."':replace{space 2}over40 = 1 if age > 40 & age != .}}{p_end}
+
+{pstd}One way to check our work would be
+to use the {cmd:tabulate} and {cmd:summarize} commands as follows:
+
+{pstd}{bf:{stata `"tabulate over40"'}}{p_end}
+{pstd}{bf:{stata `"summarize age if age <= 40"'}}{p_end}
+{pstd}{bf:{stata `"summarize age if age > 40"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Assign an appropriate value label to {cmd:over40}.
+
+{pstd}{bf:Hint:} use {cmd:label list} to see
+which existing value label would be appropriate
+for the new variable you've created.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"label list"'}}{p_end}
+
+{pstd}We can see that the label {cmd:yes1no0} can be used
+for the variable. Thus:
+
+{pstd}{bf:{stata `"label values over40 yes1no0"'}}{p_end}
+
+{hline}{marker q6}
+
+{pstd}{bf:Answer to Question 6}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} First, execute the following commands,
+which define the value label {cmd:addressunit}
+and assign it to the variable {cmd:addressdur_unit}:
+
+{pstd}{bf:{stata `"label define addressunit 1 days 2 weeks 3 months 4 years"'}}{p_end}
+{pstd}{bf:{stata `"label values addressdur_unit addressunit"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}{it}{...} Combining the two variables {cmd:addressdur} and {cmd:addressdur_unit},
+create a new variable named {cmd:addressdays} that indicates
+the number of days a respondent has lived at his/her current address.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"generate addressdays = ."'}}{p_end}
+{pstd}{bf:{stata `"replace addressdays = addressdur               if addressdur_unit == 1"':replace addressdays = addressdur{space 15}if addressdur_unit == 1}}{p_end}
+{pstd}{bf:{stata `"replace addressdays = addressdur * 7           if addressdur_unit == 2"':replace addressdays = addressdur * 7{space 11}if addressdur_unit == 2}}{p_end}
+{pstd}{bf:{stata `"replace addressdays = addressdur * 365.25 / 12 if addressdur_unit == 3"'}}{p_end}
+{pstd}{bf:{stata `"replace addressdays = addressdur * 365.25      if addressdur_unit == 4"':replace addressdays = addressdur * 365.25{space 6}if addressdur_unit == 4}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}{it}{...} Calculate the mean number of days
+{it}{...} that respondents have lived at their current address.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"summarize addressdays"'}}{p_end}
+
+{hline}{marker q7}
+
+{pstd}{bf:Answer to Question 7}
+
+{hline}
+
+{pstd}{it}{...} Under what circumstances would you want
+{it}{...} to convert a string variable to numeric?
+{it}{...} How about converting a numeric variable to string?
+{txt}{sf}{ul off}{...}
+
+{pstd}Converting a string variable to numeric greatly aids data analysis.
+For instance, one can calculate various statistics regarding the variable,
+such as its mean, median, variance, and so on.
+A numeric variable, unlike a string,
+can also be used in regressions and other types of analysis.
+
+{pstd}Converting from numeric to string is rarely necessary, but here's one example.
+Suppose you have an open-ended free text variable
+that could contain numbers or text.
+If it contains only numbers, it may be imported from the raw data as numeric.
+However, if future values of the variable are likely to contain text,
+you may want to convert it to string.
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/Variable Properties - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Tasks/Variable Properties.smcl""':Variable Properties}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}

@@ -1,0 +1,19 @@
+February 11th, 2014
+
+In this folder, we will migrate the Stata 102 training onto SMCL. 
+
+Sections:
+
+INTRO
+RESOURCES
+COMMANDS
+DUPLICATES
+TYPES
+NAMING
+LOCALS
+LOOPS
+EXPORTING
+IMPORTING
+
+
+**Need to update commands to download in introduction

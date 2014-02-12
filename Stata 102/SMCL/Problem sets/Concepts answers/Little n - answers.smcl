@@ -1,0 +1,125 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:{bf:_n}}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q4"':Question 4}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}What is the difference between {cmd:_n} and {cmd:_N}?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:_n} refers to the observation number,
+while {cmd:_N} is a constant
+that indicates the total number of observations in the dataset.
+Thus, {cmd:_n} ranges from {cmd:1} to {cmd:_N}.
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Do you have to be attentive to the sort order when using {cmd:_n}?
+How about {cmd:_N}?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:_N} is a constant that equals the number of observations,
+and it is unaffected by how those observations are sorted.
+On the other hand, {cmd:_n} refers to the observation number,
+{view `""SMCL/Problem sets/Concepts answers/Explicit Subscripting - answers.smcl"##q1"':which depends on the sort order}.
+When using {cmd:_n}, you must be sure that the dataset is sorted as you expect.
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{it}{...} Can you interpret the logical expression {cmd:hhid == hhid[_n - 1]}?
+{txt}{sf}{ul off}{...}
+
+{pstd}This tests whether the observation's value of {cmd:hhid} is
+equal to the previous observation's value of {cmd:hhid}.
+If this condition is true, the expression equals {cmd:1};
+if it is false, the result is {cmd:0}.
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':As we have seen},
+there are duplicates on the ID variable {cmd:hhid}.
+Use {cmd:_n} to create a new, clean unique ID variable named {cmd:cleanid}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"generate cleanid = _n"'}}{p_end}
+
+{hline}{marker q4}
+
+{pstd}{bf:Answer to Question 4}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}There are {cmd:1001} observations in the dataset.
+Use {cmd:_n} to create a variable of consecutive integers from {cmd:1} to {cmd:1001},
+named {cmd:n}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"generate n = _n"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Using {helpb sum()}, create a variable named {cmd:rsum} that is the running sum of {cmd:n}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"generate rsum = sum(n)"'}}{p_end}
+
+{pstd}{it}{...} {bf:(c)}
+
+{pstd}Create a variable named {cmd:triangular} that is equal to {cmd:n * (n + 1) / 2}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"generate triangular = n * (n + 1) / 2"'}}{p_end}
+
+{pstd}{it}{...} {bf:(d)}
+
+{pstd}For how many observations is {cmd:rsum == triangular}?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"count if rsum == triangular"'}}{p_end}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/Little n - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}

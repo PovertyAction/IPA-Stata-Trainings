@@ -1,0 +1,177 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:{bf:by}}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q5"':Question 5}{break}
+{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q6"':Question 6}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{it}{...} What are by-groups and by-variables?
+{txt}{sf}{ul off}{...}
+
+{pstd}By-groups are subsets of the data used by the {cmd:by} prefix.
+Every observation in the dataset belongs to exactly one by-group.
+When used with {cmd:by}, a command is executed separately for each by-group.
+The by-variables are the list of variables that follow {cmd:by}.
+Each combination of values of the by-variables is
+associated with an individual by-group.
+The by-variables are constant within a given by-group;
+all observations of a particular by-group share the same values of the by-variables.
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{it}{...} What is the {cmd:bysort} command?
+{it}{...} How does it differ from {cmd:by}?
+{it}{...} When should you use {cmd:bysort}?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:bysort} combines the {cmd:by} and {cmd:sort} commands.
+It first sorts the dataset by the by-variables
+and then executes the {cmd:by} command.
+By itself, {cmd:by} requires that the dataset be previously sorted.
+
+{pstd}{cmd:bysort} should be used
+when the dataset hasn't already been sorted by the by-variables.
+However, it's always possible to use {cmd:bysort} instead of {cmd:by}:
+there's no harm in using {cmd:bysort} over {cmd:by}.
+
+{pstd}Note you cannot combine {cmd:by} with {cmd:gsort} if you want to
+have by-variables in descending order. Use {cmd:gsort} first and then
+execute {cmd:by}.
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{it}{...} We know that without {cmd:by},
+{view `""SMCL/Concepts/Big N.smcl""':{bf:_N}} is the number of observations in the dataset,
+and {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}} is the the observation number of an individual observation.
+However, the use of {cmd:by}
+can change the definitions of {cmd:_N} and {cmd:_n}. Please explain.
+{txt}{sf}{ul off}{...}
+
+{pstd}For {view `""SMCL/Concepts/by.smcl"##group3"':group 3} commands like {cmd:generate} and {cmd:list},
+using {cmd:by} changes the meanings
+of {cmd:_N} and {cmd:_n}.
+For these commands,
+{cmd:_N} becomes the total number of observations
+in the {it:by-group} (not the dataset),
+while {cmd:_n} becomes the observation number
+within the by-group (not the dataset as a whole).
+
+{pstd}With {view `""SMCL/Concepts/by.smcl"##group4"':group 4} commands,
+including {cmd:egen},
+the values of {cmd:_N} and {cmd:_n} are unpredictable.
+{cmd:_N} and {cmd:_n} should not be used with these commands.
+
+{hline}{marker q4}
+
+{pstd}{bf:Answer to Question 4}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} Create a variable named {cmd:sexn} that is the number of respondents
+of a given sex. For example, if {cmd:sex = Male}, {cmd:sexn} should equal {cmd:590}.
+
+{pstd}What group(s) are the command(s) you used?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"bysort sex: generate sexn = _N"'}}{p_end}
+
+{pstd}{cmd:generate} is {view `""SMCL/Concepts/by.smcl"##group3"':group 3}.
+
+{hline}{marker q5}
+
+{pstd}{bf:Answer to Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} Create a variable named {cmd:treatment} that is {cmd:1} or {cmd:0}.
+Use {cmd:by}, {cmd:_N}, and {cmd:_n}
+to ensure that treatment is balanced with respect to {cmd:sex}
+by assigning {cmd:treatment = 1} to the first half of males
+and the first half of females
+and {cmd:treatment = 0} to the second half of males and the second half of females.
+
+{pstd}To check that you got it right:
+
+{pstd}{bf:{stata `"bysort sex: tabulate treatment"'}}{p_end}
+
+{pstd}{it}{...} Or:
+
+{pstd}{bf:{stata `"tabulate sex treatment"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}To create {cmd:treatment}:
+
+{pstd}{bf:{stata `"bysort sex: generate treatment = _n <= _N / 2"'}}{p_end}
+
+{pstd}Note the use of the logical expression
+{cmd:_n <= _N / 2} to create the dummy variable.
+
+{hline}{marker q6}
+
+{pstd}{bf:Answer to Question 6}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} Using the {cmd:by} {it:varlist1} {cmd:(}{it:varlist2}{cmd:)} syntax,
+create a variable named {cmd:over30} that is
+{cmd:1} if any member of a respondent's {cmd:castename} is older than {cmd:30},
+and {cmd:0} otherwise.
+{txt}{sf}{ul off}{...}
+
+{pstd}Here is one option, using a logical expression:
+
+{pstd}{bf:{stata `"bysort castename (age): generate over30 = age[_N] > 30"'}}{p_end}
+
+{pstd}Here is another option,
+again using a logical expression, this time to create a dummy variable:
+
+{pstd}{cmd:* "respover30" for "respondent over 30"}{p_end}
+{pstd}{bf:{stata `"generate respover30 = age > 30"'}}{p_end}
+{pstd}{bf:{stata `"bysort castename (respover30): generate over30 = respover30[_N]"'}}{p_end}
+
+{pstd}{bf:{stata `"tabulate over30"'}}{p_end}
+{pstd}{bf:{stata `"tabulate castename over30"'}}{p_end}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/by - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Concepts/by.smcl""':{bf:by}}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}

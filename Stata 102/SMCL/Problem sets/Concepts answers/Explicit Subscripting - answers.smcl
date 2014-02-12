@@ -1,0 +1,88 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Explicit Subscripting}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts answers/Explicit Subscripting - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts answers/Explicit Subscripting - answers.smcl"##q2"':Question 2}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{it}{...} Why does sort order matter when using explicit subscripting?
+{txt}{sf}{ul off}{...}
+
+{pstd}The explicit subscript {it:varname}{cmd:[}{it:obs_num}{cmd:]}
+is the value of variable {it:varname} in observation number {it:obs_num}.
+Explicit subscripting allows you to refer to a variable's value
+in a particular observation number.
+However, the association between observations and their observation numbers isn't fixed:
+an observation can have any observation number
+between {cmd:1} and the number of observations.
+The order of the observations {hline 2}
+the correspondence of observations and their observation numbers {hline 2}
+depends on the sort order.
+
+{pstd}This means that when using explicit subscripting,
+you have to be careful that the sort order is the way you expect.
+If the sort order changes {hline 2}
+if the list of variables by which the data is sorted is changed or
+if any of those variables are modified {hline 2}
+then the same observation number may refer to a different observation.
+This can lead to difficult-to-detect bugs,
+so solutions that don't rely on sort order and explicit subscripting
+are often preferable.
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} Using explicit subscripting,
+write a for-loop that displays the fifth and sixth values of the following variables:
+{cmd:age}, {bf:educ}, and {bf:castename}.
+Ensure that the data is sorted by {bf:hhid} beforehand.
+
+{pstd}Use the {cmd:browse} command to check your answer.
+
+{pstd}If you need a refresher on for-loops, visit the module on
+{view `""SMCL/Concepts/For-Loops and Macros.smcl""':for-loops and macros}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"sort hhid"'}}{p_end}
+
+{pstd}{cmd}foreach var in age educ castecode {{txt}{p_end}
+{pmore}{cmd}display "`var'"{txt}{p_end}
+{pmore}{cmd}display `var'[5]{txt}{p_end}
+{pmore}{cmd}display `var'[6]{txt}{p_end}
+{pmore}{cmd}display{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/Explicit Subscripting - answers.do" 1"':Click here to execute.}
+
+{pstd}{bf:{stata `"browse age educ castecode in 5/6"'}}{p_end}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/Explicit Subscripting - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Concepts/Explicit Subscripting.smcl""':Explicit Subscripting}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
