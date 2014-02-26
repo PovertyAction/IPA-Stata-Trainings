@@ -10,14 +10,14 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:For-Loops and Macros}{break}
+{pstd}{bf:Loops}{break}
 
 {pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
-{pstd}{view `""SMCL/Concepts/For-Loops and Macros.smcl"##introduction"':1. Introduction}{break}
-{view `""SMCL/Concepts/For-Loops and Macros.smcl"##tracing"':2. Tracing}{break}
-{view `""SMCL/Concepts/For-Loops and Macros.smcl"##macros"':3. More on Macros}{break}
-{view `""SMCL/Concepts/For-Loops and Macros.smcl"##loops"':4. More Loops}
+{pstd}{view `""SMCL/Concepts/Loops.smcl"##introduction"':1. Introduction}{break}
+{view `""SMCL/Concepts/Loops.smcl"##tracing"':2. Tracing}{break}
+{view `""SMCL/Concepts/Loops.smcl"##macros"':3. More on Macros}{break}
+{view `""SMCL/Concepts/Loops.smcl"##loops"':4. More Loops}
 
 {hline}{marker introduction}
 
@@ -478,8 +478,8 @@ Then, once the condition imposed on the {cmd:while} loop was no longer true
 
 {hline}
 
-{pstd}Problem Set: {view `""SMCL/Problem sets/Concepts/For-Loops and Macros - problem set.smcl""':For-Loops and Macros}{break}
+{pstd}Problem Set: {view `""SMCL/Problem sets/Concepts/Loops - problem set.smcl""':Loops}{break}
 
-{pstd}Next: {view `""SMCL/Concepts/if.smcl""':The {bf:if} Command Versus the {bf:if} Qualifier}{break}
+{pstd}Next: {IF}
 Previous: {SUBSCRIPTING}
 {view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

@@ -1,0 +1,28 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Naming and Labeling Variables}{break}
+
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+
+
+
+
+{pstd}Naming and Labeling Variables
+
+
+
+{hline}
+
+{pstd}Next: {view `""SMCL/Concepts/Macros and Locals.smcl""':Macros and Locals}{break}
+Previous: {view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
+{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

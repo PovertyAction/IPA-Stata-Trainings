@@ -26,12 +26,12 @@ introduced in {bf:Stata 103}.
 {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
 {p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks/Unique IDs and Duplicates - problem set.smcl""':Problem set}{break}{p_end}{pstd}
 {p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks answers/Unique IDs and Duplicates - answers.smcl""':Answers}{break}{p_end}{pstd}
-{TYPES}
-{NAMING}
-{LOCALS}
-{view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
-{EXPORTING}
-{IMPORTING}
+{view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
+{view `""SMCL/Tasks/Naming and Labeling Variables.smcl""':Naming and Labeling Variables}{break}
+{view `""SMCL/Concepts/Macros and Locals.smcl""':Macros and Locals}{break}
+{view `""SMCL/Concepts/Loops.smcl""':Loops}{break}
+{view `""SMCL/Tasks/Importing.smcl""':Importing}{break}
+{view `""SMCL/Tasks/Exporting.smcl""':Exporting}{break}
 
 {pstd}The training material is written in SMCL (pronounced "smickle"), Stata's output language.
 Since multiple SMCL files will be used, your working directory needs to be set correctly using {cmd:cd}.

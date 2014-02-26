@@ -10,12 +10,12 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:{bf:egen}}{break}
+{pstd}{EGEN!}
 {it:Problem set}{break}
 
-{pstd}{view `""SMCL/Problem sets/Concepts/egen - problem set.smcl"##q1"':Question 1}{break}
-{view `""SMCL/Problem sets/Concepts/egen - problem set.smcl"##q2"':Question 2}{break}
-{view `""SMCL/Problem sets/Concepts/egen - problem set.smcl"##q3"':Question 3}{break}
+{pstd}{EGEN_PSQ1}
+{EGEN_PSQ2}
+{EGEN_PSQ3}
 
 
 {hline}{marker q1}
@@ -94,7 +94,7 @@ from most other {cmd:egen} functions?
 
 {hline}
 
-{pstd}{view `""SMCL/Problem sets/Concepts answers/egen - answers.smcl""':Answers}{break}
-Return to Module: {view `""SMCL/Concepts/egen.smcl""':{bf:egen}}{break}
+{pstd}{EGEN_ANS2}
+Return to Module: {EGEN}
 
 {pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

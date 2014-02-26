@@ -10,16 +10,16 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:Variable Properties}{break}
+{pstd}{PROPERTIES!}
 {it:Problem set answers}{break}
 
-{pstd}{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q1"':Question 1}{break}
-{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q2"':Question 2}{break}
-{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q3"':Question 3}{break}
-{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q4"':Question 4}{break}
-{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q5"':Question 5}{break}
-{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q6"':Question 6}{break}
-{view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl"##q7"':Question 7}{break}
+{pstd}{PROPERTIES_ANSQ1}
+{PROPERTIES_ANSQ2}
+{PROPERTIES_ANSQ3}
+{PROPERTIES_ANSQ4}
+{PROPERTIES_ANSQ5}
+{PROPERTIES_ANSQ6}
+{PROPERTIES_ANSQ7}
 
 
 {hline}{marker q1}
@@ -264,7 +264,7 @@ you may want to convert it to string.
 
 {hline}
 
-{pstd}{view `""SMCL/Problem sets/Tasks/Variable Properties - problem set.smcl""':Problem set}{break}
-Return to Module: {view `""SMCL/Tasks/Variable Properties.smcl""':Variable Properties}{break}
+{pstd}{PROPERTIES_PS2}
+Return to Module: {PROPERTIES}
 
 {pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

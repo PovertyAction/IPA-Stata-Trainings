@@ -63,7 +63,7 @@ Ensure that the data is sorted by {bf:hhid} beforehand.
 {pstd}Use the {cmd:browse} command to check your answer.
 
 {pstd}If you need a refresher on for-loops, visit the module on
-{view `""SMCL/Concepts/For-Loops and Macros.smcl""':for-loops and macros}.
+{view `""SMCL/Concepts/Loops.smcl""':for-loops and macros}.
 {txt}{sf}{ul off}{...}
 
 {pstd}{bf:{stata `"sort hhid"'}}{p_end}

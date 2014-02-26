@@ -10,15 +10,15 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:{bf:by}}{break}
+{pstd}{BY!}
 {it:Problem set answers}{break}
 
-{pstd}{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q1"':Question 1}{break}
-{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q2"':Question 2}{break}
-{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q3"':Question 3}{break}
-{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q4"':Question 4}{break}
-{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q5"':Question 5}{break}
-{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl"##q6"':Question 6}{break}
+{pstd}{BY_ANSQ1}
+{BY_ANSQ2}
+{BY_ANSQ3}
+{BY_ANSQ4}
+{BY_ANSQ5}
+{BY_ANSQ6}
 
 
 {hline}{marker q1}
@@ -71,13 +71,13 @@ execute {cmd:by}.
 {hline}
 
 {pstd}{it}{...} We know that without {cmd:by},
-{view `""SMCL/Concepts/Big N.smcl""':{bf:_N}} is the number of observations in the dataset,
-and {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}} is the the observation number of an individual observation.
+{BIGN...} is the number of observations in the dataset,
+and {LITTLEN...} is the the observation number of an individual observation.
 However, the use of {cmd:by}
 can change the definitions of {cmd:_N} and {cmd:_n}. Please explain.
 {txt}{sf}{ul off}{...}
 
-{pstd}For {view `""SMCL/Concepts/by.smcl"##group3"':group 3} commands like {cmd:generate} and {cmd:list},
+{pstd}For {GROUP3...} commands like {cmd:generate} and {cmd:list},
 using {cmd:by} changes the meanings
 of {cmd:_N} and {cmd:_n}.
 For these commands,
@@ -86,7 +86,7 @@ in the {it:by-group} (not the dataset),
 while {cmd:_n} becomes the observation number
 within the by-group (not the dataset as a whole).
 
-{pstd}With {view `""SMCL/Concepts/by.smcl"##group4"':group 4} commands,
+{pstd}With {view `"{BY-}##group4"':group 4} commands,
 including {cmd:egen},
 the values of {cmd:_N} and {cmd:_n} are unpredictable.
 {cmd:_N} and {cmd:_n} should not be used with these commands.
@@ -107,7 +107,7 @@ of a given sex. For example, if {cmd:sex = Male}, {cmd:sexn} should equal {cmd:5
 
 {pstd}{bf:{stata `"bysort sex: generate sexn = _N"'}}{p_end}
 
-{pstd}{cmd:generate} is {view `""SMCL/Concepts/by.smcl"##group3"':group 3}.
+{pstd}{cmd:generate} is {GROUP3...}.
 
 {hline}{marker q5}
 
@@ -171,7 +171,7 @@ again using a logical expression, this time to create a dummy variable:
 
 {hline}
 
-{pstd}{view `""SMCL/Problem sets/Concepts/by - problem set.smcl""':Problem set}{break}
-Return to Module: {view `""SMCL/Concepts/by.smcl""':{bf:by}}{break}
+{pstd}{BY_PS2}
+Return to Module: {BY}
 
 {pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

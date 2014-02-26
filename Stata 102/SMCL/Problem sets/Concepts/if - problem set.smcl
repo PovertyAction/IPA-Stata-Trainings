@@ -10,12 +10,12 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:The {bf:if} Command Versus the {bf:if} Qualifier}{break}
+{pstd}{IF!}
 {it:Problem set}{break}
 
-{pstd}{view `""SMCL/Problem sets/Concepts/if - problem set.smcl"##q1"':Question 1}{break}
-{view `""SMCL/Problem sets/Concepts/if - problem set.smcl"##q2"':Question 2}{break}
-{view `""SMCL/Problem sets/Concepts/if - problem set.smcl"##q3"':Question 3}{break}
+{pstd}{IF_PSQ1}
+{IF_PSQ2}
+{IF_PSQ3}
 
 
 {hline}{marker q1}
@@ -107,7 +107,7 @@ on which the observations with {cmd:hhid "1813023"} differ.
 
 {hline}
 
-{pstd}{view `""SMCL/Problem sets/Concepts answers/if - answers.smcl""':Answers}{break}
-Return to Module: {view `""SMCL/Concepts/if.smcl""':The {bf:if} Command Versus the {bf:if} Qualifier}{break}
+{pstd}{IF_ANS2}
+Return to Module: {IF}
 
 {pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

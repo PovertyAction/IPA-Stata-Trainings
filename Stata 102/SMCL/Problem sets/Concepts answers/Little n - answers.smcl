@@ -10,13 +10,13 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:{bf:_n}}{break}
+{pstd}{LITTLEN!}
 {it:Problem set answers}{break}
 
-{pstd}{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q1"':Question 1}{break}
-{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q2"':Question 2}{break}
-{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q3"':Question 3}{break}
-{view `""SMCL/Problem sets/Concepts answers/Little n - answers.smcl"##q4"':Question 4}{break}
+{pstd}{LITTLEN_ANSQ1}
+{LITTLEN_ANSQ2}
+{LITTLEN_ANSQ3}
+{LITTLEN_ANSQ4}
 
 
 {hline}{marker q1}
@@ -119,7 +119,7 @@ named {cmd:n}.
 
 {hline}
 
-{pstd}{view `""SMCL/Problem sets/Concepts/Little n - problem set.smcl""':Problem set}{break}
-Return to Module: {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}}{break}
+{pstd}{LITTLEN_PS2}
+Return to Module: {LITTLEN}
 
 {pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

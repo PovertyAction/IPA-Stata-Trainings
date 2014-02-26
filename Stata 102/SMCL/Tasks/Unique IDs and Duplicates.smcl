@@ -56,7 +56,7 @@ can also be used to uniquely identify observations.
 More specifically, we will make sure that the ID is unique.
 If it isn't, we will find out how many and which IDs are duplicates and resolve them.
 
-{pstd}Why is our first data cleaning task after {view `""SMCL/Tasks/Variable Properties.smcl""':variable properties}
+{pstd}Why is our first data cleaning task after {view `"{PROPERTIES-}"':variable properties}
 to clean the ID? A unique ID is important for all sorts of reasons:
 
 {hline}{marker q1}
@@ -218,6 +218,6 @@ so we will compare on sex, age, education, and occupation.
 
 {pstd}Problem Set: {view `""SMCL/Problem sets/Tasks/Unique IDs and Duplicates - problem set.smcl""':Unique IDs and Duplicates}{break}
 
-{pstd}Next: {SUBSCRIPTING}
-Previous: {view `""SMCL/Tasks/Variable Properties.smcl""':Variable Properties}{break}
+{pstd}Next: {view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
+Previous: {view `""SMCL/Concepts/Commands.smcl""':Commands}{break}
 {view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

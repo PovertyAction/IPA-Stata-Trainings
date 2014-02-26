@@ -10,27 +10,19 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:List of Group 3 Commmands}{break}
+{pstd}{bf:Importing}{break}
 
-{pstd}While not exhaustive, the following is a list of many {view `""SMCL/Concepts/by.smcl"##group3"':group 3} commands:
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
-{pstd}{helpb assert}{break}
-{helpb correlate}{break}
-{helpb count}{break}
-{helpb drop}{break}
-{helpb generate}{break}
-{helpb inspect}{break}
-{helpb keep}{break}
-{helpb list}{break}
-{helpb mleval}{break}
-{helpb oneway}{break}
-{helpb replace}{break}
-{helpb summarize}{break}
-{helpb tabdisp}{break}
-{helpb tabulate}
+
+
+{pstd}Importing
+
+
 
 
 {hline}
 
-{pstd}Previous: {view `""SMCL/Concepts/by.smcl""':{bf:by}}{break}
+{pstd}Next: {view `""SMCL/Tasks/Exporting.smcl""':Exporting}{break}
+Previous: {view `""SMCL/Concepts/Loops.smcl""':Loops}{break}
 {view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

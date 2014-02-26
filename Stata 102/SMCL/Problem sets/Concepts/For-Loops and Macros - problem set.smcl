@@ -10,12 +10,12 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:For-Loops and Macros}{break}
+{pstd}{bf:Loops}{break}
 {it:Problem set}{break}
 
-{pstd}{view `""SMCL/Problem sets/Concepts/For-Loops and Macros - problem set.smcl"##q1"':Question 1}{break}
-{view `""SMCL/Problem sets/Concepts/For-Loops and Macros - problem set.smcl"##q2"':Question 2}{break}
-{view `""SMCL/Problem sets/Concepts/For-Loops and Macros - problem set.smcl"##q3"':Question 3}{break}
+{pstd}{view `""SMCL/Problem sets/Concepts/Loops - problem set.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts/Loops - problem set.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts/Loops - problem set.smcl"##q3"':Question 3}{break}
 
 
 {hline}{marker q1}
@@ -44,7 +44,7 @@ For each of these castes,
 
 {pstd}{bf:{stata `"tabulate castecode"'}}{p_end}
 
-{pstd}{cmd:castecode} is {view `""SMCL/Tasks/Variable Properties.smcl"##labels"':value labeled}:
+{pstd}{cmd:castecode} is {view `"{PROPERTIES-}##labels"':value labeled}:
 
 {pstd}{bf:{stata `"tabulate castecode, nolabel"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
@@ -140,7 +140,7 @@ we could estimate what fraction of the sample was a victim of any of these crime
 
 {hline}
 
-{pstd}{view `""SMCL/Problem sets/Concepts answers/For-Loops and Macros - answers.smcl""':Answers}{break}
-Return to Module: {view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
+{pstd}{view `""SMCL/Problem sets/Concepts answers/Loops - answers.smcl""':Answers}{break}
+Return to Module: {view `""SMCL/Concepts/Loops.smcl""':Loops}{break}
 
 {pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

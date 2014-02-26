@@ -10,15 +10,15 @@
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
-{pstd}{bf:{bf:by}}{break}
+{pstd}{BY!}
 {it:Problem set}{break}
 
-{pstd}{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q1"':Question 1}{break}
-{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q2"':Question 2}{break}
-{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q3"':Question 3}{break}
-{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q4"':Question 4}{break}
-{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q5"':Question 5}{break}
-{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q6"':Question 6}{break}
+{pstd}{BY_PSQ1}
+{BY_PSQ2}
+{BY_PSQ3}
+{BY_PSQ4}
+{BY_PSQ5}
+{BY_PSQ6}
 
 
 {hline}{marker q1}
@@ -48,8 +48,8 @@ When should you use {cmd:bysort}?
 {hline}
 
 {pstd}We know that without {cmd:by},
-{view `""SMCL/Concepts/Big N.smcl""':{bf:_N}} is the number of observations in the dataset,
-and {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}} is the the observation number of an individual observation.
+{BIGN...} is the number of observations in the dataset,
+and {LITTLEN...} is the the observation number of an individual observation.
 However, the use of {cmd:by}
 can change the definitions of {cmd:_N} and {cmd:_n}. Please explain.
 {txt}{sf}{ul off}{...}
@@ -109,7 +109,7 @@ and {cmd:0} otherwise.
 
 {hline}
 
-{pstd}{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl""':Answers}{break}
-Return to Module: {view `""SMCL/Concepts/by.smcl""':{bf:by}}{break}
+{pstd}{BY_ANS2}
+Return to Module: {BY}
 
 {pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

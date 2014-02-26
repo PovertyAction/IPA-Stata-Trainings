@@ -18,10 +18,10 @@ introduced in {bf:Stata 103}.
   o {DUPLICATES_ANS2}
 {TYPES}
 {NAMING}
-{LOCALS}
+{MACROS}
 {LOOPS}
-{EXPORTING}
 {IMPORTING}
+{EXPORTING}
 
 The training material is written in SMCL (pronounced "smickle"), Stata's output language.
 Since multiple SMCL files will be used, your working directory needs to be set correctly using {cmd:cd}.
