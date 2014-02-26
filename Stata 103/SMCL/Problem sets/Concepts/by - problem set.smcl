@@ -1,0 +1,115 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:{bf:by}}{break}
+{it:Problem set}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q5"':Question 5}{break}
+{view `""SMCL/Problem sets/Concepts/by - problem set.smcl"##q6"':Question 6}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+
+{pstd}What are by-groups and by-variables?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+
+{pstd}What is the {cmd:bysort} command?
+How does it differ from {cmd:by}?
+When should you use {cmd:bysort}?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}We know that without {cmd:by},
+{view `""SMCL/Concepts/Big N.smcl""':{bf:_N}} is the number of observations in the dataset,
+and {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}} is the the observation number of an individual observation.
+However, the use of {cmd:by}
+can change the definitions of {cmd:_N} and {cmd:_n}. Please explain.
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q4}
+
+{pstd}{bf:Problem Set Question 4}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}Create a variable named {cmd:sexn} that is the number of respondents
+of a given sex. For example, if {cmd:sex = Male}, {cmd:sexn} should equal {cmd:590}.
+
+{pstd}What group(s) are the command(s) you used?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q5}
+
+{pstd}{bf:Problem Set Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}Create a variable named {cmd:treatment} that is {cmd:1} or {cmd:0}.
+Use {cmd:by}, {cmd:_N}, and {cmd:_n}
+to ensure that treatment is balanced with respect to {cmd:sex}
+by assigning {cmd:treatment = 1} to the first half of males
+and the first half of females
+and {cmd:treatment = 0} to the second half of males and the second half of females.
+
+{pstd}To check that you got it right:
+
+{pstd}{bf:{stata `"bysort sex: tabulate treatment"'}}{p_end}
+
+{pstd}Or:
+
+{pstd}{bf:{stata `"tabulate sex treatment"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{hline}{marker q6}
+
+{pstd}{bf:Problem Set Question 6}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}Using the {cmd:by} {it:varlist1} {cmd:(}{it:varlist2}{cmd:)} syntax,
+create a variable named {cmd:over30} that is
+{cmd:1} if any member of a respondent's {cmd:castename} is older than {cmd:30},
+and {cmd:0} otherwise.
+{txt}{sf}{ul off}{...}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Concepts answers/by - answers.smcl""':Answers}{break}
+Return to Module: {view `""SMCL/Concepts/by.smcl""':{bf:by}}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}

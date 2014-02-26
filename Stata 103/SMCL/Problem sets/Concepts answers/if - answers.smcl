@@ -1,0 +1,187 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:The {bf:if} Command Versus the {bf:if} Qualifier}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts answers/if - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts answers/if - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts answers/if - answers.smcl"##q3"':Question 3}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+
+{pstd}{it}{...} Which {cmd:if} should be used: the {cmd:if} command or the {cmd:if} qualifier?
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}List the genders of respondents less than {cmd:30}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:if} qualifier: the command has been limited to a subset of the data, respondents younger
+than {cmd:30}:
+
+{pstd}{bf:{stata `"list sex if age < 30"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Determine the number of values of {cmd:sex} that are less than {cmd:0}
+and save it in a local.
+If this number is greater than {cmd:0}, {cmd:summarize sex}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:if} command: the command has not been limited to a subset of the data.
+Utilizing {helpb return:saved results}, a concept introduced in {bf: Stata 104},
+the code for this might look like:
+
+{pstd}{cmd}count if sex < 0{txt}{p_end}
+{pstd}{cmd}local n = r(N){txt}{p_end}
+{pstd}{cmd}if `n' > 0 {{txt}{p_end}
+{pmore}{cmd}summarize sex{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/if - answers.do" 1"':Click here to execute.}
+
+{pstd}{it}{...} {bf:(c)}
+
+{pstd}{help tabulate oneway:Tabulate} the occupation frequencies of women.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:if} qualifier: the command has been limited to a subset of the data, namely women:
+
+{pstd}{bf:{stata `"tabulate occupation if sex == 2"'}}{p_end}
+
+{pstd}{it}{...} {bf:(d)}
+
+{pstd}Determine the number of values of {cmd:sex} that are less than {cmd:0}
+and save it in a local.
+If this number is greater than {cmd:0},
+list the values of {cmd:hhid} for which {cmd:sex} is less than {cmd:0}.
+{txt}{sf}{ul off}{...}
+
+{pstd}Both. First the {cmd:if} command is used to test whether there are any values
+greater than {cmd:0}, then the {cmd:if} qualifier limits the observations whose values of
+{cmd:hhid} are listed to those for which the variable is less than {cmd:0}.
+Again utlizing {helpb return:saved results}:
+
+{pstd}{cmd}count if sex < 0{txt}{p_end}
+{pstd}{cmd}local n = r(N){txt}{p_end}
+{pstd}{cmd}if `n' > 0 {{txt}{p_end}
+{pmore}{cmd}list hhid if sex < 0{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/if - answers.do" 2"':Click here to execute.}
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}How can you tell whether a command allows the {cmd:if} qualifier?
+{txt}{sf}{ul off}{...}
+
+{pstd}A command's help file shows whether it allows the {cmd:if} qualifier.
+If it does, [{it:{help if}}] will usually appear
+on the first line of the syntax section.
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Name a command that allows the {cmd:if} qualifier (besides {cmd:summarize})
+and another that does not (other than {cmd:display}).
+{txt}{sf}{ul off}{...}
+
+{pstd}Many commands with which we are familiar allow the {cmd:if} qualifer,
+including {helpb tabulate oneway:tabulate}, {helpb generate}, and {helpb browse}.
+
+{pstd}Commands that don't allow the {cmd:if} qualifier include
+{helpb describe}, {helpb sort}, {helpb label}, and {helpb local}.
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} For the following questions, be sure to have the (fully) duplicated {bf:hhid} observations dropped:
+
+{pstd}{bf:{stata `"duplicates drop"'}}{p_end}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}There are two observations with {cmd:hhid "1813023"}.
+If they differ on the variable {cmd:surveyid},
+have Stata display {cmd:"Difference!"}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:* Obtain the observation numbers.}{p_end}
+{pstd}{bf:{stata `"list hhid if hhid == "1813023""'}}{p_end}
+
+{pstd}{cmd}if surveyid[678] != surveyid[679] {{txt}{p_end}
+{pmore}{cmd}display "Difference!"{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/if - answers.do" 3"':Click here to execute.}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}What are all the variables
+on which the observations with {cmd:hhid "1813023"} differ?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}if `var'[678] != `var'[679] {{txt}{p_end}
+{pmore2}{cmd}display "Difference on `var'"{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/if - answers.do" 4"':Click here to execute.}
+
+{pstd}{it}{...} {bf:(c)}
+
+{pstd}Get Stata to count the number of variables
+on which the observations with {cmd:hhid "1813023"} differ.
+{txt}{sf}{ul off}{...}
+
+{pstd}Using the method described in the {view `""SMCL/Concepts/For-Loops and Macros.smcl"##counting"':module on for-loops}:
+
+{pstd}{cmd}local diffs 0{txt}{p_end}
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}if `var'[678] != `var'[679] {{txt}{p_end}
+{pmore2}{cmd}local diffs = `diffs' + 1{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{cmd}display "`diffs' differences"{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/if - answers.do" 5"':Click here to execute.}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/if - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Concepts/if.smcl""':The {bf:if} Command Versus the {bf:if} Qualifier}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
