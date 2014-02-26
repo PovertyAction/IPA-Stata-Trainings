@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Variable Properties}{break}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {marker stuffofstata}{...}
 {pstd}Variables are the stuff of Stata.
@@ -59,7 +59,7 @@ Thus, attending to variable properties is typically the first task in the data c
 {p2col:{c |} {bf:{stata list gear_ratio}}}{c |}{p_end}
 {p2col:{c |} {bf:{stata format gear_ratio %9.3f}}}{c |}{p_end}
 {p2col:{c |} {bf:{stata list gear_ratio}}}{c |}{p_end}
-{p2col:{c |} {bf:{stata use "Raw/Kenya 2014 - Stata 103", clear}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata use "Raw/Post Kenya 2014 - Stata 102", clear}}}{c |}{p_end}
 {pstd}{c BLC}{hline 78}{c BRC}{p_end}
 {p2colreset}{...}
 
@@ -149,7 +149,7 @@ but {cmd:rename}'s extended functionality appeals to you,
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}We will now review {helpb label}.
 There are two main types of labels: variable labels and value labels.
@@ -491,7 +491,7 @@ Display formats include {cmd:%9.0g}, {cmd:%td}, and {cmd:%15s}.
 {p2col:{c |} Option {cmd:format(%24.0g)} works not just in this case to resolve the issue, but}{c |}{p_end}
 {p2col:{c |} in all cases.}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}
-{p2col:{c |} {bf:{stata use "Raw/Kenya 2014 - Stata 103", clear}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata use "Raw/Post Kenya 2014 - Stata 102", clear}}}{c |}{p_end}
 {pstd}{c BLC}{hline 78}{c BRC}{p_end}
 {p2colreset}{...}
 
@@ -598,4 +598,4 @@ you can use {cmd:encode} to retain the value label text or
 
 {pstd}Next: {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
 Previous: {view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}
-{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

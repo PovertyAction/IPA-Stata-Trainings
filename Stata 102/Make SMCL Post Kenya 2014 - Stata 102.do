@@ -21,9 +21,8 @@ Date of last revision: July 18, 2013
 */
 
 /* Author: Harrison Diamond Pollock, IPA, hpollock@poverty-action.org
-Purpose: revise to produce files for Kenya 2014 - Stata 103 training
-Changes to file solely to comport with new file names, produce new files
-Date of last revision: Jan 22, 2013
+Purpose: revise to produce files for Post Kenya 2014 - Stata 102 training
+Last revision: Feb 24, 2014
 */ 
 
 
@@ -51,8 +50,8 @@ loc boxwidth 80
 loc curdir "`c(pwd)'"
 nobreak {
 	* -c- is from the SSC -fastcd- package
-	c stata103
-	u "Raw/Kenya 2014 - Stata 103", clear
+	c stata102
+	u "Raw/Post Kenya 2014 - Stata 102", clear
 	cd "`curdir'"
 }
 cou if sex == 1
@@ -232,7 +231,7 @@ loc curdir "`c(pwd)'"
 c otherstata
 loc otherstata "`c(pwd)'"
 
-c stata103
+c stata102
 
 foreach dir of loc dirstruct {
 	loc files : dir "Pseudo-SMCL/`dir'" file "*.do", respect
@@ -387,13 +386,10 @@ Column 5: The args part of {view args:text}.
 Column 6: The text part of {view args:text}. */
 #d ;
 loc codeslinks
-	{START}			0	0	1	"Kenya 2014 - Stata 103.smcl"						"Stata 103 Start"
+	{START}			0	0	1	"Post Kenya 2014 - Stata 102.smcl"						"Stata 102 Start"
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"			""
-	{RESOURCES}		0	0	1	"SMCL/Concepts/Resources.smcl"	""
-	{SUBSCRIPTING}	1	0	1	"SMCL/Concepts/Explicit Subscripting.smcl"				""
-	{SUBSCRIPTING_ANSWERS}
-					0	0	1	"SMCL/Problem sets/Concepts answers/Explicit Subscripting - answers.smcl"
-																						""
+	{RESOURCES}		0	0	1	"SMCL/Concepts/Resources.smcl"							""
+	{COMMANDS}		1	0	1	"SMCL/Concepts/Commands.smcl"							""
 	{LOOPS}			1	0	1	"SMCL/Concepts/For-Loops and Macros.smcl"				""
 	{IF}			1	0	1	"SMCL/Concepts/if.smcl"									"The {bf:if} Command Versus the {bf:if} Qualifier"
 	{RESULTS}		1	0	1	"SMCL/Concepts/Saved Results.smcl"						""
@@ -559,7 +555,7 @@ loc head
 {c |}{HEAD1} The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{BR}{O}
 {c |}{HEAD1}{space 43}}{c |}{BR}{O}
 {c |}{HEAD1} Staff Training - Kenya 2014 {space 14}}{c |}{BR}{O}
-{c |}{HEAD1} Stata 103{space 33}}{c |}{BR}{O}
+{c |}{HEAD1} Stata 102{space 33}}{c |}{BR}{O}
 {sf}{...}{O}
 {c BLC}{hline 43}{c BRC}
 ;
@@ -617,9 +613,9 @@ forv i = 1/`:list sizeof infiles' {
 			"{VAR9}" = "`VAR9'" \
 
 			"{USE}"           = "use {DATA}, clear" \
-			"{DATA}"          = `""Raw/Kenya 2014 - Stata 103""' \
-			"{DATA_BASE}"     = "Kenya 2014 - Stata 103" \
-			"{DATA_BACK}"     = `""Raw\Kenya 2014 - Stata 103""' \
+			"{DATA}"          = `""Raw/Post Kenya 2014 - Stata 102""' \
+			"{DATA_BASE}"     = "Post Kenya 2014 - Stata 102" \
+			"{DATA_BACK}"     = `""Raw\Post Kenya 2014 - Stata 102""' \
 			"{DATA_CASTECSV}" = `""Raw/Clean castename.csv""' \
 			"{DATA_CASTEDTA}" = `""Raw/Clean castename""' \
 
@@ -681,7 +677,7 @@ loc date = strofreal(date(c(current_date), "DMY"), "%tdCCYY.NN.DD")
 copy "`otherstata'/Do to SMCL.do" "Archived/Do to SMCL/Do to SMCL `date'.do", replace
 
 * Move the start page to a different directory.
-loc intro Kenya 2014 - Stata 103.smcl
+loc intro Post Kenya 2014 - Stata 102.smcl
 copy  "SMCL/Introduction/`intro'" "`intro'", replace
 erase "SMCL/Introduction/`intro'"
 

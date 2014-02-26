@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -45,7 +45,7 @@ How about {cmd:_N}?
 {pstd}{cmd:_N} is a constant that equals the number of observations,
 and it is unaffected by how those observations are sorted.
 On the other hand, {cmd:_n} refers to the observation number,
-{view `""SMCL/Problem sets/Concepts answers/Explicit Subscripting - answers.smcl"##q1"':which depends on the sort order}.
+{view `"{SUBSCRIPTING_ANSWERS-}##q1"':which depends on the sort order}.
 When using {cmd:_n}, you must be sure that the dataset is sorted as you expect.
 
 {hline}{marker q2}
@@ -68,7 +68,7 @@ if it is false, the result is {cmd:0}.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':As we have seen},
 there are duplicates on the ID variable {cmd:hhid}.
@@ -83,7 +83,7 @@ Use {cmd:_n} to create a new, clean unique ID variable named {cmd:cleanid}.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{it}{...} {bf:(a)}
@@ -122,4 +122,4 @@ named {cmd:n}.
 {pstd}{view `""SMCL/Problem sets/Concepts/Little n - problem set.smcl""':Problem set}{break}
 Return to Module: {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}}{break}
 
-{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

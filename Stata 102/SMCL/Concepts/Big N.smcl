@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:{bf:_N}}{break}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{helpb _N} is the number of observations in the dataset:
 
@@ -48,4 +48,4 @@ then the number of unique values of {cmd:hhid} should equal the number of observ
 
 {pstd}Next: {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}}{break}
 Previous: {view `""SMCL/Concepts/if.smcl""':The {bf:if} Command Versus the {bf:if} Qualifier}{break}
-{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -24,7 +24,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} Loop over these values of variable {cmd:castename}:
 {cmd:"hami"}, {cmd:"jain"}, and {cmd:"rawat"}.
@@ -70,7 +70,7 @@ To address this, we can {cmd:display} the caste name before {cmd:summarize}:
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} Variable {cmd:castecode} is categorical: it can be one of a fixed set of values.
 
@@ -103,7 +103,7 @@ If {cmd:castecode} is missing, {cmd:castecode1} should also be missing.
 
 {pstd}Reload the dataset:
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} Use a for-loop to create a dummy variable for each of the six castes.
 {txt}{sf}{ul off}{...}
@@ -120,7 +120,7 @@ If {cmd:castecode} is missing, {cmd:castecode1} should also be missing.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} For many crimes in the dataset,
 there is information about which household members were victims.
@@ -185,7 +185,7 @@ among members who were victims?
 
 {pstd}Reload the dataset:
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} For each household member with member number {cmd:1} through the maximum
 (determined in part {cmd:(c)}),
@@ -229,4 +229,4 @@ we could estimate what fraction of the sample was a victim of any of these crime
 {pstd}{view `""SMCL/Problem sets/Concepts/For-Loops and Macros - problem set.smcl""':Problem set}{break}
 Return to Module: {view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
 
-{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

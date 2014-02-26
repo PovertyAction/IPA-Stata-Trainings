@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -28,7 +28,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} Consider the problem of renaming the same variables
 multiple times with different prefixes.
@@ -78,7 +78,7 @@ Further, renaming it in this way could impede merging.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} In this dataset, a number of variables end with {cmd:_1} or {cmd:_2}.
 But imagine you instead prefer these variables
@@ -113,7 +113,7 @@ one option is repeated uses of the user-written program {cmd:renvars}:
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} Variables {cmd:robberyyn}, {cmd:assaultyn} and {cmd:falsecaseyn}
 share the same value label, which has been removed for this problem set.
@@ -129,7 +129,7 @@ label the values of all three variables with the existing value label {cmd:yesno
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} For the variable {cmd:educ},
 {it}{...} why are some values labeled while others are apparently not?
@@ -159,7 +159,7 @@ so the value label {cmd:standard} was defined for only those values.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} When you create a new variable,
 {it}{...} you often want to immediately assign it a value label.
@@ -206,7 +206,7 @@ for the variable. Thus:
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{it}{...} First, execute the following commands,
 which define the value label {cmd:addressunit}
@@ -267,4 +267,4 @@ you may want to convert it to string.
 {pstd}{view `""SMCL/Problem sets/Tasks/Variable Properties - problem set.smcl""':Problem set}{break}
 Return to Module: {view `""SMCL/Tasks/Variable Properties.smcl""':Variable Properties}{break}
 
-{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

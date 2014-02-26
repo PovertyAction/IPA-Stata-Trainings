@@ -1,0 +1,44 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{it:Gean Spektor, Matthew White, and Harrison Diamond Pollock}
+
+{pstd}Thanks to Niall Keleher, and Jeffery McManus
+for valuable contributions to the course.
+
+{pstd}This training introduces foundational Stata concepts
+and will allow the user to complete essential data manipulation and analysis tasks.
+Completing the training provides the basis for the more advanced Stata concepts
+introduced in {bf:Stata 103}.
+
+{pstd}{view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}
+{view `""SMCL/Concepts/Resources.smcl""':Resources}{break}
+{view `""SMCL/Concepts/Commands.smcl""':Commands}{break}
+{view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
+{p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks/Unique IDs and Duplicates - problem set.smcl""':Problem set}{break}{p_end}{pstd}
+{p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks answers/Unique IDs and Duplicates - answers.smcl""':Answers}{break}{p_end}{pstd}
+{TYPES}
+{NAMING}
+{LOCALS}
+{view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
+{EXPORTING}
+{IMPORTING}
+
+{pstd}The training material is written in SMCL (pronounced "smickle"), Stata's output language.
+Since multiple SMCL files will be used, your working directory needs to be set correctly using {cmd:cd}.
+Now, {bf:{ul:set your working directory to the directory that contains this SMCL file.}}
+If you opened this file by double-clicking on it, you probably don't need to change your working directory.
+
+
+{hline}
+
+{pstd}Next: {view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}

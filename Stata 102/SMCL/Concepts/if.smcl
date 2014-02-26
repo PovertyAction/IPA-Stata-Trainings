@@ -2,19 +2,19 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:The {bf:if} Command Versus the {bf:if} Qualifier}{break}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
-{pstd}Let's return to the {view `""SMCL/Concepts/Explicit Subscripting.smcl"##loop"':loop from the module on explicit subscripting}:
+{pstd}Let's return to the {view `"{SUBSCRIPTING-}##loop"':loop from the module on explicit subscripting}:
 
 {pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
 {pmore}{cmd}display "`var'"{txt}{p_end}
@@ -150,7 +150,7 @@ expression is true, that's the {cmd:if} command. Time for a pop quiz:
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}Which {cmd:if} should be used: the {cmd:if} command or the {cmd:if} qualifier?
 {txt}{sf}{ul off}{...}
@@ -257,7 +257,7 @@ Thus, it's easy to tell what's in the loop and what's not, and what's in the {cm
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}For the following questions, be sure to have the (fully) duplicated {bf:hhid} observations dropped:
@@ -301,4 +301,4 @@ on which the observations with {cmd:hhid "1813023"} differ.
 
 {pstd}Next: {view `""SMCL/Concepts/Big N.smcl""':{bf:_N}}{break}
 Previous: {view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
-{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}

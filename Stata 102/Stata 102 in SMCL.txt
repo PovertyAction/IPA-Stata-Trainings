@@ -17,3 +17,8 @@ IMPORTING
 
 
 **Need to update commands to download in introduction
+**When first linking to a help file, (in Ch2 or beyond) mention it and link back to help section 
+
+**Once PDFs are uploaded, link to individual modules - ***make PDFs for 101 as well, link to individual sections. 
+
+Resources: removed 'SSC' as a resource (to leave in Commands section) and added a mention of the Stata manual 

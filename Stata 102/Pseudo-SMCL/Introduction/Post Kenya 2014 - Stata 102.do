@@ -1,6 +1,6 @@
 /* {HEAD}
 
-{it:Gean Spektor, Matthew White and Harrison Diamond Pollock}
+{it:Gean Spektor, Matthew White, and Harrison Diamond Pollock}
 
 Thanks to Niall Keleher, and Jeffery McManus
 for valuable contributions to the course.
