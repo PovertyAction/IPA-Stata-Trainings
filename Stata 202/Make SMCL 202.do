@@ -200,8 +200,8 @@ loc head
 {c |}{HEAD1} Innovations for Poverty Action{space 12}}{c |}{BR}{O}
 {c |}{HEAD1} The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{BR}{O}
 {c |}{HEAD1}{space 43}}{c |}{BR}{O}
-{c |}{HEAD1} Staff Training - New Hampshire 2013{space 7}}{c |}{BR}{O}
-{c |}{HEAD1} Advanced Stata{space 28}}{c |}{BR}{O}
+{c |}{HEAD1} Staff Training{space 28}}{c |}{BR}{O}
+{c |}{HEAD1} Stata 202{space 33}}{c |}{BR}{O}
 {sf}{...}{O}
 {c BLC}{hline 43}{c BRC}
 ;
