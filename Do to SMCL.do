@@ -11,7 +11,6 @@ Purpose: Convert a pseudo-SMCL file to a SMCL file and do-file. Pseudo-SMCL is l
 	"Click here to execute" below them that executes them. The blocks' code is
 	stored in a do-file associated with the resulting SMCL file.
 	2. There are more directives. They are specified through `subinstr'.
-Date of last revision: July 2, 2013
 */
 
 vers 10
@@ -228,6 +227,11 @@ if `n1' & `n2' & !regexm(strlower("`infile'"), "alternative|working") ///
 compress line
 assert "`:type line'" != "str`c(maxstrvarlen)'"
 
+gen isstata = cond(line == "STATACMD", 1, cond(line == "MATACMD", 0, .))
+replace isstata = isstata[_n - 1] if mi(isstata)
+replace isstata = 1 if mi(isstata)
+drop if inlist(line, "STATACMD", "MATACMD")
+
 * Replace tabs as spaces.
 replace line = subinstr(line, char(9), "    ", .)
 
@@ -443,28 +447,47 @@ if r(N) {
 		ex 198
 	}
 	file open `fh' using "`dofile'", w replace
-	file w `fh' ///
-		"args example" _n(2) ///
-		`"loc trace = c(trace) == "on""' _n ///
-		"if " _char(96) "trace' set trace off" _n(2) ///
+	#d ;
+	file w `fh'
+		"args example" _n(2)
+		`"loc trace = c(trace) == "on""' _n
+		"if " _char(96) "trace' set trace off" _n(2)
+		"local mata mata:" _n(2)
+	;
+	#d cr
 
 	forv i = 1/`=_N' {
 		if inblock[`i'] {
 			if blocknum[`i'] != blocknum[`i' - 1] {
-				file w `fh' ///
-					"`=cond(blocknum[`i'] == 1, "", "else ")'if " _char(96) "example' == `=blocknum[`i']' {" _n ///
-						_tab "if " _char(96) "trace' set trace on" _n ///
-						_tab "noi {" _n(2)
+				* Open -if- block.
+				file w `fh' (cond(blocknum[`i'] > 1, "else ", "")) "if " ///
+					_char(96) "example' == " (blocknum[`i']) " {" _n
+
+				* -set trace on-
+				file w `fh' _tab "if " _char(96) "trace' set trace on" _n
+
+				* Begin -noisily-.
+				file w `fh' _tab "noi "
+				loc isstata = isstata[`i']
+				if `isstata' ///
+					file w `fh' "{"
+				else ///
+					file w `fh' _char(96) "mata'"
+				file w `fh' _n(2)
 			}
 
 			loc line = line[`i']
 			file w `fh' `"`=ws[`i']'`macval(line)'"' _n
 
 			if endblock[`i'] {
-				file w `fh' ///
-						_n _tab "}" _n ///
-						_tab "if " _char(96) "trace' set trace off" _n ///
-					"}" _n
+				* End -noisily-.
+				file w `fh' _n _tab (cond(`isstata', "}", "end")) _n
+
+				* -set trace off-
+				file w `fh' _tab "if " _char(96) "trace' set trace off" _n
+
+				* Close -if- block.
+				file w `fh' "}" _n
 			}
 		}
 	}
@@ -491,9 +514,11 @@ if !`trimcmds' {
 * Enclose commands outside blocks in {stata} directives,
 * adding indent and internal spaces.
 gen nointernal = line == spaceline
-replace line = indent + "{bf:{stata `" + `"""' + line + `"""' + "'}}{p_end}" ///
+replace line = indent + "{bf:{" + cond(isstata, "stata", "matacmd") + ///
+	" `" + `"""' + line + `"""' + "'}}{p_end}" ///
 	if cmd & !inblock & nointernal
-replace line = indent + "{bf:{stata `" + `"""' + line + `"""' + "':" + spaceline + "}}{p_end}" ///
+replace line = indent + "{bf:{" + cond(isstata, "stata", "matacmd") + ///
+	" `" + `"""' + line + `"""' + "':" + spaceline + "}}{p_end}" ///
 	if cmd & !inblock & !nointernal
 drop nointernal
 
