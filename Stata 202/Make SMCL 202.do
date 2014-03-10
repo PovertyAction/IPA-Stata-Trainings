@@ -19,28 +19,6 @@ loc eol `=char(13)'`=char(10)'
 * Width of text boxes (not including indent)
 loc boxwidth 80
 
-c adv13
-u "Raw/New Hampshire 2013 police 3", clear
-unab all : _all
-assert `:length loc all' > 245
-loc badk = wordcount(substr("`all'", 1, 245))
-assert `badk' < c(k)
-* Check that a variable name is cut in the middle at the 244 (or whatever) mark.
-assert !strpos(substr("`all'", 243, 4), " ")
-loc var_lastvar = word(substr("`all'", 1, 245), ///
-	wordcount(substr("`all'", 1, 245)))
-assert !`:list var_lastvar in all'
-
-u "Raw/New Hampshire 2013 police 2", clear
-
-foreach id in 1101008 1113003 {
-	cou if hhid == "`id'"
-	assert r(N) == 1
-}
-assert s1_q2 == 1        if inlist(hhid, "1101008", "1113003")
-assert s1_q3 == "KUMHAR" if inlist(hhid, "1101008", "1113003")
-
-
 
 /* -------------------------------------------------------------------------- */
 					/* convert				*/
