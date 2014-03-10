@@ -28,9 +28,6 @@ timer on 1
 
 loc curdir "`c(pwd)'"
 
-c otherstata
-loc otherstata "`c(pwd)'"
-
 c adv13
 
 foreach dir of loc dirstruct {
@@ -246,7 +243,7 @@ forv i = 1/`:list sizeof infiles' {
 	loc isans    : word `i' of `ans'
 
 	#d ;
-	do "`otherstata'/Do to SMCL.do"
+	do "../Do to SMCL.do"
 		infile("`infile'") smclfile("`smclfile'") dofile("`dofile'")
 		subinstr(
 			`define'
@@ -334,10 +331,6 @@ forv i = 1/`:list sizeof infiles' {
 	;
 	#d cr
 }
-
-* Back up "Do to SMCL.do".
-loc date = strofreal(date(c(current_date), "DMY"), "%tdCCYY.NN.DD")
-copy "`otherstata'/Do to SMCL.do" "Archived/Do to SMCL/Do to SMCL `date'.do", replace
 
 * Move the start page to a different directory.
 loc intro New Hampshire 2013 Advanced.smcl
