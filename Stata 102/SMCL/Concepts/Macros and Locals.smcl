@@ -14,9 +14,127 @@
 
 {pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
+{pstd}{view `""SMCL/Concepts/Macros and Locals.smcl"##introduction"':1. Introduction}{break}
+{view `""SMCL/Concepts/Macros and Locals.smcl"##declaring"':2. Declaring and Calling Macros}{break}
+{view `""SMCL/Concepts/Macros and Locals.smcl"##examples"':3. Using Macros}{break}
+
+{hline}{marker introduction}
+
+{pstd}{bf:1. Introduction}
+
+{hline}
+
+{pstd}Up until now, we have worked solely with {view `""SMCL/Concepts/Variable Types.smcl""':variables} in Stata.
+A Stata dataset is simply a collection of variables, sets of values,
+which can be manipulated and analyzed in a variety of ways. However,
+when writing code, variables have a number of drawbacks. In this chapter,
+we’ll introduce an essential Stata concept, the macro.
+We’ll explore macros through one particular type, the local.
+
+{pstd}What is a macro? A macro simply stores a single value, and if you need
+to save a value for later, it's often more convenient to attach it to a
+macro than to create an entire variable for it.{space 2}Macros also facilitate
+more complex code in a way that variables don't -- we'll get to that.
+
+{pstd}A macro is basically a symbol that you program Stata to read as something else;
+for example, if you tell Stata that X means “Apples”, every time Stata sees X
+it knows that you really mean “Apples”.
+
+{hline}{marker declaring}
+
+{pstd}{bf:2. Declaring and Calling Macros}
+
+{hline}
+
+{pstd}There are two steps to working with macros:
+
+{pstd}{bf:1) Declare} or create a macro, i.e. tell Stata that from now on, whenever you say
+X you mean "Apples". One way to declare a macro is as follows:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+local awesome "ipa and jpal"
+{txt}{sf}{ul off}{...}
+
+{pstd}Where "awesome" is the {it:local} macro, and "ipa & jpal" is the text it will
+stand for in the future. Note that the macro in this case only reads ipa & jpal,
+and the quotation marks aren’t treated as a part of the local.
+In the declaration, Stata simply reads them to mean that you are showing
+it text and not a variable or numbers.
+
+{pstd}{bf:2) Call} the macro you created, meaning you use the new macro to pull
+up the symbolized text. Local macros are called as follows:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+display "`awesome'"
+{txt}{sf}{ul off}{...}
+
+{pstd}As you can see, since you declared "awesome" to mean "ipa and jpal", every time
+you call awesome, Stata will know you actually mean "ipa and jpal".
+
+{pstd}{bf:Note} the characters ` and ' are used when calling a local macro (but not
+when declaring it). Without these {bf:single quotes}, Stata will not recognize
+the local as a local and will just treat it as text or as a variable. To see this,
+let's execute the previous command without these single quotes
+
+{pstd}{bf:{stata `"display "awesome""'}}{p_end}
+
+{pstd}Single quotes comprise a forward quote (`) which is located to the left of
+the "1" key, and a normal quote mark (') found next to the "Enter" key.
+
+{pstd}Also note that in this case, we need to enclose the local with {bf:double quotes} (" "),
+since the text it calls up is a string and needs to be treated as such. What happens if
+we execute the following?
+
+{pstd}{bf:{stata `"display `awesome'"'}}{p_end}
+
+{pstd}Why is the result an error? "ipa and jpal" is copied in the place of `awesome', and then
+the command is executed. So far so good. However, what Stata ends up executing is
+
+{pstd}{bf:{stata `"display ipa and jpal"'}}{p_end}
+
+{pstd}This we know will result in an error, as if you want to use the {helpb display} command to display
+strings, you need to enclose them in double quotes.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} {bf:Locals}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} Remember that a local is a subset of the larger category of macros.}{c |}{p_end}
+{p2col:{c |} There are additional types of macros that can be created, however, for now,}{c |}{p_end}
+{p2col:{c |} just know that the key characteristic of a local macro is that it only}{c |}{p_end}
+{p2col:{c |} exists within the do-file that it was created. }{c |}{p_end}
+{p2col:{c |} If you attempt to call `awesome' from another do-file, you'll find that}{c |}{p_end}
+{p2col:{c |} it doesn't exist. We'll learn about different types of macros, namely}{c |}{p_end}
+{p2col:{c |} globals, in {bf:Stata 103}.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{hline}{marker examples}
+
+{pstd}{bf:3. Using Macros}
+
+{hline}
+
+{pstd}Macros might not seem so handy right now. After all, why can’t you just type "ipa & jpal" instead of bothering with the macro? However, macros are useful in a variety of ways. One is dealing with lists of variables, particularly those you need to reuse.{space 2}For example, imagine if you needed to summarize a whole bunch of variables repeatedly across the file. Instead of typing them over and over again, you can create a macro for the entire list of variables, and then input them into the commands.
 
 
-{pstd}Macros and Locals
+
+
+
+{pstd}As you may have surmised,
+
 
 
 
