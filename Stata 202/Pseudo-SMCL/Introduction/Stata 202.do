@@ -56,12 +56,5 @@ For example:
 display "{c -(}hline}"
 {DEF}
 
-Finally, this training uses or refers to the following user-written programs.
-Click each to install them.
-
-{P}{bf:{stata "ssc install fastcd":fastcd}}{p_end}
-{phang}  o Utility to automate changing directories{p_end}
-{P}{bf:{stata "ssc install lstrfun":lstrfun}}{p_end}
-{phang}  o Modify long local macros that contain strings{p_end}
-{P}{bf:{stata "net search renvars":renvars}}{p_end}
-{phang}  o Rename groups of variables{p_end} */
+{NEXT1}{MATA}
+*/
