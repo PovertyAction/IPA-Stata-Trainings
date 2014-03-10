@@ -49,11 +49,9 @@ Column 5: The args part of {view args:text}.
 Column 6: The text part of {view args:text}. */
 #d ;
 loc codeslinks
-	{START}			0	0	1	"New Hampshire 2013 Advanced.smcl"				"High Intermediate Start"
-	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"	""
-	{MACROS}		1	1	1	"SMCL/Modules/Macros.smcl"						""
-	{RESHAPE}		1	1	1	"SMCL/Modules/reshape.smcl"						"{bf:reshape}"
-	{EXPORT}		0	1	1	"SMCL/Modules/Exporting Tables.smcl"			"Exporting Tables"
+	{START}			0	0	1	"Stata 202.smcl"					"Stata 202 Start"
+	{INTRO}			0	0	1	"SMCL/Introduction/Stata 202.smcl"	""
+	{MATA}			1	1	1	"SMCL/Modules/Mata.smcl"			""
 ;
 #d cr
 assert mod(`:list sizeof codeslinks', 6) == 0
@@ -235,7 +233,8 @@ forv i = 1/`:list sizeof infiles' {
 	do "../Do to SMCL.do"
 		infile("`infile'") smclfile("`smclfile'") dofile("`dofile'")
 		subinstr(
-			"{HEAD}"     = "`head'" \
+			"{HEAD}"  = "`head'" \
+			"{HEAD1}" = `"{view `"{START-}"':"' \
 
 			`define'
 			`questions'

@@ -39,7 +39,6 @@ loc shared_subinstr (
 	"QTITLE" = "\`=cond(\`isans', "ANS", "--")'" \
 	"{AQ}"   = "\`=cond(\`isans', "{IT}", "")'" \
 
-	"{HEAD1}"    = `"{view `"{START-}"':"' \
 	"{PS!}"      = "{it:Problem set}{BR}" \
 	"{PSANS!}"   = "{it:Answer key}{BR}" \
 	"{FOOT}"     = "{NEW}{hline}" \

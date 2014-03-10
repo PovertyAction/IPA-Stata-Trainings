@@ -1,46 +1,60 @@
-/* {HEAD}
+/* {HEAD}{BR}
+{BF}{IT}{UL}
+(All pages have a header like the one above.
+You can click it to return to the start page.)
+{DEF}
 
-As a Stata pro, you are already very comfortable with essential Stata concepts,
-such as the following:
+{INTRO!}
 
-Explicit subscripting{BR}
-For-loops and macros{BR}
-The {helpb ifcmd:if} command vs. the {helpb if} qualifier{BR}
-Saved results{BR}
-{helpb _N}{BR}
-{helpb _n}{BR}
-{helpb by}{BR}
-{helpb egen}
+The fact that we're using SMCL means
+that we can run commands from within the training files.
+For example: */
 
-Thus, the purpose of this course is not to train you on essentials like these,
-but instead to fill any gaps in your knowledge,
-to extend your deep understanding of Stata,
-and to present the most efficient solutions to common data tasks.
+display "Hello world!"
 
-This course is meant to be challenging,
-and if you are not already very familiar with the essential concepts above,
-you should join the High Intermediate training now.
-High Intermediate is a rigorous course and
-is designed to solidify your understanding of these concepts.
+/* Commands that are one line long are blue and clickable.
+Blocks and commands that are more than one line long are bold black,
+and can be executed by clicking the blue "Click here to execute" below them.
+For example: */
 
-This training is split into two modules.
-While all Stata beginners start the same,
-Stata pros can have different skill sets from one another.
-While you may know the content of one module very well,
-you could be less familiar with the other.
-We will cover the following modules:
+foreach i of numlist 1/10 {
+	display `i'
+}
 
-{MACROS}
-  o {MACROS_ANS2}
-{RESHAPE}
-  o {RESHAPE_ANS2}
+/* Further, you will see links like {help contents:this one} that
+take you to different spots in the training, to help files,
+or to locations in a Stata manual.
+These links work like those in an Internet browser,
+so you can always press the Back button
+to return to your exact previous location.
+Further, if you right-click on a link,
+you have the option to open it in a new tab or window.
+Links to Stata manuals, such as {bf:{mansection U:[U] Stata User's Guide}},
+function only in Stata 11 and higher.
 
-The training material is written in SMCL (pronounced "smickle"), Stata's output language.
-Since multiple SMCL files will be used, your working directory needs to be set correctly using {cmd:cd}.
-Now, {bf:{ul:set your working directory to the directory that contains this SMCL file.}}
-If you opened this file by double-clicking on it, you probably don't need to change your working directory.
+Throughout the training,
+you'll see text boxes like the one below holding technical tips.
+Although not essential,
+these tips can help you reach the next level of Stata mastery.
+If the text box is misaligned,
+resize your viewer to a larger size and click the Reload button.
+Alternatively, right click on the page, click Font,
+then select a smaller font size.
 
-Before embarking on the first module,
-let's do a brief introduction to the training and its format:
-{view `"{INTRO-}"':click here}. */
+{TECH}
+{COL}Typing {helpb contents:help} by itself is the same as {helpb contents:help contents}.{CEND}
+{BOTTOM}
 
+When a command is introduced for the first time,
+it'll usually appear as text instead of a link.
+It'll be preceded by a text box reminder
+to type out the command fully in the Command window.
+({it:Don't just copy and paste!})
+For example:
+
+{TRYITCMD}
+display "{c -(}hline}"
+{DEF}
+
+{NEXT1}{MATA}
+*/
