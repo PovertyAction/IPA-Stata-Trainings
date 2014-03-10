@@ -235,7 +235,8 @@ forv i = 1/`:list sizeof infiles' {
 	do "../Do to SMCL.do"
 		infile("`infile'") smclfile("`smclfile'") dofile("`dofile'")
 		subinstr(
-			"{HEAD}"     = "`head'" \
+			"{HEAD}"  = "`head'" \
+			"{HEAD1}" = `"{view `"{START-}"':"' \
 
 			`define'
 			`questions'
