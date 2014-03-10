@@ -22,7 +22,7 @@ timer on 1
 
 loc curdir "`c(pwd)'"
 
-c adv13
+c train202
 
 foreach dir of loc dirstruct {
 	loc files : dir "Pseudo-SMCL/`dir'" file "*.do", respect
@@ -273,7 +273,7 @@ forv i = 1/`:list sizeof infiles' {
 }
 
 * Move the start page to a different directory.
-loc intro New Hampshire 2013 Advanced.smcl
+loc intro Stata 202.smcl
 copy  "SMCL/Introduction/`intro'" "`intro'", replace
 erase "SMCL/Introduction/`intro'"
 //view "`intro'"
