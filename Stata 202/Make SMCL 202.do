@@ -5,9 +5,9 @@ vers 13
 
 * The directory structure (directories and subdirectories) of the Pseudo-SMCL,
 * SMCL, and Do directories.
-loc dirstruct Introduction Modules "Problem sets" Answers
+loc dirstruct Introduction Modules
 * Directories that contain answer key files
-loc ansdirs	Answers
+loc ansdirs
 * Maximum number of questions in a problem set
 loc maxq 2
 conf integer n `maxq'
