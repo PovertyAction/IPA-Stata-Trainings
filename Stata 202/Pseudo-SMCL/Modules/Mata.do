@@ -76,11 +76,7 @@ display "`vallab'"
 display "`type'"
 display "`format'"
 
-{MACROS_Q1}
-
-/* {hline}
-
-Another category of extended macro functions manipulates lists.
+/* Another category of extended macro functions manipulates lists.
 
 For example, say we have two lists:
 {cmd:`nolabvars'}, the list of variables without a value label,
@@ -660,9 +656,7 @@ we could already get this using the {cmd:word} extended macro function.
 the list with the first element removed,
 and it's this novel capability that makes {cmd:gettoken} worth learning. */
 
-{MACROS_Q2}
-
-/* {hline}{marker arguments}
+/* {marker arguments}
 
 {bf:4. Passing arguments to do-files}
 
