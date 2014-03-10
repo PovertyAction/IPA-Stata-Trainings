@@ -1,5 +1,4 @@
 * Author: Matt White, Innovations for Poverty Action, mwhite@poverty-action.org
-* Date of last revision: September 9, 2013
 
 vers 13
 
