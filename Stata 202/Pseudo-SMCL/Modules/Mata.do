@@ -11,7 +11,7 @@ We will touch on these topics:
 {view `"{MATA-}##speed"':2. Mata for speed}{BR}
 {view `"{MATA-}##data_structures"':3. Mata for data structures}{BR}
 {view `"{MATA-}##strings"':4. Mata for strings}{BR}
-{view `"{MATA-}##learning_more"':5. Learning more}{BR}
+{view `"{MATA-}##wrapping_up"':5. Wrapping up}{BR}
 
 {hline}{marker what_is_mata}
 
@@ -51,11 +51,11 @@ Stata version */
 clear
 set obs 10
 gen x = 100 - _n ^ 2
-browse
+list
 
 * {cmd:* Sort it.}
 sort x
-browse
+list
 
 * Mata version
 
@@ -78,8 +78,7 @@ STATACMD
 Mata has no {help macro:macros}: there are no locals or globals.
 Everything, from single values to large matrices, are stored in {it:variables}.
 These bear the same name as Stata variables,
-but there is no real relation {hline 2}
-though you can store Stata variables in Mata.
+but there is no real relation.
 
 As there are no macros, for-loops look dramatically different: */
 
@@ -89,11 +88,11 @@ forvalues i = 1/10 {
 	replace x = x + `i'
 }
 
-browse x
+list
 
 * {cmd:* Mata version}
 
-mata:
+mata
 MATACMD
 
 {BLOCK}for (i = 1; i <= 10; i++)
@@ -127,14 +126,16 @@ regress weight length
 
 Stata has a {help language:basic language syntax} to which many commands adhere.
 Yet the syntax of many other commands differ from this, and
-Stata's flexible syntax permits this.
+Stata's flexible syntactical rules permit this.
 
-The lack of an extensive global syntax means that
+The lack of a rigid global syntax means that
 macros become a key part of work in Stata.
 
 Macros are convenient, but they have downsides:{BR}
 - They are relatively slow.{BR}
 - They make it hard to work with difficult strings.
+
+Let's see some examples of these.
 
 Here is an example of the Stata/Mata speed difference,
 borrowed from the blog
@@ -153,12 +154,12 @@ Stata */
 {BLOCK}
 {BLOCK}timer off 1
 {BLOCK}timer list 1
-
-display `x2'
+{BLOCK}
+{BLOCK}display `x2'
 
 * Mata
 
-mata:
+mata
 MATACMD
 
 {BLOCK}timer_clear(1)
@@ -170,8 +171,8 @@ MATACMD
 {BLOCK}
 {BLOCK}timer_off(1)
 {BLOCK}timer(1)
-
-x2
+{BLOCK}
+{BLOCK}x2
 
 end
 STATACMD
@@ -179,6 +180,9 @@ STATACMD
 /* Mata is many times faster than Stata.
 
 Mata is also much stronger at recursion than Stata.
+
+If an algorithm is very slow in Stata, or if you are considering recursion,
+you may wish to implement the algorithm in Mata instead.
 
 {hline}{marker data_structures}
 
@@ -190,7 +194,8 @@ A much cited fault of Stata is that
 you can have only one dataset open in memory.
 Mata does not have this requirement:
 you may define as many Mata variables of whatever type as
-your machine can handle.
+your machine can handle {hline 2}
+even if each variable is itself a dataset.
 
 Since it is possible to easily move objects from Stata to Mata and back again,
 this means that you can load a dataset in Stata,
@@ -202,15 +207,16 @@ For instance: */
 
 sysuse cancer, clear
 
-mata:
+mata
 MATACMD
+* {cmd:* Store the Stata dataset in the Mata variable cancer.}
 cancer = st_data(., .)
 end
 STATACMD
 
 sysuse voter, clear
 
-mata:
+mata
 MATACMD
 voter = st_data(., .)
 end
@@ -221,7 +227,7 @@ clear
 * There is no Stata dataset in memory,
 * yet Mata still has access to both datasets:
 
-mata:
+mata
 MATACMD
 cancer
 voter
@@ -247,9 +253,9 @@ Mata has its own lists, lists of lists, hash tables, and so on.
 
 Stata has a difficult time manipulating strings that
 contain characters with a special meaning to Stata, for instance,
-{cmd:`} {cmd:$} {cmd:"} and {cmd:\}.
+{cmd:`}, {cmd:$}, {cmd:"}, and {cmd:\}.
 
-These characters are uncommon, but they are by means impossible:
+These characters are uncommon, but they are by no means impossible:
 enumerators sometimes enter {cmd:`} instead of {cmd:'}, and
 {cmd:$} appears in some Windows filenames.
 
@@ -258,13 +264,24 @@ For instance, if you are looping over files with difficult filenames
 or parsing files that contain difficult characters,
 Mata is an excellent choice.
 
-{hline}{marker learning_more}
+{hline}{marker wrapping_up}
 
-5. Learning more
+5. Wrapping up
 
 {hline}
 
-The {help mata:Mata help} is fantastic,
+Consider using Mata if...{BR}
+- You are manipulating matrices:
+Mata has many more matrix operations than Stata.{BR}
+- You are working with difficult strings{BR}
+- You are manipulating files and their contents{BR}
+- You are running a custom algorithm that is slow in Stata{BR}
+- You are using heavy-duty recursion{BR}
+- You would like access to more than one dataset at once{BR}
+- You require a data structure more complex than rectangular data
+
+If you would like to learn more about Mata,
+the {help mata:Mata help} is fantastic,
 and will walk you through step by step from the beginning.
 Start with {helpb m1_first:help m1_first}. */
 
