@@ -1,0 +1,51 @@
+Febuary 28, 2014
+
+1-hour Stata Sessions
+
+Modual: 103
+
+Topics: 
+
+-display format
+-stata built-in datasets
+-storing numbers
+-rename
+-labels
+ >rename label values
+ >value labels
+ >label list
+ >label dir
+ >label drop
+-describe
+-notes
+-delimit
+- /// (back slash) only runs in do-files
+- storage type
+
+
+Suggestions:
+
+- placement of dummary varaible example
+- create a manual on Date and Time
+- Take a look at the code for SMCL example. Sometimes the first letter of the command is dropped
+- Show examples of using /// (backslash)
+
+
+Questions:
+
+1. What is the difference between 9% and 9.3%? And what does each stand for?
+2. Why is -renpfix- no longer useful?
+3. You don't need to put the note in quotes, Why?
+4. when defining lables do you need quotes?
+5. Is the only punctuation you can use for delimit is ; (semi coloin)?
+6. When will you use /// (backslash)? Could you give examples?
+
+
+
+Next Time:
+
+-destring
+-to string
+-decode
+-encode
+-percision

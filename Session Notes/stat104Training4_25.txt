@@ -1,0 +1,40 @@
+April 25, 2014
+
+104 Modual
+
+
+Topic:
+-returning results using quotes and double quotes
+-using single quotes in a foreach loop
+- _all
+- limiting the number of variales in your loop using ds
+- problem set question 4 of modual saved results
+
+
+Questions:
+1. why does it not have 24 character quotes when you use r(varlist) in double quotes?
+2. why would you create a local outside the loop but not inside the loop?
+3. 
+
+Suggestions:
+-problem set question: How would you see what r(min) and r(max) actually are?
+set trace on
+
+-problem set question: Why are we using 'in' instead of 'of' in the foreach loop when you using saved results r(varlist)?
+- talked about 'in' and 'of' and when it will and will not work
+-
+
+Good Coding practice:
+-no harm in putting single quotes around r(mean), but sometimes they are required.
+for example when they are used in a loop
+It depends on what is saved results but this is no longer true for stata 13
+-you should never see an expression in foreach loop
+
+
+Next Time:
+
+duplicates tag
+quietly
+noisily
+
+

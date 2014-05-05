@@ -1,0 +1,46 @@
+March 7, 2014
+
+103 Modual
+
+Topic: 
+ 
+- Foreach x of varlist
+- Explicit Subscripting
+- sorting and than looking at the value of the explicit subscripting
+- For-Loops
+ *foreach var in
+- locals
+- macro
+- trace
+
+
+
+Questions:
+1. After the foreach statment do I put the variable name?
+2. why do we need double quote in the example foreach loop?
+3. How would the loop work if you put a local in the loop? Is that something you should not do?
+4. Which way will you use "in" in a foreach loop?
+5. why with the example the missing values for sex and age do not show up?
+6. when using display in the loop it will evaluate the expression before doing the display?
+7. how does Stata read `var?
+8. Is the trace running through each line?
+9. 
+
+
+Suggestions:
+
+- expand on varlist using the * in the foreach statement, might want
+to include this in with the rename command
+
+- put the value of the local for the number values
+- Stata has improved on infrom the error in the code but using trace is still imporatant
+- 
+
+Good Coding practice:
+- why not to use the observation numbers
+- when writing a loop it is stylistically nice to indent the code until the end bracket
+- resource on Box on programing style
+- every loop will have a macro but not all marcro will have a loop
+
+
+Next Time:

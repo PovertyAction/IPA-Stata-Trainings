@@ -1,0 +1,36 @@
+March 18, 2014
+
+103 Modual
+
+Topic: 
+-the difference between in and of in loops
+-reviewed problem set question 1 & 2 of the For-loops and Macro modual
+-problem set question 3 of the For-loops and Macros
+
+ 
+
+
+Questions:
+
+1. In for-loop does 'of' allways goes with varlist and 'in' goes with numlist?
+2. When creating a dummy variable how do you specify it in one line?
+3. Does the logical expression always have to have parentesis?
+4. 
+
+
+
+Suggestions:
+
+-answer explanation for the problem set question in the for-loop and Macro module needs to be clearified
+-go over the other anwers for the problem set questions to see if more explanction can be added
+-The question and answer for part b of problem set question 
+
+Good Coding practice:
+
+-always use double quotes when refering to a string
+-do not need quote when defining the local in a loop
+-
+
+
+Next Time:
+

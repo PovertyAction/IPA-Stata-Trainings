@@ -1,0 +1,43 @@
+March 28, 2014
+
+103 Modual
+
+Topic:
+- _N 
+- r(r)
+- _n
+
+
+
+Questions:
+1. _N gives the number of observations and r(r) give the number of unique observations?
+2. Will you ever see _N in a foreach loop?
+3. How can we use smcl and a do-file at the same time?
+4. Is there any case when using _n in example
+sort hhid
+generate iddup = hhid[_n - 1]
+ 
+will fail spectacularly?
+5. Why would you not just do duplicate tag in the first place than using _n?
+6. 
+
+
+
+Suggestions:
+- come up with examples of using _N in a loop or in another way
+- Need logical experession in 103
+- what if there is a duplicate in the last observation what will happen.
+- we need to talk about the -count- command
+
+
+Good Coding practice:
+
+
+
+
+
+Next Time:
+
+We will see _N in 104
+r(r) will also be seen in 104
+finsh problem set 4 of the _n

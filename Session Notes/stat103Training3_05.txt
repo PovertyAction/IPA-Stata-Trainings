@@ -1,0 +1,43 @@
+March 5, 2014
+
+103 Modual
+
+Topic: 
+
+Follow up from last week
+-persision
+-unique IDs 
+-Duplicates
+  -duplicate list
+-problem set 1 ---> variables properties
+ -question 1
+ -question 3
+ -question 5
+
+-sum (min/max)
+
+
+
+Questions:
+1. Before using duplicates drop should we check the duplicates first?
+2. Why is only one observation is dropped and not all the duplicate ids?
+3. How do you rename all variables?
+4. When get an invalid message that the variable name is too long?
+5. Whould the dot have to be in quotation or no?
+6. Is the best way to create a new variables in two lines?
+7. 
+
+
+Suggestions:
+-Probably take out the helpful hint for question 5(b) labeling question.
+
+
+
+Good Coding practice:
+
+-Do not use the observation number when writing code because the observation number can change
+-variable names are limited to 32 characters
+-Better to keep the replace command when generating variables and changing the values
+
+Next Time:
+-scripting

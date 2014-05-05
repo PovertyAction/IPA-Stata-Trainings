@@ -1,0 +1,64 @@
+Febuary 19, 2014
+
+Stata Sessions
+
+Modual: 102 
+Topics: Naming and Labeling data
+
+-rename group: very powerful stata command
+-character 
+	-*
+	-#
+	-?
+
+Specifier    Meaning in old
+        -------------------------------------------------------------------
+        *            0 or more characters
+        ?            1 character exactly
+        #            1 or more digits
+        (#)          1 digit exactly
+        (##)         2 digits exactly
+        (###)        3 digits exactly
+        ...
+        (##########) 10 digits exactly
+        -------------------------------------------------------------------
+
+
+
+
+-label variable
+-label define
+-label values
+-import/insheet
+-merge
+
+
+
+
+
+Questions:
+
+1. When you rename a variables you erase the old name?
+2. Do the ? and * function in the same way as the wild card?
+3. when you look at the data and there are extra class and most of them are blanck, why is that?
+4. Is it a bad idea to name the label the same as the variables?
+5. How would you correct the label if you miss-spelled something in the label?
+6. Where whould you use label option (modify, rename, add,nofix) if you are working in a do-file?
+7. Do you always have to specify replace if you are relabeling variables?
+8. Can you label a string or is the command only used for labeling numeric?
+9. Is -insheet- obsolete?
+10. The point when you are merging, does that mean you have taken out the names?
+11. With merging, how do you know which is dataset one and dataset two.
+12. With the merging if you have serveral unique ids and you want to merge than in the other dataset would you have one instance of the unique ids?
+      -what is an example of when that would happen.
+13. When you merge, do you want all merge 3?
+14. 
+
+
+
+Suggestions:
+
+-get a general sense of the data to know what the variables mean to make the cleaning easier or what should be cleaned
+-rename variables, it might be good to go in more dept.
+-the merging file does not open when you go through the Kenya 2014 training file/it open when you use the smcl file
+-

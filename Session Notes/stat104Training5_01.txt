@@ -1,0 +1,32 @@
+April 25, 2014
+
+104 Modual
+
+
+Topic:
+-save results modua
+-problem set question 5 
+ -duplicates tag
+ -duplicates drop
+-quietly
+-noisily
+
+Questions:
+1. why would you not want to see the results of a command?
+2. When will you use noisely?
+3. can you ruin someone's saved results using pi?
+
+
+Suggestions:
+-check SMCL file, someone had trouble opening it.  Would open but show no content.
+ -the individual files were not working
+-Should add a brief discussion on when to use noisely (look at stat pdf help file)
+
+
+Good Coding practice:
+
+
+Next Time:
+
+
+

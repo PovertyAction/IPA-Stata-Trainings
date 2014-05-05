@@ -1,0 +1,90 @@
+2.04.2014
+
+Sections covered:
+
+Stata resources
+Variables types
+Macro & Locals
+Loops
+
+Starttime 3:30pm
+
+
+Introdution:
+
+Resources --> 3:31pm - 3:39pm (talk about resources/how to read help file e.g. the help, tabulate, in, if)
+
+
+Variables types & working with string variables:
+
+variable type (numeric/string) --> 3:40pm - 3:49pm
+
+destring --> 3:50pm - 4:00pm
+
+encode/decode --> 4:01pm - 4:09pm
+
+
+Macro & Loops: 
+
+Macro (Locals) --> 4:10pm - 4:37pm
+
+Loops (for loops) --> 4:38pm - 5:03pm
+
+Last Questions --> 5:04pm - 5:06pm
+
+
+
+
+Sugesstions:
+
+*forgot chapter 4
+*title of handout is wanky
+*Stata 10 does not give you the same help 
+*You talk about using the command describe and codebook or look at the properties window but
+probaly display how to use all three methods when working through activity.
+* Talk about the alternatives to useing replace (e.g. ignor)
+*practice backing up dataset, other files for trainng. Talk about this in the beging of the training.
+* have all files setup for them for the training
+*Easier to have the command window open
+*have practice having the do-file open and get into the habit of working in the do-file
+*use destring you have to specify if you want it to change to missing
+*mention tostring but it was not shown as an example with doing destring
+*for macros are you only focusing on local or both local and global (Will not talk about other macros here)
+*The slant quote is not single quote.  Have to differianciate bewteen the two. (called forward quotes)
+*Should talk about what the varaibles means and how they are labled
+*Find out when to use douple quotes when assigning locals
+* Might want to talk about assigning an same name to two different locals (talk about overwitting local later)
+* the equal sign is not negligable (e.g. local i = `i'+ 3). Tale about when using local in an operation
+* Might want to talk about why you have to have the open bracket and press enter then close bracket on its own line
+* Typo in example when using "foreach" example
+* The variables names in example are different than the ones in the dataset
+* Might want to change the example (e.g. gen schooltype1-1 = (schooltype1 ==1) because you start talking about logical expression but never introduced this concept.
+* Stata independent study from wendsday 11am-12pm use an 1hour to go part of manual
+
+Questions:
+
+1. What are the different storage types of variables e.g. float, byte? Do we need to know these different types?
+2. Was it householdid or childid?
+3. How does destring treat nondigit like a letter?
+4. How is the syntix using replace, gen() do you need the perenteses?
+5. What happen when you rewite and want to go back?
+6. Are we going to go over foreach?
+7. There is no undo command?
+8. When using encode do you lose the values or do you have to generate a new variable
+9. If you use destring on a non-numberic it does not just change a variable as missing?
+10. Would it be fine after encoding to drop tcstatus?
+11. who labled the names of quotes?
+12. what is the point of generate one uisng local?
+13. should there be double quotes around the local i (e.g. "`i'" instead `i')?
+14. why would it do the middle part first (e.g. display "`a`1''")
+15. when you call (local a a1 a2 a3), Is it a string or a number?
+16. when you generate the variable you generate the string? Right?
+17. It would not be a good procatice to redefine locals because it is obnotious to the person trying to follow your code?
+18. Chances of changing a global would be rarely? Right?
+19. what is SMCL?
+20. Can you think of a way to make this easier which fequency table corresponds to which variables in a loop?
+21. How is using loops useful?
+22. Can you create a list of variables in a local? How would you go about doing that? 
+23. Without loops how would you go about create a dummy for each group of observations in a variable?
+24. when you doing variables var1 to var20 are they names in the dataset or numbers?
+25. when is stata 103 training?

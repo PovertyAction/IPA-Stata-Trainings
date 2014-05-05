@@ -1,0 +1,40 @@
+March 26, 2014
+
+103 Modual
+
+Topic: 
+
+-103 Problem set question 3 of Forloops and Macros
+-if Command vs. the if Qualifier
+-problem set question a, b, and c
+
+
+
+
+Questions:
+
+1. when using if as a qualifer it not an option?
+2. What would it look like if we used the if statement the other way for part b. of problem set question 1? 
+(useing local with the if qualifer) e.g. summarize sex if 1==1
+3. Is there anther way to do the problem set question without using the observation number?
+4. How do you use count?
+5. 
+
+
+Suggestions:
+-question on part b of the problem set question 1 for if command vs. if qualifier
+-rewrite the problem set question 1 in the if command vs. if qualifier.  Clean up language.
+- 
+
+
+Good Coding practice:
+
+-display does not take if as an option
+-When you have a brace in a line for a loop it is good coding practice to indent
+
+
+
+
+Next Time:
+
+Greg deserves a cookie!

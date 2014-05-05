@@ -1,0 +1,30 @@
+March 14, 2014
+
+103 Modual
+
+Topic: 
+ 
+-while loops
+-problem sets on loops
+
+
+Questions:
+
+1. Can you use ++ or any other operation to tell Stata to count?
+2. What does local i in the loop do and is that different than local i in the local above?
+3. Why would the loop in exercise one be different if you use of instead in?
+4. Why not use a while statement for the first example?
+5. 
+
+
+
+Suggestions:
+-Talk more about different ways to write conditonals
+
+
+
+Good Coding practice:
+
+
+Next Time:
+
