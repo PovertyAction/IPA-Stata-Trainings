@@ -1,0 +1,307 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Checking Skip Patterns and Logical Consistency}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl"##q5"':Question 5}{break}
+{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl"##q6"':Question 6}{break}
+{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl"##q7"':Question 7}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{it}{...} In your project, what critical skip patterns could you check using Stata?
+
+{pstd}{it}{...} What command(s) would you use to check this skip pattern?
+{txt}{sf}{ul off}{...}
+
+{pstd}As a first step, use {cmd:assert} to check key skip patterns.
+Combining {cmd:assert} with {cmd:capture} could be especially useful
+for more complicated checks, such as those requiring for-loops.
+
+{pstd}Alternatively, create a
+{view `""SMCL/Tasks/Logic Checks.smcl"##dummy"':dummy variable that indicates whether there's a data issue},
+then use {cmd:browse} or summary commands like {cmd:summarize} or {cmd:tabulate}.
+
+{pstd}Here's an example from this dataset.
+{cmd:assaultyn} asks whether anyone from the respondent's household
+has suffered from an action that caused injury, fear, or annoyance.
+{cmd:assaultnum} indicates the number of times this happened.
+{cmd:assaultnum} should be nonmissing if and only if
+{cmd:assaultyn} equals {cmd:Yes} ({cmd:1}).
+Here's how we could check this using {cmd:assert}:
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{bf:{stata `"assert assaultnum != . if assaultyn == 1"'}}{p_end}
+{pstd}{bf:{stata `"assert assaultnum == . if assaultyn != 1"'}}{p_end}
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{it}{...} How does the output of {cmd:assert} compare with that of
+{it}{...} {helpb isid}?
+{txt}{sf}{ul off}{...}
+
+{pstd}For both commands, no output is displayed if the assertion/assumption is true.
+(In the case of {cmd:isid}, the assertion is that
+the specified variables uniquely identify the observations.)
+Moreover, both issue an error message if the assertion is false.
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{it}{...} If you add the prefix {cmd:capture} to a command
+and the command results in an error,
+what do you expect to see?
+How about if the command does not result in an error?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:capture} suppresses all output from a command
+regardless of whether it results in an error.
+If a {cmd:capture}d command issues an error message, it is not shown.
+If the command does not result in an error,
+its normal output is also not displayed.
+The exception to this is the use of {cmd:noisily} with {cmd:capture}.
+
+{hline}{marker q4}
+
+{pstd}{bf:Answer to Question 4}
+
+{hline}
+
+{pstd}{it}{...} It can be difficult to tell whether your {cmd:assert}ions are true
+when you use the {cmd:capture} prefix.
+What are two solutions to this problem?
+{txt}{sf}{ul off}{...}
+
+{pstd}One option is to add {cmd:noisily} after {cmd:capture}.
+For example:
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{cmd:* No output is shown, but because of the capture, it's unclear what this means.}{p_end}
+{pstd}{bf:{stata `"capture assert cycleownyn == 1 | cycleownyn == 2"'}}{p_end}
+{pstd}{cmd:* No output is shown, which means the assertion is true.}{p_end}
+{pstd}{bf:{stata `"capture noisily assert cycleownyn == 1 | cycleownyn == 2"'}}{p_end}
+
+{pstd}A second possibility is to use {cmd:_rc},
+which indicates whether the command resulted in an error:
+
+{pstd}{bf:{stata `"capture assert cycleownyn == 1 | cycleownyn == 2"'}}{p_end}
+{pstd}{bf:{stata `"display _rc"'}}{p_end}
+
+{pstd}You can also choose simply not to use {cmd:assert} for this purpose,
+opting instead for
+{view `""SMCL/Tasks/Logic Checks.smcl"##dummy"':alternatives like {bf:list} and {bf:tabulate}},
+which don't require {cmd:capture}.
+
+{hline}{marker q5}
+
+{pstd}{bf:Answer to Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}Use {cmd:assert} to check that {cmd:sex} is either {cmd:1} or {cmd:2}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"assert sex == 1 | sex == 2"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Checking for logical consistency between questions
+entails checking that the responses to the different questions
+are logically consistent with each other.
+
+{pstd}Skip patterns are an example of a logical relationship,
+and you check logical consistency in the same way as skip patterns.
+With that mind, complete the following logic check using {cmd:assert}:
+
+{pstd}Victim 1 of a two-wheeler theft ({cmd:own2wheelertheftvictim_1}) is
+different from victim 2 ({cmd:own2wheelertheftvictim_2}).
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"assert own2wheelertheftvictim_1 != own2wheelertheftvictim_2 | own2wheelertheftvictim_1 == ."'}}{p_end}
+
+{pstd}{it}{...} {bf:(c)}
+
+{pstd}Use {cmd:assert} to check all logicial relationships between {cmd:own2wheelertheft},
+{cmd:own2wheelertheftnum}, {cmd:own2wheelertheftvictim_1}, and {cmd:own2wheelertheftvictim_2}:
+{txt}{sf}{ul off}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheft}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Have you or other members of your household had any of their mopeds/}{c |}{p_end}
+{p2col:{c |} scooters/motorcycles stolen?}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {cmd:1}{space 2}Yes}{c |}{p_end}
+{p2col:{c |} {cmd:2}{space 2}No (skip remaining questions)}{c |}{p_end}
+{p2col:{c |} {cmd:.d} Don't know (skip remaining questions)}{c |}{p_end}
+{p2col:{c |} {cmd:.r} Refuse to answer (skip remaining questions)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftnum}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} How many times did this happen?}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftvictim_1}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Which household members were victims of this type of crime? (Victim 1)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}{it}{...}If {cmd:own2wheelertheftnum > 1} and multiple households members were victims,
+ask {cmd:own2wheelertheftvictim_2}:
+{txt}{sf}{ul off}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftvictim_2}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Which household members were victims of this type of crime? (Victim 2)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}foreach var of varlist own2wheelertheftnum own2wheelertheftvictim_1 {{txt}{p_end}
+{pmore}{cmd}assert `var' != . if own2wheelertheft == 1{txt}{p_end}
+{pmore}{cmd}assert `var' == . if own2wheelertheft != 1{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/Logic Checks - answers.do" 1"':Click here to execute.}
+
+{pstd}{cmd}assert own2wheelertheftvictim_2 == . ///{txt}{p_end}
+{pmore}{cmd}if own2wheelertheftnum < 2 | own2wheelertheftnum == .{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/Logic Checks - answers.do" 2"':Click here to execute.}
+
+{hline}{marker q6}
+
+{pstd}{bf:Answer to Question 6}
+
+{hline}
+
+{pstd}{it}{...} After each command, is {cmd:_rc} zero or nonzero?
+Answer without executing the commands in Stata.
+
+{pstd}{cmd:capture display "Hello world!" if sex == 1}{break}
+{cmd:display "Hello world!"}
+{txt}{sf}{ul off}{...}
+
+{pstd}It is nonzero ({cmd:111}) after both:
+
+{pstd}{cmd:capture display "Hello world!" if sex == 1}
+
+{pstd}After this command, {cmd:_rc == 111}.
+
+{pstd}{cmd:display "Hello world!"}
+
+{pstd}This command is not preceded by {cmd:capture},
+so {cmd:_rc} is unchanged and remains {cmd:111}.
+
+
+{hline}{marker q7}
+
+{pstd}{bf:Answer to Question 7}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} In this dataset, there are multiple pairs of variables that first ask
+whether a given action has taken place,
+and second, how many times it has happened.
+These variables have the suffixes {cmd:yn} and {cmd:num}, respectively.
+For instance, {cmd:attackyn} and {cmd:attacknum} are one such pair.
+
+{pstd}{bf:{stata `"describe attackyn attacknum"'}}{p_end}
+{pstd}{bf:{stata `"browse attackyn attacknum"'}}{p_end}
+
+{pstd}{it}{...} Check for logical consistency in all such pairs:
+if the yes/no variable is yes,
+then the {cmd:num} variable should not be missing;
+if the yes/no variable is no,
+then the {cmd:num} variable should be missing.
+
+{pstd}{bf:Hint 1:}
+First use {cmd:ds} to identify all variables that end with {cmd:yn}.
+Do all these variables have the same value label?
+Do they all have a corresponding {cmd:num} variable?
+
+{pstd}{bf:Hint 2:}
+You may need to use a {help string function}, such as {helpb substr()}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:* First, make sure that all yes/no variables have yes == 1 and no == 2.}{p_end}
+{pstd}{bf:{stata `"ds *yn"'}}{p_end}
+{pstd}{bf:{stata `"local ynvars `r(varlist)'"'}}{p_end}
+{pstd}{bf:{stata `"describe `ynvars'"'}}{p_end}
+{pstd}{bf:{stata `"recode `ynvars' (0=2)"'}}{p_end}
+{pstd}{bf:{stata `"label values `ynvars' yesno"'}}{p_end}
+
+{pstd}{cmd}* Loop over all yes/no variables.{txt}{p_end}
+{pstd}{cmd}foreach ynvar of varlist *yn {{txt}{p_end}
+{pmore}{cmd}* Remove "yn" from the end of `ynvar'. This makes it easy to determine the name of{txt}{p_end}
+{pmore}{cmd}* the num variable.{txt}{p_end}
+{pmore}{cmd}local base = substr("`ynvar'", 1, length("`ynvar'") - 2){txt}{p_end}
+{pmore}{cmd}capture noisily list `ynvar' `base'num ///{txt}{p_end}
+{pmore2}{cmd}if (`ynvar' == 1 & `base'num == .) | (`ynvar' == 2 & `base'num != .), ///{txt}{p_end}
+{pmore2}{cmd}abbreviate(32){txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/Logic Checks - answers.do" 3"':Click here to execute.}
+
+{pstd}Here, we use {cmd:capture} because there are several variables
+that end with {cmd:yn} but don't have a correponding variable that ends with {cmd:num}
+(for example, {cmd:backcheckedyn}).
+Without the {cmd:capture}, the for-loop would result in an error.
+
+{pstd}We use {cmd:noisily} so that the output of {cmd:list} is not suppressed by {cmd:capture}.
+We don't want the do-file to issue an error message and stop,
+but we do want to see what {cmd:list} displays.
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Tasks/Logic Checks.smcl""':Checking Skip Patterns and Logical Consistency}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

@@ -1,0 +1,140 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Saved Results}{break}
+{it:Problem set}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl"##q5"':Question 5}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}What are saved results?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}How do you view the current saved results?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Use {cmd:ds} to list the string variables in the dataset.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}When listing variables,
+{cmd:ds} by default abbreviates variable names to 12 characters.
+Using saved results, display the unabbreviated list.
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}How does using saved results change
+based on whether the results are numeric or string?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q4}
+
+{pstd}{bf:Problem Set Question 4}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}List all variables with the value label {cmd:yesno}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Using {cmd:ds} and a for-loop,
+get Stata to count the number of variables with the value label {cmd:yesno}.
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q5}
+
+{pstd}{bf:Problem Set Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Use {cmd:duplicates tag} and {cmd:count} to determine the number of {cmd:surveyid} duplicates.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}First, use {cmd:duplicates drop} to drop the exact copy of {cmd:hhid "1807077"}:
+
+{pstd}{bf:{stata `"duplicates drop"'}}{p_end}
+
+{pstd}Now, using {cmd:duplicates tag} and {cmd:count},
+find all numeric variables that uniquely identify observations.
+If the output is overwhelming, try adding {cmd:quietly} before select commands.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Find all combinations of two numeric variables that uniquely identify observations.
+Reminder: {cmd:duplicates tag} takes a variable {it:list}.
+
+{pstd}Make sure you have used {cmd:duplicates drop}
+to drop the exact copy of {cmd:hhid "1807077"}.
+{txt}{sf}{ul off}{...}
+
+{pstd}A (much faster) alternative to {cmd:duplicates tag} is
+the combination of {helpb isid} and
+{view `""SMCL/Tasks/Logic Checks.smcl"##capture"':{bf:capture}}.
+Extra credit if you try using them,
+but only do so if you already know {cmd:capture} and {cmd:_rc}.
+If you don't know them, we will discuss them
+in the module on {view `""SMCL/Tasks/Logic Checks.smcl""':logic checks}.
+{txt}{sf}{ul off}{...}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl""':Answers}{break}
+Return to Module: {view `""SMCL/Concepts/Saved Results.smcl""':Saved Results}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

@@ -1,0 +1,314 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Other Data Checks}{break}
+
+{pstd}{view `""SMCL/Tasks/Other Data Checks.smcl"##codes"':1. Variable Codes}{break}
+{view `""SMCL/Tasks/Other Data Checks.smcl"##missing"':2. Missing Data}{break}
+{view `""SMCL/Tasks/Other Data Checks.smcl"##other"':3. Other Checks}
+
+
+{hline}{marker codes}
+
+{pstd}{bf:1. Variable Codes}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}It is important to check that variables are coded as you expect. For
+example, {cmd:cycleownyn} can only be {cmd:Yes} or {cmd:No}.
+
+{marker levelsof}{...}
+{pstd}{helpb levelsof} displays
+a list of the unique values of a variable,
+saving the list in
+{view `""SMCL/Concepts/Saved Results.smcl""':{bf:r(levels)}}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+levelsof cycleownyn{break}
+assert "`r(levels)'" == "1 2"
+{txt}{sf}{ul off}{...}
+
+{marker inrange}{...}
+{pstd}Alternatively, you can use {helpb inrange()}.
+{cmd:inrange(}{it:z}{cmd:,} {it:a}{cmd:,} {it:b}{cmd:) == 1}
+if {it:a} {ul:<} {it:z} {ul:<} {it:b},
+and {cmd:0} otherwise:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+assert inrange(cycleownyn, 1, 2)
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}We've seen two ways to check that {cmd:cycleownyn} is only {cmd:Yes} or {cmd:No}.
+The first involved {bf:{view `""SMCL/Tasks/Other Data Checks.smcl"##levelsof"':levelsof}}:
+
+{pstd}{bf:{stata `"levelsof cycleownyn"'}}{p_end}
+{pstd}{bf:{stata `"assert "`r(levels)'" == "1 2""'}}{p_end}
+
+{pstd}The second was {bf:{view `""SMCL/Tasks/Other Data Checks.smcl"##inrange"':inrange()}}:
+
+{pstd}{bf:{stata `"assert inrange(cycleownyn, 1, 2)"'}}{p_end}
+
+{pstd}Could it ever occur that the first {cmd:assert} (with {cmd:levelsof})
+would fail but the second with {cmd:inrange()} would not?
+How about vice versa?
+If so, under what circumstances would this occur?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Using {cmd:levelsof}, loop through all distinct values of {cmd:castename}.
+For how many values is the {help substr():first character} {cmd:"B"}?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}For each distinct value of {cmd:castename},
+display the number of corresponding values of {cmd:castecode}.
+For example, {cmd:castename "VISHWAKARMA"} has
+exactly one corresponding value of {cmd:castecode}: {cmd:OBC}.
+
+{pstd}Are there any values of {cmd:castename}
+with more than one corresponding value of {cmd:castecode}?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker missing}
+
+{pstd}{bf:2. Missing Data}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Another important set of checks has to do with missing values. For example,
+required questions should have no missing values. In this dataset, {cmd:sex} should
+have no missing values. Nor should {cmd:scrutinizedyn}, or {cmd:educ}.
+
+{pstd}{cmd}foreach var of varlist sex scrutinizedyn educ {{txt}{p_end}
+{pmore}{cmd}display "Checking `var' for missing values..."{txt}{p_end}
+{pmore}{cmd}list hhid `var' if missing(`var'){txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Tasks/Other Data Checks.do" 1"':Click here to execute.}
+
+{pstd}{cmd:missing(}{it:varlist}{cmd:) == 1} if any of {it:varlist} are missing
+(system missing or {view `""SMCL/Tasks/Recoding.smcl"##extended_missing"':extended missing})
+in any observation, and {cmd:0} otherwise.
+
+{pstd}Notice how I only wrote {cmd:if missing(`var')}, not {cmd:if missing(`var') == 1}.
+If a {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':logical expression} has no logical operator, {cmd:!= 0} is assumed.
+So {cmd:if missing(`var')} is the same as {cmd:if missing(`var') != 0}, and since
+{cmd:missing(`var')} is either {cmd:0} or {cmd:1},
+this is the same as {cmd:if missing(`var') == 1}.
+
+{pstd}The opposite of this shortcut is {cmd:!} by itself (pronounced "not"). For example:
+
+{pstd}{cmd}foreach var of varlist sex scrutinizedyn educ {{txt}{p_end}
+{pmore}{cmd}display "Checking `var' for missing values..."{txt}{p_end}
+{pmore}{cmd}assert !missing(`var'){txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Tasks/Other Data Checks.do" 2"':Click here to execute.}
+
+{pstd}Here, {cmd:!missing(`var')} is short for {cmd:missing(`var') == 0}.
+
+{pstd}An alternative to this sort of loop is {helpb codebook}, which displays the frequency of missing values:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+codebook sex scrutinizedyn educ
+{txt}{sf}{ul off}{...}
+
+{pstd}You might still prefer the loop: {cmd:codebook} gives a little {it:too} much information.
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Using a loop (not manually using {cmd:codebook}),
+find all variables with all missing values.
+
+{pstd}If there are any, are they all necessarily problematic?
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{pstd}Again, instead of a loop, {cmd:codebook} could be useful:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+codebook, problems
+{txt}{sf}{ul off}{...}
+
+{pstd}If you have Stata 11 or higher, you can use {helpb misstable}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+misstable summarize
+{txt}{sf}{ul off}{...}
+
+{pstd}If you have Stata 10 or lower, you can use the {help SSC} program {cmd:mdesc}.
+You may want this program even if you have Stata 11 or higher.
+
+{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+ssc install mdesc
+{txt}{sf}{ul off}{...}
+
+{* I'm putting this text box here because this is the first time -ssc install-}{...}
+{* has been used since -net search- was used in the variable properties module.}{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} When should you use {helpb ssc install} to install user-written programs, and when}{c |}{p_end}
+{p2col:{c |} should you use {helpb net search}? (You can always use {cmd:net search} instead of}{c |}{p_end}
+{p2col:{c |} {helpb findit}.) While {cmd:ssc install} downloads the version of a program stored on the}{c |}{p_end}
+{p2col:{c |} Boston College Statistical Software Components (SSC) archive, {cmd:net search}}{c |}{p_end}
+{p2col:{c |} often lists other versions. That said, the SSC version is often the most}{c |}{p_end}
+{p2col:{c |} up-to-date. However, not all user-written programs are available through}{c |}{p_end}
+{p2col:{c |} SSC. For example, the user-written program {bf:renvars} isn't on SSC.}{c |}{p_end}
+{p2col:{c |} In such cases, use {cmd:net search} to find the most recent version.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{hline}{marker other}
+
+{pstd}{bf:3. Other Checks}
+
+{hline}
+
+{pstd}There are many data checks you can implement that we haven't discussed.
+Many of them are listed
+in the guide to computer-assisted interviewing (CAI) high-frequency checks,
+available on Box
+{browse "https://ipastorage.box.com/s/iqd61emtjj8povugfhd4":here}.
+Most of these checks apply to both CAI and paper-and-pencil projects.
+The guide also includes sample code for almost all the checks it covers.
+
+{pstd}It's highly recommended that you run data checks as soon as possible after the data is collected.
+If the data is received in batches, run checks on each batch.
+
+{pstd}A final note. If you're regularly receiving data from the field, then
+as data collection is ongoing, you'll be able pick up on unexpected trends in the data and think of new data checks.
+To make sure you discover these trends, commit to spending a portion of each day or each week
+just inspecting your data and dreaming up new data checks.
+Tabulate frequencies, graph distributions, calculate means, and just eyeball variables in the Stata Data Browser
+and make sure their values look right.
+It's important to complete the normal data checks,
+but you must also look out for issues specific to your data and project.
+
+
+{hline}
+
+{pstd}Problem Set: {view `""SMCL/Problem sets/Tasks/Other Data Checks - problem set.smcl""':Other Data Checks}{break}
+
+{pstd}Next: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
+Previous: {view `""SMCL/Tasks/Logic Checks.smcl""':Checking Skip Patterns and Logical Consistency}{break}
+{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

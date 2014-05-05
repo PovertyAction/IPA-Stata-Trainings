@@ -1,0 +1,172 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:String Cleaning}{break}
+{it:Problem set}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl"##q5"':Question 5}{break}
+{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl"##q6"':Question 6}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+
+{pstd}Explain the two main approaches to string cleaning.
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recreating {cmd:newcaste}:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+
+{pstd}Using {view `""SMCL/Tasks/Other Data Checks.smcl"##levelsof"':{bf:levelsof}} and {cmd:foreach},
+display each unique value of {cmd:newcaste} on its own line.
+Copy these values to Excel.
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}What is an alternative to {cmd:replace}
+that can be used for making multiple, simultaneous replacements?
+Why can't it be used to make replacements to {cmd:castename}?
+(If you don't know, try it and see!)
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q4}
+
+{pstd}{bf:Problem Set Question 4}
+
+{hline}
+
+{pstd}In {view `""SMCL/Tasks/String Cleaning.smcl"##version_loop"':this loop},
+many replacements were made using
+{cmd:#delimit}, multiple local macros, and for-loops.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}How was {cmd:#delimit ;} useful for defining the local macros?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Why was it necessary to enclose {cmd:"MEHTA JAIN"} in double quotes?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Are there limitations to this approach?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q5}
+
+{pstd}{bf:Problem Set Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Standardize the letter case of {cmd:castename}
+so that for each caste,
+words begin with an uppercase letter
+and are followed by lowercase.
+For example, {cmd:"suthar"} should become {cmd:"Suthar"},
+and {cmd:"RAVAN RAJPUT"} should become {cmd:"Ravan Rajput"}.
+Use {helpb string functions:help string functions} to find the correct function.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}After making this change,
+how many unique caste names are there?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q6}
+
+{pstd}{bf:Problem Set Question 6}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}First, recreate {cmd:newcaste}:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Create a variable named {cmd:multiword}
+that equals {cmd:1} if {cmd:newcaste} is more than one word long,
+equals {cmd:0} if it is exactly one word,
+and equals {cmd:.} (missing) if it is missing.
+
+{pstd}You may need to use {helpb string functions:help string functions}
+to find the correct function.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}How many unique caste names are more than one word long?
+{txt}{sf}{ul off}{...}
+
+{pstd}{it:Extra credit:}
+
+{pstd}{bf:(c)}
+
+{pstd}If we {help tabulate oneway:tabulate} {cmd:newcaste},
+it is clear that several multiword caste names
+are actually single words with spaces incorrectly inserted,
+for example, {cmd:"RAJ PUT"}:
+
+{pstd}{bf:{stata `"tabulate newcaste"'}}{p_end}
+
+{pstd}How could you remove these spaces
+while leaving true multiword caste names intact?
+{txt}{sf}{ul off}{...}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl""':Answers}{break}
+Return to Module: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

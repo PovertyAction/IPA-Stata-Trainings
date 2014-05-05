@@ -1,0 +1,19 @@
+/* {HEAD}
+
+{LOOPS!} */
+
+{USE}
+
+* Text here...
+
+/* {FOOT}
+
+{GOTOPS}{LOOPS_PS}
+
+{NEXT}{IF}
+{PREV}{SUBSCRIPTING}
+{START}
+
+{ALTMAP}
+{NEXTC}{IF}
+{PREVC}{SUBSCRIPTING} */

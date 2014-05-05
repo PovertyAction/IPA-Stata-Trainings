@@ -1,0 +1,141 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Merging}{break}
+
+{pstd}Here are three tips to avoid common merging pitfalls.
+I assume you already know the syntax of {helpb merge} and have used it before.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {bf:Tip 1:} Specify the merge type}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}Always specify the merge type: one-to-one (1:1), many-to-one (m:1), or one-to-many (1:m).
+In Stata 11 or higher, you're required to specify this,
+but in Stata 10 or lower,
+it's possible to accidentally complete a merge of one type when you intended another.
+If you're using Stata 10 or lower, take advantage of the following options.
+(Users of Stata 11 and higher:
+click {help merge_10:here} for the help file for the old {cmd:merge}.)
+
+{pstd}Option {cmd:unique}
+specifies a 1:1 match merge.
+
+{pstd}Option {cmd:uniqmaster}
+specifies a 1:m match merge if options {cmd:unique} and {cmd:uniqusing} are not specified.
+
+{pstd}Option {cmd:uniqusing}
+specifies a m:1 match merge if options {cmd:unique} and {cmd:uniqmaster} are not specified.
+
+{pstd}Option {cmd:sort}
+sorts the master and using datasets before merging
+and implies option {cmd:unique}
+if options {cmd:uniqmaster} and {cmd:uniqusing} are not specified.
+(In Stata 11 and higher, the datasets are automatically sorted
+unless option {cmd:sorted} is specified.)
+
+{pstd}Your default choice should be to use one of these option combinations:
+
+{p2colset 5 36 0 0}{...}
+{pstd}{c TLC}{hline 12}{c TT}{hline 17}{c TRC}{p_end}
+{p2col:{c |} {bf:Merge type} {c |} {bf:Options}}{c |}{p_end}
+{pstd}{c LT}{hline 12}{c +}{hline 17}{c RT}{p_end}
+{p2col:{c |} 1:1 match{space 2}{c |} {cmd:sort}}{c |}{p_end}
+{p2col:{c |} m:1 match{space 2}{c |} {cmd:sort uniqusing}}{c |}{p_end}
+{p2col:{c |} 1:m match{space 2}{c |} {cmd:sort uniqmaster}}{c |}{p_end}
+{pstd}{c BLC}{hline 12}{c BT}{hline 17}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}If you don't specify a different merge type
+through options {cmd:unique}, {cmd:uniqmaster}, {cmd:uniqusing}, and {cmd:sort},
+then the implication is that you're completing a many-to-many merge.
+Here's what the Stata documentation says about many-to-many merges:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {manlink D merge}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} A many-to-many merge ... is a bad idea. In an m:m merge, observations are}{c |}{p_end}
+{p2col:{c |} matched within equal values of the key variable(s), with the first}{c |}{p_end}
+{p2col:{c |} observation being matched to the first; the second, to the second; and so}{c |}{p_end}
+{p2col:{c |} on. If the master and using have an unequal number of observations within}{c |}{p_end}
+{p2col:{c |} the group, then the last observation of the shorter group is used repeatedly}{c |}{p_end}
+{p2col:{c |} to match with subsequent observations of the longer group. Thus m:m merges}{c |}{p_end}
+{p2col:{c |} are dependent on the current sort order{hline 2}something which should never}{c |}{p_end}
+{p2col:{c |} happen. ...}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} If you think that you need an m:m merge, then you probably need to work with}{c |}{p_end}
+{p2col:{c |} your data so that you can use a 1:m or m:1 merge.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}If you don't specify any of the options {cmd:unique}, {cmd:uniqmaster}, {cmd:uniqusing}, and {cmd:sort},
+you could be implementing a many-to-many merge unknowingly.
+To prevent this, always specify the merge type.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {bf:Tip 2:} Check all identifying variables}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}Even if a merge seems successful, check other identifying variables. For example,
+if {cmd:ID 1} has {cmd:sex = Male} in the master data but {cmd:sex = Female} in the using, it doesn't
+matter that the {cmd:ID 1} observations were matched by the merge, because the match
+was probably incorrect. To check for incorrect matches:
+
+{pstd}{cmd:merge 1:1} {it:uniqueid} {cmd:using} {it:filename},
+{cmd:update replace keep(}{it:other_identifying_vars}{cmd:)}{break}
+{cmd:list} {it:uniqueid} {cmd:if _merge == 5}
+
+{pstd}Where {it:other_identifying_vars} is the list of other identifying variables, such as {cmd:sex}.
+
+{pstd}You can also use the IPA {help SSC} program {cmd:cfout}:
+
+{pstd}{bf:{stata `"ssc install cfout"'}}{p_end}
+
+{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {bf:Tip 3:} Use string IDs}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}Be extremely suspicious of numeric ID variables with more than 7 digits.
+Unless much care is taken,
+these variables can have insufficient {help data_types:precision}
+and incorrect values,
+and {cmd:merge} will match observations incorrectly.
+For exactly this reason,
+{cmd:hhid} is a string variable in the training dataset,
+even though it has all numeric values.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {bf:Learning more}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}For more merging pitfalls, check out the Stata blog:
+
+{pstd}{browse "http://blog.stata.com/2011/04/18/merging-data-part-1-merges-gone-bad/":{it:Merging data, part 1: Merges gone bad}}{break}
+{browse "http://blog.stata.com/2011/05/27/merging-data-part-2-multiple-key-merges/":{it:Merging data, part 2: Multiple-key merges}}
+
+{pstd}Does anyone here have stories of merges gone wrong?
+
+
+{hline}
+
+{pstd}Previous: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
+{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

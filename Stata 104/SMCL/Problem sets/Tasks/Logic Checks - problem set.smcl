@@ -1,0 +1,196 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Checking Skip Patterns and Logical Consistency}{break}
+{it:Problem set}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl"##q5"':Question 5}{break}
+{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl"##q6"':Question 6}{break}
+{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl"##q7"':Question 7}{break}
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+
+{pstd}In your project, what critical skip patterns could you check using Stata?
+
+{pstd}What command(s) would you use to check this skip pattern?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+
+{pstd}How does the output of {cmd:assert} compare with that of
+{helpb isid}?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}If you add the prefix {cmd:capture} to a command
+and the command results in an error,
+what do you expect to see?
+How about if the command does not result in an error?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q4}
+
+{pstd}{bf:Problem Set Question 4}
+
+{hline}
+
+{pstd}It can be difficult to tell whether your {cmd:assert}ions are true
+when you use the {cmd:capture} prefix.
+What are two solutions to this problem?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q5}
+
+{pstd}{bf:Problem Set Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Use {cmd:assert} to check that {cmd:sex} is either {cmd:1} or {cmd:2}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Checking for logical consistency between questions
+entails checking that the responses to the different questions
+are logically consistent with each other.
+
+{pstd}Skip patterns are an example of a logical relationship,
+and you check logical consistency in the same way as skip patterns.
+With that mind, complete the following logic check using {cmd:assert}:
+
+{pstd}Victim 1 of a two-wheeler theft ({cmd:own2wheelertheftvictim_1}) is
+different from victim 2 ({cmd:own2wheelertheftvictim_2}).
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Use {cmd:assert} to check all logicial relationships between {cmd:own2wheelertheft},
+{cmd:own2wheelertheftnum}, {cmd:own2wheelertheftvictim_1}, and {cmd:own2wheelertheftvictim_2}:
+{txt}{sf}{ul off}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheft}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Have you or other members of your household had any of their mopeds/}{c |}{p_end}
+{p2col:{c |} scooters/motorcycles stolen?}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {cmd:1}{space 2}Yes}{c |}{p_end}
+{p2col:{c |} {cmd:2}{space 2}No (skip remaining questions)}{c |}{p_end}
+{p2col:{c |} {cmd:.d} Don't know (skip remaining questions)}{c |}{p_end}
+{p2col:{c |} {cmd:.r} Refuse to answer (skip remaining questions)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftnum}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} How many times did this happen?}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftvictim_1}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Which household members were victims of this type of crime? (Victim 1)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}If {cmd:own2wheelertheftnum > 1} and multiple households members were victims,
+ask {cmd:own2wheelertheftvictim_2}:
+{txt}{sf}{ul off}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftvictim_2}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Which household members were victims of this type of crime? (Victim 2)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q6}
+
+{pstd}{bf:Problem Set Question 6}
+
+{hline}
+
+{pstd}After each command, is {cmd:_rc} zero or nonzero?
+Answer without executing the commands in Stata.
+
+{pstd}{cmd:capture display "Hello world!" if sex == 1}{break}
+{cmd:display "Hello world!"}
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q7}
+
+{pstd}{bf:Problem Set Question 7}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}In this dataset, there are multiple pairs of variables that first ask
+whether a given action has taken place,
+and second, how many times it has happened.
+These variables have the suffixes {cmd:yn} and {cmd:num}, respectively.
+For instance, {cmd:attackyn} and {cmd:attacknum} are one such pair.
+
+{pstd}{bf:{stata `"describe attackyn attacknum"'}}{p_end}
+{pstd}{bf:{stata `"browse attackyn attacknum"'}}{p_end}
+
+{pstd}Check for logical consistency in all such pairs:
+if the yes/no variable is yes,
+then the {cmd:num} variable should not be missing;
+if the yes/no variable is no,
+then the {cmd:num} variable should be missing.
+
+{pstd}{bf:Hint 1:}
+First use {cmd:ds} to identify all variables that end with {cmd:yn}.
+Do all these variables have the same value label?
+Do they all have a corresponding {cmd:num} variable?
+
+{pstd}{bf:Hint 2:}
+You may need to use a {help string function}, such as {helpb substr()}.
+{txt}{sf}{ul off}{...}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/Logic Checks - answers.smcl""':Answers}{break}
+Return to Module: {view `""SMCL/Tasks/Logic Checks.smcl""':Checking Skip Patterns and Logical Consistency}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

@@ -1,0 +1,232 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Saved Results}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl"##q5"':Question 5}{break}
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}What are saved results?
+{txt}{sf}{ul off}{...}
+
+{pstd}Saved results are values that are stored by commands
+and are available for use after the command is complete.
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}How do you view the current saved results?
+{txt}{sf}{ul off}{...}
+
+{pstd}Saved results come in different {view `""SMCL/Concepts/Saved Results.smcl"##r_and_e"':classes},
+of which the most common are {cmd:r()} and {cmd:e()}.
+To view the current {cmd:r()} saved results, use {helpb return list}.
+To view the current {cmd:e()} saved results, use {helpb ereturn list}.
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}Use {cmd:ds} to list the string variables in the dataset.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"ds, has(type string)"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}When listing variables,
+{cmd:ds} by default abbreviates variable names to 12 characters.
+Using saved results, display the unabbreviated list.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"ds, has(type string)"'}}{p_end}
+{pstd}{bf:{stata `"display "`r(varlist)'""'}}{p_end}
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{it}{...} How does using saved results change
+based on whether the results are numeric or string?
+{txt}{sf}{ul off}{...}
+
+{pstd}String saved results, such as {cmd:r(varlist)},
+should always be enclosed by single quotes,
+as otherwise they are truncated at around 244 characters. (Prior to Stata 13)
+
+{pstd}Numeric saved results, such as {cmd: r(mean)},
+typically can be used without being enclosed by single quotes.
+However, they need single quotes when used with the for-loop commands
+{cmd:foreach} and {cmd:forvalues}.
+For details, see the related
+{view `""SMCL/Concepts/Saved Results.smcl"##enclosing_saved_results"':Technical Tip box}
+in the saved results module.
+
+{hline}{marker q4}
+
+{pstd}{bf:Answer to Question 4}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}List all variables with the value label {cmd:yesno}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"ds, has(vallabel yesno)"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Using {cmd:ds} and a for-loop,
+get Stata to count the number of variables with the value label {cmd:yesno}.
+{txt}{sf}{ul off}{...}
+
+{pstd}Using an interative loop to count:
+
+{pstd}{cmd}local nvars 0{txt}{p_end}
+{pstd}{cmd}ds, has(vallabel yesno){txt}{p_end}
+{pstd}{cmd}foreach var in `r(varlist)' {{txt}{p_end}
+{pmore}{cmd}local nvars = `nvars' + 1{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{cmd}display "`nvars' variables have the value label yesno."{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/Saved Results - answers.do" 1"':Click here to execute.}
+
+{hline}{marker q5}
+
+{pstd}{bf:Answer to Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}Use {cmd:duplicates tag} and {cmd:count} to determine the number of {cmd:surveyid} duplicates.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"duplicates tag surveyid, generate(dup)"'}}{p_end}
+{pstd}{bf:{stata `"count if dup > 0"'}}{p_end}
+
+{pstd}{bf:{stata `"drop dup"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}First, use {cmd:duplicates drop} to drop the exact copy of {cmd:hhid "1807077"}:
+
+{pstd}{bf:{stata `"duplicates drop"'}}{p_end}
+
+{pstd}{it}{...} Now, using {cmd:duplicates tag} and {cmd:count},
+find all numeric variables that uniquely identify observations.
+If the output is overwhelming, try adding {cmd:quietly} before select commands.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}ds, has(type numeric){txt}{p_end}
+{pstd}{cmd}foreach var in `r(varlist)' {{txt}{p_end}
+{pmore}{cmd}quietly duplicates tag `var', generate(dup){txt}{p_end}
+{pmore}{cmd}quietly count if dup > 0{txt}{p_end}
+{pmore}{cmd}if r(N) == 0 {{txt}{p_end}
+{pmore2}{cmd}display "`var' uniquely identifies observations."{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pmore}{cmd}drop dup{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/Saved Results - answers.do" 2"':Click here to execute.}
+
+{pstd}{it}{...} {bf:(c)}
+
+{pstd}Find all combinations of two numeric variables that uniquely identify observations.
+Reminder: {cmd:duplicates tag} takes a variable {it:list}.
+
+{pstd}Make sure you have used {cmd:duplicates drop}
+to drop the exact copy of {cmd:hhid "1807077"}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}ds, has(type numeric){txt}{p_end}
+{pstd}{cmd}local numvars `r(varlist)'{txt}{p_end}
+{pstd}{cmd}foreach var1 in `numvars' {{txt}{p_end}
+{pmore}{cmd}foreach var2 in `numvars' {{txt}{p_end}
+{pmore2}{cmd}if "`var1'" != "`var2'" {{txt}{p_end}
+{pmore3}{cmd}quietly duplicates tag `var1' `var2', generate(dup){txt}{p_end}
+{pmore3}{cmd}quietly count if dup > 0{txt}{p_end}
+{pmore3}{cmd}if r(N) == 0 {{txt}{p_end}
+{p 20 20 2}{cmd}display "`var1' `var2' uniquely identify observations."{txt}{p_end}
+{pmore3}{cmd}}{txt}{p_end}
+{pmore3}{cmd}drop dup{txt}{p_end}
+{pmore2}{cmd}}{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/Saved Results - answers.do" 3"':Click here to execute.}
+
+{pstd}{it}{...} A (much faster) alternative to {cmd:duplicates tag} is
+the combination of {helpb isid} and
+{view `""SMCL/Tasks/Logic Checks.smcl"##capture"':{bf:capture}}.
+Extra credit if you try using them,
+but only do so if you already know {cmd:capture} and {cmd:_rc}.
+If you don't know them, we will discuss them
+in the module on {view `""SMCL/Tasks/Logic Checks.smcl""':logic checks}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}ds, has(type numeric){txt}{p_end}
+{pstd}{cmd}local numvars `r(varlist)'{txt}{p_end}
+{pstd}{cmd}foreach var1 in `numvars' {{txt}{p_end}
+{pmore}{cmd}foreach var2 in `numvars' {{txt}{p_end}
+{pmore2}{cmd}if "`var1'" != "`var2'" {{txt}{p_end}
+{pmore3}{cmd}capture isid `var1' `var2'{txt}{p_end}
+{pmore3}{cmd}if _rc == 0 {{txt}{p_end}
+{p 20 20 2}{cmd}display "`var1' `var2' uniquely identify observations."{txt}{p_end}
+{pmore3}{cmd}}{txt}{p_end}
+{pmore2}{cmd}}{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Concepts answers/Saved Results - answers.do" 4"':Click here to execute.}
+
+{pstd}Do you notice a difference between the output
+of these two approaches to {bf:(c)}?
+What explains it?
+(Hint: it has to do with how {helpb isid} responds to missing values.)
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Concepts/Saved Results.smcl""':Saved Results}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

@@ -1,0 +1,457 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Checking Skip Patterns and Logical Consistency}{break}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}After the data is organized
+through managing variable properties
+and {view `""SMCL/Tasks/Recoding.smcl""':recoding},
+and the most important check {hline 2}
+that of the unique ID {hline 2}
+is complete,
+it's time for other data checks.
+
+{pstd}A broad category of such checks are {it:logic checks}.
+These examine whether the data makes sense conceptually and looks as expected.
+Is it reasonable that this variable has such and such a value?
+Is it reasonable given that this other variable has such and such a value?
+
+{pstd}Skip patterns are one object of logic checks.
+A skip pattern specifies that a question will not be asked
+because of the responses to one or more previous questions.
+For example:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own4wheeleryn}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Has anyone in your household had for private use any car, van, tractor, bus,}{c |}{p_end}
+{p2col:{c |} 3 wheeler, or truck?}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {cmd:1}{space 2}Yes}{c |}{p_end}
+{p2col:{c |} {cmd:2}{space 2}No (skip to {cmd:own2wheeleryn})}{c |}{p_end}
+{p2col:{c |} {cmd:.d} Don't know (skip to {cmd:own2wheeleryn})}{c |}{p_end}
+{p2col:{c |} {cmd:.r} Refuse to answer (skip to {cmd:own2wheeleryn})}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own4wheelernum}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} How many vehicles have you had most of the time?}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheeleryn}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Has anyone in your household owned a moped, motor scooter, or motorcycle?}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {cmd:1}{space 2}Yes}{c |}{p_end}
+{p2col:{c |} {cmd:2}{space 2}No}{c |}{p_end}
+{p2col:{c |} {cmd:.d} Don't know}{c |}{p_end}
+{p2col:{c |} {cmd:.r} Refuse to answer}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}Here, there are two ways the skip pattern could be violated:
+
+{pstd}1. {cmd:own4wheeleryn == 1}, but {cmd:own4wheelernum} is {cmd:"."}.{break}
+2. {cmd:own4wheeleryn == 2}, {cmd:.d}, or {cmd:.r},
+but {cmd:own4wheelernum} is not {cmd:"."}.
+
+{pstd}How do you check this in Stata?
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+assert own4wheelernum != . if own4wheeleryn == 1{break}
+assert own4wheelernum == . if own4wheeleryn == 2
+{txt}{sf}{ul off}{...}
+
+{pstd}{helpb assert} evaluates a {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':logical expression}.
+If the logical expression is true for all observations, nothing happens.
+Otherwise, {cmd:assert} results in an error.
+{cmd:assert} is similar to {cmd:isid} in this way:
+you declare an assumption {hline 2}
+in this case, that {cmd:own4wheelernum != . if own4wheeleryn == 1},
+and with {cmd:isid}, that a variable list uniquely identifies observations {hline 2}
+and if the assumption is false, Stata results in an error;
+otherwise it does nothing.
+
+{pstd}Unlike commands like {cmd:summarize} or {cmd:tabulate},
+you never have to review the results of {cmd:assert}.
+Either your assumption is true and no results were displayed,
+or your assumption was false and your do-file stopped with an error.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Above, we used two lines to check the skip pattern:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {bf:{stata assert own4wheelernum != . if own4wheeleryn == 1}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata assert own4wheelernum == . if own4wheeleryn == 2}}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} We could have combined them into one:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {bf:{stata assert (own4wheeleryn == 1) + (own4wheelernum != .) != 1}}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':Logical expressions evaluate to either {bf:1} or {bf:0}.} Each logical expression in}{c |}{p_end}
+{p2col:{c |} the command evaluates to {cmd:1} or {cmd:0}, then those results are summed. So}{c |}{p_end}
+{p2col:{c |} {cmd:(own4wheeleryn == 1) + (own4wheelernum != .)} can take on three values: {cmd:0}, if}{c |}{p_end}
+{p2col:{c |} both expressions are false; {cmd:1}, if one expression is true and the other is}{c |}{p_end}
+{p2col:{c |} false; and {cmd:2}, if both expressions are true. These conditions should go hand}{c |}{p_end}
+{p2col:{c |} in hand, so we'd expect {cmd:0} or {cmd:2}, but not {cmd:1} {hline 2} and that's what the command}{c |}{p_end}
+{p2col:{c |} checks.}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} We've reduced two lines to one, but it required many more lines of}{c |}{p_end}
+{p2col:{c |} explanation. In this case, it might be easiest to keep the check as two}{c |}{p_end}
+{p2col:{c |} lines.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{hline}{marker q5}
+
+{pstd}{bf:Problem Set Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Use {cmd:assert} to check that {cmd:sex} is either {cmd:1} or {cmd:2}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Checking for logical consistency between questions
+entails checking that the responses to the different questions
+are logically consistent with each other.
+
+{pstd}Skip patterns are an example of a logical relationship,
+and you check logical consistency in the same way as skip patterns.
+With that mind, complete the following logic check using {cmd:assert}:
+
+{pstd}Victim 1 of a two-wheeler theft ({cmd:own2wheelertheftvictim_1}) is
+different from victim 2 ({cmd:own2wheelertheftvictim_2}).
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Use {cmd:assert} to check all logicial relationships between {cmd:own2wheelertheft},
+{cmd:own2wheelertheftnum}, {cmd:own2wheelertheftvictim_1}, and {cmd:own2wheelertheftvictim_2}:
+{txt}{sf}{ul off}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheft}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Have you or other members of your household had any of their mopeds/}{c |}{p_end}
+{p2col:{c |} scooters/motorcycles stolen?}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {cmd:1}{space 2}Yes}{c |}{p_end}
+{p2col:{c |} {cmd:2}{space 2}No (skip remaining questions)}{c |}{p_end}
+{p2col:{c |} {cmd:.d} Don't know (skip remaining questions)}{c |}{p_end}
+{p2col:{c |} {cmd:.r} Refuse to answer (skip remaining questions)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftnum}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} How many times did this happen?}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftvictim_1}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Which household members were victims of this type of crime? (Victim 1)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}If {cmd:own2wheelertheftnum > 1} and multiple households members were victims,
+ask {cmd:own2wheelertheftvictim_2}:
+{txt}{sf}{ul off}{...}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {cmd:own2wheelertheftvictim_2}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Which household members were victims of this type of crime? (Victim 2)}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}Whenever you find data that doesn't make sense,
+you should first check with field staff, including enumerators and data entry operators,
+to see if there's a simple explanation
+of the problem. If you're still unsure of the cause, you should discuss what to
+do with your supervisor. It is not appropriate to modify illogical data without
+first making an effort to understand the problem and informing your supervisor
+of the changes.
+
+{marker dummy}{...}
+{pstd}There's no way you can miss it when {cmd:assert} informs you with an error
+that there's a problem with your data.
+However, if you want to complete these checks without seeing error messages,
+you have a few options.
+For many of them, it's helpful to create a dummy variable
+that is {cmd:1} if there is a data issue and {cmd:0} otherwise.
+
+{pstd}{bf:{stata `"generate problem = 0"'}}{p_end}
+{pstd}{bf:{stata `"replace  problem = 1 if own4wheeleryn == 1 & own4wheelernum == ."':replace{space 2}problem = 1 if own4wheeleryn == 1 & own4wheelernum == .}}{p_end}
+{pstd}{bf:{stata `"replace  problem = 1 if own4wheeleryn == 2 & own4wheelernum != ."':replace{space 2}problem = 1 if own4wheeleryn == 2 & own4wheelernum != .}}{p_end}
+
+{pstd}{bf:{stata `"browse hhid own4wheeleryn own4wheelernum if problem"'}}{p_end}
+
+{pstd}{bf:{stata `"list hhid own4wheeleryn own4wheelernum if problem"'}}{p_end}
+
+{pstd}{bf:{stata `"tabulate own4wheeleryn own4wheelernum if problem, missing"'}}{p_end}
+
+{marker capture}{...}
+{pstd}Alternatively, you can use {helpb capture}.
+If you prefix a command with {cmd:capture}, the command will never result in an error.
+This doesn't mean that errors go away;
+a command that didn't work before still won't work,
+but the error message is suppressed,
+and within a do-file, Stata will continue to the next command without stopping.
+For example, suppose we forgot the double quotes needed for {cmd:display}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+display "Hello world!"{break}
+display Hello world!{break}
+capture display Hello world!
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:display Hello world!} resulted in an error,
+but when we added {cmd:capture}, it was suppressed.
+{cmd:capture} suppresses not just error messages, but all output.
+Even if a command does not result in an error,
+{cmd:capture} will suppress its output. For example:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+display "Hello world!"{break}
+capture display "Hello world!"
+{txt}{sf}{ul off}{...}
+
+{pstd}We know that the {cmd:assert} commands from the start result in errors,
+so we can use {cmd:capture} to suppress the error messages:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+capture assert own4wheelernum != . if own4wheeleryn == 1
+{txt}{sf}{ul off}{...}
+
+{pstd}This seems a little pointless,
+since now we can't tell whether the {cmd:assert}ions are true.
+
+{pstd}However, there are two ways to learn about the result of a command
+while using {cmd:capture}.
+
+{pstd}The first is {helpb noisily}.
+When you add {cmd:noisily} after {cmd:capture},
+{cmd:capture} no longer suppresses output:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+capture noisily assert own4wheelernum != . if own4wheeleryn == 1
+{txt}{sf}{ul off}{...}
+
+{pstd}There is still no error,
+and a do-file would not stop at this line,
+but the command's output, including its error message, is shown.
+
+{pstd}The second way to learn about the results is {helpb _rc}.
+There are two possibilities for a command prefixed by {cmd:capture}:
+either it results in an error or it doesn't.
+If it does, Stata issues an error message associated with a number,
+called the {ul:r}eturn {ul:c}ode (of which {cmd:_rc} is an abbreviation).
+For example, the following command results in an error
+with a return code of {cmd:111}:
+
+{pstd}{bf:{stata `"display Hello world!"'}}{p_end}
+
+{pstd}Prefixing this command with {cmd:capture} stores the return code in {cmd:_rc}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+capture display Hello world!{break}
+display _rc
+{txt}{sf}{ul off}{...}
+
+{pstd}If a command doesn't result in an error, {cmd:_rc} equals {cmd:0}:
+
+{pstd}{bf:{stata `"capture display "Hello world!""'}}{p_end}
+{pstd}{bf:{stata `"display _rc"'}}{p_end}
+
+{pstd}If a command is not prefixed by {cmd:capture},
+the return code is not stored in {cmd:_rc}:
+{cmd:_rc} is always the return code from the latest command
+with which {cmd:capture} was used.
+The following command results in an error with return code {cmd:111},
+but because it is not prefixed by {cmd:capture},
+{cmd:_rc} remains {cmd:0} from the last {cmd:capture} command:
+
+{pstd}{bf:{stata `"display Hello world!"'}}{p_end}
+{pstd}{bf:{stata `"display _rc"'}}{p_end}
+
+{hline}{marker q6}
+
+{pstd}{bf:Problem Set Question 6}
+
+{hline}
+
+{pstd}After each command, is {cmd:_rc} zero or nonzero?
+Answer without executing the commands in Stata.
+
+{pstd}{cmd:capture display "Hello world!" if sex == 1}{break}
+{cmd:display "Hello world!"}
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}We can use {cmd:capture} and {cmd:_rc}
+to learn about the results of {cmd:assert}
+while suppressing any errors. For example:
+
+{pstd}{bf:{stata `"capture assert own4wheelernum != . if own4wheeleryn == 1"'}}{p_end}
+{pstd}{bf:{stata `"display _rc"'}}{p_end}
+{pstd}{bf:{stata `"capture assert own4wheelernum == . if own4wheeleryn == 2"'}}{p_end}
+{pstd}{bf:{stata `"display _rc"'}}{p_end}
+
+{pstd}We will now turn briefly from checks of skip patterns and logical consistency
+to say more about {cmd:capture}.
+
+{pstd}You wouldn't use {cmd:capture} if you knew a command wouldn't result in an error:
+there'd be no point.
+Similarly, you wouldn't use {cmd:capture}
+if you knew a command {it:would} result in an error.
+{cmd:capture} is helpful when you're not sure whether a command will succeed.
+
+{pstd}For example, suppose you want to loop through a list of .dta files,
+dropping the personally identifiable information (PII) variable {cmd:gps} in each.
+But suppose only some of the datasets contain the variable {cmd:gps}.
+You could use the following loop:
+
+{pstd}{cmd}{...}
+foreach dta in `dtas' {{break}
+{p_end}{pmore}use "`dta'", clear{break}{p_end}{pstd}
+{p_end}{pmore}capture drop gps{break}{p_end}{pstd}
+{p_end}{pmore}save "`dta' - no PII", replace{break}{p_end}{pstd}
+}
+{txt}{sf}{ul off}{...}
+
+{pstd}If {cmd:gps} (or other variables that begin with {cmd:gps}) exist in the dataset, they are dropped.
+If they are not, {cmd:drop} results in an error, but you don't see the error message,
+and the loop continues unimpeded.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} In a {view `""SMCL/Concepts/Saved Results.smcl"##q5"':problem set question of the saved results module}, we asked which}{c |}{p_end}
+{p2col:{c |} combinations of two numeric variables uniquely identified observations}{c |}{p_end}
+{p2col:{c |} (after dropping the exact copy of {cmd:hhid "1807077"}). {view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl"##q5"':One way} to find out was:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {bf:{stata use "Raw/Kenya 2014 - Stata 104", clear}}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {bf:{stata duplicates drop}}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{cmd}{...}
+{p2col:{c |} ds, has(type numeric)}{c |}{p_end}
+{p2col:{c |} local numvars `r(varlist)'}{c |}{p_end}
+{p2col:{c |} foreach var1 in `numvars' {c -(}}{c |}{p_end}
+{p2col:{c |}{space 5}foreach var2 in `numvars' {c -(}}{c |}{p_end}
+{p2col:{c |}{space 9}if "`var1'" != "`var2'" {c -(}}{c |}{p_end}
+{p2col:{c |}{space 13}quietly duplicates tag `var1' `var2', generate(dup)}{c |}{p_end}
+{p2col:{c |}{space 13}quietly count if dup > 0}{c |}{p_end}
+{p2col:{c |}{space 13}if r(N) == 0 {c -(}}{c |}{p_end}
+{p2col:{c |}{space 17}display "`var1' `var2' uniquely identify observations."}{c |}{p_end}
+{p2col:{c |}{space 13}{c )-}}{c |}{p_end}
+{p2col:{c |}{space 13}drop dup}{c |}{p_end}
+{p2col:{c |}{space 9}{c )-}}{c |}{p_end}
+{p2col:{c |}{space 5}{c )-}}{c |}{p_end}
+{p2col:{c |} {c )-}}{c |}{p_end}
+{txt}{sf}{ul off}{...}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {stata `"run "Do/Text boxes.do" "logic checks" 1"':Click here to execute.}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} A much faster alternative uses the combination of {cmd:isid} and {cmd:capture}:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{cmd}{...}
+{p2col:{c |} ds, has(type numeric)}{c |}{p_end}
+{p2col:{c |} local numvars `r(varlist)'}{c |}{p_end}
+{p2col:{c |} foreach var1 in `numvars' {c -(}}{c |}{p_end}
+{p2col:{c |}{space 5}foreach var2 in `numvars' {c -(}}{c |}{p_end}
+{p2col:{c |}{space 9}if "`var1'" != "`var2'" {c -(}}{c |}{p_end}
+{p2col:{c |}{space 13}capture isid `var1' `var2'}{c |}{p_end}
+{p2col:{c |}{space 13}if _rc == 0 {c -(}}{c |}{p_end}
+{p2col:{c |}{space 17}display "`var1' `var2' uniquely identify observations."}{c |}{p_end}
+{p2col:{c |}{space 13}{c )-}}{c |}{p_end}
+{p2col:{c |}{space 9}{c )-}}{c |}{p_end}
+{p2col:{c |}{space 5}{c )-}}{c |}{p_end}
+{p2col:{c |} {c )-}}{c |}{p_end}
+{txt}{sf}{ul off}{...}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {stata `"run "Do/Text boxes.do" "logic checks" 2"':Click here to execute.}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} Here, after {cmd:capture isid `var1' `var2'}, {cmd:_rc == 0} if and only if the command}{c |}{p_end}
+{p2col:{c |} did not result in an error, that is, if and only if {cmd:`var1'} {cmd:`var2'} uniquely}{c |}{p_end}
+{p2col:{c |} identifies observations.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+
+{hline}
+
+{pstd}Problem Set: {view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl""':Checking Skip Patterns and Logical Consistency}{break}
+
+{pstd}Next: {view `""SMCL/Tasks/Other Data Checks.smcl""':Other Data Checks}{break}
+Previous: {view `""SMCL/Tasks/Recoding.smcl""':Recoding}{break}
+{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

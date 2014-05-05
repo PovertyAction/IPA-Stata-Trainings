@@ -1,0 +1,269 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Recoding}{break}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recoding entails
+changing variables' values in order to
+standardize codes across variables
+or otherwise make variables easier to understand or use.
+After working with variable properties,
+recoding is one of the first steps in the data cleaning process,
+often coming before even unique ID checks.
+Clarifying and standardizing variables facilitate
+the many uses of variables,
+so this data cleaning task
+should come before more advanced data work.
+
+{pstd}Suppose you'd like to run a series of regressions
+involving all variables with a binary yes/no response.
+Before this, you need to make sure that all yes/no response variables
+are coded in the same way.
+In this dataset, there are two yes/no value labels:
+
+{pstd}{bf:{stata `"label dir"'}}{p_end}
+{pstd}{bf:{stata `"label list yesno yes1no0"'}}{p_end}
+
+{pstd}{bf:{stata `"ds, has(vallabel yesno)"'}}{p_end}
+{pstd}{bf:{stata `"ds, has(vallabel yes1no0)"'}}{p_end}
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recode all variables with the value label {cmd:yes1no0}
+so that {cmd:Yes = 1} and {cmd:No = 2},
+and attach the value label {cmd:yesno} to them.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}An alternative is {helpb recode}.
+{cmd:recode} recodes a variable list according to one or more rules.
+For example, the following command recodes variable {cmd:sex}
+according to the rule {cmd:(2=0)},
+changing all values of {cmd:2} to {cmd:0}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+recode sex (2=0)
+{txt}{sf}{ul off}{...}
+
+{pstd}Now {cmd:sex} is a dummy variable for whether the respondent is male.
+Here's a more advanced example, demonstrating an alternate solution to Exercise 1:
+
+{pstd}{cmd}ds, has(vallabel yes1no0){txt}{p_end}
+{pstd}{cmd}* "varl" for "variable list"{txt}{p_end}
+{pstd}{cmd}local varl `r(varlist)'{txt}{p_end}
+{pstd}{cmd}recode `varl' (0=2){txt}{p_end}
+{pstd}{cmd}label values `varl' yesno{txt}{p_end}
+
+{pstd}{stata `"run "Do/Tasks/Recoding.do" 1"':Click here to execute.}
+
+{pstd}Above, the rule
+was {cmd:(0=2)},
+which specified that {cmd:0} be recoded as {cmd:2}.
+
+{pstd}Here's a third example of {cmd:recode}:
+
+{pstd}{bf:{stata `"describe occupation"'}}{p_end}
+{pstd}{cmd:* occup is the value label of occupation.}{p_end}
+{pstd}{bf:{stata `"label list occup"'}}{p_end}
+
+{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+recode occupation (1=2) (2=1)
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}What do the rules {cmd:(1=2) (2=1)} specify?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}How does
+
+{pstd}{cmd:recode occupation (1=2) (2=1)}
+
+{pstd}differ from:
+
+{pstd}{cmd:replace occupation = 2 if occupation == 1}{break}
+{cmd:replace occupation = 1 if occupation == 2}
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}Note, however, that the {it:value label} of {cmd:occupation} did not change:
+
+{pstd}{bf:{stata `"label list occup"'}}{p_end}
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recode {cmd:castecode} so that {cmd:1} is recoded as {cmd:2}, {cmd:2} is recoded as {cmd:3},
+and {cmd:3} is recoded as {cmd:1}. Modify the value label to reflect these changes.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}It is important to have special codes for missing values,
+including "don't know" and "refusal."
+This helps you understand {it:why} a variable has missing values,
+allowing you to complete checks that you wouldn't be able to otherwise.
+For this dataset's numeric variables, {cmd:97} is "refusal", and {cmd:99} is "don't know."
+
+{pstd}However, there is a downside to such codes.
+For example, the mean of {cmd:own2wheelertheft} should be between {cmd:1} and {cmd:2}:
+
+{pstd}{bf:{stata `"describe own2wheelertheft"'}}{p_end}
+{pstd}{cmd:* yesno is the value label of own2wheelertheft.}{p_end}
+{pstd}{bf:{stata `"label list yesno"'}}{p_end}
+
+{pstd}{bf:{stata `"summarize own2wheelertheft"'}}{p_end}
+
+{pstd}What's going on? The {cmd:Don't Know} values are skewing the mean
+so that the mean is greater than {cmd:2}:
+
+{pstd}{bf:{stata `"tabulate own2wheelertheft"'}}{p_end}
+
+{pstd}What's to be done? Here's one option:
+
+{pstd}{bf:{stata `"summarize own2wheelertheft if own2wheelertheft != 97 & own2wheelertheft != 99"'}}{p_end}
+
+{pstd}That works, but imagine adding that {cmd:if} qualifier
+to every statistical command you run: it's a pain.
+
+{marker extended_missing}{...}
+{pstd}Special codes that are nonmissing provide information but are inconvenient,
+while converting all codes to missing ({cmd:.}) provides less information but is easier.
+Fortunately, there's a third option: {help missing:extended missing values}.
+You already know the missing value {cmd:.} (called the "system missing value" or {cmd:sysmiss}),
+but there are also missing values {cmd:.a}, {cmd:.b}, {cmd:.c}, all the way to {cmd:.z},
+called "extended missing values."
+These values are each distinct:
+
+{pstd}all nonmissing values < {cmd:.} < {cmd:.a} < {cmd:.b} < {cmd:.c} < ... < {cmd:.z}
+
+{pstd}More importantly, extended missing values {hline 2} unlike {cmd:sysmiss} {hline 2} can be value labeled.
+They offer the best of both worlds.
+With their value labels, they provide information about their origin ("don't know," "refusal," and so on).
+At the same time, they're convenient to use and don't figure into most statistical calculations.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+recode own2wheelertheft (97=.r) (99=.d){break}
+label define yesno .d "Don't know" .r "Refusal", add{break}
+label define yesno 97 "" 99 "", modify{break}
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"label list yesno"'}}{p_end}
+
+{pstd}{bf:{stata `"summarize own2wheelertheft"'}}{p_end}
+
+{pstd}We can do this for all variables labeled with the value label {cmd:yesno}:
+
+{pstd}{bf:{stata `"ds, has(vallabel yesno)"'}}{p_end}
+{pstd}{bf:{stata `"recode `r(varlist)' (97=.r) (99=.d)"'}}{p_end}
+
+{pstd}Ultimately, we'd like to make these changes to all value labels
+and value labeled variables.
+
+
+{hline}
+
+{pstd}Problem Set: {view `""SMCL/Problem sets/Tasks/Recoding - problem set.smcl""':Recoding}{break}
+
+{pstd}Next: {view `""SMCL/Tasks/Logic Checks.smcl""':Checking Skip Patterns and Logical Consistency}{break}
+Previous: {view `""SMCL/Concepts/Saved Results.smcl""':Saved Results}{break}
+{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

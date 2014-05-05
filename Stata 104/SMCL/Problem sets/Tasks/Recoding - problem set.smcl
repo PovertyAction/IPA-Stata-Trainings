@@ -1,0 +1,76 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Recoding}{break}
+{it:Problem set}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/Recoding - problem set.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks/Recoding - problem set.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks/Recoding - problem set.smcl"##q3"':Question 3}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Problem Set Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recode all variables with the value label {cmd:yes1no0}
+so that {cmd:Yes = 1} and {cmd:No = 2},
+and attach the value label {cmd:yesno} to them.
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}What do the rules {cmd:(1=2) (2=1)} specify?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}How does
+
+{pstd}{cmd:recode occupation (1=2) (2=1)}
+
+{pstd}differ from:
+
+{pstd}{cmd:replace occupation = 2 if occupation == 1}{break}
+{cmd:replace occupation = 1 if occupation == 2}
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recode {cmd:castecode} so that {cmd:1} is recoded as {cmd:2}, {cmd:2} is recoded as {cmd:3},
+and {cmd:3} is recoded as {cmd:1}. Modify the value label to reflect these changes.
+{txt}{sf}{ul off}{...}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/Recoding - answers.smcl""':Answers}{break}
+Return to Module: {view `""SMCL/Tasks/Recoding.smcl""':Recoding}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

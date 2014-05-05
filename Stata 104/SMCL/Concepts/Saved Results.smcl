@@ -1,0 +1,500 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Saved Results}{break}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Stata commands can show a lot of information.
+Among other summary statistics, {cmd:summarize} displays mean and standard deviation:
+
+{pstd}{bf:{stata `"summarize cycleownnum"'}}{p_end}
+
+{pstd}What if we want to use this information?
+Say we want to create a standardized version of {cmd:cycleownnum}:
+
+{pstd}{cmd:generate cyclenumstd = (cycleownnum - }{it:mean}{cmd:) /} {it:standard_deviation}
+
+{pstd}One option is to copy and paste the values shown by summarize:
+
+{pstd}{cmd}{...}
+generate cyclenumstd = (cycleownnum - 1.175) / .4847292
+{txt}{sf}{ul off}{...}
+
+{pstd}This isn't the best strategy.
+First, if these numbers ever change, {cmd:cyclenumstd} will be incorrect.
+Second, Stata calculates standard deviations to more than 7 significant digits,
+and we'd like to use that information in {cmd:generate} if it's accessible.
+Third, someone looking at this command might be mystified
+about where {cmd:1.175} and {cmd:.4847292} came from:
+you'd probably need to add an extra comment.
+
+{pstd}The alternative is utilizing {help return:saved results},
+values that are saved in the classes{space 2}{cmd:r()}, {cmd:e()}, and rarely {cmd:s()}.
+If you ever want to refer back to values that a previous command displayed,
+it may be an option with saved results.
+You can type {helpb return list} after a command
+to display a list of {cmd:r()} saved results and
+{helpb ereturn list} to display a list of {cmd:e()} saved results:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+summarize cycleownnum{break}
+return list
+{txt}{sf}{ul off}{...}
+
+{pstd}Among other results, we see the mean and standard deviation of {cmd:cycleownnum}
+saved as {cmd:r(mean)} and {cmd:r(sd)}.
+{cmd:r(sd)} has a whopping 16 significant digits.
+You can use these as you would other values:
+
+{pstd}{bf:{stata `"display r(mean)"'}}{p_end}
+{pstd}{bf:{stata `"display r(sd)"'}}{p_end}
+
+{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+summarize cycleownnum{break}
+generate cyclenumstd = (cycleownnum - r(mean)) / r(sd)
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"drop cyclenumstd"'}}{p_end}
+
+{pstd}Some commands save results that they never display.
+For example, {cmd:summarize} saved the sum
+of all values of {cmd:cycleownnum}
+in {cmd:r(sum)}
+even though it didn't show it:
+
+{pstd}{bf:{stata `"summarize cycleownnum"'}}{p_end}
+{pstd}{bf:{stata `"return list"'}}{p_end}
+
+{pstd}We could have learned this by visiting the
+{help summarize##saved_results:saved results section of the {bf:summarize} help file}.
+It pays to glance at this section of help files, even for commands you know.
+
+{marker r_and_e}{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} {bf:r() vs. e()}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} I mentioned three classes of saved results: {helpb r()}, {helpb e()}, and {helpb s()}. {cmd:s()} is rare}{c |}{p_end}
+{p2col:{c |} enough that I won't discuss it here, but {cmd:r()} and {cmd:e()} saved results are both}{c |}{p_end}
+{p2col:{c |} often available. To determine whether a command returns {cmd:r()} or {cmd:e()} saved}{c |}{p_end}
+{p2col:{c |} results (it's rare that it's both), check the Saved Results section of its}{c |}{p_end}
+{p2col:{c |} help file. Most estimation commands (for example, {helpb regress}, {helpb mean}, and {helpb pca})}{c |}{p_end}
+{p2col:{c |} return {cmd:e()} saved results, and most other commands return {cmd:r()} saved results.}{c |}{p_end}
+{p2col:{c |} The chief difference between {cmd:r()} and {cmd:e()} saved results is that you refer to}{c |}{p_end}
+{p2col:{c |} an {cmd:r()} saved result as {cmd:r(}{it:whatever}{cmd:)}, while you refer to an {cmd:e()} saved result}{c |}{p_end}
+{p2col:{c |} as {cmd:e(}{it:whatever}{cmd:)}. For example:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{cmd}{...}
+{p2col:{c |} {bf:{stata summarize cycleownnum}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata return list}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata display r(mean)}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata regress cycleownnum sex}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata ereturn list}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata display e(df_r)}}}{c |}{p_end}
+{txt}{sf}{ul off}{...}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} In this training, we'll use {cmd:r()} saved results exclusively.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}{cmd:r()} saved results can disappear after the next command,
+so you should utilize them immediately or store them in macros.
+For example:
+
+{pstd}{bf:{stata `"summarize cycleownnum"'}}{p_end}
+{pstd}{bf:{stata `"return list"'}}{p_end}
+{pstd}{bf:{stata `"describe cycleownnum"'}}{p_end}
+{pstd}{bf:{stata `"return list"'}}{p_end}
+{pstd}{bf:{stata `"generate cyclenumstd = (cycleownnum - r(mean)) / r(sd)"'}}{p_end}
+{pstd}{bf:{stata `"tabulate cyclenumstd, missing"'}}{p_end}
+
+{pstd}{bf:{stata `"drop cyclenumstd"'}}{p_end}
+
+{pstd}{cmd:summarize} returned the saved results {cmd:r(mean)} and {cmd:r(sd)},
+but after {cmd:describe},
+they were gone, replaced with a new set of saved results.
+{cmd:generate} should have come immediately after {cmd:summarize}.
+Or, {cmd:r(mean)} and {cmd:r(sd)} should have been stored in locals:
+
+{pstd}{bf:{stata `"summarize cycleownnum"'}}{p_end}
+{pstd}{bf:{stata `"return list"'}}{p_end}
+{pstd}{bf:{stata `"local mean = r(mean)"'}}{p_end}
+{pstd}{bf:{stata `"local sd   = r(sd)"':local sd{space 3}= r(sd)}}{p_end}
+{pstd}{bf:{stata `"describe cycleownnum"'}}{p_end}
+{pstd}{bf:{stata `"return list"'}}{p_end}
+{pstd}{bf:{stata `"generate cyclenumstd = (cycleownnum - `mean') / `sd'"'}}{p_end}
+{pstd}{bf:{stata `"tabulate cyclenumstd, missing"'}}{p_end}
+
+{pstd}An important command that returns an {cmd:r()} saved result is {helpb ds}.
+Its behavior is similar to {helpb describe:{ul:d}escribe, {ul:s}imple}, which {cmd:describe}s the dataset
+insomuch as it lists its variable names:
+
+{pstd}{bf:{stata `"describe, simple"'}}{p_end}
+
+{pstd}{cmd:ds} similarly displays a list of variables, but of a subset.
+For example, {cmd:ds, has(type numeric)} lists
+just the subset of variables with numeric type:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+ds, has(type numeric)
+{txt}{sf}{ul off}{...}
+
+{pstd}If you're trying to get a subset of variables that satisfy certain criteria,
+{cmd:ds} will usually be able to it:
+
+{pstd}{cmd:* Variables of type long}{p_end}
+{pstd}{bf:{stata `"ds, has(type long)"'}}{p_end}
+{pstd}{cmd:* Variables with the value label yes1no0}{p_end}
+{pstd}{bf:{stata `"ds, has(vallab yes1no0)"'}}{p_end}
+{pstd}{cmd:* Variables with variable labels that contain the string "victim"}{p_end}
+{pstd}{bf:{stata `"ds, has(varlab *victim*)"'}}{p_end}
+
+{pstd}{cmd:ds} returns the saved result {cmd:r(varlist)},
+the list of variables that meet the criteria:
+
+{pstd}{bf:{stata `"ds, has(type numeric)"'}}{p_end}
+{pstd}{bf:{stata `"return list"'}}{p_end}
+
+{pstd}Unlike {cmd:r(mean)} and {cmd:r(sd)} of {cmd:summarize},
+{cmd:r(varlist)} is a string value.
+This means it should be enclosed by single quotes ({cmd:`} and {cmd:'}):
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+ds, has(type numeric){break}
+display "`r(varlist)'"
+{txt}{sf}{ul off}{...}
+
+{pstd}What happens if you don't use these quotes?
+
+{pstd}{bf:{stata `"ds, has(type numeric)"'}}{p_end}
+{pstd}{bf:{stata `"display r(varlist)"'}}{p_end}
+
+{pstd}{cmd:r(varlist)} is cut off at variable {cmd:castecode}.
+Without the single quotes,
+a string saved result is truncated around 244 characters.
+Variable lists in particular are frequently longer than this,
+and Stata recommends that you always enclose string saved results by single quotes.
+
+{pstd}{bf:Note:} Beginning with Stata 13, this restriction has been lifted, so
+that there is no limit on the character length of string saved results (absent
+single quotes), or strings more broadly.
+If you are using Stata 13, you should see no difference between the {cmd:r(varlist)}
+outputed with and without single quotes.
+Note in Stata 13 there is no change to the relationship between
+numeric saved results and single quotes.
+
+{pstd}We have seen that numeric saved results don't need these single quotes.
+However, they're always allowed,
+and they don't do any harm unless you need a {it:lot} of precision
+(for example, if you're doing iterative calculations).
+Here's an example:
+
+{pstd}{bf:{stata `"summarize cycleownnum"'}}{p_end}
+{pstd}{bf:{stata `"display r(mean)"'}}{p_end}
+{pstd}{bf:{stata `"display `r(mean)'"'}}{p_end}
+
+{pstd}{cmd:r(mean)} and {cmd:`r(mean)'} are treated the same.
+
+{pstd}Actually,
+the single quotes are sometimes required even for numeric saved results.
+Let's say we wanted to sum all the integers
+between the minimum and maximum values of {cmd:cycleownnum}.
+These two values are accessible through {cmd:summarize} as the saved results {cmd:r(min)} and {cmd:r(max)}:
+
+{pstd}{bf:{stata `"summarize cycleownnum"'}}{p_end}
+{pstd}{bf:{stata `"display r(min)"'}}{p_end}
+{pstd}{bf:{stata `"display r(max)"'}}{p_end}
+
+{pstd}Let's try to use {cmd:r(min)} and {cmd:r(max)} without single quotes in a for-loop:
+
+{pstd}{cmd}local sum 0{txt}{p_end}
+{pstd}{cmd}summarize cycleownnum{txt}{p_end}
+{pstd}{cmd}foreach i of numlist r(min)/r(max) {{txt}{p_end}
+{pmore}{cmd}local sum = `sum' + `i'{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+{pstd}{cmd}display "The sum is: `sum'"{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/Saved Results.do" 1"':Click here to execute.}
+
+{pstd}Unlike {cmd:display} and {cmd:generate},
+both of which we have seen handle numeric saved results not enclosed by single quotes,
+{cmd:foreach} requires them:
+
+{pstd}{cmd}local sum 0{txt}{p_end}
+{pstd}{cmd}summarize cycleownnum{txt}{p_end}
+{pstd}{cmd}foreach i of numlist `r(min)'/`r(max)' {{txt}{p_end}
+{pmore}{cmd}local sum = `sum' + `i'{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+{pstd}{cmd}display "The sum is: `sum'"{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/Saved Results.do" 2"':Click here to execute.}
+
+{pstd}If you have connected the single quotes enclosing saved results to those enclosing locals,
+you're on the right track:
+{cmd:`r(varlist)'}, {cmd:`r(min)'}, and {cmd:`r(max)'} are local macros
+and behave just like them.
+In the loop above, the values of {cmd:`r(min)'} and {cmd:`r(max)'}
+are substituted ("copied and pasted") in the command before it is executed.
+{cmd:foreach} never knows that it's processing saved results:
+{cmd:`r(min)'} and {cmd:`r(max)'} are expanded, and only then is {cmd:foreach} executed.
+
+{marker enclosing_saved_results}{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} When do numeric saved results need single quotes, and when do they not? If a}{c |}{p_end}
+{p2col:{c |} command understands {help expressions}, as {cmd:display} and and {cmd:generate} do, they're not}{c |}{p_end}
+{p2col:{c |} needed. However, commands that take only evaluated values and not}{c |}{p_end}
+{p2col:{c |} expressions, such as {cmd:foreach}, require the single quotes. {cmd:foreach} can't}{c |}{p_end}
+{p2col:{c |} handle any expressions, even the simplest:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{cmd}{...}
+{p2col:{c |} foreach i of numlist (1+1)/(2+2) {c -(}}{c |}{p_end}
+{p2col:{c |}{space 5}display `i'}{c |}{p_end}
+{p2col:{c |} {c )-}}{c |}{p_end}
+{txt}{sf}{ul off}{...}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {stata `"run "Do/Text boxes.do" "saved results" 1"':Click here to execute.}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} Rather, {cmd:foreach} needs all expressions to be evaluated beforehand:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{cmd}{...}
+{p2col:{c |} local start = 1 + 1}{c |}{p_end}
+{p2col:{c |} local end{space 3}= 2 + 2}{c |}{p_end}
+{p2col:{c |} foreach i of numlist `start'/`end' {c -(}}{c |}{p_end}
+{p2col:{c |}{space 5}display `i'}{c |}{p_end}
+{p2col:{c |} {c )-}}{c |}{p_end}
+{txt}{sf}{ul off}{...}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {stata `"run "Do/Text boxes.do" "saved results" 2"':Click here to execute.}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} Not enclosed by single quotes, a numeric saved result counts as part of an}{c |}{p_end}
+{p2col:{c |} expression. Enclosed by them, it's treated like a macro and expanded}{c |}{p_end}
+{p2col:{c |} immediately.}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} I should also say that the distinction between numeric and string saved}{c |}{p_end}
+{p2col:{c |} results is actually one between scalar and macro saved results. For more,}{c |}{p_end}
+{p2col:{c |} see the technical note in {bf:{mansection U 18.8Accessingresultscalculatedbyotherprograms:[U] 18.8 Accessing results calculated by other}}}{c |}{p_end}
+{p2col:{c |} {bf:{mansection U 18.8Accessingresultscalculatedbyotherprograms:programs}}.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}Below is a loop (introduced in {bf:Stata 103}) that lists the variables
+on which two observations of {cmd:hhid "1802011"} differ:
+
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}if `var'[597] != `var'[598] {{txt}{p_end}
+{pmore2}{cmd}display "The two observations of 1802011 differ on `var'."{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/Saved Results.do" 3"':Click here to execute.}
+
+{pstd}Now, any difference between the two observations is troubling.
+However, a difference in an open-ended string variable is more understandable
+than a difference in a numeric variable like {cmd:sex} or {cmd:age}.
+How could we modify the loop to list only the {it:numeric} variables
+on which the observations differ?
+
+{pstd}{cmd}ds, has(type numeric){txt}{p_end}
+{pstd}{cmd}foreach var in `r(varlist)' {{txt}{p_end}
+{pmore}{cmd}if `var'[597] != `var'[598] {{txt}{p_end}
+{pmore2}{cmd}display "The two observations of 1802011 differ on numeric variable `var'."{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/Saved Results.do" 4"':Click here to execute.}
+
+{hline}{marker q4}
+
+{pstd}{bf:Problem Set Question 4}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}List all variables with the value label {cmd:yesno}.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Using {cmd:ds} and a for-loop,
+get Stata to count the number of variables with the value label {cmd:yesno}.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}You are likely already familiar with {helpb duplicates list} and {helpb duplicates drop}.
+Here's another subcommand of {cmd:duplicates} that utilizes saved results:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+duplicates tag hhid, generate(iddup){break}
+list hhid if iddup > 0{break}
+tabulate iddup
+{txt}{sf}{ul off}{...}
+
+{pstd}{helpb duplicates tag} generates a variable (here {cmd:iddup})
+that indicates the number of duplicates on a certain variable list (here just {cmd:hhid})
+for each observation.
+In this case, observations with a unique value of {cmd:hhid} will have {cmd:iddup == 0},
+while observations with a duplicate value will have {cmd:iddup} equal
+to the number of extra observations with that value.
+For example, there are {cmd:2} values of {cmd:hhid "1802011"},
+that is, {cmd:1} extra,
+so {cmd:iddup == 1} when {cmd:hhid == "1802011"}:
+
+{pstd}{bf:{stata `"list hhid iddup if hhid == "1802011""'}}{p_end}
+
+{pstd}Since an observation has a duplicate value of {cmd:hhid}
+if and only if {cmd:iddup > 0},
+if we can find out the number of observations with {cmd:iddup > 0},
+we can determine the number of {cmd:hhid} duplicates:
+
+{pstd}{helpb count} displays the number of observations that satisfy a condition, and
+stores it as the saved result {cmd:r(N)}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+count if iddup > 0{break}
+display r(N)
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"drop iddup"'}}{p_end}
+
+{pstd}Before another exercise, I'll touch briefly on {helpb quietly}.
+When added before a command, {cmd:quietly} suppresses output from the command.
+For example:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+display "Hello world!"{break}
+quietly display "Hello world!"
+{txt}{sf}{ul off}{...}
+
+{pstd}On the other hand, {helpb noisily} counteracts the effect of {cmd:quietly}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+quietly noisily display "Hello world!"
+{txt}{sf}{ul off}{...}
+
+{pstd}By itself, {cmd:noisily} has no effect, since by default output is not suppressed:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+noisily display "Hello world!"
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}{bf:Problem Set Question 5 (partial)}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{bf:(a)}
+
+{pstd}Use {cmd:duplicates tag} and {cmd:count} to determine the number of {cmd:surveyid} duplicates.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}First, use {cmd:duplicates drop} to drop the exact copy of {cmd:hhid "1807077"}:
+
+{pstd}{bf:{stata `"duplicates drop"'}}{p_end}
+
+{pstd}Now, using {cmd:duplicates tag} and {cmd:count},
+find all numeric variables that uniquely identify observations.
+If the output is overwhelming, try adding {cmd:quietly} before select commands.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} {bf:c-class values}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} In addition to r-, e-, and s-class saved results, which we have already}{c |}{p_end}
+{p2col:{c |} discussed, there are also {help creturn:c-class values}. These store system parameters and}{c |}{p_end}
+{p2col:{c |} settings, such as the current date in {cmd:c(current_date)} and the {view `""SMCL/Concepts/For-Loops and Macros.smcl"##tracing"':{bf:set trace}}}{c |}{p_end}
+{p2col:{c |} setting in {cmd:c(trace)}, as well as constants like pi, in {cmd:c(pi)}:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{bf}{...}
+{p2col:{c |} {stata display c(current_date)}}{c |}{p_end}
+{p2col:{c |} {stata display c(trace)}}{c |}{p_end}
+{p2col:{c |} {stata display c(pi)}}{c |}{p_end}
+{txt}{sf}{ul off}{...}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} It's worth taking a look at the {help creturn:full list} of c-class values.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+
+{hline}
+
+{pstd}Problem Set: {view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl""':Saved Results}{break}
+
+{pstd}Next: {view `""SMCL/Tasks/Recoding.smcl""':Recoding}{break}
+Previous: {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':Logical Expressions and Dummy Variables}{break}
+{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

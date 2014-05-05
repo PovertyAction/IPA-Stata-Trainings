@@ -1,0 +1,278 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:String Cleaning}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl"##q4"':Question 4}{break}
+{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl"##q5"':Question 5}{break}
+{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl"##q6"':Question 6}{break}
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{it}{...} Explain the two main approaches to string cleaning.
+{txt}{sf}{ul off}{...}
+
+{pstd}The first approach to string cleaning is
+making
+{view `""SMCL/Tasks/String Cleaning.smcl"##exact"':exact replacements}
+to various string variables,
+such that specific string values are replaced
+with other specific string values.
+
+{pstd}The second broad strategy is specifying
+{view `""SMCL/Tasks/String Cleaning.smcl"##patterns"':{it:patterns}} to be replaced
+rather than individual strings.
+A particular pattern that describes string values is specified,
+and all strings that match the pattern are replaced with another string.
+
+{pstd}Both methods are usually preceded by
+{view `""SMCL/Tasks/String Cleaning.smcl"##basic"':basic string cleaning},
+which may involve standardizing letter case
+and removing extraneous characters.
+The two methods are also not mutually exclusive:
+you'll often make at least a few exact replacements before
+using pattern or string matching.
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} Recreating {cmd:newcaste}:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+
+{pstd}{it}{...} Using {view `""SMCL/Tasks/Other Data Checks.smcl"##levelsof"':{bf:levelsof}} and {cmd:foreach},
+display each unique value of {cmd:newcaste} on its own line.
+Copy these values to Excel.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}levelsof newcaste{txt}{p_end}
+{pstd}{cmd}foreach level in `r(levels)' {{txt}{p_end}
+{pmore}{cmd}display "`level'"{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/String Cleaning - answers.do" 1"':Click here to execute.}
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} What is an alternative to {cmd:replace}
+that can be used for making multiple, simultaneous replacements?
+Why can't it be used to make replacements to {cmd:castename}?
+(If you don't know, try it and see!)
+{txt}{sf}{ul off}{...}
+
+{pstd}{view `""SMCL/Tasks/Recoding.smcl""':{bf:recode}} is an alternative to {cmd:replace}.
+However, {cmd:recode} takes only numeric variables.
+
+{hline}{marker q4}
+
+{pstd}{bf:Answer to Question 4}
+
+{hline}
+
+{pstd}{it}{...} In {view `""SMCL/Tasks/String Cleaning.smcl"##version_loop"':this loop},
+many replacements were made using
+{cmd:#delimit}, multiple local macros, and for-loops.
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}How was {cmd:#delimit ;} useful for defining the local macros?
+{txt}{sf}{ul off}{...}
+
+{pstd}Similarly to
+using {bf:#delimit ;} for value labels,
+{cmd:#delimit ;} here allows
+the different versions of the caste names to be spaced out,
+enhancing readability.
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Why was it necessary to enclose {cmd:"MEHTA JAIN"} in double quotes?
+{txt}{sf}{ul off}{...}
+
+{pstd}It is because {cmd:"MEHTA JAIN"} contains a space. Without the double quotes, Stata
+would ignore the space, and would interpret {cmd:"MEHTA JAIN"} as two different values:
+{cmd:"MEHTA"} and {cmd:"JAIN"}.
+
+{pstd}{it}{...} {bf:(c)}
+
+{pstd}Are there limitations to this approach?
+{txt}{sf}{ul off}{...}
+
+{pstd}Yes:{break}
+1. The standardized name cannot contain a space, since macro names cannot contain spaces.{break}
+2. The standardized name cannot be more than 22 characters, since
+local macro names can be at most 31 characters,
+and {cmd:"_versions"} is 9.
+
+{hline}{marker q5}
+
+{pstd}{bf:Answer to Question 5}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}Standardize the letter case of {cmd:castename}
+so that for each caste,
+words begin with an uppercase letter
+and are followed by lowercase.
+For example, {cmd:"suthar"} should become {cmd:"Suthar"},
+and {cmd:"RAVAN RAJPUT"} should become {cmd:"Ravan Rajput"}.
+Use {helpb string functions:help string functions} to find the correct function.
+{txt}{sf}{ul off}{...}
+
+{pstd}Using {helpb proper()}:
+
+{pstd}{bf:{stata `"generate newcaste = proper(castename)"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}After making this change,
+how many unique caste names are there?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"quietly tabulate newcaste"'}}{p_end}
+{pstd}{bf:{stata `"display "There are `r(r)' unique caste names.""'}}{p_end}
+
+{hline}{marker q6}
+
+{pstd}{bf:Answer to Question 6}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} First, recreate {cmd:newcaste}:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}Create a variable named {cmd:multiword}
+that equals {cmd:1} if {cmd:newcaste} is more than one word long,
+equals {cmd:0} if it is exactly one word,
+and equals {cmd:.} (missing) if it is missing.
+
+{pstd}You may need to use {helpb string functions:help string functions}
+to find the correct function.
+{txt}{sf}{ul off}{...}
+
+{pstd}Using {helpb wordcount()}:
+
+{pstd}{bf:{stata `"generate multiword = wordcount(newcaste) > 1 if !missing(newcaste)"'}}{p_end}
+
+{pstd}Alternatively, using {helpb strpos()}:
+
+{pstd}{bf:{stata `"generate multiword = strpos(newcaste, " ") != 0 if !missing(newcaste)"'}}{p_end}
+
+{pstd}Both approaches use {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':logical expressions}.
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}How many unique caste names are more than one word long?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"quietly tabulate newcaste if multiword"'}}{p_end}
+{pstd}{bf:{stata `"display "There are `r(r)' unique multiword caste names.""'}}{p_end}
+
+{pstd}{it}{...} {it:Extra credit:}
+
+{pstd}{bf:(c)}
+
+{pstd}If we {help tabulate oneway:tabulate} {cmd:newcaste},
+it is clear that several multiword caste names
+are actually single words with spaces incorrectly inserted,
+for example, {cmd:"RAJ PUT"}:
+
+{pstd}{bf:{stata `"tabulate newcaste"'}}{p_end}
+
+{pstd}{it}{...} How could you remove these spaces
+while leaving true multiword caste names intact?
+{txt}{sf}{ul off}{...}
+
+{pstd}Any truly robust process for this would be complicated,
+but here's a first attempt:
+
+{pstd}{cmd}levelsof newcaste{txt}{p_end}
+{pstd}{cmd}foreach caste in `r(levels)' {{txt}{p_end}
+{pmore}{cmd}if strpos("`caste'", " ") {{txt}{p_end}
+{pmore2}{cmd}local nospaces = subinstr("`caste'", " ", "", .){txt}{p_end}
+{pmore2}{cmd}count if newcaste == "`nospaces'"{txt}{p_end}
+{pmore2}{cmd}if r(N) > 0 {{txt}{p_end}
+{pmore3}{cmd}replace newcaste = "`nospaces'" if newcaste == "`caste'"{txt}{p_end}
+{pmore2}{cmd}}{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/String Cleaning - answers.do" 2"':Click here to execute.}
+
+{pstd}Here, we first use {helpb strpos()} to determine
+whether each value of {cmd:newcaste}, stored in {cmd:`caste'},
+contains one or more spaces:
+
+{pstd}{cmd}{...}
+if strpos("`caste'", " ") {
+{txt}{sf}{ul off}{...}
+
+{pstd}If it does, we examine whether any value of {cmd:newcaste}
+equals {cmd:`caste'} with its spaces removed ({cmd:`nospaces'}):
+
+{pstd}{cmd}{...}
+local nospaces = subinstr("`caste'", " ", "", .){break}
+count if newcaste == "`nospaces'"{break}
+if r(N) > 0 {
+{txt}{sf}{ul off}{...}
+
+{pstd}If there is such a value, then the spaces are removed from the original caste name,
+and all values of {cmd:`caste'} are replaced with {cmd:`nospaces'}:
+
+{pstd}{cmd}{...}
+replace newcaste = "`nospaces'" if newcaste == "`caste'"
+{txt}{sf}{ul off}{...}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

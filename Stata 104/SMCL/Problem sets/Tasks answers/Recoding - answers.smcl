@@ -1,0 +1,113 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Recoding}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/Recoding - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks answers/Recoding - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks answers/Recoding - answers.smcl"##q3"':Question 3}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} Recode all variables with the value label {cmd:yes1no0}
+so that {cmd:Yes = 1} and {cmd:No = 2},
+and attach the value label {cmd:yesno} to them.
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}ds, has(vallabel yes1no0){txt}{p_end}
+{pstd}{cmd}* "varl" for "variable list"{txt}{p_end}
+{pstd}{cmd}local varl `r(varlist)'{txt}{p_end}
+{pstd}{cmd}foreach var in `varl' {{txt}{p_end}
+{pstd}{cmd}{space 4}replace `var' = 2 if `var' == 0{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+{pstd}{cmd}label values `varl' yesno{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/Recoding - answers.do" 1"':Click here to execute.}
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}What do the rules {cmd:(1=2) (2=1)} specify?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:1} ({cmd:Farming or livestock}) will be recoded as {cmd:2},
+and {cmd:2} ({cmd:Manual labor on other people’s land, farm, house})
+will be recoded as {cmd:1}.
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}How does
+
+{pstd}{cmd:recode occupation (1=2) (2=1)}
+
+{pstd}differ from:
+
+{pstd}{cmd:replace occupation = 2 if occupation == 1}{break}
+{cmd:replace occupation = 1 if occupation == 2}
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:recode occupation (1=2) (2=1)}
+
+{pstd}swaps values of {cmd:1} and {cmd:2}: values of {cmd:1} are now {cmd:2}, and values of {cmd:2} are now {cmd:1}.
+That is, a simultaneous recoding of two values is completed. However,
+
+{pstd}{cmd:replace occupation = 2 if occupation == 1}{break}
+{cmd:replace occupation = 1 if occupation == 2}
+
+{pstd}simply replaces values of {cmd:2} with {cmd:1}.
+First, values of {cmd:1} are recoded as {cmd:2},
+then all values of {cmd:2}, including the former values of {cmd:1} now newly recoded, are replaced with {cmd:1}.
+
+{pstd}Here, an alternative to {cmd:recode} using {cmd:replace} would look like:
+
+{pstd}{cmd}replace occupation = 100 if occupation == 1{break}
+replace occupation = 1 if occupation == 2{break}
+replace occupation = 2 if occupation == 100{txt}
+
+{pstd}where {cmd:100} is not otherwise a value of {cmd:occupation}.
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} Recode {cmd:castecode} so that {cmd:1} is recoded as {cmd:2}, {cmd:2} is recoded as {cmd:3},
+and {cmd:3} is recoded as {cmd:1}. Modify the value label to reflect these changes.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"recode castecode (1=2) (2=3) (3=1)"'}}{p_end}
+{pstd}{bf:{stata `"label define castecode 1 SC 2 General 3 OBC, modify"'}}{p_end}
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/Recoding - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Tasks/Recoding.smcl""':Recoding}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

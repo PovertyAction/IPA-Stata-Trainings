@@ -1,0 +1,604 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:String Cleaning}{break}
+
+{pstd}Very often, whether due to the enumerator, the data entry operator, or just the
+fact that certain places, people, and things have different names,
+string variables will have multiple spellings for the same response.
+For example, a single province variable may have
+{cmd:"Chhattisgarh"}, {cmd:"Chattisgarh"}, and {cmd:"Chatisgarr"}.
+Or, an occupation variable might have
+{cmd:"tailor"}, {cmd:"sewer"}, and {cmd:"clothes repairer"},
+all of which refer to the same job.
+Creating good codes for your questionnaire can help prevent this.
+However, you will almost always have open-ended response variables
+that you need to standardize.
+
+{pstd}In some cases, such as the names of cities and states,
+standardizing is pretty straightforward.
+At other times,
+whether or not two different responses are really the same
+might involve a judgment call.
+In these cases, you should discuss the coding with your supervisor.
+
+{pstd}There are two broad strategies for cleaning strings.
+The first is specifying the exact changes you want to make.
+For example, you might decide that {cmd:"Chhattisgarh"} and {cmd:"Chatisgarr"}
+should be replaced as {cmd:"Chattisgarh"}.
+The second main approach is specifying string {it:patterns}.
+For instance, you might say that any string
+that begins with {cmd:"Ch"} and contains {cmd:"tis"} followed somewhere by {cmd:"gar"}
+should be replaced as {cmd:"Chattisgarh"}.
+
+{pstd}Either approach is typically preceded by some basic string standardization,
+for example, making all strings lowercase
+so that differences in letter case aren't counted as different responses.
+
+{pstd}This module is divided into three sections:
+
+{pstd}{view `""SMCL/Tasks/String Cleaning.smcl"##basic"':1. Basic string cleaning}{break}
+{view `""SMCL/Tasks/String Cleaning.smcl"##exact"':2. Specifying exact replacements}{break}
+{view `""SMCL/Tasks/String Cleaning.smcl"##patterns"':3. Pattern and string matching}
+
+{hline}{marker basic}
+
+{pstd}{bf:1. Basic string cleaning}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Here, we will standardize the string variable {cmd:castename}.
+First, we have to get a list of its unique values:
+
+{pstd}{bf:{stata `"tabulate castename"'}}{p_end}
+
+{pstd}Notice that a lot of the differences in {cmd:castename} are caused by differences
+in capitalization and punctuation. We can remove these by making all values of
+{cmd:castename} the same case, removing punctuation, and removing excess spaces:
+
+{pstd}{bf:{stata `"tabulate castename"'}}{p_end}
+{pstd}{bf:{stata `"local oldr = r(r)"'}}{p_end}
+{pstd}{bf:{stata `"display "There are `oldr' unique values of castename.""'}}{p_end}
+
+{pstd}{bf:{stata `"bysort castename: generate oldn = _N"'}}{p_end}
+
+{pstd}{cmd:r(r)} is a {view `""SMCL/Concepts/Saved Results.smcl""':saved result}
+stored by {cmd:tabulate}.
+Recall also that in this case with {cmd:by},
+{bf:_N} is
+the number of observations in the by-group.
+
+{pstd}The following command converts all values of {cmd:castename} to uppercase:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+
+{pstd}{bf:{stata `"bysort newcaste: generate newn = _N"'}}{p_end}
+
+{pstd}{bf:{stata `"sort newcaste oldn"'}}{p_end}
+{pstd}{bf:{stata `"browse castename newcaste oldn newn if oldn != newn"'}}{p_end}
+
+{pstd}Using {helpb quietly} with {cmd:tabulate},
+since all we need from {cmd:tabulate} is its saved result {cmd:r(r)} {hline 2}
+we're not interested in its output:
+
+{pstd}{bf:{stata `"quietly tabulate newcaste"'}}{p_end}
+{pstd}{bf:{stata `"local newr = r(r)"'}}{p_end}
+{pstd}{bf:{stata `"display "Letter case has been standardized. newcaste now has " `oldr' - `newr' " fewer values than castename.""'}}{p_end}
+
+{pstd}The following replaces all instances of {cmd:"."} in {cmd:newcaste} with {cmd:""}:
+
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+
+{pstd}This replaces all instances of {cmd:","} in {cmd:newcaste} with {cmd:""}:
+
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+
+{pstd}{bf:{stata `"quietly tabulate newcaste"'}}{p_end}
+{pstd}{bf:{stata `"local newr = r(r)"'}}{p_end}
+{pstd}{bf:{stata `"display "Punctuation has been removed. newcaste now has " `oldr' - `newr' " fewer values than castename.""'}}{p_end}
+
+{pstd}This removes all spaces at the start or end of {cmd:newcaste}:
+
+{pstd}{bf:{stata `"replace newcaste = trim(newcaste)"'}}{p_end}
+
+{pstd}This replaces multiple, consecutive internal spaces {hline 2}
+that is, two or more spaces in a row in the middle of {cmd:newcaste} {hline 2}
+with a single space:
+
+{pstd}{bf:{stata `"replace newcaste = itrim(newcaste)"'}}{p_end}
+
+{pstd}{bf:{stata `"quietly tabulate newcaste"'}}{p_end}
+{pstd}{bf:{stata `"local newr = r(r)"'}}{p_end}
+{pstd}{bf:{stata `"display "Spaces have been trimmed. newcaste now has " `oldr' - `newr' " fewer values than castename.""'}}{p_end}
+
+{pstd}The combination of {cmd:trim()} and {cmd:itrim()} removes all excess spaces.
+However, for castes that are more than one word long,
+it preserves a single space between words.
+For string variables that are supposed to be only one word,
+you may want to remove all spaces entirely.
+To do this for {cmd:newcaste}, we could have coded:
+
+{pstd}{cmd:replace newcaste = subinstr(newcaste, " ", "", .)}
+
+{pstd}See {helpb subinstr()} for more options for string substitution.
+
+{pstd}We now have a much shorter list of caste names:
+
+{pstd}{bf:{stata `"tabulate newcaste"'}}{p_end}
+
+{pstd}I saw after my first use above of {cmd:tabulate castename}
+that we needed to remove periods, commas, and excess spaces.
+You can also use the {help SSC} program {cmd:charlist}
+to get the list of characters in a string:
+
+{pstd}{bf:{stata `"ssc install charlist"'}}{p_end}
+
+{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+charlist castename
+{txt}{sf}{ul off}{...}
+
+{pstd}We now have a cleaner list of caste names.
+You might want to copy this list of names to Excel
+for easy viewing and further cleaning.
+However, copying the table from {cmd:tabulate} above doesn't work. What to do?
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recreating {cmd:newcaste}:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+
+{pstd}Using {view `""SMCL/Tasks/Other Data Checks.smcl"##levelsof"':{bf:levelsof}} and {cmd:foreach},
+display each unique value of {cmd:newcaste} on its own line.
+Copy these values to Excel.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{pstd}There's an alternative solution:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+egen tag = tag(newcaste)
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"browse newcaste if tag"'}}{p_end}
+
+{pstd}{help egen:{bf:egen tag(}{it:varlist}{bf:)}} "tags" one observation
+in each distinct group of {varlist}.
+The result will be {cmd:1} for observations that are tagged
+and for which {it:varlist} is all nonmissing,
+and {cmd:0} otherwise.
+
+{pstd}The following command:
+
+{pstd}{cmd:browse newcaste if tag}
+
+{pstd}displays each unique value of {cmd:newcaste} just once.
+You can then copy this list to Excel.
+
+{hline}{marker exact}
+
+{pstd}{bf:2. Specifying exact replacements}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recreating {cmd:newcaste} by completing
+{view `""SMCL/Tasks/String Cleaning.smcl"##basic"':basic string cleaning}:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+
+{pstd}Once you've decided on the standardized responses, you can make
+replacements. For example, suppose these are all the same caste:
+
+{pstd}{cmd:SUDAT SUDHAR SUHALAKA SUMEJA SUNAR SUTAR SUTHAR}
+
+{pstd}If I wanted to standardize {cmd:newcaste} by changing all these values to {cmd:"SUDAT"}, I could code:
+
+{pstd}{cmd}replace newcaste = "SUDAT" if newcaste == "SUDHAR" | ///{txt}{p_end}
+{pmore}{cmd}newcaste == "SUHALAKA" | newcaste == "SUMEJA"{space 2}| ///{txt}{p_end}
+{pmore}{cmd}newcaste == "SUNAR"{space 4}| newcaste == "SUTAR"{space 3}| ///{txt}{p_end}
+{pmore}{cmd}newcaste == "SUTHAR"{txt}{p_end}
+
+{pstd}{stata `"run "Do/Tasks/String Cleaning.do" 1"':Click here to execute.}
+
+{pstd}To be efficient, I could use the function {helpb inlist()} in place of this code:
+
+{pstd}{bf:{stata `"replace newcaste = "SUDAT" if inlist(newcaste, "SUDHAR", "SUHALAKA", "SUMEJA", "SUNAR", "SUTAR", "SUTHAR")"'}}{p_end}
+
+{pstd}{cmd:inlist(}{it:z}{cmd:,} {it:a}{cmd:,} {it:b}{cmd:,} {it:...}{cmd:) == 1} if {it:z} {cmd:==} {it:a} {cmd:|} {it:z} {cmd:==} {it:b} {cmd:|}
+{it:...}, and {cmd:0} otherwise.
+As you can see, {cmd:inlist()} results in much less code than multiple
+{view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':logical expressions}.
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}What is an alternative to {cmd:replace}
+that can be used for making multiple, simultaneous replacements?
+Why can't it be used to make replacements to {cmd:castename}?
+(If you don't know, try it and see!)
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recreating {cmd:newcaste}:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+
+{marker version_loop}{...}
+{pstd}Here's yet another alternative, useful if you are making many replacements:
+
+{pstd}{cmd}#delimit ;{txt}{p_end}
+{pstd}{cmd}local SUDAT_versions{txt}{p_end}
+{pmore}{cmd}SUDHAR{txt}{p_end}
+{pmore}{cmd}SUHALAKA{txt}{p_end}
+{pmore}{cmd}SUMEJA{txt}{p_end}
+{pmore}{cmd}SUNAR{txt}{p_end}
+{pmore}{cmd}SUTAR{txt}{p_end}
+{pmore}{cmd}SUTHAR{txt}{p_end}
+{pstd}{cmd};{txt}{p_end}
+{pstd}{cmd}local MEHTA_versions{txt}{p_end}
+{pmore}{cmd}MEHLA{txt}{p_end}
+{pmore}{cmd}MEHRA{txt}{p_end}
+{pmore}{cmd}MEHRAAT{txt}{p_end}
+{pmore}{cmd}MEHRAJ{txt}{p_end}
+{pmore}{cmd}MEHRAT{txt}{p_end}
+{pmore}{cmd}"MEHTA JAIN"{txt}{p_end}
+{pmore}{cmd}MEHTAR{txt}{p_end}
+{pmore}{cmd}MEKHBAL{txt}{p_end}
+{pmore}{cmd}MEKHWAL{txt}{p_end}
+{pstd}{cmd};{txt}{p_end}
+{pstd}{cmd}local REGARA_versions{txt}{p_end}
+{pmore}{cmd}RAZAR{txt}{p_end}
+{pmore}{cmd}RAZER{txt}{p_end}
+{pmore}{cmd}REBARI{txt}{p_end}
+{pmore}{cmd}REDAS{txt}{p_end}
+{pmore}{cmd}REGAR{txt}{p_end}
+{pmore}{cmd}REGRA{txt}{p_end}
+{pstd}{cmd};{txt}{p_end}
+{pstd}{cmd}#delimit cr{txt}{p_end}
+{pstd}{cmd}foreach name in SUDAT MEHTA REGARA {{txt}{p_end}
+{pmore}{cmd}foreach version of local `name'_versions {{txt}{p_end}
+{pmore2}{cmd}replace newcaste = "`name'" if newcaste == "`version'"{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Tasks/String Cleaning.do" 2"':Click here to execute.}
+
+{hline}{marker q4}
+
+{pstd}{bf:Problem Set Question 4}
+
+{hline}
+
+{pstd}In {view `""SMCL/Tasks/String Cleaning.smcl"##version_loop"':this loop},
+many replacements were made using
+{cmd:#delimit}, multiple local macros, and for-loops.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}How was {cmd:#delimit ;} useful for defining the local macros?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Why was it necessary to enclose {cmd:"MEHTA JAIN"} in double quotes?
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Are there limitations to this approach?
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}A similar approach does not have these limitations, but brings us outside Stata.
+In Excel, you can create a .csv file like
+{bf:{stata !"Raw/Clean castename.csv":"Raw/Clean castename.csv"}}
+that displays unclean {cmd:castename} versions next to the standardized {cmd:newcaste}.
+You can then use {helpb insheet} to import the .csv file to Stata.
+(If you're using Stata 12 or higher,
+you could opt for an Excel file and {helpb import excel} instead.)
+
+{pstd}{bf:{stata `"insheet using "Raw/Clean castename.csv", comma names clear"'}}{p_end}
+
+{pstd}{bf:{stata `"list"'}}{p_end}
+
+{pstd}{bf:{stata `"save "Raw/Clean castename", replace"'}}{p_end}
+
+{pstd}This dataset contains two variables: {cmd:castename} and {cmd:newcaste}.
+We can merge {cmd:newcaste} into the original dataset
+by using {cmd:castename} as the merge key variable.
+
+{pstd}For values of {cmd:castename} in {cmd:"Raw/Clean castename.csv"},
+we want {cmd:newcaste} in the final dataset to equal {cmd:newcaste}
+in the .csv file.
+For values of {cmd:castename} {it:not} specified in the .csv file,
+we want {cmd:newcaste} to equal {cmd:castename}.
+We can then clean those values using other methods.
+
+{pstd}To do this, we'll first make {cmd:newcaste} a copy of {cmd:castename}:
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{bf:{stata `"generate newcaste = castename"'}}{p_end}
+
+{pstd}We'll then use the {cmd:update replace} options of {helpb merge}
+to replace {cmd:newcaste} with its value from the .csv file.
+
+{pstd}We'll merge using the suggestions from the {view `""SMCL/Tasks/Merging.smcl""':module on merging}.
+
+{pstd}Stata 11 or higher:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+merge m:1 castename using "Raw/Clean castename", update replace{break}
+drop if _merge == 2{break}
+{txt}{sf}{ul off}{...}
+
+{pstd}Stata 10 or lower:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+merge castename using "Raw/Clean castename", sort uniqusing update replace{break}
+drop if _merge == 2{break}
+{txt}{sf}{ul off}{...}
+
+{pstd}Let's examine the results:
+
+{pstd}{bf:{stata `"browse castename newcaste if _merge >= 3"'}}{p_end}
+
+{pstd}It was easy to specify the desired replacements in the .csv file,
+and we were then able to merge the changes into the original dataset.
+This is probably easier than any of the other solutions we've seen:
+multiple logical expressions, {cmd:inlist()}, and multiple local macros with for-loops.
+However, some people may prefer to see the replacements within their do-file,
+or would rather keep everything in Stata
+instead of using two different programs.
+
+{hline}{marker patterns}
+
+{pstd}{bf:3. Pattern and string matching}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}Recreating {cmd:newcaste} by implementing
+the basic string cleaning described in
+{view `""SMCL/Tasks/String Cleaning.smcl"##basic"':section 1} of the module:
+
+{pstd}{bf:{stata `"generate newcaste = upper(castename)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ".", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = subinstr(newcaste, ",", "", .)"'}}{p_end}
+{pstd}{bf:{stata `"replace newcaste = trim(itrim(newcaste))"'}}{p_end}
+
+{pstd}So far we've covered four approaches to string cleaning:{break}
+1. {cmd:replace} with many logical expressions{break}
+2. {cmd:replace} with {cmd:inlist()}{break}
+3. {bf:For-loops}{break}
+4. {cmd:merge}
+
+{pstd}They have shared the following core strategy:
+first, complete basic string cleaning (e.g., standardize letter case and remove punctuation),
+then specify the exact recoding, that is, which particular strings should be replaced with which other ones.
+
+{pstd}There are other options for string cleaning that specify patterns (simple or complex)
+rather than particular strings to recode.
+For example, you might specify that any string that starts with {cmd:"RAJP"} be recoded as {cmd:"RAJPUT"}.
+Here, a pattern ("starts with {cmd:"RAJP"}") has been specified for recoding
+rather than a particular list of strings
+({cmd:"RAJPOOT"}, {cmd:"RAJPUT PAWAR"}, {cmd:"RAJPUT RATHORE"}, {cmd:"RAJ PUROHIT."}, etc.).
+
+{pstd}One such option is {helpb strmatch()}. {cmd:strmatch(}{it:string}{cmd:,} {it:pattern}{cmd:) == 1} if
+{it:string} matches {it:pattern}, and {cmd:0} otherwise. Two "wildcard" characters are allowed
+in {cmd:strmatch()} patterns: {cmd:"?"} and {cmd:"*"}. {cmd:"?"} means that exactly one character goes
+in the position that {cmd:"?"} holds, and {cmd:"*"} means that zero or more characters go in
+the position that {cmd:"*"} holds.
+For example, the following replaces any value of {cmd:newcaste}
+that starts with {cmd:"PUS"},
+is followed by exactly one character,
+is followed by {cmd:"KARN"},
+and is followed by zero or more characters
+with the correct {cmd:castename} {cmd:"PUSHKARNA"}:
+
+{pstd}{bf:{stata `"replace newcaste = "PUSHKARNA" if strmatch(newcaste, "PUS?KARN*")"'}}{p_end}
+
+{pstd}{cmd:"PUSHKARNEE"}, {cmd:"PUSHKARN"}, and {cmd:"PUSSKARNA"} are replaced.
+
+{pstd}Regular expression matching is a powerful tool; it's like an amplified version of {cmd:strmatch()}.
+Regular expression syntax is involved, and I won't cover it here, but
+here's an example of what's possible. The following command replaces any value of
+{cmd:newcaste} that starts with {cmd:"R"}, is followed by one or more vowels,
+then ends with a consonant
+with the correct {cmd:castename} {cmd:"RAIEN"}:
+
+{pstd}{bf:{stata `"replace newcaste = "RAIEN" if regexm(newcaste, "^R[AEIOU]+[^AEIOU]$")"'}}{p_end}
+
+{pstd}{cmd:"RAIK"}, {cmd:"RAV"}, and {cmd:"ROUT"} are replaced.
+See {helpb regexm()} for more information.
+See also
+{browse "http://www.stata.com/support/faqs/data-management/regular-expressions/":this}
+Stata FAQ on regular expressions.
+
+{pstd}Touching on even more complex string matching algorithms,
+the SSC program {cmd:strgroup} matches strings by how similar they are:
+
+{pstd}{bf:{stata `"ssc install strgroup"'}}{p_end}
+
+{pstd}{cmd:strgroup} matches strings
+based on something called their "Levenshtein edit distance."
+The Levenshtein distance between two strings is
+the minimum number of insertions, deletions, or substitutions
+necessary to change one string to the other.
+Thus, the Levenshtein distance between {cmd:"VINAWA"} and {cmd:"VINAYA"} is {cmd:1},
+while the distance between {cmd:"NAT"} and {cmd:"SWAMI BRAHMAN"} is {cmd:12}.
+The following code matches all string pairs
+with a distance of {cmd:3} or less:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+strgroup newcaste, generate(levcaste) threshold(3) normalize(none)
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"tabulate levcaste"'}}{p_end}
+{pstd}{bf:{stata `"sort levcaste newcaste"'}}{p_end}
+{pstd}{bf:{stata `"browse newcaste levcaste"'}}{p_end}
+
+{pstd}Using the
+{bf:by varlist1 (varlist2)}
+syntax to make {cmd:newcaste} constant within each group of {cmd:levcaste}:
+
+{pstd}{bf:{stata `"bysort levcaste (newcaste): replace newcaste = newcaste[1]"'}}{p_end}
+
+{pstd}{bf:{stata `"drop levcaste"'}}{p_end}
+
+{...}
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} Instead of matching on the absolute Levenshtein distance, you could match on}{c |}{p_end}
+{p2col:{c |} the {it:percent} distance. For example, the following command matches all string}{c |}{p_end}
+{p2col:{c |} pairs whose Levenshtein distance is no more than 20% of the length of the}{c |}{p_end}
+{p2col:{c |} shorter string:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {bf:{stata strgroup newcaste, generate(levcaste) threshold(0.2) normalize(shorter)}}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{pstd}If you're intrigued by {cmd:strgroup},
+{browse "http://openrefine.org/":OpenRefine} (formerly Google Refine),
+a useful tool for working with messy data,
+has a variety of string matching algorithms,
+some of which perform better than
+the Levenshtein edit distance for some types of strings.
+Just be careful about documenting your work so that it's reproducible.
+
+{pstd}I'll mention just one more useful command.
+{cmd:reclink} is a user-written program that matches observations between two datasets
+when no perfect key variables exist {hline 2} essentially a fuzzy merge:
+
+{pstd}{bf:{stata `"ssc install reclink"'}}{p_end}
+
+{pstd}If you're merging an unclean dataset with a clean one
+or merging two unclean datasets,
+{cmd:reclink} can be very useful
+and for this use more convenient than
+{cmd:strgroup} or {browse "http://openrefine.org/":OpenRefine}.
+
+
+{hline}
+
+{pstd}Problem Set: {view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl""':String Cleaning}{break}
+
+{pstd}Next: {view `""SMCL/Tasks/Merging.smcl""':Merging}{break}
+Previous: {view `""SMCL/Tasks/Other Data Checks.smcl""':Other Data Checks}{break}
+{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

@@ -1,0 +1,167 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Other Data Checks}{break}
+{it:Problem set answers}{break}
+
+{pstd}{view `""SMCL/Problem sets/Tasks answers/Other Data Checks - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Tasks answers/Other Data Checks - answers.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Tasks answers/Other Data Checks - answers.smcl"##q3"':Question 3}{break}
+{view `""SMCL/Problem sets/Tasks answers/Other Data Checks - answers.smcl"##q4"':Question 4}{break}
+
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} We've seen two ways to check that {cmd:cycleownyn} is only {cmd:Yes} or {cmd:No}.
+{it}{...} The first involved {bf:{view `""SMCL/Tasks/Other Data Checks.smcl"##levelsof"':levelsof}}:
+
+{pstd}{bf:{stata `"levelsof cycleownyn"'}}{p_end}
+{pstd}{bf:{stata `"assert "`r(levels)'" == "1 2""'}}{p_end}
+
+{pstd}{it}{...} The second was {bf:{view `""SMCL/Tasks/Other Data Checks.smcl"##inrange"':inrange()}}:
+
+{pstd}{bf:{stata `"assert inrange(cycleownyn, 1, 2)"'}}{p_end}
+
+{pstd}{it}{...} Could it ever occur that the first {cmd:assert} (with {cmd:levelsof})
+would fail but the second with {cmd:inrange()} would not?
+How about vice versa?
+If so, under what circumstances would this occur?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd:assert} with {cmd:levelsof} would fail while {cmd:assert} with {cmd:inrange()} wouldn't
+if {cmd:1 < cycleownyn < 2}.
+
+{pstd}{cmd:assert} with {cmd:inrange()} would fail while {cmd:assert} with {cmd:levelsof} wouldn't
+if {cmd:cycleownyn} was missing, since unless its option {cmd:missing} is specified,
+{cmd:levelsof} doesn't display or save missing values.
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}Using {cmd:levelsof}, loop through all distinct values of {cmd:castename}.
+For how many values is the {help substr():first character} {cmd:"B"}?
+{txt}{sf}{ul off}{...}
+
+{pstd}Using a for-loop for counting:
+
+{pstd}{cmd}local i 0{txt}{p_end}
+{pstd}{cmd}levelsof castename{txt}{p_end}
+{pstd}{cmd}foreach level in `r(levels)' {{txt}{p_end}
+{pmore}{cmd}if substr("`level'", 1, 1) == "B" {{txt}{p_end}
+{pmore2}{cmd}local i = `i' + 1{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{cmd}display "`i' values of castename start with B."{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/Other Data Checks - answers.do" 1"':Click here to execute.}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}For each distinct value of {cmd:castename},
+display the number of corresponding values of {cmd:castecode}.
+For example, {cmd:castename "VISHWAKARMA"} has
+exactly one corresponding value of {cmd:castecode}: {cmd:OBC}.
+
+{pstd}Are there any values of {cmd:castename}
+with more than one corresponding value of {cmd:castecode}?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}levelsof castename{txt}{p_end}
+{pstd}{cmd}foreach level in `r(levels)' {{txt}{p_end}
+{pmore}{cmd}quietly tabulate castecode if castename == "`level'"{txt}{p_end}
+{pmore}{cmd}display "`level' corresponds to `r(r)' values of castecode."{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/Other Data Checks - answers.do" 2"':Click here to execute.}
+
+{pstd}There are values of {cmd:castename}
+with more than one corresponding value of {cmd:castecode}.
+
+{hline}{marker q3}
+
+{pstd}{bf:Answer to Question 3}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+
+{pstd}{it}{...} Using a loop (not manually using {cmd:codebook}),
+find all variables with all missing values.
+
+{pstd}If there are any, are they all necessarily problematic?
+{txt}{sf}{ul off}{...}
+
+{pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
+{pmore}{cmd}quietly count if missing(`var'){txt}{p_end}
+{pmore}{cmd}if r(N) == _N {{txt}{p_end}
+{pmore2}{cmd}display "`var' has all missing values."{txt}{p_end}
+{pmore}{cmd}}{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Problem sets/Tasks answers/Other Data Checks - answers.do" 3"':Click here to execute.}
+
+{pstd}These variables are not all necessarily problematic.
+For example, {cmd:own2wheelertheftvictim_2} has all missing values,
+but just because there was never a second reported theft victim,
+not because the enumerators or data entry operators made a mistake.
+
+{hline}{marker q4}
+
+{pstd}{bf:Answer to Question 4}
+
+{hline}
+
+{pstd}{it}{...} Have you encountered unexpected, problematic, or weird data originating
+from a project's survey design, computer-assisted interviewing (CAI) programming,
+or field work?
+Describe the process through which you identified
+the source of the issue and how you resolved it.
+{txt}{sf}{ul off}{...}
+
+{pstd}There are many potential problems you can encounter
+when collecting survey data.
+Here is one example, from an actual project:
+
+{pstd}A question in the project's computer-assisted interviewing (CAI) program
+was supposed to ask how many hours per week
+respondents worked at their job,
+but was accidentally programmed to ask for hours per {it:day}.
+However, from the data collected,
+it appeared that many enumerators were still asking for
+hours per week, given that many responses were the maximum allowed {cmd:24}.
+
+{pstd}Fortunately, the error was caught quickly,
+and the corrected question was added to a back check survey
+while the survey was reprogrammed to fix the question text.
+
+
+{hline}
+
+{pstd}{view `""SMCL/Problem sets/Tasks/Other Data Checks - problem set.smcl""':Problem set}{break}
+Return to Module: {view `""SMCL/Tasks/Other Data Checks.smcl""':Other Data Checks}{break}
+
+{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}
