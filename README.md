@@ -1,13 +1,15 @@
 Stata_Training
 ==============
 
-Houses IPA's Stata training courses and code. It contains the 102, 103, and 202 trainings.
+Houses IPA's Stata training courses and code. It contains the 102, 103, 104 and 202 trainings.
 
 102 is the first version on SMCL, previous versions had appeared as a word document.
 
 103 is similar to training given at Kenya 2014, changes to made soon (removing Duplicates module, incorporating material throughout other modules).
 
 202 is a module on Mata presented at the March 2014 Data Day.
+
+The `Session Notes` folder contains notes from New Haven Stata trainings.
 
 User-written programs
 ---------------------
