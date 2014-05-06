@@ -84,7 +84,7 @@ from basic data management to advanced analysis, organized by topic.
 
 {bf: Statalist}
 
-Statalist is an independently operated Stata {browse "http://www.stata.com/statalist/":forum}.
+Statalist is an independently operated Stata {browse "http://www.stata.com/statalist/":forum}. 
 It's hosted at the Harvard School of Public Health and has over 5,100 active users. Thousands of posts
 are found in the forum on a wide variety of Stata related topics. The level of discussion
 on Statalist is typically rather advanced but it can nonetheless be a useful resource. Browsing the Stata FAQ
