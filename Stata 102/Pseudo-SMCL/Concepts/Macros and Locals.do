@@ -65,7 +65,7 @@ you call awesome, Stata will know you actually mean "ipa and jpal".
 {bf:Note} the characters ` and ' are used when calling a local macro (but not
 when declaring it). Without these {bf:single quotes}, Stata will not recognize
 the local as a local and will just treat it as text or as a variable. To see this,
-let's execute the previous command without these single quotes */
+let's execute the previous command without these single quotes: */
 
 display "awesome" 
 
@@ -107,7 +107,7 @@ strings, you need to enclose them in double quotes.
 Macros might not seem so handy right now. After all, why can’t you just type "ipa & jpal"
 instead of bothering with the macro? However, macros are useful in a variety of ways.
 One is dealing with lists of variables, particularly those you need to reuse.
-For example, imagine if you needed to summarize a whole bunch of variables repeatedly
+For example, imagine you needed to summarize a whole bunch of variables repeatedly
 across the file. Instead of typing them over and over again, you can create a macro for
 the entire list of variables, and then input them into various commands.  
 
@@ -121,8 +121,8 @@ Let’s declare "i" as a local for number 1, and then generate a variable called "
 that is equal to 1 throughout by using our local. 
 
 {TRYITCMD}
-local i 1
-display "`i'"
+local i 1{BR}
+display "`i'"{BR}
 generate one = `i'
 {DEF}
 
@@ -159,7 +159,7 @@ display "`a`1''"
 
 /* This result might be initially confusing. In the final line, the local `a`1'' is called. 
 First, the embedded local (`1') is called and it is exanded into "one" as declared previously. 
-Now the local reads simpmle `aone', which has already been declared as "the first one", and thus, 
+Now the local reads simmply `aone', which has already been declared as "the first one", and thus, 
 that text is what is displayed. 
 
 {hline}{marker numerics}
@@ -168,21 +168,55 @@ that text is what is displayed.
 
 {hline}
 
-It is important to note that locals don't have to be only strings, but they can also be numeric. 
+It is important to note that locals don't have to be only strings, they can also be numeric. 
 When you set a local to a number, Stata recognizes it to be a value, not just text. This can be very
-useful when writing code. As an example execute the following commands
+useful when writing code. As an example, execute the following commands:
 
 {TRYITCMD}
-local one 1
+local one 1{BR}
 display 2 + `one'
 {DEF}
 
+We can use any combination of mathematical operators with numeric locals as well: */
 
+local i 8
+display (`i' * 3)/2
 
+/* As you have been playing around with locals, you may have noticed one thing:
+you never got an error stating that it was impossible to create a local or change
+it because it was already defined. When you were learning the {cmd:generate} command,
+these warnings abounded – so what’s going on here?
 
+The question goes back to this: how do you redefine or drop a local?
+Well, it’s extremely easy – you just declare it again! Every time a local is declared,
+it overwrites whatever text was attached to that local previously. So, you can write: */
 
+local i 1
+local i 2
+local i = `i' + 3
 
+/* And you can continue in this vein, and Stata will keep re-defininng `i'. What is the value
+of `i' right now? 
 
+When you learn loops in the next {view `"{LOOPS-}"':module} and get comfortable with them,
+you will soon realize that this makes locals (especially numeric locals) much easier to use with loops. 
+
+As a final note, notice how an equal sign was used above when we last declared `i'. Up until then, we had not used
+any equal signs. The reason is that in this case we are evaluating an expression, not simply copy and pasting
+a value or values into a local. To see what's going on here, compare: */
+
+local num = 1 * 2 + 3
+display "`num'"
+
+*with
+
+local num 1 * 2 + 3
+display "`num'"
+
+/* Why are the results different? In the first instance, the expression {bf: 1 * 2 + 3} is evaluated,
+then is stored within the local {bf: `num'}. In the second instance, without the = operator, Stata doesn't
+evaluate the expression but simply stores the string as-is in the local {bf:`num'}. In {bf:Stata 103} we'll see
+more examples where using the  = operator along with locals can be especially useful.
 
 {FOOT}
 

@@ -17,6 +17,7 @@
 {pstd}{view `""SMCL/Concepts/Macros and Locals.smcl"##introduction"':1. Introduction}{break}
 {view `""SMCL/Concepts/Macros and Locals.smcl"##declaring"':2. Declaring and Calling Macros}{break}
 {view `""SMCL/Concepts/Macros and Locals.smcl"##examples"':3. Using Macros}{break}
+{view `""SMCL/Concepts/Macros and Locals.smcl"##numerics"':4. Using Macros with Numerics}{break}
 
 {hline}{marker introduction}
 
@@ -84,7 +85,7 @@ you call awesome, Stata will know you actually mean "ipa and jpal".
 {pstd}{bf:Note} the characters ` and ' are used when calling a local macro (but not
 when declaring it). Without these {bf:single quotes}, Stata will not recognize
 the local as a local and will just treat it as text or as a variable. To see this,
-let's execute the previous command without these single quotes
+let's execute the previous command without these single quotes:
 
 {pstd}{bf:{stata `"display "awesome""'}}{p_end}
 
@@ -110,7 +111,7 @@ strings, you need to enclose them in double quotes.
 {p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
 {pstd}{c LT}{hline 78}{c RT}{p_end}
 {p2col:{c |} {bf:Locals}}{c |}{p_end}
-{p2col:{c |} }{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
 {p2col:{c |} Remember that a local is a subset of the larger category of macros.}{c |}{p_end}
 {p2col:{c |} There are additional types of macros that can be created, however, for now,}{c |}{p_end}
 {p2col:{c |} just know that the key characteristic of a local macro is that it only}{c |}{p_end}
@@ -127,16 +128,129 @@ strings, you need to enclose them in double quotes.
 
 {hline}
 
-{pstd}Macros might not seem so handy right now. After all, why can’t you just type "ipa & jpal" instead of bothering with the macro? However, macros are useful in a variety of ways. One is dealing with lists of variables, particularly those you need to reuse.{space 2}For example, imagine if you needed to summarize a whole bunch of variables repeatedly across the file. Instead of typing them over and over again, you can create a macro for the entire list of variables, and then input them into the commands.
+{pstd}Macros might not seem so handy right now. After all, why can’t you just type "ipa & jpal"
+instead of bothering with the macro? However, macros are useful in a variety of ways.
+One is dealing with lists of variables, particularly those you need to reuse.
+For example, imagine you needed to summarize a whole bunch of variables repeatedly
+across the file. Instead of typing them over and over again, you can create a macro for
+the entire list of variables, and then input them into various commands.
 
+{pstd}Control variables in regressions is a good exmaple. You can simply declare all
+the controls in a macro and then refer to that in multiple regressions,
+saving you loads of time. There are many other wonderful uses as well that are more advanced.
+You will discover them all in time.
 
+{pstd}For now let’s try to get a hang of the format.
+Let’s declare "i" as a local for number 1, and then generate a variable called "one"
+that is equal to 1 throughout by using our local.
 
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+local i 1{break}
+display "`i'"{break}
+generate one = `i'
+{txt}{sf}{ul off}{...}
 
+{pstd}There are many great things you can do with locals that will allow you to write neat code.
+For example you could nest a local within a local. Execute the following commands, and see
+if you can figure out what's happening:
 
-{pstd}As you may have surmised,
+{pstd}{bf:{stata `"local a a1 a2 a3"'}}{p_end}
 
+{pstd}{bf:{stata `"local b b1 b2 b3"'}}{p_end}
 
+{pstd}{bf:{stata `"local ab `a' `b'"'}}{p_end}
 
+{pstd}Let's now display the contents of the three locals we've just declared:
+
+{pstd}{bf:{stata `"display "`a'""'}}{p_end}
+
+{pstd}{bf:{stata `"display "`b'""'}}{p_end}
+
+{pstd}{bf:{stata `"display "`ab'""'}}{p_end}
+
+{pstd}Does this make sense? The local `ab' was declared as a list comprising the contents of
+local `a' along with the contents of local `b'. Note the first word following the {cmd:local}
+command is the local name and all subsequent terms are the local's contents. Let's look at a
+another example:
+
+{pstd}{bf:{stata `"local aone "the first one""'}}{p_end}
+
+{pstd}{bf:{stata `"local 1 "one""'}}{p_end}
+
+{pstd}{bf:{stata `"display "`aone'""'}}{p_end}
+
+{pstd}{bf:{stata `"display "`a`1''""'}}{p_end}
+
+{pstd}This result might be initially confusing. In the final line, the local `a`1'' is called.
+First, the embedded local (`1') is called and it is exanded into "one" as declared previously.
+Now the local reads simmply `aone', which has already been declared as "the first one", and thus,
+that text is what is displayed.
+
+{hline}{marker numerics}
+
+{pstd}{bf:4. Using Macros with Numerics}
+
+{hline}
+
+{pstd}It is important to note that locals don't have to be only strings, they can also be numeric.
+When you set a local to a number, Stata recognizes it to be a value, not just text. This can be very
+useful when writing code. As an example, execute the following commands:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+local one 1{break}
+display 2 + `one'
+{txt}{sf}{ul off}{...}
+
+{pstd}We can use any combination of mathematical operators with numeric locals as well:
+
+{pstd}{bf:{stata `"local i 8"'}}{p_end}
+{pstd}{bf:{stata `"display (`i' * 3)/2"'}}{p_end}
+
+{pstd}As you have been playing around with locals, you may have noticed one thing:
+you never got an error stating that it was impossible to create a local or change
+it because it was already defined. When you were learning the {cmd:generate} command,
+these warnings abounded – so what’s going on here?
+
+{pstd}The question goes back to this: how do you redefine or drop a local?
+Well, it’s extremely easy – you just declare it again! Every time a local is declared,
+it overwrites whatever text was attached to that local previously. So, you can write:
+
+{pstd}{bf:{stata `"local i 1"'}}{p_end}
+{pstd}{bf:{stata `"local i 2"'}}{p_end}
+{pstd}{bf:{stata `"local i = `i' + 3"'}}{p_end}
+
+{pstd}And you can continue in this vein, and Stata will keep re-defininng `i'. What is the value
+of `i' right now?
+
+{pstd}When you learn loops in the next {view `""SMCL/Concepts/Loops.smcl""':module} and get comfortable with them,
+you will soon realize that this makes locals (especially numeric locals) much easier to use with loops.
+
+{pstd}As a final note, notice how an equal sign was used above when we last declared `i'. Up until then, we had not used
+any equal signs. The reason is that in this case we are evaluating an expression, not simply copy and pasting
+a value or values into a local. To see what's going on here, compare:
+
+{pstd}{bf:{stata `"local num = 1 * 2 + 3"'}}{p_end}
+{pstd}{bf:{stata `"display "`num'""'}}{p_end}
+
+{pstd}with
+
+{pstd}{bf:{stata `"local num 1 * 2 + 3"'}}{p_end}
+{pstd}{bf:{stata `"display "`num'""'}}{p_end}
+
+{pstd}Why are the results different? In the first instance, the expression {bf: 1 * 2 + 3} is evaluated,
+then is stored within the local {bf: `num'}. In the second instance, without the = operator, Stata doesn't
+evaluate the expression but simply stores the string as-is in the local {bf:`num'}. In {bf:Stata 103} we'll see
+more examples where using the{space 2}= operator along with locals can be especially useful.
 
 
 {hline}
