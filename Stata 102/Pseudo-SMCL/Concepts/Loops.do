@@ -126,10 +126,28 @@ foreach var in literateyn own4wheeleryn theftfromcaryn {
 in this case, {bf:var}, when it is being {view `"{MACROS-}##declaring"':called}. 
 
 Also a quick note about style: notice that the code was indented on the line following
-the left brace ({) while the right brace (}) stays aligned with {cmd:foreach}. This formatting
+the opening brace while the closing brace stays aligned with {cmd:foreach}. This formatting
 makes the code more readable; it's easy to tell what's in the loop and what's not. 
 This is an important practice to adopt, especially when using more complex constructions
 such as loops within loops. 
+
+{TECH}
+{COL}For more tips on Stata programming style, see these resources, available on{CEND}
+{COL}Box:{CEND}
+{BLANK}
+{COL}{browse "http://www.stata-journal.com/sjpdf.html?articlenum=pr0018":{it:Suggestions on Stata programming style}}{CEND}
+{BLANK}
+{COL}{browse "http://faculty.chicagobooth.edu/matthew.gentzkow/research/ra_manual_coding.pdf":{it:RA Manual: Notes on Writing Code}}{CEND}
+{BOTTOM}
+
+{hline}{marker examples}
+
+{bf:4. Loop Examples}
+
+{hline}
+
+
+
 
 {FOOT}
 
