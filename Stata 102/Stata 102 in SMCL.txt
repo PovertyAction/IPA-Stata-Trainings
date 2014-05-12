@@ -24,3 +24,12 @@ IMPORTING
 **Verify links to other modules are correct 
 
 Resources: removed 'SSC' as a resource (to leave in Commands section) and added a mention of the Stata manual 
+
+
+102: Just intro to foreach in and loops in general. mention at the end about other loops, add in additional more complex example of forloop!! (from duplicates/types/labels)
+
+***Check links to TYPES module so that it points to appropriate section within it, instead of just whole module
+
+103: tracing, numlist/varlist, globals, while. 
+
+**Modify psets! 
