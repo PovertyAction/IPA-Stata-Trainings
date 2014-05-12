@@ -146,8 +146,57 @@ such as loops within loops.
 
 {hline}
 
+Let's look at a somewhat more complex example of using a loop to help us identify missing values in our
+dataset. Execute the following loop:
 
+{TRYITCMD}
+foreach var in sex age educ {
+	display "Checking `var' for missing values..."
+	list hhid `var' if `var' == .
+}
+{DEF}
 
+Here we loop over the variables {cmd:sex}, {cmd:age}, and {cmd:educ}.
+In this dataset, these variables should never have missing values.
+For each variable, the loop first displays the variable name as part of a message
+({cmd:"Checking `var' for missing values..."}). 
+It then lists all values of {cmd:hhid} for which the variable is missing.
+Knowing these, we can then examine the problematic observations more closely.
+
+The first element in the list is {cmd:"sex"}.
+Thus, the local macro {cmd:`var'} is first set to {cmd:"sex"}.
+The commands in the loop are then executed:
+
+{CMD}
+display "Checking {ul:`var'} for missing values..."{BR}
+list hhid {ul:`var'} if {ul:`var'} == .
+{DEF}
+
+The value of {cmd:`var'} is immediately substituted for {cmd:`var'} in the commands,
+so this is the same as:
+
+{CMD}
+display "Checking {ul:sex} for missing values..."{BR}
+list hhid {ul:sex} if {ul:sex} == .
+{DEF}
+
+After {cmd:list}, all the commands in the for-loop have been executed,
+so {cmd:`var'} is set to the next element in the list: {cmd:"age"} and then finally {cmd:"educ".}
+
+Also note that the contents of a list when using {cmd:foreach...in} do not have to be of 
+any specific variable {view `"{TYPES-}"':type}; they can be letters, variables, strings 
+or numeric, assuming the command you're using works with it. Again returning to the {cmd:display}
+command: */
+
+foreach i in 1 2 3 purple cow "purple cow" {
+	display "`i'"
+}
+
+/* In this module, we have only discussed one particular variation of the {cmd:foreach} command,
+specifically {cmd:foreach...in}. In {bf: Stata 103} we'll discuss using
+{cmd: of varlist} and {cmd: of numlist} along with {cmd:foreach} for added functionality.
+As always, feel free to check out the {cmd:foreach} {help foreach:help file} to learn more
+about the command. 
 
 {FOOT}
 

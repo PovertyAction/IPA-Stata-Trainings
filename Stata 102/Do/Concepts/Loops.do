@@ -25,3 +25,14 @@ foreach var in literateyn own4wheeleryn theftfromcaryn {
 	}
 	if `trace' set trace off
 }
+else if `example' == 3 {
+	if `trace' set trace on
+	noi {
+
+foreach i in 1 2 3 purple cow "purple cow" {
+    display "`i'"
+}
+
+	}
+	if `trace' set trace off
+}

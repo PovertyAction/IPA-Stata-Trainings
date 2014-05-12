@@ -144,10 +144,88 @@ foreach _ in literateyn own4wheeleryn theftfromcaryn {{break}
 in this case, {bf:var}, when it is being {view `""SMCL/Concepts/Macros and Locals.smcl"##declaring"':called}.
 
 {pstd}Also a quick note about style: notice that the code was indented on the line following
-the left brace ({) while the right brace (}) stays aligned with {cmd:foreach}. This formatting
+the opening brace while the closing brace stays aligned with {cmd:foreach}. This formatting
 makes the code more readable; it's easy to tell what's in the loop and what's not.
 This is an important practice to adopt, especially when using more complex constructions
 such as loops within loops.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} For more tips on Stata programming style, see these resources, available on}{c |}{p_end}
+{p2col:{c |} Box:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {browse "http://www.stata-journal.com/sjpdf.html?articlenum=pr0018":{it:Suggestions on Stata programming style}}}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {browse "http://faculty.chicagobooth.edu/matthew.gentzkow/research/ra_manual_coding.pdf":{it:RA Manual: Notes on Writing Code}}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{hline}{marker examples}
+
+{pstd}{bf:4. Loop Examples}
+
+{hline}
+
+{pstd}Let's look at a somewhat more complex example of using a loop to help us identify missing values in our
+dataset. Execute the following loop:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+foreach var in sex age educ {
+{p_end}{pmore}display "Checking `var' for missing values..."{p_end}{pstd}
+{p_end}{pmore}list hhid `var' if `var' == .{p_end}{pstd}
+}
+{txt}{sf}{ul off}{...}
+
+{pstd}Here we loop over the variables {cmd:sex}, {cmd:age}, and {cmd:educ}.
+In this dataset, these variables should never have missing values.
+For each variable, the loop first displays the variable name as part of a message
+({cmd:"Checking `var' for missing values..."}).
+It then lists all values of {cmd:hhid} for which the variable is missing.
+Knowing these, we can then examine the problematic observations more closely.
+
+{pstd}The first element in the list is {cmd:"sex"}.
+Thus, the local macro {cmd:`var'} is first set to {cmd:"sex"}.
+The commands in the loop are then executed:
+
+{pstd}{cmd}{...}
+display "Checking {ul:`var'} for missing values..."{break}
+list hhid {ul:`var'} if {ul:`var'} == .
+{txt}{sf}{ul off}{...}
+
+{pstd}The value of {cmd:`var'} is immediately substituted for {cmd:`var'} in the commands,
+so this is the same as:
+
+{pstd}{cmd}{...}
+display "Checking {ul:sex} for missing values..."{break}
+list hhid {ul:sex} if {ul:sex} == .
+{txt}{sf}{ul off}{...}
+
+{pstd}After {cmd:list}, all the commands in the for-loop have been executed,
+so {cmd:`var'} is set to the next element in the list: {cmd:"age"} and then finally {cmd:"educ".}
+
+{pstd}Also note that the contents of a list when using {cmd:foreach...in} do not have to be of
+any specific variable {view `""SMCL/Concepts/Variable Types.smcl""':type}; they can be letters, variables, strings
+or numeric, assuming the command you're using works with it. Again returning to the {cmd:display}
+command:
+
+{pstd}{cmd}foreach i in 1 2 3 purple cow "purple cow" {{txt}{p_end}
+{pmore}{cmd}display "`i'"{txt}{p_end}
+{pstd}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Concepts/Loops.do" 3"':Click here to execute.}
+
+{pstd}In this module, we have only discussed one particular variation of the {cmd:foreach} command,
+specifically {cmd:foreach...in}. In {bf: Stata 103} we'll discuss using
+{cmd: of varlist} and {cmd: of numlist} along with {cmd:foreach} for added functionality.
+As always, feel free to check out the {cmd:foreach} {help foreach:help file} to learn more
+about the command.
 
 
 {hline}
