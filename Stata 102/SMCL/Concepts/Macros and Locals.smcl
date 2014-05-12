@@ -104,7 +104,16 @@ the command is executed. So far so good. However, what Stata ends up executing i
 {pstd}{bf:{stata `"display ipa and jpal"'}}{p_end}
 
 {pstd}This we know will result in an error, as if you want to use the {helpb display} command to display
-strings, you need to enclose them in double quotes.
+{view `""SMCL/Concepts/Variable Types.smcl""':strings}, you need to enclose them in double quotes. However, there are many instances
+where we might put one or more variables in a local and then declare it, in which case, we don't
+need double quotes. Here we declare a local named "variable" and then call it with the
+{cmd:summarize} command.
+
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"local variable age"'}}{p_end}
+{pstd}{bf:{stata `"summarize `variable'"'}}{p_end}
+
+{pstd}We'll see more examples of using variables in locals in the next module on {view `""SMCL/Concepts/Loops.smcl""':loops}.
 
 {p2colset 5 84 0 0}{...}
 {pstd}{c TLC}{hline 78}{c TRC}{p_end}
@@ -115,9 +124,9 @@ strings, you need to enclose them in double quotes.
 {p2col:{c |} Remember that a local is a subset of the larger category of macros.}{c |}{p_end}
 {p2col:{c |} There are additional types of macros that can be created, however, for now,}{c |}{p_end}
 {p2col:{c |} just know that the key characteristic of a local macro is that it only}{c |}{p_end}
-{p2col:{c |} exists within the do-file that it was created. }{c |}{p_end}
-{p2col:{c |} If you attempt to call `awesome' from another do-file, you'll find that}{c |}{p_end}
-{p2col:{c |} it doesn't exist. We'll learn about different types of macros, namely}{c |}{p_end}
+{p2col:{c |} exists within the do-file that it was created. If you attempt to call}{c |}{p_end}
+{p2col:{c |} `awesome' or `variable' from another do-file, you'll find that it}{c |}{p_end}
+{p2col:{c |} doesn't exist. We'll learn about different types of macros, namely}{c |}{p_end}
 {p2col:{c |} globals, in {bf:Stata 103}.}{c |}{p_end}
 {pstd}{c BLC}{hline 78}{c BRC}{p_end}
 {p2colreset}{...}

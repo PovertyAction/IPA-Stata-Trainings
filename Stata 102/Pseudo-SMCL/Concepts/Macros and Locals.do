@@ -84,7 +84,16 @@ the command is executed. So far so good. However, what Stata ends up executing i
 display ipa and jpal 
 
 /* This we know will result in an error, as if you want to use the {helpb display} command to display
-strings, you need to enclose them in double quotes. 
+{view `"{TYPES-}"':strings}, you need to enclose them in double quotes. However, there are many instances
+where we might put one or more variables in a local and then call it, in which case, we don't
+use double quotes. Here we declare a local named "variable" and then call it with the
+{cmd:summarize} command. */ 
+
+{USE}
+local variable age
+summarize `variable'
+
+/* We'll see more examples of using variables in locals in the next module on {view `"{LOOPS-}"':loops}.
 
 {TECH}
 {COL}{bf:Locals}{CEND}
@@ -92,9 +101,9 @@ strings, you need to enclose them in double quotes.
 {COL}Remember that a local is a subset of the larger category of macros.{CEND}
 {COL}There are additional types of macros that can be created, however, for now,{CEND}
 {COL}just know that the key characteristic of a local macro is that it only{CEND}
-{COL}exists within the do-file that it was created. {CEND}
-{COL}If you attempt to call `awesome' from another do-file, you'll find that{CEND}
-{COL}it doesn't exist. We'll learn about different types of macros, namely{CEND}
+{COL}exists within the do-file that it was created. If you attempt to call{CEND}
+{COL}`awesome' or `variable' from another do-file, you'll find that it{CEND}
+{COL}doesn't exist. We'll learn about different types of macros, namely{CEND}
 {COL}globals, in {bf:Stata 103}.{CEND}
 {BOTTOM}
 
