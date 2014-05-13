@@ -387,7 +387,6 @@ loc codeslinks
 	{START}			0	0	1	"Kenya 2014 - Stata 104.smcl"						"Stata 104 Start"
 	{ALTTOC}		0	1	1	"SMCL/Introduction/Alternative Table of Contents.smcl"	""
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"			""
-	{DUMMIES}		0	0	1	"SMCL/Concepts/Logical Expressions and Dummy Variables.smcl"	""
 	{SUBSCRIPTING}	1	0	1	"SMCL/Concepts/Explicit Subscripting.smcl"				""
 	{SUBSCRIPTING_ANSWERS}
 					0	0	1	"SMCL/Problem sets/Concepts answers/Explicit Subscripting - answers.smcl"

@@ -19,12 +19,11 @@ for valuable contributions to the course.
 
 {pstd}This is an advanced, applied Stata training. It builds off of the concepts presented
 in {bf:Stata 103} and covers data management, cleaning, and checking.
-There are 7 modules in total, most of which contain a number of problem set questions.
+There are 6 modules in total, most of which contain a number of problem set questions.
 If you have any questions about this training or have suggestions for improvements, email
 IPA Research Support at researchsupport@poverty-action.org
 
 {pstd}{view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}
-{view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':Logical Expressions and Dummy Variables}{break}
 {view `""SMCL/Concepts/Saved Results.smcl""':Saved Results}{break}
 {p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl""':Problem set}{break}{p_end}{pstd}
 {p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Concepts answers/Saved Results - answers.smcl""':Answers}{break}{p_end}{pstd}

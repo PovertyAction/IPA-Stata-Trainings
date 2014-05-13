@@ -204,7 +204,7 @@ to find the correct function.
 
 {pstd}{bf:{stata `"generate multiword = strpos(newcaste, " ") != 0 if !missing(newcaste)"'}}{p_end}
 
-{pstd}Both approaches use {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':logical expressions}.
+{pstd}Both approaches use {view `"{DUMMIES-}"':logical expressions}.
 
 {pstd}{it}{...} {bf:(b)}
 

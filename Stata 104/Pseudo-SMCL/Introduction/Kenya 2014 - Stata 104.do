@@ -9,12 +9,11 @@ for valuable contributions to the course.
 
 This is an advanced, applied Stata training. It builds off of the concepts presented
 in {bf:Stata 103} and covers data management, cleaning, and checking.
-There are 7 modules in total, most of which contain a number of problem set questions.
+There are 6 modules in total, most of which contain a number of problem set questions.
 If you have any questions about this training or have suggestions for improvements, email
 IPA Research Support at researchsupport@poverty-action.org
 
 {INTRO}
-{DUMMIES}
 {RESULTS}
   o {RESULTS_PS2}
   o {RESULTS_ANS2}

@@ -203,8 +203,7 @@ replace newcaste = "SUDAT" if inlist(newcaste, "SUDHAR", "SUHALAKA", "SUMEJA", "
 
 /* {cmd:inlist(}{it:z}{cmd:,} {it:a}{cmd:,} {it:b}{cmd:,} {it:...}{cmd:) == 1} if {it:z} {cmd:==} {it:a} {cmd:|} {it:z} {cmd:==} {it:b} {cmd:|}
 {it:...}, and {cmd:0} otherwise.
-As you can see, {cmd:inlist()} results in much less code than multiple
-{view `"{DUMMIES-}"':logical expressions}. */
+As you can see, {cmd:inlist()} results in much less code than multiple logical expressions. */
 
 {STRINGS_Q3}
 

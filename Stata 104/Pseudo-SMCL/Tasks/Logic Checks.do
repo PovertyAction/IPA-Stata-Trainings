@@ -64,7 +64,7 @@ assert own4wheelernum != . if own4wheeleryn == 1{BR}
 assert own4wheelernum == . if own4wheeleryn == 2
 {DEF}
 
-{helpb assert} evaluates a {view `"{DUMMIES-}"':logical expression}.
+{helpb assert} evaluates a logical expression.
 If the logical expression is true for all observations, nothing happens.
 Otherwise, {cmd:assert} results in an error.
 {cmd:assert} is similar to {cmd:isid} in this way:
@@ -89,7 +89,7 @@ or your assumption was false and your do-file stopped with an error.
 {BLANK}
 {COL}{bf:{stata assert (own4wheeleryn == 1) + (own4wheelernum != .) != 1}}{CEND}
 {BLANK}
-{COL}{view `"{DUMMIES-}"':Logical expressions evaluate to either {bf:1} or {bf:0}.} Each logical expression in{CEND}
+{COL}Logical expressions evaluate to either {bf:1} or {bf:0}.} Each logical expression in{CEND}
 {COL}the command evaluates to {cmd:1} or {cmd:0}, then those results are summed. So{CEND}
 {COL}{cmd:(own4wheeleryn == 1) + (own4wheelernum != .)} can take on three values: {cmd:0}, if{CEND}
 {COL}both expressions are false; {cmd:1}, if one expression is true and the other is{CEND}

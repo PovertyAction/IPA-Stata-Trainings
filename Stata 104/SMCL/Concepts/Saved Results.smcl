@@ -496,5 +496,4 @@ If the output is overwhelming, try adding {cmd:quietly} before select commands.
 {pstd}Problem Set: {view `""SMCL/Problem sets/Concepts/Saved Results - problem set.smcl""':Saved Results}{break}
 
 {pstd}Next: {view `""SMCL/Tasks/Recoding.smcl""':Recoding}{break}
-Previous: {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':Logical Expressions and Dummy Variables}{break}
 {view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}

@@ -65,7 +65,7 @@ foreach var of varlist sex scrutinizedyn educ {
 in any observation, and {cmd:0} otherwise.
 
 Notice how I only wrote {cmd:if missing(`var')}, not {cmd:if missing(`var') == 1}.
-If a {view `"{DUMMIES-}"':logical expression} has no logical operator, {cmd:!= 0} is assumed.
+If a logical expression has no logical operator, {cmd:!= 0} is assumed.
 So {cmd:if missing(`var')} is the same as {cmd:if missing(`var') != 0}, and since
 {cmd:missing(`var')} is either {cmd:0} or {cmd:1},
 this is the same as {cmd:if missing(`var') == 1}.

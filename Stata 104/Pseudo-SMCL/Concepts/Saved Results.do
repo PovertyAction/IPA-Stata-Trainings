@@ -390,5 +390,4 @@ noisily display "Hello world!"
 {GOTOPS}{RESULTS_PS}
 
 {NEXT}{RECODING}
-{PREV}{DUMMIES}
 {START} */

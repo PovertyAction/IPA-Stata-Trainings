@@ -291,8 +291,7 @@ replacements. For example, suppose these are all the same caste:
 
 {pstd}{cmd:inlist(}{it:z}{cmd:,} {it:a}{cmd:,} {it:b}{cmd:,} {it:...}{cmd:) == 1} if {it:z} {cmd:==} {it:a} {cmd:|} {it:z} {cmd:==} {it:b} {cmd:|}
 {it:...}, and {cmd:0} otherwise.
-As you can see, {cmd:inlist()} results in much less code than multiple
-{view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':logical expressions}.
+As you can see, {cmd:inlist()} results in much less code than multiple logical expressions.
 
 {hline}{marker q3}
 
