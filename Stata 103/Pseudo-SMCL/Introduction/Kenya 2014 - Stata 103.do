@@ -16,6 +16,7 @@ and cleaning tasks that are introduced in {bf:Stata 104}.
 {PROPERTIES}
   o {PROPERTIES_PS2}
   o {PROPERTIES_ANS2}
+{DUMMIES}
 {DUPLICATES}
   o {DUPLICATES_PS2}
   o {DUPLICATES_ANS2}
