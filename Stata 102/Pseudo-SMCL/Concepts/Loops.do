@@ -200,6 +200,8 @@ about the command.
 
 {FOOT}
 
+{GOTOPS}{LOOPS_PS}
+
 {NEXT}{IMPORTING}
 {PREV}{MACROS}
 {START} */
