@@ -230,6 +230,8 @@ about the command.
 
 {hline}
 
+{pstd}Problem Set: {view `""SMCL/Problem sets/Concepts/Loops - problem set.smcl""':Loops}{break}
+
 {pstd}Next: {view `""SMCL/Tasks/Importing.smcl""':Importing}{break}
 Previous: {view `""SMCL/Concepts/Macros and Locals.smcl""':Macros and Locals}{break}
 {view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}
