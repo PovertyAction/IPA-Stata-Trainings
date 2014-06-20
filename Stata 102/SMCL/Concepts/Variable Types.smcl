@@ -14,10 +14,18 @@
 
 {pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
+{pstd}{view `""SMCL/Concepts/Variable Types.smcl"##strings"':1. Strings and Numerics}{break}
+{view `""SMCL/Concepts/Variable Types.smcl"##destring"':2. Destring and Tostring}{break}
+{view `""SMCL/Concepts/Variable Types.smcl"##encode"':3. Encode and Decode}{break}
 
+{hline}{marker strings}
 
+{pstd}{bf:1. Strings and Numerics}
 
-{pstd}Variable Types
+{hline}
+
+{pstd}There are two types of variables within Stata: {bf:string} and {bf:numeric}.
+
 
 
 
