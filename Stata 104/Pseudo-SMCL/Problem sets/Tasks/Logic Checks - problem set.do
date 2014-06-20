@@ -56,7 +56,7 @@ are logically consistent with each other.
 
 Skip patterns are an example of a logical relationship,
 and you check logical consistency in the same way as skip patterns.
-With that mind, complete the following logic check using {cmd:assert}:
+With that in mind, complete the following logic check using {cmd:assert}:
 
 Victim 1 of a two-wheeler theft ({cmd:own2wheelertheftvictim_1}) is
 different from victim 2 ({cmd:own2wheelertheftvictim_2}). */
