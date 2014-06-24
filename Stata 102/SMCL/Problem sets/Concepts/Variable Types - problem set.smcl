@@ -1,0 +1,35 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
+{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Variable Types}{break}
+{it:Problem set}{break}
+
+{pstd}{view `""SMCL/Problem sets/Concepts/Variable Types - problem set.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Problem sets/Concepts/Variable Types - problem set.smcl"##q2"':Question 2}{break}
+{view `""SMCL/Problem sets/Concepts/Variable Types - problem set.smcl"##q3"':Question 3}{break}
+
+{pstd}{cmd}{PSQ1:TYPES_Q1}{txt}{p_end}
+
+{pstd}{p_end}
+
+{pstd}{cmd}{PSQ1:TYPES_Q2}{txt}{p_end}
+
+{pstd}{p_end}
+{pstd}{p_end}
+
+
+{pstd}{p_end}
+
+{pstd}{p_end}
+{pstd}{p_end}
+
+{pstd}{p_end}
