@@ -3,11 +3,11 @@ Stata_Training
 
 Houses IPA's Stata training courses and code. It contains the 102, 103, 104 and 202 trainings.
 
-102 is the first version on SMCL, previous versions had appeared as a word document.
+102 is the first version on SMCL, previous versions had appeared as a word document - will incorporate material from 103.
 
-103 is similar to training given at Kenya 2014, changes to made soon (removing Duplicates module, incorporating material throughout other modules).
+103 is similar to the training given at Kenya 2014, changes to made soon (removing Duplicates and Variable Properties modules, changing Loops module).
 
-104 is the version prepared for Kenya 2014, small revisions to be made soon (e.g. removal of Logical Expressions module)
+104 is the version prepared for Kenya 2014, main change since was to remove Logical Expressions module. 
 
 202 is a module on Mata presented at the March 2014 Data Day.
 
