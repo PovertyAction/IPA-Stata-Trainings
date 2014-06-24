@@ -42,7 +42,7 @@ We will start with cleaning the ID.
 More specifically, we will make sure that the ID is unique.
 If it isn't, we will find out how many and which IDs are duplicates and resolve them.
 
-Why is our first data cleaning task after {view `"{PROPERTIES-}"':variable properties}
+Why is our first data cleaning task after {view `"{NAMING-}"':variable naming and labeling}
 to clean the ID? A unique ID is important for all sorts of reasons: */
 
 {DUPLICATES_Q1}
@@ -129,6 +129,6 @@ browse if hhid == "1802011" | hhid == "1813023"
 
 {GOTOPS}{DUPLICATES_PS}
 
-{NEXT}{TYPES}
-{PREV}{COMMANDS}
+{NEXT}{MACROS}
+{PREV}{TYPES}
 {START} */
