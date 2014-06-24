@@ -23,9 +23,9 @@ introduced in {bf:Stata 103}.
 {pstd}{view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}
 {view `""SMCL/Concepts/Resources.smcl""':Resources}{break}
 {view `""SMCL/Concepts/Commands.smcl""':Commands}{break}
-{view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
-{view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
 {view `""SMCL/Tasks/Naming and Labeling Variables.smcl""':Naming and Labeling Variables}{break}
+{view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
+{view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
 {view `""SMCL/Concepts/Macros and Locals.smcl""':Macros and Locals}{break}
 {view `""SMCL/Concepts/Loops.smcl""':Loops}{break}
 {view `""SMCL/Tasks/Importing.smcl""':Importing}{break}
