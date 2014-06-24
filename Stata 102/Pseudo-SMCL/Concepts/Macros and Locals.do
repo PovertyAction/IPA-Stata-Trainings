@@ -230,5 +230,5 @@ more examples where using the  = operator along with locals can be especially us
 {FOOT}
 
 {NEXT}{LOOPS}
-{PREV}{NAMING}
+{PREV}{DUPLICATES}
 {START} */

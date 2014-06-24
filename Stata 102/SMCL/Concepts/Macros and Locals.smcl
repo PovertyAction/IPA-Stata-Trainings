@@ -265,5 +265,5 @@ more examples where using the{space 2}= operator along with locals can be especi
 {hline}
 
 {pstd}Next: {view `""SMCL/Concepts/Loops.smcl""':Loops}{break}
-Previous: {view `""SMCL/Tasks/Naming and Labeling Variables.smcl""':Naming and Labeling Variables}{break}
+Previous: {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
 {view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}
