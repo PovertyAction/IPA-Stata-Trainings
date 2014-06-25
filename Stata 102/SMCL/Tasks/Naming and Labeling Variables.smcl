@@ -14,15 +14,396 @@
 
 {pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
 
+{pstd}Variables are the stuff of Stata.
+After all, a Stata dataset is just a collection of variables.
+Whether you're manipulating the data,
+calculating summary statistics,
+or running a regression,
+you're working with variables.
 
+{pstd}To some extent, variables are just a set of values.
+However, they're also characterized by a series of properties:
+a {help varname:name},
+{help label:variable and value labels},
+a {help data_types:variable type} (numeric or string),
+and a {help format:display format}.
+These properties are essential information about a variable,
+and you usually want to get them right before moving on
+to more advanced data work.
+For example, it doesn't make sense to use a variable throughout a do-file
+only to rename it at the end.
+Thus, attending to variable properties is typically the first task in the data cleaning process.
 
+{pstd}This module will go over naming and labeling, as well as a note about delimiters. In the next
+{view `""SMCL/Concepts/Variable Types.smcl""':module}, we'll discuss variable types and ways to work with different variables.
 
-{pstd}Naming and Labeling Variables
+{pstd}{view `""SMCL/Tasks/Naming and Labeling Variables.smcl"##names"':1. Variable Names}{break}
+{view `""SMCL/Tasks/Naming and Labeling Variables.smcl"##varlabels"':2. Variable Labels}{break}
+{view `""SMCL/Tasks/Naming and Labeling Variables.smcl"##vallabels"':3. Value Labels}{break}
+{view `""SMCL/Tasks/Naming and Labeling Variables.smcl"##delimit"':4. Delimiters}{break}
 
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} {bf:Display formats}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} In addition to its name, labels, and storage type, a variable is}{c |}{p_end}
+{p2col:{c |} characterized by a {help format:display format} that determines how it is displayed in the}{c |}{p_end}
+{p2col:{c |} absence of a value label. This module doesn't cover formats in depth, but}{c |}{p_end}
+{p2col:{c |} below is a short example. The following code first formats variable}{c |}{p_end}
+{p2col:{c |} {cmd:gear_ratio} in the auto dataset so that it is displayed with exactly one}{c |}{p_end}
+{p2col:{c |} digit after the decimal, then with exactly three:}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} {bf:{stata sysuse auto, clear}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata format gear_ratio %9.1f}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata list gear_ratio}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata format gear_ratio %9.3f}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata list gear_ratio}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata use "Raw/Post Kenya 2014 - Stata 102", clear}}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{hline}{marker names}
+
+{pstd}{bf:1. Variable Names}
+
+{hline}
+
+{pstd}Renaming variables is a common task when doing data cleaning
+and analysis. An old name might have been clunky, or you might
+be looking to combine different datasets and want variable
+names to be consistent. Mastering the {cmd:rename} command
+is essential for this task.
+
+{pstd}The syntax for the basic {helpb rename:rename} command
+is simple. Say we want to change the name
+of the variable {bf:sex} to be {bf:gender}. We simply execute:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+rename sex gender
+{txt}{sf}{ul off}{...}
+
+{pstd}However, what if you want to rename multiple variables, or
+don't want to change a complete variable's name to another, but instead,
+add a prefix to a group of variables. Luckily, {cmd:rename} offers much additional
+functionality. We'll cover a few of the most commonly used methods of {cmd:rename}
+here, but it is highly suggested to browse through the entire {helpb rename group:help file}.
+
+{pstd}First, we can rename sets of variables at once, say:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+rename (educ addressdur areadur) (education addressduration areaduration)
+{txt}{sf}{ul off}{...}
+
+{pstd}Changing the case of variables is another useful potential task:
+
+{pstd}{bf:{stata `"rename surveyid, upper"'}}{p_end}
+{pstd}{bf:{stata `"rename SURVEYID, lower"'}}{p_end}
+
+{pstd}One of the most common renaming tasks is to attach some sort of prefix or suffix
+to many variables at once. For instance, you may want to assign all baseline variables with
+the prefix {cmd:bl_} so that when you merge with data from the endline, it is easy
+to determine from which round each variable came from. Doing so is straightforward
+with {cmd:rename}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+rename * bl_*
+{txt}{sf}{ul off}{...}
+
+{pstd}Here, the symbol * means "zero or more characters." Thus, the command looks
+for all variables with zero or more characters (i.e. all of them) and attaches the prefix
+{cmd:bl_} to them (see the {helpb rename group:help file} for more on this
+and other "wildcard" symbols. Let's now change this prefix to {cmd:base_} instead, and then remove
+the prefix from the unique ID, {bf:hhid}:
+
+{pstd}{bf:{stata `"rename bl_* base_*"'}}{p_end}
+{pstd}{bf:{stata `"rename base_hhid hhid"'}}{p_end}
+
+{pstd}{bf:Note:} The {cmd:rename} command as described above was introduced only in Stata 12.
+If you have an earlier version of Stata, commands such as {cmd:renpfix} and the
+{view `""SMCL/Concepts/Commands.smcl""':user-written} {cmd:renvars} provided much of the same functionality.
+
+{hline}{marker varlabels}
+
+{pstd}{bf:2. Variable Labels}
+
+{hline}
+
+{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+
+{pstd}We will now review {helpb label:labelling}.
+There are two main types of labels: variable labels and value labels.
+
+{pstd}Variable labels are descriptions of variables,
+and are usually made more informative than variable names. They are displayed each time
+Stata calls a variable, e.g. when summarizing or tabulating. Good variable labelling
+is critical to ensuring that variables are understandable to others.
+
+{pstd}Variable {cmd:areadur_unit} ("area duration unit") is the time unit (day/week/etc.)
+for variable {cmd:areadur}.
+However, while it's clear from its variable label what {cmd:areadur} represents,
+{cmd:areadur_unit} is missing a variable label:
+
+{pstd}{bf:{stata `"describe areadur areadur_unit"'}}{p_end}
+
+{pstd}The following command adds a variable label to {cmd:areadur_unit}:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+label variable areadur_unit "How long has your household been living in this area? (unit)"
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:{stata `"describe areadur areadur_unit"'}}{p_end}
+
+{pstd}This added descriptive text to {cmd:areadur_unit}.
+A common choice for the variable label is the question text.
+However, variable labels are limited to 80 characters,
+so some questions may not fit.
+In this dataset, the variable label of {cmd:own4wheeleryn} has been truncated:
+
+{pstd}{bf:{stata `"describe own4wheeleryn"'}}{p_end}
+
+{pstd}An alternative is to add question text in {helpb notes},
+leaving the variable label free for a shorter description.
+Here's how we might do this for {cmd:own4wheeleryn}:
+
+{pstd}{bf:{stata `"notes own4wheeleryn: Over the past 12 months, has anyone in your household had for private use any car, van, tractor, bus, 3 wheeler, or truck?"'}}{p_end}
+{pstd}{bf:{stata `"label variable own4wheeleryn "Household member had 4-wheeled vehicle for private use in last 12 months""'}}{p_end}
+{pstd}{bf:{stata `"describe own4wheeleryn"'}}{p_end}
+{pstd}{bf:{stata `"notes own4wheeleryn"'}}{p_end}
+
+{hline}{marker vallabels}
+
+{pstd}{bf:3. Value Labels}
+
+{hline}
+
+{pstd}While variable labels describe variables as a whole,
+value labels describe particular values.
+A value label is a list of associations of integers and descriptive text.
+After a value label is attached to a variable,
+the values of the variable are shown as their associated text, not as numbers,
+for example, when you {cmd:browse}.
+
+{pstd}Currently, the values of {cmd:areadur_unit} are not labeled:
+
+{pstd}{bf:{stata `"tabulate areadur_unit"'}}{p_end}
+
+{pstd}This is a problem, because even if {cmd:areadur} equals {cmd:1},
+{cmd:1} week is very different from {cmd:1} year.
+First we need to define the value label,
+declaring the integer to text correspondences:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+label define timeunit 1 days 2 weeks 3 months 4 years
+{txt}{sf}{ul off}{...}
+
+{pstd}Then we attach the value label to the variable:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+label values areadur_unit timeunit
+{txt}{sf}{ul off}{...}
+
+{pstd}Let's see if it worked:
+
+{pstd}{bf:{stata `"tabulate areadur_unit"'}}{p_end}
+
+{pstd}Much better.
+
+{pstd}Now, while the values of {cmd:areadur_unit} are {it:displayed} differently
+in commands like {cmd:tabulate},
+the actual values of the variable are unchanged,
+and the variable has not been converted to a string variable.
+For example, the results of {cmd:summarize} are the same
+as before {cmd:areadur_unit} was value labeled:
+
+{pstd}{bf:{stata `"summarize areadur_unit"'}}{p_end}
+
+{pstd}Value labels are just for display,
+and they make working with numeric variables easier.
+A value labeled numeric variable is typically easier to work with
+than a string variable with values equal to the value label text.
+For example, it's easier to create dummy variables from numeric variables than string variables.
+In the following module on {view `""SMCL/Concepts/Variable Types.smcl""':variable types}, we'll discuss different methods
+of converting from string to numeric variables and vice versa.
+
+{pstd}We used {cmd:timeunit} for the name of the value label that we attached to {cmd:areadur_unit}.
+The name of the value label was different from the variable name,
+but Stata also would have allowed it to be the same.
+
+{pstd}You can modify value labels:
+
+{pstd}{bf:{stata `"label define timeunit 3 "lunar cycles", modify"'}}{p_end}
+{pstd}{bf:{stata `"label define timeunit 5 decades, add"'}}{p_end}
+{pstd}{bf:{stata `"label list timeunit"'}}{p_end}
+
+{pstd}Further, the same value label can be attached to multiple variables.
+The following command attaches the value label {cmd:timeunit}
+to the variable {cmd:addressdur_unit};
+{cmd:timeunit} is already attached to {cmd:areadur_unit}.
+
+{pstd}{bf:{stata `"label values addressdur_unit timeunit"'}}{p_end}
+
+{pstd}{bf:{stata `"browse addressdur_unit areadur_unit"'}}{p_end}
+
+{pstd}It's also possible to remove value labels:
+
+{pstd}{bf:{stata `"label values areadur_unit"'}}{p_end}
+{pstd}{bf:{stata `"label values addressdur_unit"'}}{p_end}
+
+{pstd}{bf:{stata `"browse areadur_unit addressdur_unit"'}}{p_end}
+
+{pstd}You can attach value labels to multiple variables at the same time:
+
+{pstd}{bf:{stata `"label values areadur_unit addressdur_unit timeunit"'}}{p_end}
+
+{pstd}{bf:{stata `"browse areadur_unit addressdur_unit"'}}{p_end}
+
+{pstd}Or list all value labels:
+
+{pstd}{bf:{stata `"label dir"'}}{p_end}
+
+{pstd}{bf:{stata `"label list"'}}{p_end}
+
+{hline}{marker delimit}
+
+{pstd}{bf:4. Delimiters}
+
+{hline}
+
+{pstd}The {helpb #delimit} command sets the character that indicates the end of a command.
+By default, it's a carriage return, the character that the enter key makes.
+This means that in a do-file, once you press enter and continue to the next line,
+the previous command is registered as complete;
+the command does not extend to the next line.
+
+{pstd}Alternatively, you can make the delimiter a semicolon.
+This means that Stata considers a command to be complete only once it sees a semicolon,
+even if new lines have been started.
+The following sets the delimiter to a semicolon.
+Try it yourself by typing it out in a new do-file, then running it.
+You can change the delimiter only within do-files, not interactively in the Command window.
+
+{marker delimit}{...}
+{pstd}{cmd:#delimit ;} is very useful for long value labels.
+Compare:
+
+{pstd}{bf:{stata `"label define timeunit2 1 milliseconds 2 seconds 3 minutes 4 hours 5 days 6 weeks 7 months 8 quarters 9 trimesters 10 semesters 11 years 12 decades"'}}{p_end}
+
+{pstd}to:
+
+{pstd}{bf:{stata `"label drop timeunit2"'}}{p_end}
+
+{pstd}{cmd}#delimit ;{txt}{p_end}
+{pstd}{cmd}label define timeunit2{txt}{p_end}
+{pmore}{cmd}1 milliseconds{txt}{p_end}
+{pmore}{cmd}2 seconds{txt}{p_end}
+{pmore}{cmd}3 minutes{txt}{p_end}
+{pmore}{cmd}4 hours{txt}{p_end}
+{pmore}{cmd}5 days{txt}{p_end}
+{pmore}{cmd}6 weeks{txt}{p_end}
+{pmore}{cmd}7 months{txt}{p_end}
+{pmore}{cmd}8 quarters{txt}{p_end}
+{pmore}{cmd}9 trimesters{txt}{p_end}
+{pmore}{cmd}10 semesters{txt}{p_end}
+{pmore}{cmd}11 years{txt}{p_end}
+{pmore}{cmd}12 decades{txt}{p_end}
+{pstd}{cmd};{txt}{p_end}
+{pstd}{cmd}#delimit cr{txt}{p_end}
+
+{pstd}{stata `"run "Do/Tasks/Naming and Labeling Variables.do" 1"':Click here to execute.}
+
+{pstd}The second definition is much more readable.
+In a do-file, you might have to scroll across to see all of the first definition.
+Note that {cmd:#delimit ;} sets the delimiter to the semicolon, while {cmd:#delimit cr}
+sets it back to the {ul:c}arriage {ul:r}eturn.
+
+{pstd}A middle path is to use the {cmd:///} {help comments:line-join indicator} with {cmd:#delimit cr}.
+{cmd:///} indicates that the command runs onto the next line:
+
+{pstd}{bf:{stata `"label drop timeunit2"'}}{p_end}
+
+{pstd}{cmd}label define timeunit2 ///{txt}{p_end}
+{pmore}{cmd}1 milliseconds ///{txt}{p_end}
+{pmore}{cmd}2 seconds ///{txt}{p_end}
+{pmore}{cmd}3 minutes ///{txt}{p_end}
+{pmore}{cmd}4 hours ///{txt}{p_end}
+{pmore}{cmd}5 days ///{txt}{p_end}
+{pmore}{cmd}6 weeks ///{txt}{p_end}
+{pmore}{cmd}7 months ///{txt}{p_end}
+{pmore}{cmd}8 quarters ///{txt}{p_end}
+{pmore}{cmd}9 trimesters ///{txt}{p_end}
+{pmore}{cmd}10 semesters ///{txt}{p_end}
+{pmore}{cmd}11 years ///{txt}{p_end}
+{pmore}{cmd}12 decades{txt}{p_end}
+
+{pstd}{stata `"run "Do/Tasks/Naming and Labeling Variables.do" 2"':Click here to execute.}
+
+{pstd}Like {cmd:#delimit}, the line-join indicator works only within do-files.
+Try the following example by typing it out in a new do-file, then running it.
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+tabulate castecode ///{break}
+{p_end}{pmore}if sex == 1 & age <= 35, ///{break}{p_end}{pstd}
+{p_end}{pmore}missing nolabel{p_end}{pstd}
+{txt}{sf}{ul off}{...}
+
+{pstd}Here, the line-join indicator allowed the command to span three lines.
+The first line contained the main piece of the command,
+{cmd:tabulate castecode}.
+The second line then held the {cmd:if} qualifier,
+and the third line listed the command's options, {cmd:missing nolabel}.
+This command is short enough that it probably could have been put on a single line,
+but for longer commands,
+it's often most readable to use the line-join indicator in this way
+to divide the command at particular points of its syntax.
+
+{pstd}The {help SSC} packages {cmd:labutil} (which includes the useful {cmd:labmask})
+and {cmd:labutil2} (which includes {cmd:labrecode})
+offer a number of user-written programs
+for working with variable and value labels:
+
+{pstd}{bf:{stata `"ssc install labutil"'}}{p_end}
+{pstd}{bf:{stata `"ssc install labutil2"'}}{p_end}
 
 
 {hline}
 
-{pstd}Next: {view `""SMCL/Concepts/Macros and Locals.smcl""':Macros and Locals}{break}
-Previous: {view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
+{pstd}Next: {view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
+Previous: {view `""SMCL/Concepts/Commands.smcl""':Commands}{break}
 {view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}
