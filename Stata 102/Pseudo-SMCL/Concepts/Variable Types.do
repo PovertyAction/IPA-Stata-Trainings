@@ -87,7 +87,7 @@ a string, which would subsequently impede any numerical analysis of the variable
 try executing the {cmd:summarize} command on a string variable. However, imagine in
 the cleaning process you catch this mistake and fix it, and now want to make the variable numeric to work with it. 
 
-This is where {cmd:destring} comes in. The {helpb destring:syntax} is pretty straightforward, but note that the option
+This is where {helpb destring:destring} comes in. The syntax is pretty straightforward, but note that the option
 {bf:generate} (to generate a new variable name) or {bf:replace} (to replace the existing variable with the new one) must
 be specified. When you first start off using these commands, it's recommended to use the {bf:generate}
 option, so you can keep both variables and compare them to ensure the command worked as intended.  
@@ -113,7 +113,7 @@ summarize hhid
 
 drop hhid_num
 
-/* Notice the differences in color when you {cmd:browse} and output between both {cmd:summarize} commands. 
+/* Notice the differences in color when you {cmd:browse} and the differing output between both {cmd:summarize} commands. 
 
 Let's now use {cmd:tostring} to convert a numeric to a string variable: 
 
@@ -129,9 +129,30 @@ tabulate literateyn_str
 
 drop literateyn_str
 
-/* What's going on here? Unlike {cmd:summarize}, the {cmd:tabulate} command works perfectly well for both string and numeric variables.
-However, when we created the string variable, the {view `"{NAMING-}##vallabels"':value labels} were dropped, so tabulate just displays the
-underlying values. In addition, notice how the number of observations between the two is different. Why did this occur?
+/* What's going on here? Unlike {cmd:summarize}, the {cmd:tabulate} command works perfectly well
+for both string and numeric variables. However, when we created the string variable, the
+{view `"{NAMING-}##vallabels"':value labels} were dropped, so tabulate just displays the
+underlying values. In addition, notice how the number of observations between the two variables is different.
+Why did this occur?
+
+{...}
+{TECH}
+{COL}Sometimes {cmd:tostring} will fail to convert a variable to string, delivering the{CEND}
+{COL}warning "cannot be converted reversibly." For example:{CEND}
+{BLANK}
+{COL}{bf:{stata sysuse auto, clear}}{CEND}
+{COL}{bf:{stata tostring gear_ratio, replace}}{CEND}
+{BLANK}
+{COL}The solution to this is not option {cmd:force}, which results in loss of{CEND}
+{COL}information. Instead, use option {cmd:format(%24.0g)}:{CEND}
+{BLANK}
+{COL}{bf:{stata tostring gear_ratio, replace format(%24.0g)}}{CEND}
+{BLANK}
+{COL}Option {cmd:format(%24.0g)} works not just in this case to resolve the issue, but{CEND}
+{COL}in all cases.{CEND}
+{BLANK}
+{COL}{bf:{stata {USE}}}{CEND}
+{BOTTOM}
 
 {hline}{marker encode}
 
@@ -139,11 +160,62 @@ underlying values. In addition, notice how the number of observations between th
 
 {hline}
 
-As we have seen, {cmd:destring} and {cmd:tostring} offer a relatively simple way of converting from a string variable to a numeric
-one and vice versa. There are 
+As we have seen, {cmd:destring} and {cmd:tostring} offer a relatively simple way of converting
+from a string variable to a numeric one and vice versa. One major disadvantage, is that
+{cmd:tostring} does not preserve any value labels associated with the variable.
+Without the {cmd:force} or {cmd:ignore()} options, {cmd:destring} cannot
+be used with a variable unless it is composed solely of numbers. The solution to these issues is to use
+{cmd:encode} and {cmd:decode}. You can convert a string variable to a value labeled numeric variable
+using {helpb encode:encode}:
 
+{TRYITCMD}
+encode thanavisitreason, generate(visitreason)
+{DEF} */
 
+browse thanavisitreason visitreason
 
+/* Each unique value of the variable was assigned a number, with each value label corresponding to the strings
+of the original variable. However, it might make sense to define and apply one's own value label: */
+
+label define visitreasonlab ///
+	1  "To register a Crime" ///
+	2  "To answer charges filed against you" ///
+	3  "To say hello/to chat" ///
+	97 "Refuse to answer" ///
+	98 "Other" ///
+	99 "Don't Know"
+
+/* {...}
+{TRYITCMD}
+encode thanavisitreason, generate(visitreason2) label(visitreasonlab)
+{DEF} */
+
+browse thanavisitreason visitreason visitreason2 if visitreason != visitreason2
+
+/* You can also convert a value labeled variable
+to a string variable that contains the value label text
+using {helpb decode}:
+
+{TRYITCMD}
+decode visitreason, generate(visitreasonstr)
+{DEF} */
+
+browse thanavisitreason visitreason visitreasonstr
+
+/* Just like {cmd:destring} and {cmd:tostring}, {cmd:encode} and {cmd:decode}
+are inverse operations.
+
+If a string variable has all numeric values, convert it to numeric using {cmd:destring}.
+If the variable does not have all numeric values,
+use {cmd:encode} or use {cmd:destring} with option {cmd:ignore()} or {cmd:force}.
+
+If a numeric variable is not value labeled, convert it to string using {cmd:tostring}.
+If the variable is value labeled,
+you can use {cmd:encode} to retain the value label text or
+{cmd:tostring} for just the numeric values.
+
+For more on the history of these sets of commands, see this interesting Stata
+{browse "http://www.stata.com/support/faqs/data-management/destring-command/":FAQ post}.
 
 {FOOT}
 
