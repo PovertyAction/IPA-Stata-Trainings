@@ -13,6 +13,6 @@ odkmeta
 
 {FOOT}
 
-{NEXT}{DUPLICATES}
+{NEXT}{NAMING}
 {PREV}{RESOURCES}
 {START} */
