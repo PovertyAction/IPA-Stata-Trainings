@@ -17,19 +17,42 @@
 {view `""SMCL/Problem sets/Concepts/Variable Types - problem set.smcl"##q2"':Question 2}{break}
 {view `""SMCL/Problem sets/Concepts/Variable Types - problem set.smcl"##q3"':Question 3}{break}
 
-{pstd}{cmd}{PSQ1:TYPES_Q1}{txt}{p_end}
+{hline}{marker q1}
 
-{pstd}{p_end}
+{pstd}{bf:Problem Set Question 1}
 
-{pstd}{cmd}{PSQ1:TYPES_Q2}{txt}{p_end}
+{hline}
 
-{pstd}{p_end}
-{pstd}{p_end}
+{pstd}Identify the types of variables in the dataset. How might you go about doing so?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Problem Set Question 2}
+
+{hline}
+
+{pstd}Differing restrictions on when you can destring vs. tostring. A: you can always tostring since numerics
+made strings, but not the opposite.
+
+{pstd}{txt}{sf}{ul off}{...}
+
+{hline}{marker q3}
+
+{pstd}{bf:Problem Set Question 3}
+
+{hline}
+
+{pstd}Under what circumstances would you want
+to convert a string variable to numeric?
+How about converting a numeric variable to string?
+
+{pstd}{txt}{sf}{ul off}{...}
 
 
-{pstd}{p_end}
+{hline}
 
-{pstd}{p_end}
-{pstd}{p_end}
+{pstd}{view `""SMCL/Problem sets/Concepts answers/Variable Types - answers.smcl""':Answers}{break}
+Return to Module: {view `""SMCL/Concepts/Loops.smcl""':Loops}{break}
 
-{pstd}{p_end}
+{pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}
