@@ -606,7 +606,11 @@ forv i = 1/`:list sizeof infiles' {
 			"{DATA_BACK}"     = `""Raw\Post Kenya 2014 - Stata 102""' \
 			"{DATA_CASTECSV}" = `""Raw/Clean castename.csv""' \
 			"{DATA_CASTEDTA}" = `""Raw/Clean castename""' \
-
+			"{DATA_DEMOXLS}"  = `""Raw/Demo Info.xlsx""' \
+			"{DATA_DEMOCSV}"  = `""Raw/Demo Info.csv""' \
+			"{DATA_MERGE}"    = `""Raw/New Variables.dta""' \
+			"{DATA_APPEND}"   = `""Raw/New Observations.dta""' \
+			
 			"{HEAD}"     = "`head'" \
 			"{HEAD1}"    = `"{view `"{START-}"':"' \
 			"{PS!}"      = "{it:Problem set}{BR}" \
