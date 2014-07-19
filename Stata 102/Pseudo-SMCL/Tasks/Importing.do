@@ -206,7 +206,7 @@ the concept of {bf:relative references}.
 Relative references involve creating some sort of shorthand that Stata recognizes
 to mean a certain location, and to then only change that one
 line when switching users, moving data, etc. Subsequently, all new locations are
-made {it:relative} to that intial location. 
+made {it:relative} to that initial location. 
 
 There are a few ways to use relative references. One is by using a 
 {view `"{MACROS-}"':local} or global (introduced in {bf:Stata 103}) macro to set a particular
