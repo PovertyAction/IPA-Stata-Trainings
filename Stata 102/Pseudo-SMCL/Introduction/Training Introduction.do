@@ -79,18 +79,18 @@ Click each to install them.
 
 {P}{bf:{stata "ssc install dummies2":dummies2}}{p_end}
 {phang}  o Create indicator variables from categorical variable or vice versa{p_end}
-{P}{bf:{stata "ssc install outreg2, replace":outreg2}}{p_end}
-{phang}  o Arrange regression, summary, and tabulation into an illustrative table{p_end}
-{P}{bf:{stata "ssc install estout":estout}}{p_end}
-{phang}  o Makes regression tables from stored estimates{p_end}
-{P}{bf:{stata "ssc install orth_out":orth_out}}{p_end}
-{phang}  o Outputes summary stats and orthogonality tables{p_end}
 {P}{bf:{stata "ssc install cfout":cfout}}{p_end}
 {phang}  o Compare two datasets, optionally saving the list of differences to file{p_end}
 {P}{bf:{stata "ssc install cfby":cfby}}{p_end}
 {phang}  o Compare two files to get the number differences "by" a common variable{p_end}
 {P}{bf:{stata "ssc install odkmeta":odkmeta}}{p_end}
 {phang}  o Creates do-file to import ODK meta into Stata{p_end}
+{P}{bf:{stata "ssc install outreg2, replace":outreg2}}{p_end}
+{phang}  o Arrange regression, summary, and tabulation into an illustrative table{p_end}
+{P}{bf:{stata "ssc install estout":estout}}{p_end}
+{phang}  o Makes regression tables from stored estimates{p_end}
+{P}{bf:{stata "ssc install orth_out":orth_out}}{p_end}
+{phang}  o Outputes summary stats and orthogonality tables{p_end}
 
 {BF}{IT}{UL}
 (All pages have a footer like the one below
