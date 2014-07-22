@@ -83,6 +83,8 @@ Click each to install them.
 {phang}  o Arrange regression, summary, and tabulation into an illustrative table{p_end}
 {P}{bf:{stata "ssc install estout":estout}}{p_end}
 {phang}  o Makes regression tables from stored estimates{p_end}
+{P}{bf:{stata "ssc install orth_out":orth_out}}{p_end}
+{phang}  o Outputes summary stats and orthogonality tables{p_end}
 {P}{bf:{stata "ssc install cfout":cfout}}{p_end}
 {phang}  o Compare two datasets, optionally saving the list of differences to file{p_end}
 {P}{bf:{stata "ssc install cfby":cfby}}{p_end}
