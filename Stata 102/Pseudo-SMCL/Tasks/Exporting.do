@@ -87,7 +87,7 @@ Next, let's identify the key syntax elements:
 The table calculates means and standard deviations for several variables divided by the distinct values
 within the variable found within the {bf:by()} option. So here, the means and sds of {bf:age, literateyn,}
 and {bf:educ} are compared across both 'Male' and 'Female', which are the two values of the {bf:sex} variable. 
-The other options are fairly simple: {bf:se} displays standard deviations, {bf:colnum} puts in the (1) and (2) over the
+The other options are fairly simple: {bf:se} displays standard errors, {bf:colnum} puts in the (1) and (2) over the
 columns, and you know all about {bf:replace} by now! 
 
 {bf:Note:} If you read papers that discuss the results of RCTs, you'll often see a similar table as one of the first
