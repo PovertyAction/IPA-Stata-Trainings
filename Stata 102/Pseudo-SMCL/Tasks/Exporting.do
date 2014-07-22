@@ -84,8 +84,8 @@ customize the command. There are few key points to make. First, notice the table
 in the Stata Results window and as an Excel file in our "Tables and Graphs" folder.
 Next, let's identify the key syntax elements:
 
-The table calculates means and standard deviations for several variables divided by the distinct values
-within the variable found within the {bf:by()} option. So here, the means and sds of {bf:age, literateyn,}
+The table calculates means and standard errors for several variables grouped by the distinct values
+of the variable found in the {bf:by()} option. So here, the mean and se of {bf:age, literateyn,}
 and {bf:educ} are compared across both 'Male' and 'Female', which are the two values of the {bf:sex} variable. 
 The other options are fairly simple: {bf:se} displays standard errors, {bf:colnum} puts in the (1) and (2) over the
 columns, and you know all about {bf:replace} by now! 
