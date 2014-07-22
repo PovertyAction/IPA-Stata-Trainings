@@ -28,8 +28,8 @@ macro than to create an entire variable for it.  Macros also facilitate
 more complex code in a way that variables don't -- we'll get to that.
 
 A macro is basically a symbol that you program Stata to read as something else;
-for example, if you tell Stata that X means “Apples”, every time Stata sees X
-it knows that you really mean “Apples”.
+for example, if you tell Stata that X means "Apples", every time Stata sees X
+it knows that you really mean "Apples".
 
 {hline}{marker declaring}
 
