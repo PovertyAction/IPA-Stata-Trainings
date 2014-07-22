@@ -22,7 +22,7 @@ but crucial tasks of {bf:merging} and {bf:appending} datasets together. Finally,
 
 {helpb import:import} is a flexible command that allows you to read in data to Stata from a variety of formats. 
 In this section, we'll cover two of the most common formats data might take before
-it is imported nto Stata: Excel and text delimited. For Excel data, the required command is {helpb import excel:import excel}.
+it is imported into Stata: Excel and text delimited. For Excel data, the required command is {helpb import excel:import excel}.
 Let's see an example: */
 
 import excel using {DATA_DEMOXLS}, clear firstrow
