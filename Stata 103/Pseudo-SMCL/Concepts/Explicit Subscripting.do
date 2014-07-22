@@ -9,10 +9,8 @@ It looks like the two observations for {cmd:hhid "1802011"} are very similar: */
 
 list hhid sex age educ occupation if hhid == "1802011"
 
-/* We know from the module on {view `"{DUPLICATES-}"':unique IDs and duplicates}
-that they aren't perfectly identical.
-So how idential are they?
-We can use the following loop to find out: */
+/* However, they aren't identical across all variables. 
+We can use the following loop to find out how different they are: */
 
 foreach var of varlist _all {
 	display "`var'"
@@ -68,5 +66,5 @@ followed by the values corresponding to John Doe (observation {cmd:{VAR1}}) and 
 {GOTOPS}{SUBSCRIPTING_PS}
 
 {NEXT}{LOOPS}
-{PREV}{DUPLICATES}
+{PREV}{DUMMIES}
 {START} */

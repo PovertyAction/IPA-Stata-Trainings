@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:{bf:by}}{break}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {pstd}In Stata, you often find yourself needing to repeat a command,
 perhaps making minor adjustments from one call to another.
@@ -245,7 +245,7 @@ When using {cmd:by}, the values of {cmd:_N} and {cmd:_n} are unpredictable
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {pstd}Create a variable named {cmd:sexn} that is the number of respondents
 of a given sex. For example, if {cmd:sex = Male}, {cmd:sexn} should equal {cmd:590}.
@@ -259,7 +259,7 @@ of a given sex. For example, if {cmd:sex = Male}, {cmd:sexn} should equal {cmd:5
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {pstd}Create a variable named {cmd:treatment} that is {cmd:1} or {cmd:0}.
 Use {cmd:by}, {cmd:_N}, and {cmd:_n}
@@ -374,7 +374,7 @@ from the last value of {cmd:`var'} (for numeric variables: the maximum; for stri
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {pstd}Using the {cmd:by} {it:varlist1} {cmd:(}{it:varlist2}{cmd:)} syntax,
 create a variable named {cmd:over30} that is
@@ -401,4 +401,4 @@ and {cmd:0} otherwise.
 
 {pstd}Next: {view `""SMCL/Concepts/egen.smcl""':{bf:egen}}{break}
 Previous: {view `""SMCL/Concepts/Little n.smcl""':{bf:_n}}{break}
-{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}

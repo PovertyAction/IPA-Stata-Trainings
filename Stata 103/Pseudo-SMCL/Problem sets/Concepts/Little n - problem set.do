@@ -34,7 +34,7 @@ How about {cmd:_N}? */
 
 {USE}
 
-/* {view `"{DUPLICATES-}"':As we have seen},
+/* As we have seen,
 there are duplicates on the ID variable {cmd:hhid}.
 Use {cmd:_n} to create a new, clean unique ID variable named {cmd:cleanid}. */
 

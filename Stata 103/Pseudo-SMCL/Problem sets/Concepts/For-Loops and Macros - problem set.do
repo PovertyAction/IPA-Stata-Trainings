@@ -27,7 +27,7 @@ For each of these castes,
 
 tabulate castecode
 
-* {cmd:castecode} is {view `"{PROPERTIES-}##labels"':value labeled}:
+* {cmd:castecode} is {helpb label:value labeled}:
 
 tabulate castecode, nolabel
 

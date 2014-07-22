@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -24,7 +24,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {pstd}Which {cmd:if} should be used: the {cmd:if} command or the {cmd:if} qualifier?
 {txt}{sf}{ul off}{...}
@@ -78,7 +78,7 @@ and another that does not (other than {cmd:display}).
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}For the following questions, be sure to have the (fully) duplicated {bf:hhid} observations dropped:
@@ -110,4 +110,4 @@ on which the observations with {cmd:hhid "1813023"} differ.
 {pstd}{view `""SMCL/Problem sets/Concepts answers/if - answers.smcl""':Answers}{break}
 Return to Module: {view `""SMCL/Concepts/if.smcl""':The {bf:if} Command Versus the {bf:if} Qualifier}{break}
 
-{pstd}{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{pstd}{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}

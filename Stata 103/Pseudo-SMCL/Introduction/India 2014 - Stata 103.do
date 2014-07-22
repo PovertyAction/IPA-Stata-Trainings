@@ -13,9 +13,6 @@ Completing the training provides the basis for the more advanced data management
 and cleaning tasks that are introduced in {bf:Stata 104}. 
 
 {INTRO}
-{PROPERTIES}
-  o {PROPERTIES_PS2}
-  o {PROPERTIES_ANS2}
 {DUMMIES}
 {SUBSCRIPTING}
   o {SUBSCRIPTING_PS2}

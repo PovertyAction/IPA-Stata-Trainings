@@ -128,8 +128,6 @@ foreach var of varlist _all {
 {NEW46}
 
 These are the observation numbers of the two observations with {cmd:hhid "1802011"}.
-We know them from {cmd:list} and {cmd:browse} in the module on
-{view `"{DUPLICATES-}##list"':unique IDs and duplicates}.
 
 Touching on {view `"{LOOPS-}##style"':style} again,
 notice above that for every left brace, I indented once.

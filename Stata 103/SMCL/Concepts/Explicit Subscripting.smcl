@@ -2,27 +2,25 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Explicit Subscripting}{break}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {marker loop}{...}
 {pstd}It looks like the two observations for {cmd:hhid "1802011"} are very similar:
 
 {pstd}{bf:{stata `"list hhid sex age educ occupation if hhid == "1802011""'}}{p_end}
 
-{pstd}We know from the module on {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':unique IDs and duplicates}
-that they aren't perfectly identical.
-So how idential are they?
-We can use the following loop to find out:
+{pstd}However, they aren't identical across all variables.
+We can use the following loop to find out how different they are:
 
 {pstd}{cmd}foreach var of varlist _all {{txt}{p_end}
 {pmore}{cmd}display "`var'"{txt}{p_end}
@@ -90,5 +88,5 @@ followed by the values corresponding to John Doe (observation {cmd:597}) and Jan
 {pstd}Problem Set: {view `""SMCL/Problem sets/Concepts/Explicit Subscripting - problem set.smcl""':Explicit Subscripting}{break}
 
 {pstd}Next: {view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
-Previous: {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
-{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+Previous: {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':Logical Expressions and Dummy Variables}{break}
+{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}

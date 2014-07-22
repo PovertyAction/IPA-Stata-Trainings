@@ -48,7 +48,7 @@ replace castecode1 = 0 if castecode != 1 & castecode != .
 * A simpler method is to take advantage of logical expressions:
 generate castecode1_1 = castecode == 1 if castecode != .
 
-* See the {bf: Stata 104} module on {bf:logical expressions} for more on this method of creating dummy variables. 
+* See the module on view {view `"{DUMMIES-}"':logical expressions} for more on this method of creating dummy variables. 
 
 {LOOPS_Q2B}
 

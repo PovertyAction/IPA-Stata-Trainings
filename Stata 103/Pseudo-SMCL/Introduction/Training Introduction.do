@@ -99,5 +99,5 @@ as well as the problem set, if there is one.)
 {DEF}
 {FOOT}
 
-{NEXT1}{PROPERTIES}
+{NEXT1}{DUMMIES}
 {START} */

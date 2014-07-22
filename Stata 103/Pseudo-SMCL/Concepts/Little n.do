@@ -57,7 +57,7 @@ which doesn't exist, so
 
 We can use {cmd:_n}
 as part of our favorite check:
-that of the {view `"{DUPLICATES-}"':unique ID}.
+that of the unique ID.
 The code below creates a dummy variable named {cmd:iddup}:
 
 {TRYITCMD}

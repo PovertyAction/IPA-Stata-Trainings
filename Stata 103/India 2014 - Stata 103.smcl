@@ -23,9 +23,6 @@ Completing the training provides the basis for the more advanced data management
 and cleaning tasks that are introduced in {bf:Stata 104}.
 
 {pstd}{view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}
-{view `""SMCL/Tasks/Variable Properties.smcl""':Variable Properties}{break}
-{p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks/Variable Properties - problem set.smcl""':Problem set}{break}{p_end}{pstd}
-{p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks answers/Variable Properties - answers.smcl""':Answers}{break}{p_end}{pstd}
 {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':Logical Expressions and Dummy Variables}{break}
 {view `""SMCL/Concepts/Explicit Subscripting.smcl""':Explicit Subscripting}{break}
 {p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Concepts/Explicit Subscripting - problem set.smcl""':Problem set}{break}{p_end}{pstd}

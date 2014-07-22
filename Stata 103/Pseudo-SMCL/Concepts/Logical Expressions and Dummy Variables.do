@@ -85,6 +85,6 @@ variables, {cmd:xi} works with string variables in addition to numeric.
 
 {FOOT}
 
-{NEXT}{RESULTS}
+{NEXT}{SUBSCRIPTING}
 {PREV}{INTRO}
 {START} */

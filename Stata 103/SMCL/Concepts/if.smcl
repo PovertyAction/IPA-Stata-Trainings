@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:The {bf:if} Command Versus the {bf:if} Qualifier}{break}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {pstd}Let's return to the {view `""SMCL/Concepts/Explicit Subscripting.smcl"##loop"':loop from the module on explicit subscripting}:
 
@@ -150,7 +150,7 @@ expression is true, that's the {cmd:if} command. Time for a pop quiz:
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 
 {pstd}Which {cmd:if} should be used: the {cmd:if} command or the {cmd:if} qualifier?
 {txt}{sf}{ul off}{...}
@@ -243,8 +243,6 @@ list the values of {cmd:hhid} for which {cmd:sex} is less than {cmd:0}.
 
 
 {pstd}These are the observation numbers of the two observations with {cmd:hhid "1802011"}.
-We know them from {cmd:list} and {cmd:browse} in the module on
-{view `""SMCL/Tasks/Unique IDs and Duplicates.smcl"##list"':unique IDs and duplicates}.
 
 {pstd}Touching on {view `""SMCL/Concepts/For-Loops and Macros.smcl"##style"':style} again,
 notice above that for every left brace, I indented once.
@@ -257,7 +255,7 @@ Thus, it's easy to tell what's in the loop and what's not, and what's in the {cm
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}For the following questions, be sure to have the (fully) duplicated {bf:hhid} observations dropped:
@@ -301,4 +299,4 @@ on which the observations with {cmd:hhid "1813023"} differ.
 
 {pstd}Next: {view `""SMCL/Concepts/Big N.smcl""':{bf:_N}}{break}
 Previous: {view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
-{view `""Kenya 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}

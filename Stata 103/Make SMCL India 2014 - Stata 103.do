@@ -388,7 +388,6 @@ Column 6: The text part of {view args:text}. */
 #d ;
 loc codeslinks
 	{START}			0	0	1	"India 2014 - Stata 103.smcl"						"Stata 103 Start"
-	{ALTTOC}		0	1	1	"SMCL/Introduction/Alternative Table of Contents.smcl"	""
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"			""
 	{DUMMIES}		0	0	1	"SMCL/Concepts/Logical Expressions and Dummy Variables.smcl"	""
 	{SUBSCRIPTING}	1	0	1	"SMCL/Concepts/Explicit Subscripting.smcl"				""
@@ -405,13 +404,6 @@ loc codeslinks
 	{BIGN}			0	1	1	"SMCL/Concepts/Big N.smcl"								"{bf:_N}"
 	{BY}			1	1	1	"SMCL/Concepts/by.smcl"									"{bf:by}"
 	{EGEN}			1	0	1	"SMCL/Concepts/egen.smcl"						"{bf:egen}"
-	{DUPLICATES}	1	0	1	"SMCL/Tasks/Unique IDs and Duplicates.smcl"				""
-	{PROPERTIES}	1	0	1	"SMCL/Tasks/Variable Properties.smcl"					""
-	{RECODING}		1	0	1	"SMCL/Tasks/Recoding.smcl"								""
-	{LOGICCHECKS}	1	0	1	"SMCL/Tasks/Logic Checks.smcl"							"Checking Skip Patterns and Logical Consistency"
-	{OTHERCHECKS}	1	0	1	"SMCL/Tasks/Other Data Checks.smcl"						""
-	{STRINGS}		1	0	1	"SMCL/Tasks/String Cleaning.smcl"						""
-	{MERGING}		0	0	1	"SMCL/Tasks/Merging.smcl"								""
 	{GROUP3}		0	1	1	`""SMCL/Concepts/by.smcl"##group3"'						"group 3"
 	{GROUP3LIST}	0	0	1	"SMCL/Concepts/Group 3 commands.smcl"					"List of Group 3 Commmands"
 ;
