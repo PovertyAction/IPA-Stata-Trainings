@@ -81,6 +81,7 @@ entry operator, making it easy to see the error rates of each operator
 and incentivize the data entry accordingly.
 
 {pstd}{bf:readreplace} inputs the corrections from double-entry reconciliation back into the dataset.
+{bf:Note:} {cmd:readreplace} is installed along with {cmd:cfout}.
 
 {pstd}All of these commands can be found on SSC. For more on data entry quality control, see our Box
 {browse "https://ipastorage.box.com/s/ejpuvpzfs1tmxwew3q4l":resources} on the topic.
