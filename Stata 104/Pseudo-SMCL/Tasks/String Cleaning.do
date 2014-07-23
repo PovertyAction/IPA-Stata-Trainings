@@ -452,6 +452,6 @@ and for this use more convenient than
 
 {GOTOPS}{STRINGS_PS}
 
-{NEXT}{MERGING}
+{NEXT}{EXPORTING}
 {PREV}{OTHERCHECKS}
 {START} */
