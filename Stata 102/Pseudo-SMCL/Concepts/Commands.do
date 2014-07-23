@@ -48,7 +48,7 @@ First off, how do you install commands that are found on SSC? The syntax is pret
 
 {bf:ssc install "command", replace}
 
-As an example, let's install the popular {view `"{EXPORTING-}"':exporting} command {cmd:estout}: */
+As an example, let's install the popular exporting command {cmd:estout}: */
 
 ssc install estout, replace
 

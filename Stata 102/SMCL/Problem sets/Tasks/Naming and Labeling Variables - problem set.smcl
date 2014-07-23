@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -27,7 +27,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}Consider the problem of renaming the same variables
 multiple times with different prefixes.
@@ -44,7 +44,7 @@ Finally, rename with the prefix {cmd:end_}.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}In this dataset, a number of variables end with {cmd:_1} or {cmd:_2}.
 But imagine you instead prefer these variables
@@ -58,7 +58,7 @@ How would you go about doing this?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}Variables {cmd:robberyyn}, {cmd:assaultyn} and {cmd:falsecaseyn}
 share the same value label, which has been removed for this problem set.
@@ -72,7 +72,7 @@ label the values of all three variables with the existing value label {cmd:yesno
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}For the variable {cmd:educ},
 why are some values labeled while others are apparently not?
@@ -89,7 +89,7 @@ You can see this as follows:
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}When you create a new variable,
 you often want to immediately assign it a value label.
@@ -119,7 +119,7 @@ for the new variable you've created.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}First, execute the following commands,
 which define the value label {cmd:addressunit}
@@ -150,4 +150,4 @@ that respondents have lived at their current address.
 {pstd}{view `""SMCL/Problem sets/Tasks answers/Naming and Labeling Variables - answers.smcl""':Answers}{break}
 Return to Module: {view `""SMCL/Tasks/Naming and Labeling Variables.smcl""':Naming and Labeling Variables}{break}
 
-{pstd}{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}
+{pstd}{view `""India 2014 - Stata 102.smcl""':Stata 102 Start}{break}

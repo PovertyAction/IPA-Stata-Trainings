@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Post Kenya 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Variable Types}{break}
 
-{pstd}{bf:{stata `"use "Raw/Post Kenya 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
 
 {pstd}{view `""SMCL/Concepts/Variable Types.smcl"##strings"':1. Strings and Numerics}{break}
 {view `""SMCL/Concepts/Variable Types.smcl"##destring"':2. Destring and Tostring}{break}
@@ -178,7 +178,7 @@ Why did this occur?
 {p2col:{c |} Option {cmd:format(%24.0g)} works not just in this case to resolve the issue, but}{c |}{p_end}
 {p2col:{c |} in all cases.}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}
-{p2col:{c |} {bf:{stata use "Raw/Post Kenya 2014 - Stata 102", clear}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata use "Raw/India 2014 - Stata 102", clear}}}{c |}{p_end}
 {pstd}{c BLC}{hline 78}{c BRC}{p_end}
 {p2colreset}{...}
 
@@ -267,4 +267,4 @@ you can use {cmd:encode} to retain the value label text or
 
 {pstd}Next: {view `""SMCL/Tasks/Unique IDs and Duplicates.smcl""':Unique IDs and Duplicates}{break}
 Previous: {view `""SMCL/Tasks/Naming and Labeling Variables.smcl""':Naming and Labeling Variables}{break}
-{view `""Post Kenya 2014 - Stata 102.smcl""':Stata 102 Start}{break}
+{view `""India 2014 - Stata 102.smcl""':Stata 102 Start}{break}

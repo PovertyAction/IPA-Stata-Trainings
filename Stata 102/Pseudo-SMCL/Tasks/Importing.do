@@ -250,6 +250,5 @@ See the {helpb fastcd:help file} for more.
 
 {FOOT}
 
-{NEXT}{EXPORTING}
 {PREV}{LOOPS}
 {START}
