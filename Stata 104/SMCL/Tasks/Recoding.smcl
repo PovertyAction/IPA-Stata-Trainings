@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Recoding}{break}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}Recoding entails
 changing variables' values in order to
@@ -44,7 +44,7 @@ In this dataset, there are two yes/no value labels:
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}Recode all variables with the value label {cmd:yes1no0}
 so that {cmd:Yes = 1} and {cmd:No = 2},
@@ -101,7 +101,7 @@ and attach the value label {cmd:yesno} to them.
 
 
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}An alternative is {helpb recode}.
 {cmd:recode} recodes a variable list according to one or more rules.
@@ -185,7 +185,7 @@ recode occupation (1=2) (2=1)
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}Recode {cmd:castecode} so that {cmd:1} is recoded as {cmd:2}, {cmd:2} is recoded as {cmd:3},
 and {cmd:3} is recoded as {cmd:1}. Modify the value label to reflect these changes.
@@ -266,4 +266,4 @@ and value labeled variables.
 
 {pstd}Next: {view `""SMCL/Tasks/Logic Checks.smcl""':Checking Skip Patterns and Logical Consistency}{break}
 Previous: {view `""SMCL/Concepts/Saved Results.smcl""':Saved Results}{break}
-{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}

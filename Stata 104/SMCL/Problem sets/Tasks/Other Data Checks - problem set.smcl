@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -25,7 +25,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}We've seen two ways to check that {cmd:cycleownyn} is only {cmd:Yes} or {cmd:No}.
 The first involved {bf:{view `""SMCL/Tasks/Other Data Checks.smcl"##levelsof"':levelsof}}:
@@ -49,7 +49,7 @@ If so, under what circumstances would this occur?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{bf:(a)}
@@ -75,7 +75,7 @@ with more than one corresponding value of {cmd:castecode}?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}Using a loop (not manually using {cmd:codebook}),
 find all variables with all missing values.
@@ -102,4 +102,4 @@ the source of the issue and how you resolved it.
 {pstd}{view `""SMCL/Problem sets/Tasks answers/Other Data Checks - answers.smcl""':Answers}{break}
 Return to Module: {view `""SMCL/Tasks/Other Data Checks.smcl""':Other Data Checks}{break}
 
-{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{pstd}{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}

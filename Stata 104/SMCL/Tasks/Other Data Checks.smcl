@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -23,7 +23,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}It is important to check that variables are coded as you expect. For
 example, {cmd:cycleownyn} can only be {cmd:Yes} or {cmd:No}.
@@ -65,7 +65,7 @@ assert inrange(cycleownyn, 1, 2)
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}We've seen two ways to check that {cmd:cycleownyn} is only {cmd:Yes} or {cmd:No}.
 The first involved {bf:{view `""SMCL/Tasks/Other Data Checks.smcl"##levelsof"':levelsof}}:
@@ -89,7 +89,7 @@ If so, under what circumstances would this occur?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{bf:(a)}
@@ -115,7 +115,7 @@ with more than one corresponding value of {cmd:castecode}?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}Another important set of checks has to do with missing values. For example,
 required questions should have no missing values. In this dataset, {cmd:sex} should
@@ -168,7 +168,7 @@ codebook sex scrutinizedyn educ
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}Using a loop (not manually using {cmd:codebook}),
 find all variables with all missing values.
@@ -311,4 +311,4 @@ but you must also look out for issues specific to your data and project.
 
 {pstd}Next: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
 Previous: {view `""SMCL/Tasks/Logic Checks.smcl""':Checking Skip Patterns and Logical Consistency}{break}
-{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}

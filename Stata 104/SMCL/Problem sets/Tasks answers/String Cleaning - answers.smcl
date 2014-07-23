@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -56,7 +56,7 @@ using pattern or string matching.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}{it}{...} Recreating {cmd:newcaste}:
 
@@ -83,7 +83,7 @@ Copy these values to Excel.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}{it}{...} What is an alternative to {cmd:replace}
 that can be used for making multiple, simultaneous replacements?
@@ -142,7 +142,7 @@ and {cmd:"_versions"} is 9.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{it}{...} {bf:(a)}
@@ -175,7 +175,7 @@ how many unique caste names are there?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}{it}{...} First, recreate {cmd:newcaste}:
 
@@ -275,4 +275,4 @@ replace newcaste = "`nospaces'" if newcaste == "`caste'"
 {pstd}{view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl""':Problem set}{break}
 Return to Module: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
 
-{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{pstd}{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}

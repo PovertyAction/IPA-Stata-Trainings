@@ -29,7 +29,7 @@ IPA Research Support at researchsupport@poverty-action.org
 {STRINGS}
   o {STRINGS_PS2}
   o {STRINGS_ANS2}
-{MERGING}
+{EXPORTING}
 
 The training material is written in SMCL (pronounced "smickle"), Stata's output language.
 Since multiple SMCL files will be used, your working directory needs to be set correctly using {cmd:cd}.

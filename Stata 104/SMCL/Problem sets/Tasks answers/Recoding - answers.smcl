@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -24,7 +24,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}{it}{...} Recode all variables with the value label {cmd:yes1no0}
 so that {cmd:Yes = 1} and {cmd:No = 2},
@@ -95,7 +95,7 @@ replace occupation = 2 if occupation == 100{txt}
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/Kenya 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
 
 {pstd}{it}{...} Recode {cmd:castecode} so that {cmd:1} is recoded as {cmd:2}, {cmd:2} is recoded as {cmd:3},
 and {cmd:3} is recoded as {cmd:1}. Modify the value label to reflect these changes.
@@ -110,4 +110,4 @@ and {cmd:3} is recoded as {cmd:1}. Modify the value label to reflect these chang
 {pstd}{view `""SMCL/Problem sets/Tasks/Recoding - problem set.smcl""':Problem set}{break}
 Return to Module: {view `""SMCL/Tasks/Recoding.smcl""':Recoding}{break}
 
-{pstd}{view `""Kenya 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{pstd}{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}

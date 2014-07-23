@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Staff Training - Kenya 2014 {space 14}}{c |}{break}
-{c |}{view `""Kenya 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
+{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -39,7 +39,7 @@ IPA Research Support at researchsupport@poverty-action.org
 {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
 {p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks/String Cleaning - problem set.smcl""':Problem set}{break}{p_end}{pstd}
 {p_end}{p 6 6 2}o {view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl""':Answers}{break}{p_end}{pstd}
-{view `""SMCL/Tasks/Merging.smcl""':Merging}{break}
+{view `""SMCL/Tasks/Exporting.smcl""':Exporting}{break}
 
 {pstd}The training material is written in SMCL (pronounced "smickle"), Stata's output language.
 Since multiple SMCL files will be used, your working directory needs to be set correctly using {cmd:cd}.
