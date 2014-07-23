@@ -72,11 +72,11 @@ Here, {cmd:1 + 1 == 2} is true ({cmd:1}), but {cmd:1 + 2 == 4} is false ({cmd:0}
 {BOTTOM}
 
 Another place where logical expressions are common is after
-the {bf:if qualifier}. 
+the {view `"{IF-}"':if qualifier}.
 The expression that follows {cmd:if} in a command
 is a logical expression.
 
-Referring back to {bf:Variable Properties} module in {bf:Stata 103}, remember that you can use
+Note that you can use
 {help fvvarlist:factor variables} to act as dummies in a regression without having to
 create a single dummy variable. As some commands don't allow factor varibles, the {helpb xi}
 prefix can also be used. It creates dummies for use outside a single command, and can be more 
