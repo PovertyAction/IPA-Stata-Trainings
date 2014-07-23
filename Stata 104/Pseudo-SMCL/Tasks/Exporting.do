@@ -7,7 +7,7 @@
 /* While importing in Stata consists solely of reading in
 {it:data}, exporting can take two forms: outputting some or all of the data into
 another data format, or outputting Stata {it:results} in terms of graphs
-or tables. This module will cover both of these exporting functions. 
+or tables. This module will cover all of these exporting functions. 
 
 {view `"{EXPORTING-}##exportdata"':1. Exporting Data}{BR}
 {view `"{EXPORTING-}##exporttables"':2. Exporting Tables: Orthogonality and Regression}{BR}
@@ -24,7 +24,7 @@ it. The exporting commands are even in the same help files as the importing ones
 Let's take a closer look: 
 
 To export data as an Excel file, use {helpb export excel:export excel}. The syntax
-is similar to the {cmd:import excel} command that we saw in the last module. As an example, 
+is similar to the {cmd:import excel} command that you've likely seen. As an example, 
 
 {TRYITCMD}
 export excel hhid surveyid sex age educ using "Raw/Tables and Graphs/excel", firstrow(variables) replace
@@ -39,7 +39,7 @@ any existing file with the same name. Feel free to test this out: re-run the com
 of variables to export. Though remember to close the Excel file before doing so! 
 
 There's one other option that's important to highlight here: {bf:nolabel}. As you may have noticed, the default
-is to export the {view `"{NAMING-}##vallabels"':value labels} rather than the underlying values of numeric
+is to export the {helpb label:value labels} rather than the underlying values of numeric
 variables (e.g. 'Male' and 'Female' rather than 1 and 2). If you want to export these values instead, specify
 the option {bf:nolabel} at the end of the command. 
 
@@ -53,7 +53,7 @@ Here we export the entire dataset as a text delimited (.csv) file. Again navigat
 folder to open the file. Note that here, we didn't need to specify an option
 to output the variable name as the first row, but still used the {bf:replace} option. 
 
-Also, note that for both {cmd:export} variations, you can limit the output to just to a certain subset
+Also, note that for both {cmd:export} variations, you can limit the output to just a certain subset
 of the data, using the {helpb if:if} and {helpb in:in} qualifiers. Feel free to play around with the above
 commands to gain more understanding of how they work. 
 
@@ -97,14 +97,15 @@ the table as a whole would compare key variables for differences between the tre
 {hline}
 
 Let's now introduce exporting regression results from Stata. There are a large number of commands in this
-area. Some of the most popular at IPA are {cmd:outreg2}, {cmd:xml_tab}, {cmd:estout}. 
+area. Some of the most popular at IPA are {cmd:outreg2}, {cmd:xml_tab}, and {cmd:estout}. 
 The simplest of these commands is {cmd:esttab} (along with {cmd:eststo}) so we will introduce its functionality here. 
 
 First let's make sure we've installed the needed commands: */
 
 ssc install estout
 
-/* And let's now run the regressions and export:
+/* Installing {cmd:estout} automatically installs {cmd:esttab} and {cmd:eststo}.
+Let's now run the regressions and export:
 
 {TRYITCMD}
 eststo: regress literateyn sex age {BR}
@@ -120,7 +121,7 @@ appended to the existing table (even with the replace option).
 
 There is of course much additional complexity with this and the other regression exporting commands
 mentioned above. We will leave it here for now, but it is highly encouraged to engage with IPA's many Stata
-help {view `"{RESOURCES-}"':resources} as you delve further into this topic. 
+help resources (such as Research Support and Random Help) as you delve further into this topic. 
 
 {hline}{marker exportgraphs}
 
@@ -145,8 +146,8 @@ graph bar age, over(sex)
 graph export "Raw/Tables and Graphs/graph.png", replace
 
 /*As with regression exporting, there is a wealth of possiblities when it comes to graphing
-in Stata. Spending time experimenting yourself and utilizing IPA's {view `"{RESOURCES-}"':resources}
-is your best bet to improve your skills. 
+in Stata. Spending time experimenting yourself and utilizing IPA's resources
+(see {bf:Stata 102}) is your best bet to improve your skills. 
 
 Finally, a useful {helpb ssc:SSC} command for graphing is {cmd:eclplot}, as it can quite powerfully
 plot coefficients in sophisticated ways. Keep it in mind as needed. 
