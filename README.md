@@ -1,15 +1,19 @@
 Stata_Training
 ==============
 
-Houses IPA's Stata training courses and code. It contains the 102, 103, 104 and 202 trainings.
+Houses IPA's Stata training courses and code.
 
-102 is the first version on SMCL, previous versions had appeared as a word document - will incorporate material from 103.
+101 is an intro to Stata - remains as a Word doc. 
 
-103 is similar to the training given at Kenya 2014, changes to made soon (removing Duplicates and Variable Properties modules, changing Loops module).
+102 is the first version on SMCL, previous versions had appeared as a Word doc.
+
+103 is similar to the training given at Kenya 2014, Duplicates and Variable Properties were removed, and Loops module changed.
 
 104 is the version prepared for Kenya 2014, main change since was to remove Logical Expressions module. 
 
-202 is a module on Mata presented at the March 2014 Data Day.
+201 is the New Hampshire 2013 Advanced training - will be cleaned up. 
+
+202 is a module on Mata presented at the March 2014 Data Day - will be expanded upon
 
 The `Session Notes` folder contains notes from New Haven Stata trainings.
 
