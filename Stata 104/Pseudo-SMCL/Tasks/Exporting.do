@@ -45,13 +45,13 @@ the option {bf:nolabel} at the end of the command.
 
 Let's briefly touch on exporting to text delimited formats: 
 
-In Stata 13, the command to use is {helpb export delimited:export delimited}. 
+In Stata 13 and above, the command to use is {helpb export delimited:export delimited}. 
 
 {TRYITCMD}
 export delimited using "Raw/Tables and Graphs/text_delimited", replace
 {DEF}
 
-And in Stata 12 and below it is {helpb outsheet:outsheet}: 
+And for Stata 12 and below it is {helpb outsheet:outsheet}: 
 
 {TRYITCMD}
 outsheet using "Raw/Tables and Graphs/text_delimited.csv", comma replace

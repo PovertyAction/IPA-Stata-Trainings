@@ -60,7 +60,7 @@ the option {bf:nolabel} at the end of the command.
 
 {pstd}Let's briefly touch on exporting to text delimited formats:
 
-{pstd}In Stata 13, the command to use is {helpb export delimited:export delimited}.
+{pstd}In Stata 13 and above, the command to use is {helpb export delimited:export delimited}.
 
 {p2colset 5 84 0 0}{...}
 {pstd}{c TLC}{hline 78}{c TRC}{p_end}
@@ -71,7 +71,7 @@ the option {bf:nolabel} at the end of the command.
 export delimited using "Raw/Tables and Graphs/text_delimited", replace
 {txt}{sf}{ul off}{...}
 
-{pstd}And in Stata 12 and below it is {helpb outsheet:outsheet}:
+{pstd}And for Stata 12 and below it is {helpb outsheet:outsheet}:
 
 {p2colset 5 84 0 0}{...}
 {pstd}{c TLC}{hline 78}{c TRC}{p_end}
