@@ -1,0 +1,164 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""':{space 43}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Staff Training - New Hampshire 2013{space 7}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Advanced Stata{space 28}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Macros}{break}
+{it:Answer key}{break}
+
+{pstd}{view `""SMCL/Answers/Macros - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Answers/Macros - answers.smcl"##q2"':Question 2}{break}
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{it}{...} The following dataset contains variables from psychological scales:
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 psych", clear"'}}{p_end}
+
+{phang}{bf:{stata `"tabulate scheier1"'}}{p_end}
+{phang}{bf:{stata `"tabulate cesd1"'}}{p_end}
+
+{pstd}{it}{...} Let's say we want to use both {cmd:scheier1} and {cmd:cesd1} in an index.
+For ease, we want their scales to point in the same direction.
+Right now this is not the case:
+
+{phang}{bf:{stata `"label list scheier"'}}{p_end}
+{phang}{bf:{stata `"label list cesd"'}}{p_end}
+
+{pstd}{it}{...} Create a new variable named {cmd:schierrev1}
+that is {cmd:scheier} with a reverse scale,
+with {cmd:scheier1 1} ({cmd:always}) equal to {cmd:scheierrev1 5},
+{cmd:scheier1 2} ({cmd:sometimes}) equal to {cmd:scheierrev 4},
+and so on.
+Reverse not just the values of {cmd:schier1},
+but also the value label {cmd:schier}.
+
+{pstd}To check that you got it right:
+
+{pstd}{cmd:tabulate scheier1 scheierrev1}
+
+{pstd}{bf:Hint:} Use the {helpb extended_fcn:label} extended macro function.
+{cmd:label} {it:valuelabelname #} assigns
+value label {it:valuelabelname}'s text for {it:#} to a macro. For example:
+
+{phang}{bf:{stata `"local example : label cesd 1"'}}{p_end}
+{phang}{bf:{stata `"display "`example'""'}}{p_end}
+{pstd}{it}{...} {cmd:* Confirm the result using -label list-.}{p_end}
+{phang}{bf:{stata `"label list cesd"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{phang}{bf:{stata `"generate scheierrev1 = 6 - scheier1"'}}{p_end}
+
+{phang}{cmd}forvalues i = 1/5 {{txt}{p_end}
+{phang2}{cmd}local num = 6 - `i'{txt}{p_end}
+{phang2}{cmd}local text : label scheier `i'{txt}{p_end}
+{phang2}{cmd}label define scheierrev `num' "`text'", modify{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Answers/Macros - answers.do" 1"':Click here to execute.}
+
+{phang}{bf:{stata `"label values scheierrev1 scheierrev"'}}{p_end}
+
+{phang}{bf:{stata `"tabulate scheier1 scheierrev1"'}}{p_end}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{it}{...} Modify the {view `""SMCL/Modules/Macros.smcl"##combinations_loop"':loop over combinations}
+from earlier in the module
+to loop over all combinations
+of {it:three} of {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}.
+That is, find all observations for which
+at least three of the variables {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}
+have the same nonmissing values as another observation.
+{txt}{sf}{ul off}{...}
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 police 2", clear"'}}{p_end}
+
+{phang}{bf:{stata `"generate dup = 0"'}}{p_end}
+{phang}{bf:{stata `"generate dupvars = """'}}{p_end}
+
+{phang}{cmd}local vars s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5{txt}{p_end}
+{phang}{cmd}local nvars : word count `vars'{txt}{p_end}
+{phang}{cmd}forvalues i = 1/`nvars' {{txt}{p_end}
+{phang2}{cmd}gettoken var1 vars : vars{txt}{p_end}
+{phang2}{cmd}local rest1 `vars'{txt}{p_end}
+
+{phang2}{cmd}local nrest1 : word count `rest1'{txt}{p_end}
+{phang2}{cmd}forvalues j = 1/`nrest1' {{txt}{p_end}
+{phang3}{cmd}gettoken var2 rest1 : rest1{txt}{p_end}
+
+{phang3}{cmd}foreach var3 of local rest1 {{txt}{p_end}
+{p 16 20 2}{cmd}duplicates tag `var1' `var2' `var3', generate(loopdup){txt}{p_end}
+{p 16 20 2}{cmd}replace loopdup = 0 if missing(`var1', `var2', `var3'){txt}{p_end}
+{p 16 20 2}{cmd}replace dup = 1 if loopdup{txt}{p_end}
+{p 16 20 2}{cmd}replace dupvars = dupvars + cond(dupvars == "", "", "; ") + "`var1' `var2' `var3'" if loopdup{txt}{p_end}
+{p 16 20 2}{cmd}drop loopdup{txt}{p_end}
+{phang3}{cmd}}{txt}{p_end}
+{phang2}{cmd}}{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Answers/Macros - answers.do" 2"':Click here to execute.}
+

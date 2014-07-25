@@ -1,0 +1,80 @@
+{smcl}
+{txt}{...}
+{hline}{marker q1}
+
+{pstd}{bf:Question 1}
+
+{hline}
+
+{pstd}Suppose we have a subset of a dataset of 2011 IPA expense reports.
+(Don't worry, the data is fake.)
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 projects 1", clear"'}}{p_end}
+
+{pstd}The dataset is sorted by employee ({cmd:id}) and the date of the ER ({cmd:date}):
+
+{phang}{bf:{stata `"isid id date"'}}{p_end}
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}However, the projects variables are a mess.
+They were taken directly from the ER,
+so the values are ordered according to how they were entered in the ER.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Sort across the project variables,
+so that {cmd:project1} is an employee's alphabetically first project,
+{cmd:project2} the second, and so on.
+(The project variables are numeric,
+but the values of the value label are sorted by project text:
+{bf:{stata label list project}})
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Create a variable named {cmd:projectchange} that is {cmd:1}
+if an employee's list of projects changed since their last ER,
+and {cmd:0} otherwise.
+There are multiple approaches to {bf:(b)}!
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Create a variable named {cmd:anychange} that is {cmd:1}
+if an employee made any project change in 2011,
+and {cmd:0} otherwise. How many IPAers changed projects in 2011?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Question 2}
+
+{hline}
+
+{pstd}For variables that are lists, such as {cmd:projects},
+{cmd:reshape} allows manipulation beyond sorting.
+
+{pstd}The following is a dataset of one variable, {cmd:s2_q8},
+a question that allowed respondents to choose up to 4 of 12 possible options:
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 s2_q8", clear"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}You can see that {cmd:s2_q8} is already internally sorted.
+However, it's still not possible to use the variable for analysis.
+
+{pstd}Using {cmd:reshape}, create dummy variables for all 12 options.
+For each value, if a list contains that value, the value's dummy variable should equal {cmd:1};
+otherwise it should equal {cmd:0}. For example:
+
+{phang}{bf:{stata `"list in 1"'}}{p_end}
+
+{pstd}In observation 1, the dummy variable for option {cmd:1} would equal {cmd:0},
+since the list does not contain {cmd:1}.
+However, the dummy variable for option {cmd:5} would equal {cmd:1}.
+{txt}{sf}{ul off}{...}
+
+{phang}{cmd}
+{hline}{txt}{p_end}

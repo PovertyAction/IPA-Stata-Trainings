@@ -1,0 +1,15 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""':{space 43}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Staff Training - New Hampshire 2013{space 7}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Advanced Stata{space 28}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Exporting Tables}{break}
+
+{pstd}In this module, we will discuss methods for exporting formatted tables.

@@ -1,0 +1,896 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""':{space 43}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Staff Training - New Hampshire 2013{space 7}}{c |}{break}
+{c |}{view `""New Hampshire 2013 Advanced.smcl""': Advanced Stata{space 28}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:Macros}{break}
+
+{pstd}In this module, I'll discuss advanced macro manipulation.
+I'll touch on these topics:
+
+{pstd}{view `""SMCL/Modules/Macros.smcl"##extended_fcn"':1. Extended macro functions}{break}
+{view `""SMCL/Modules/Macros.smcl"##expressions"':2. Macros and expressions}{break}
+{view `""SMCL/Modules/Macros.smcl"##gettoken"':3. {bf:gettoken}}{break}
+{view `""SMCL/Modules/Macros.smcl"##arguments"':4. Passing arguments to do-files}
+
+{hline}{marker extended_fcn}
+
+{pstd}{bf:1. Extended macro functions}
+
+{hline}
+
+{pstd}You already know multiple ways to define macros.
+
+{pstd}You can assign a string to a macro,
+using enclosing {help quotes##double:double quotes} or not:
+
+{pstd}{cmd:* Enclosing "Hello world" in double quotes}{p_end}
+{phang}{bf:{stata `"local string "Hello world!""'}}{p_end}
+{phang}{bf:{stata `"display "`string'""'}}{p_end}
+
+{pstd}{cmd:* No enclosing quotes}{p_end}
+{phang}{bf:{stata `"local string Hello world!"'}}{p_end}
+{phang}{bf:{stata `"display "`string'""'}}{p_end}
+
+{pstd}You can assign the evaluation of an expression to a macro
+using the {cmd:=} assignment operator:
+
+{phang}{bf:{stata `"local string = 1 + 1"'}}{p_end}
+{phang}{bf:{stata `"display "`string'""'}}{p_end}
+
+{phang}{bf:{stata `"local string = "ABC" + "DEF""'}}{p_end}
+{phang}{bf:{stata `"display "`string'""'}}{p_end}
+
+{pstd}Another way to define macros is {help extended_fcn:extended macro functions}.
+These have the following form:
+
+{pstd}{{cmd:local} | {cmd:global}} {it:macname} {cmd::} {it:extended_function}
+
+{pstd}After {cmd:local} or {cmd:global} and the macro's name ({it:macname}),
+you have a colon ({cmd::}) followed by the function ({it:extended_function}).
+
+{pstd}First, let's load the auto dataset:
+
+{phang}{bf:{stata `"sysuse auto, clear"'}}{p_end}
+
+{pstd}Here's an example of an extended macro function:
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {it:It's the first time!} {bf:Try it yourself.}}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+{pstd}{...}{cmd}
+local varlab : variable label make{break}
+display "`varlab'"
+{txt}{sf}{ul off}{...}
+
+{pstd}Here, {cmd:variable label} {it:varname} is an extended macro function
+that assigns the variable label of {it:varname} to a macro.
+Here, the variable label of {cmd:make} has been assigned to {cmd:`varlab'}.
+
+{pstd}There are many extended macro functions.
+We will touch on a few, but the full list is {help extended_fcn:here}.
+
+{pstd}One category of extended macros functions extracts variable attributes:
+
+{phang}{bf:{stata `"local varlab : variable label foreign"'}}{p_end}
+{phang}{bf:{stata `"local vallab : value label foreign"'}}{p_end}
+{phang}{bf:{stata `"local type   : type foreign"':local type{space 3}: type foreign}}{p_end}
+{phang}{bf:{stata `"local format : format foreign"'}}{p_end}
+
+{phang}{bf:{stata `"display "`varlab'""'}}{p_end}
+{phang}{bf:{stata `"display "`vallab'""'}}{p_end}
+{phang}{bf:{stata `"display "`type'""'}}{p_end}
+{phang}{bf:{stata `"display "`format'""'}}{p_end}
+
+{hline}{marker q1}
+
+{pstd}{bf:Question 1}
+
+{hline}
+
+{pstd}The following dataset contains variables from psychological scales:
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 psych", clear"'}}{p_end}
+
+{phang}{bf:{stata `"tabulate scheier1"'}}{p_end}
+{phang}{bf:{stata `"tabulate cesd1"'}}{p_end}
+
+{pstd}Let's say we want to use both {cmd:scheier1} and {cmd:cesd1} in an index.
+For ease, we want their scales to point in the same direction.
+Right now this is not the case:
+
+{phang}{bf:{stata `"label list scheier"'}}{p_end}
+{phang}{bf:{stata `"label list cesd"'}}{p_end}
+
+{pstd}Create a new variable named {cmd:schierrev1}
+that is {cmd:scheier} with a reverse scale,
+with {cmd:scheier1 1} ({cmd:always}) equal to {cmd:scheierrev1 5},
+{cmd:scheier1 2} ({cmd:sometimes}) equal to {cmd:scheierrev 4},
+and so on.
+Reverse not just the values of {cmd:schier1},
+but also the value label {cmd:schier}.
+
+{pstd}To check that you got it right:
+
+{pstd}{cmd:tabulate scheier1 scheierrev1}
+
+{pstd}{bf:Hint:} Use the {helpb extended_fcn:label} extended macro function.
+{cmd:label} {it:valuelabelname #} assigns
+value label {it:valuelabelname}'s text for {it:#} to a macro. For example:
+
+{phang}{bf:{stata `"local example : label cesd 1"'}}{p_end}
+{phang}{bf:{stata `"display "`example'""'}}{p_end}
+{pstd}{cmd:* Confirm the result using -label list-.}{p_end}
+{phang}{bf:{stata `"label list cesd"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{hline}
+
+{pstd}Another category of extended macro functions manipulates lists.
+
+{pstd}For example, say we have two lists:
+{cmd:`nolabvars'}, the list of variables without a value label,
+and {cmd:`strvars'}, the list of variables with a string storage type.
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 police 1", clear"'}}{p_end}
+
+{phang}{bf:{stata `"ds, not(vallab)"'}}{p_end}
+{phang}{bf:{stata `"local nolabvars `r(varlist)'"'}}{p_end}
+
+{phang}{bf:{stata `"ds, has(type string)"'}}{p_end}
+{phang}{bf:{stata `"local strvars `r(varlist)'"'}}{p_end}
+
+{pstd}A variable is in {cmd:`nolabvars'}
+if either it is numeric but without a value label
+or it is string (so cannot have a value label).
+Using the two lists {cmd:`nolabvars'} and {cmd:`strvars'},
+how can we create a list of variables in the former category,
+that is, variables that are numeric but without a value label?
+
+{pstd}Here's one option, with a loop:
+
+{phang}{cmd}ds, not(vallab){txt}{p_end}
+{phang}{cmd}local nolabvars `r(varlist)'{txt}{p_end}
+
+{phang}{cmd}ds, has(type string){txt}{p_end}
+{phang}{cmd}local strvars `r(varlist)'{txt}{p_end}
+
+{phang}{cmd}foreach nolabvar of local nolabvars {{txt}{p_end}
+{phang2}{cmd}local isnumvar 1{txt}{p_end}
+
+{phang2}{cmd}foreach strvar of local strvars {{txt}{p_end}
+{phang3}{cmd}if "`nolabvar'" == "`strvar'" {{txt}{p_end}
+{p 16 20 2}{cmd}local isnumvar 0{txt}{p_end}
+{phang3}{cmd}}{txt}{p_end}
+{phang2}{cmd}}{txt}{p_end}
+
+{phang2}{cmd}if `isnumvar' {{txt}{p_end}
+{phang3}{cmd}local numnolabvars `numnolabvars' `nolabvar'{txt}{p_end}
+{phang2}{cmd}}{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{phang}{cmd}display "`numnolabvars'"{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/Macros.do" 1"':Click here to execute.}
+
+{pstd}The {helpb macrolists:list} extended macro function makes
+this process easier.
+
+{pstd}{cmd:local} {it:macname} {cmd:: list x in y}
+
+{pstd}assigns {cmd:1} to {it:macname}
+if all the elements of {cmd:`x'} are in {cmd:`y'}
+(if the elements of {cmd:`x'} are a subset of the elements of {cmd:`y'})
+and {cmd:0} otherwise. For example:
+
+{phang}{bf:{stata `"local x a"'}}{p_end}
+{phang}{bf:{stata `"local y a b c"'}}{p_end}
+{phang}{bf:{stata `"local xiny : list x in y"'}}{p_end}
+{pstd}{cmd:* Can you guess what `xiny' will be?}{p_end}
+{phang}{bf:{stata `"display "`xiny'""'}}{p_end}
+
+{pstd}Both {cmd:`x'} and {cmd:`y'} are lists,
+and {cmd:list in} returns a result based on the relation between them.
+
+{pstd}We can use {cmd:list in} to make the loop above more efficient:
+
+{phang}{cmd}ds, not(vallab){txt}{p_end}
+{phang}{cmd}local nolabvars `r(varlist)'{txt}{p_end}
+
+{phang}{cmd}ds, has(type string){txt}{p_end}
+{phang}{cmd}local strvars `r(varlist)'{txt}{p_end}
+
+{phang}{cmd}foreach nolabvar of local nolabvars {{txt}{p_end}
+{phang2}{cmd}local instrvars : list nolabvar in strvars{txt}{p_end}
+{phang2}{cmd}if !`instrvars' {{txt}{p_end}
+{phang3}{cmd}local numnolabvars `numnolabvars' `nolabvar'{txt}{p_end}
+{phang2}{cmd}}{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{phang}{cmd}display "`numnolabvars'"{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/Macros.do" 2"':Click here to execute.}
+
+{pstd}Notice that I wrote {cmd:list nolabvar in strvars},
+not {cmd:list `nolabvar' in `strvars'}:
+the local macro names are not enclosed in single quotes, as they usually are.
+This is because we are referring to the locals themselves, not their values;
+we do not want to expand the locals, substituting them for their values.
+Extended macro functions usually (though not always)
+look like this, expecting local macro names without the single quotes.
+
+{pstd}{cmd:list} can also return the union of two lists, that is,
+the list of elements found in one or both of two lists:
+
+{phang}{bf:{stata `"local x a b c"'}}{p_end}
+{phang}{bf:{stata `"local y 1 2 3"'}}{p_end}
+{phang}{bf:{stata `"local xory : list x | y"'}}{p_end}
+{pstd}{cmd:* Can you guess what `xory' will be?}{p_end}
+{phang}{bf:{stata `"display "`xory'""'}}{p_end}
+
+{phang}{bf:{stata `"local x a b c"'}}{p_end}
+{phang}{bf:{stata `"local y c d e"'}}{p_end}
+{phang}{bf:{stata `"local xory : list x | y"'}}{p_end}
+{pstd}{cmd:* Can you guess what `xory' will be?}{p_end}
+{phang}{bf:{stata `"display "`xory'""'}}{p_end}
+{phang}{bf:{stata `"display "`x' `y'""'}}{p_end}
+
+{pstd}{cmd:list} can return the intersection of two lists,
+the list of elements found in both lists:
+
+{phang}{bf:{stata `"local x a b c"'}}{p_end}
+{phang}{bf:{stata `"local y c d e"'}}{p_end}
+{phang}{bf:{stata `"local xandy : list x & y"'}}{p_end}
+{pstd}{cmd:* Can you guess what `xandy' will be?}{p_end}
+{phang}{bf:{stata `"display "`xandy'""'}}{p_end}
+
+{pstd}{cmd:list} can give us the elements in one list but not the other:
+
+{phang}{bf:{stata `"local x a b c"'}}{p_end}
+{phang}{bf:{stata `"local y c d e"'}}{p_end}
+{phang}{bf:{stata `"local xnoty : list x - y"'}}{p_end}
+{pstd}{cmd:* Can you guess what `xnoty' will be?}{p_end}
+{phang}{bf:{stata `"display "`xnoty'""'}}{p_end}
+
+{pstd}We can use this last feature
+for even more efficiency gains from the loop above:
+
+{phang}{bf:{stata `"local numnolabvars : list nolabvars - strvars"'}}{p_end}
+{phang}{bf:{stata `"display "`numnolabvars'""'}}{p_end}
+
+{pstd}See {help macrolists:here}
+for more on the extended macro function {cmd:list} and its many features.
+
+{pstd}So far in your Stata career,
+you may have thought of locals exclusively as single values.
+However, in some data scenarios,
+it is helpful to conceptualize them instead as {it:lists} of values,
+with elements separated by spaces.
+
+{pstd}Stata has many objects, including variables, macros,
+{help scalar:scalars}, and {help matrix:matrices},
+but it does not have a specific list object:
+there are no arrays other than matrices, which are strictly numeric.
+(In contrast, {help Mata} has both numeric and string vectors and matrices,
+as well as its own {help mf_asarray:array} object.)
+It is often possible to fill this gap with locals,
+which act like lists with the {cmd:list} and other extended macro functions.
+
+{pstd}I would also be remiss to discuss extended macro functions without
+mentioning one of the most popular functions, {helpb extended_fcn:dir}.
+{cmd:dir} returns a list of files or directories.
+For example, the following returns the list of files in
+the working directory:
+
+{phang}{bf:{stata `"local files : dir . files *"'}}{p_end}
+{phang}{bf:{stata `"macro list _files"'}}{p_end}
+
+{hline}{marker expressions}
+
+{pstd}{bf:2. Macros and expressions}
+
+{hline}
+
+{p2colset 5 84 0 0}{...}
+{pstd}{c TLC}{hline 78}{c TRC}{p_end}
+{p2col:{c |} {bf:Note on Stata 13}}{c |}{p_end}
+{pstd}{c LT}{hline 78}{c RT}{p_end}
+{p2col:{c |} The following content was written for Stata 12 and below. Stata 13's new}{c |}{p_end}
+{p2col:{c |} long string capabilities have removed the limits discussed below, and not}{c |}{p_end}
+{p2col:{c |} all examples will work as intended in Stata 13, even if you set the {helpb version}.}{c |}{p_end}
+{p2col:{c |} }{c |}{p_end}
+{p2col:{c |} However, even if you have Stata 13, it is important that you understand the}{c |}{p_end}
+{p2col:{c |} constraints outlined below: after all, Stata 13's release was just three}{c |}{p_end}
+{p2col:{c |} months ago. Many of our colleagues will continue to use earlier versions for}{c |}{p_end}
+{p2col:{c |} some time, and you may need to write code that works on their computers. You}{c |}{p_end}
+{p2col:{c |} may also sometimes be required to debug code written for earlier versions.}{c |}{p_end}
+{pstd}{c BLC}{hline 78}{c BRC}{p_end}
+{p2colreset}{...}
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 police 2", clear"'}}{p_end}
+
+{phang}{bf:{stata `"describe"'}}{p_end}
+
+{pstd}We have opened a dataset with variables
+whose names refer to the questionnaire section number and the question number.
+Suppose that now that the dataset is ready for analysis,
+we want to give them more descriptive names.
+
+{pstd}We could do so manually:
+
+{phang}{bf:{stata `"rename s1_q1 sex"'}}{p_end}
+{phang}{bf:{stata `"rename s1_q2 occupation"'}}{p_end}
+{phang}{bf:{stata `"rename s1_q2_other occupationother"'}}{p_end}
+{phang}{bf:{stata `"rename s1_q3 castename"'}}{p_end}
+{phang}{bf:{stata `"rename s1_q4 castecode"'}}{p_end}
+{phang}{bf:{stata `"rename s1_q5 age"'}}{p_end}
+{phang}{bf:{stata `"rename s1_q6 education"'}}{p_end}
+
+{pstd}This isn't too bad for this dataset, which has few variables,
+but it's repetitive,
+and it would be inefficient for larger datasets.
+
+{pstd}An alternative is to loop over
+{browse "http://www.stata.com/support/faqs/programming/looping-over-parallel-lists/":parallel lists}.
+{helpb foreach} and {helpb forvalues} both loop over a single list,
+but it is possible to use them to loop over two or more lists simultaneously,
+first using the first elements of all the lists, then the second elements,
+and so on.
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 police 2", clear"'}}{p_end}
+
+{phang}{cmd}#delimit ;{txt}{p_end}
+{phang}{cmd}* The first list to loop over;{txt}{p_end}
+{phang}{cmd}local vars{txt}{p_end}
+{phang2}{cmd}s1_q1{txt}{p_end}
+{phang2}{cmd}s1_q2{txt}{p_end}
+{phang2}{cmd}s1_q2_other{txt}{p_end}
+{phang2}{cmd}s1_q3{txt}{p_end}
+{phang2}{cmd}s1_q4{txt}{p_end}
+{phang2}{cmd}s1_q5{txt}{p_end}
+{phang2}{cmd}s1_q6{txt}{p_end}
+{phang}{cmd};{txt}{p_end}
+{phang}{cmd}* The second list to loop over;{txt}{p_end}
+{phang}{cmd}local newvars{txt}{p_end}
+{phang2}{cmd}sex{txt}{p_end}
+{phang2}{cmd}occupation{txt}{p_end}
+{phang2}{cmd}occupationother{txt}{p_end}
+{phang2}{cmd}castename{txt}{p_end}
+{phang2}{cmd}castecode{txt}{p_end}
+{phang2}{cmd}age{txt}{p_end}
+{phang2}{cmd}education{txt}{p_end}
+{phang}{cmd};{txt}{p_end}
+{phang}{cmd}#delimit cr{txt}{p_end}
+
+{phang}{cmd}local nvars = wordcount("`vars'"){txt}{p_end}
+{phang}{cmd}forvalues i = 1/`nvars' {{txt}{p_end}
+{phang2}{cmd}* `var' is the `i'th element of `vars'.{txt}{p_end}
+{phang2}{cmd}local var{space 4}= word("`vars'",{space 4}`i'){txt}{p_end}
+{phang2}{cmd}* `newvar' is the `i'th element of `newvars'.{txt}{p_end}
+{phang2}{cmd}local newvar = word("`newvars'", `i'){txt}{p_end}
+{phang2}{cmd}rename `var' `newvar'{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/Macros.do" 3"':Click here to execute.}
+
+{pstd}Let's consider a similar case.
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 police 3", clear"'}}{p_end}
+
+{phang}{bf:{stata `"describe"'}}{p_end}
+
+{pstd}These variable names came directly from the CAI program,
+but now in Stata we want to make them all lowercase.
+
+{pstd}First of all, how many variables are there?
+We used that number in the loop above,
+and to try something similar, we will have to be able to determine it.
+
+{phang}{bf:{stata `"ds"'}}{p_end}
+{phang}{bf:{stata `"local vars `r(varlist)'"'}}{p_end}
+{phang}{bf:{stata `"display "`vars'""'}}{p_end}
+{phang}{bf:{stata `"display wordcount("`vars'")"'}}{p_end}
+
+{pstd}Wait a second.
+This variable list has way more variables than {cmd:20}:
+
+{phang}{bf:{stata `"describe, short"'}}{p_end}
+
+{pstd}What does {cmd:wordcount()} think the last word (variable) is?
+
+{phang}{bf:{stata `"display word("`vars'", wordcount("`vars'"))"'}}{p_end}
+
+{pstd}That isn't even a variable name! An actual variable name has been truncated:
+
+{phang}{bf:{stata `"describe AreaDuration_Num*, fullnames"'}}{p_end}
+
+{pstd}What's happening?
+You may know that string variables are limited to 244 characters.
+Similarly, Stata's expression parser is limited
+to handling strings of 245 characters.
+Strings longer than 245 characters are automatically truncated {hline 2}
+shortened {hline 2} to 245 characters.
+
+{pstd}For example, let's repeat {cmd:`vars'} twice:
+
+{phang}{bf:{stata `"local vars2 = "`vars'" + "`vars'""'}}{p_end}
+{pstd}{cmd:* `vars2' has been truncated, even before the end of the first `vars'.}{p_end}
+{phang}{bf:{stata `"display "`vars2'""'}}{p_end}
+{pstd}{cmd:* Therefore, length("`vars2'") equals the position of truncation, 245.}{p_end}
+{phang}{bf:{stata `"display length("`vars2'")"'}}{p_end}
+
+{pstd}{help exp:Expressions} are what appear after the {cmd:=} assignment operator,
+for example, after {cmd:local} above.
+Some commands, such as {cmd:generate} and {cmd:replace},
+always take an expression,
+which you can see from the {cmd:=} operator that they require.
+Expressions also follow the {help if:{bf:if} qualifier}.
+
+{pstd}Wherever you have expressions, you have the possibility of string truncation:
+string expressions are always truncated.
+
+{pstd}In contrast to commands,
+{help functions} are strictly the domain of expressions.
+Whenever you see a function, such as {cmd:wordcount()} or {cmd:length()} above,
+you know it is part of an expression.
+You can tell a function by its signature parentheses:
+while {helpb logit} is a command, {helpb logit()} is a function.
+
+{pstd}Given this length restriction on expressions,
+the evaluation of the expression {cmd:"`vars'" + "`vars'"} can be
+at most 245 characters.
+{cmd:"`vars'"} in {cmd:wordcount("`vars'")} is truncated,
+which explains the incorrect word count.
+
+{pstd}There is even a difference between:
+
+{phang}{bf:{stata `"local allvars `vars'"'}}{p_end}
+{phang}{bf:{stata `"display "`allvars'""'}}{p_end}
+
+{pstd}and:
+
+{phang}{bf:{stata `"local allvars = "`vars'""'}}{p_end}
+{phang}{bf:{stata `"display "`allvars'""'}}{p_end}
+
+{pstd}While the first {cmd:local} did not involve an expression {hline 2}
+it assigned a string to {cmd:`allvars'} that required no evaluation {hline 2}
+the second {cmd:local} did.
+We can see this immediately from the telltale {cmd:=} assignment operator.
+
+{pstd}We have identified a problem, but what is the solution?
+
+{pstd}In many cases, there is an extended macro function for what you need.
+Here is one for word counting, an alternative to {cmd:wordcount()}:
+
+{phang}{bf:{stata `"local wc = wordcount("`vars'")"'}}{p_end}
+{phang}{bf:{stata `"display `wc'"'}}{p_end}
+
+{phang}{bf:{stata `"local wc : word count `vars'"'}}{p_end}
+{phang}{bf:{stata `"display `wc'"'}}{p_end}
+
+{pstd}Here is another for extracting individual words:
+
+{phang}{bf:{stata `"local var20 = word("`vars'", 20)"'}}{p_end}
+{phang}{bf:{stata `"display "`var20'""'}}{p_end}
+
+{phang}{bf:{stata `"local var20 : word 20 of `vars'"'}}{p_end}
+{phang}{bf:{stata `"display "`var20'""'}}{p_end}
+
+{pstd}A couple of notes on these.
+
+{pstd}First, {cmd:`vars'} in {cmd:word count} and {cmd:word} cannot be
+enclosed in double quotes;
+the result would be wrong.
+
+{pstd}Second, {cmd:word count} and {cmd:word} actually have to do with "tokens,"
+not words.
+A token is a word (characters separated by spaces)
+{it:or} a set of words enclosed in double quotes.
+Here, all tokens are words:
+
+{phang}{bf:{stata `"local sentence In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since."'}}{p_end}
+
+{phang}{bf:{stata `"display length("`sentence'")"'}}{p_end}
+{phang}{bf:{stata `"display word("`sentence'", 1)"'}}{p_end}
+
+{phang}{bf:{stata `"local word1 : word 1 of `sentence'"'}}{p_end}
+{phang}{bf:{stata `"display "`word1'""'}}{p_end}
+
+{pstd}What about the following? What is the first word?
+
+{pstd}{cmd:"I married him because I thought he was a gentleman," she said finally.}
+
+{pstd}It's {cmd:"I"}, right?
+
+{phang}{bf:{stata `"local sentence `""I married him because I thought he was a gentleman," she said finally."'"'}}{p_end}
+
+{phang}{bf:{stata `"display length(`"`sentence'"')"'}}{p_end}
+{phang}{bf:{stata `"display word(`"`sentence'"', 1)"'}}{p_end}
+
+{pstd}Recall that strings that themselves contain double quotes ({cmd:"})
+must be enclosed in {help quotes##double:"compound" double quotes} ({cmd:`"""'})
+not the normal "simple" double quotes ({cmd:""}).
+
+{pstd}Now, the {cmd:word} extended macro function returns the first token,
+different from the first word:
+
+{phang}{bf:{stata `"local word1 : word 1 of `sentence'"'}}{p_end}
+{phang}{bf:{stata `"display `"`word1'"'"'}}{p_end}
+
+{pstd}To put it another way,
+the {cmd:word count} and {cmd:word} extended macro functions
+have to do with elements of macro lists.
+In macro lists, double quotes can be used
+to join multiple words as a single element.
+{cmd:word count `sentence'} counts
+the number of elements (tokens) of the macro list {cmd:`sentence'},
+just as {cmd:word 1 of `sentence'} returns
+the {cmd:1}st element/token (not necessarily word).
+
+{pstd}Together with the {cmd:list} extended macro function,
+{cmd:word} and {cmd:word count} round out the most essential tools for
+using macro lists in Stata.
+
+{pstd}{cmd:length()} and {cmd:subinstr()} also have
+extended macro function equivalents:
+
+{phang}{bf:{stata `"display length("`vars'")"'}}{p_end}
+
+{phang}{bf:{stata `"local len : length local vars"'}}{p_end}
+{phang}{bf:{stata `"display `len'"'}}{p_end}
+
+{phang}{bf:{stata `"display subinstr("`vars'", "_", "", .)"'}}{p_end}
+
+{phang}{bf:{stata `"local newvars : subinstr local vars "_" "", all"'}}{p_end}
+{phang}{bf:{stata `"display "`newvars'""'}}{p_end}
+
+{pstd}Let's return to the dataset from before for which
+we want to convert all variable names to lowercase.
+We could make {cmd:`newvars' = lower("`vars'")},
+then loop over parallel lists,
+but we also know that {cmd:lower()} cannot handle
+a string as long as {cmd:"`vars'"}.
+
+{pstd}How about using an extended macro function instead?
+Unfortunately, this is not possible,
+because many string functions, including {cmd:lower()},
+do not have an extended macro function equivalent.
+
+{pstd}However, there are still options.
+We could use the user-written {helpb lstrfun}:
+
+{phang}{bf:{stata `"ssc install lstrfun"'}}{p_end}
+{phang}{bf:{stata `"help lstrfun"'}}{p_end}
+
+{phang}{bf:{stata `"lstrfun newvars, lower("`vars'")"'}}{p_end}
+{phang}{bf:{stata `"display "`newvars'""'}}{p_end}
+
+{pstd}{cmd:lstrfun} itself uses {help Mata}, which gives us another option.
+If extended macro functions and {cmd:lstrfun} are not sufficient,
+you will have to use Mata.
+
+{pstd}I will give a brief example of Mata.
+You don't need to learn this now.
+
+{pstd}Mata's {helpb mf_st_local:st_local()} obtains the content of Stata locals:
+
+{phang}{bf:{stata `"mata: st_local("vars")"'}}{p_end}
+
+{pstd}This can be converted to lowercase using {helpb strlower()},
+Mata's version of {cmd:lower()}.
+
+{phang}{bf:{stata `"mata: strlower(st_local("vars"))"'}}{p_end}
+
+{pstd}It can then be saved back to Stata:
+
+{phang}{bf:{stata `"mata: st_local("newvars", strlower(st_local("vars")))"'}}{p_end}
+{phang}{bf:{stata `"display "`newvars'""'}}{p_end}
+
+{pstd}Now we can rename by looping over parallel lists,
+using the extended macro functions {cmd:word count} and {cmd:word}
+instead of {cmd:wordcount()} and {cmd:word()} like we did before.
+
+{phang}{cmd}ds{txt}{p_end}
+{phang}{cmd}local vars `r(varlist)'{txt}{p_end}
+
+{phang}{cmd}lstrfun newvars, lower("`vars'"){txt}{p_end}
+
+{phang}{cmd}local nvars : word count `vars'{txt}{p_end}
+{phang}{cmd}forvalues i = 1/`nvars' {{txt}{p_end}
+{phang2}{cmd}local var{space 4}: word `i' of `vars'{txt}{p_end}
+{phang2}{cmd}local newvar : word `i' of `newvars'{txt}{p_end}
+{phang2}{cmd}rename `var' `newvar'{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/Macros.do" 4"':Click here to execute.}
+
+{pstd}In Stata 12 and higher, we could have used {helpb rename group:rename}'s
+new functionality instead:
+
+{phang}{bf:{stata `"rename *, lower"'}}{p_end}
+
+{pstd}In Stata 11 and below, the SSC program {helpb renvars} was another option:
+
+{phang}{bf:{stata `"renvars, lower"'}}{p_end}
+
+{hline}{marker gettoken}
+
+{pstd}{bf:3. gettoken}
+
+{hline}
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 police 2", clear"'}}{p_end}
+
+{pstd}Consider the following task (adopted from a real data clean!):
+find all observations for which
+at least two of the variables {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}
+have the same nonmissing values as another observation.
+
+{pstd}How could we implement this in Stata? The following is one possibility.
+Below, {cmd:dup} is {cmd:1} if an observations meets these criteria
+and {cmd:0} otherwise,
+and {cmd:dupvars} is the list of duplicate variable pairs.
+For example, {cmd:hhid "1101008"} has
+{cmd:s1_q2 == Farming or livestock} and {cmd:s1_q3 == "KUMHAR"},
+as does {cmd:hhid "1113003"},
+so both should have {cmd:dup == 1} and {cmd:"s1_q2 s1_q3"}
+within {cmd:dupvars}:
+
+{phang}{bf:{stata `"list hhid s1_q2 s1_q3 if inlist(hhid, "1101008", "1113003")"'}}{p_end}
+
+{pstd}To create {cmd:dup} and {cmd:dupvars}:
+
+{phang}{bf:{stata `"generate dup = 0"'}}{p_end}
+{phang}{bf:{stata `"generate dupvars = """'}}{p_end}
+
+{phang}{cmd}local vars s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5{txt}{p_end}
+{phang}{cmd}foreach var1 of local vars {{txt}{p_end}
+{phang2}{cmd}foreach var2 of local vars {{txt}{p_end}
+{phang3}{cmd}if "`var1'" != "`var2'" {{txt}{p_end}
+{p 16 20 2}{cmd}duplicates tag `var1' `var2', generate(loopdup){txt}{p_end}
+{p 16 20 2}{cmd}replace loopdup = 0 if missing(`var1', `var2'){txt}{p_end}
+{p 16 20 2}{cmd}replace dup = 1 if loopdup{txt}{p_end}
+{p 16 20 2}{cmd}replace dupvars = dupvars + cond(dupvars == "", "", "; ") + "`var1' `var2'" if loopdup{txt}{p_end}
+{p 16 20 2}{cmd}drop loopdup{txt}{p_end}
+{phang3}{cmd}}{txt}{p_end}
+{phang2}{cmd}}{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/Macros.do" 5"':Click here to execute.}
+
+{pstd}However, there is a problem:
+we are running over all permutations of
+{cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5},
+not combinations.
+In other words, we are looping over pairs where
+the order of the variables in the pair matters.
+For example, we are running the test
+for both {cmd:s1_q2 s1_q3} and {cmd:s1_q3 s1_q2}.
+We can confirm this in {cmd:dupvars}:
+
+{phang}{bf:{stata `"browse dupvars"'}}{p_end}
+
+{pstd}A powerful alternative is {helpb gettoken}.
+
+{pstd}{cmd:gettoken} {it:macname1} {it:macname2} {cmd::} {it:macname3}
+
+{pstd}obtains the first token of the macro {it:macname3},
+stores it in {it:macname1},
+and returns the rest of {it:macname3} in {it:macname2}. For example:
+
+{phang}{bf:{stata `"use "Raw/New Hampshire 2013 police 2", clear"'}}{p_end}
+
+{phang}{bf:{stata `"ds"'}}{p_end}
+{phang}{bf:{stata `"local vars `r(varlist)'"'}}{p_end}
+{phang}{bf:{stata `"gettoken var1 rest : vars"'}}{p_end}
+{phang}{bf:{stata `"display "`vars'""'}}{p_end}
+{phang}{bf:{stata `"display "`var1'""'}}{p_end}
+{phang}{bf:{stata `"display "`rest'""'}}{p_end}
+
+{marker combinations_loop}{...}
+{pstd}We can use {cmd:gettoken} to restrict the loop above to combinations:
+
+{phang}{bf:{stata `"generate dup = 0"'}}{p_end}
+{phang}{bf:{stata `"generate dupvars = """'}}{p_end}
+
+{phang}{cmd}local vars s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5{txt}{p_end}
+{phang}{cmd}local nvars : word count `vars'{txt}{p_end}
+{phang}{cmd}forvalues i = 1/`nvars' {{txt}{p_end}
+{phang2}{cmd}gettoken var1 vars : vars{txt}{p_end}
+
+{phang2}{cmd}foreach var2 of local vars {{txt}{p_end}
+{phang3}{cmd}duplicates tag `var1' `var2', generate(loopdup){txt}{p_end}
+{phang3}{cmd}replace loopdup = 0 if missing(`var1', `var2'){txt}{p_end}
+{phang3}{cmd}replace dup = 1 if loopdup{txt}{p_end}
+{phang3}{cmd}replace dupvars = dupvars + cond(dupvars == "", "", "; ") + "`var1' `var2'" if loopdup{txt}{p_end}
+{phang3}{cmd}drop loopdup{txt}{p_end}
+{phang2}{cmd}}{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/Macros.do" 6"':Click here to execute.}
+
+{pstd}{cmd:dupvars} now has no duplicate pairs:
+
+{phang}{bf:{stata `"browse dupvars"'}}{p_end}
+
+{pstd}{cmd:gettoken} takes a macro list and returns two locals.
+One is the first element of the list {hline 2} though
+we could already get this using the {cmd:word} extended macro function.
+{cmd:gettoken} also returns the remainder of the list, that is,
+the list with the first element removed,
+and it's this novel capability that makes {cmd:gettoken} worth learning.
+
+{hline}{marker q2}
+
+{pstd}{bf:Question 2}
+
+{hline}
+
+{pstd}Modify the {view `""SMCL/Modules/Macros.smcl"##combinations_loop"':loop over combinations}
+from earlier in the module
+to loop over all combinations
+of {it:three} of {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}.
+That is, find all observations for which
+at least three of the variables {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}
+have the same nonmissing values as another observation.
+{txt}{sf}{ul off}{...}
+
+{hline}{marker arguments}
+
+{pstd}{bf:4. Passing arguments to do-files}
+
+{hline}
+
+{pstd}You often need to pass information from one do-file to another,
+for example, from a master do-file to the do-files it runs.
+What are the options?
+
+{pstd}One possibility is to use globals:
+
+{phang}{bf:{stata `"sysuse auto, clear"'}}{p_end}
+
+{phang}{bf:{stata `"global y mpg"'}}{p_end}
+{phang}{bf:{stata `"global x weight"'}}{p_end}
+
+{phang}{bf:{stata `"doedit "Do/My analysis - globals""'}}{p_end}
+{phang}{bf:{stata `"do "Do/My analysis - globals""'}}{p_end}
+
+{pstd}This works, but there are downsides to globals.
+
+{pstd}Two different do-files can use the same globals. If these do-files interact,
+mix-ups can happen, and a global can be accidentally overwritten.
+
+{pstd}{cmd:"Analysis - parent.do"} regresses {cmd:mpg} separately
+on all other numeric variables in the dataset:
+
+{phang}{bf:{stata `"sysuse auto, clear"'}}{p_end}
+
+{phang}{bf:{stata `"do "Do/My analysis - parent""'}}{p_end}
+
+{pstd}Now let's run {cmd:"Analysis - globals.do"} again:
+
+{phang}{bf:{stata `"do "Do/My analysis - globals""'}}{p_end}
+
+{pstd}{cmd:"Analysis - globals.do"} has completed a regression
+of {cmd:mpg} on {cmd:foreign},
+not on {cmd:weight} as expected.
+What happened?
+
+{phang}{bf:{stata `"doedit "Do/My analysis - parent""'}}{p_end}
+
+{pstd}{cmd:"Analysis - parent.do"} itself ran
+{cmd:"Analysis - globals.do"},
+using the globals {cmd:$y} and {cmd:$x}
+and overwriting the original value of {cmd:$x}, {cmd:weight}.
+
+{pstd}Here, we could get around this by being careful
+to define {cmd:$y} and {cmd:$x}
+right before we run {cmd:"Analysis - globals.do"}.
+For example, we could have redefined {cmd:$y} and {cmd:$x}
+as {cmd:mpg} and {cmd:weight}
+before the last run of {cmd:"Analysis - globals.do"} above.
+However, for complex data management systems with
+many do-files and many globals,
+it can be hard to keep track of which do-files rely
+on which global definitions at which time.
+It is also more difficult to share do-files,
+since you have to make sure that others' do-files
+do not use the same globals as yours.
+If nothing else, globals have the potential
+to create hard-to-find bugs in your code.
+
+{pstd}None of this means that you should stop using globals, which can be very useful.
+However, there are ways to minimize these risks.
+First, do-files that are passed information through globals
+should not modify those globals,
+in case a master do-file will later run another do-file with the same globals.
+Second, using longer global names decreases the chances that your do-files
+will use the same globals as someone else's.
+
+{pstd}The only way to eliminate these risks is to stop using globals.
+If you are working on a complex data project,
+you may find that globals are more of a headache than they're worth.
+In that case, there are other ways to pass information across do-files.
+
+{pstd}One of these is {cmd:args}.
+Below, notice how {cmd:mpg weight} is specified after
+{cmd:do "Do/My analysis - args"}:
+
+{phang}{bf:{stata `"sysuse auto, clear"'}}{p_end}
+
+{phang}{bf:{stata `"do "Do/My analysis - args" mpg weight"'}}{p_end}
+
+{phang}{bf:{stata `"doedit "Do/My analysis - args""'}}{p_end}
+
+{pstd}{cmd:args} worked great here,
+but it can be confusing if there are many arguments.
+Compare {cmd:args} from {cmd:"Analysis - args.do"}:
+
+{pstd}{cmd:args y x}
+
+{pstd}with {cmd:args} from a more complex data management do-file:
+
+{p 4 8 2}
+{cmd:args bccomplete checkday checkdkrfday lag examinesiddups quitreview maxdate showunedited maxsalivaid datedir}
+
+{pstd}This is from one of my do-files as a PA in Kenya!
+Here, you have to be careful to run the do-file
+with all these arguments in exactly the right order.
+There is also potential for bugs.
+
+{pstd}This brings us to the next option: {cmd:syntax}.
+Below, {cmd:mpg} and {cmd:weight} have been specified to the do-file
+through options {cmd:y()} and {cmd:x()}.
+
+{phang}{bf:{stata `"sysuse auto, clear"'}}{p_end}
+
+{phang}{bf:{stata `"do "Do/My analysis - syntax" y(mpg) x(weight)"'}}{p_end}
+
+{phang}{bf:{stata `"doedit "Do/My analysis - syntax""'}}{p_end}
+
+{pstd}One common use of globals is storing directory names.
+For example, I might put the location of a project folder in a global:
+
+{phang}{bf:{stata `"global projectdir C:\Users\mwhite.IPA\Dropbox\RM&T\New Hampshire 2013 advanced Stata training\My project folder"'}}{p_end}
+
+{pstd}When I run do-files that use this directory,
+they can refer to {cmd:$projectdir}.
+For these do-files to work on others' computers,
+only {cmd:$projectdir} needs to be changed.
+
+{pstd}An alternative is the SSC package {helpb fastcd}:
+
+{phang}{bf:{stata `"ssc install fastcd"'}}{p_end}
+{phang}{bf:{stata `"help fastcd"'}}{p_end}
+
+{phang}{bf:{stata `"cd "My project folder""'}}{p_end}
+
+{pstd}Adding the project folder to the database:
+
+{phang}{bf:{stata `"c cur myproject"'}}{p_end}
+{phang}{bf:{stata `"c"'}}{p_end}
+
+{pstd}Now no matter what our working directory is...
+
+{phang}{bf:{stata `"cd "C:\""'}}{p_end}
+
+{pstd}... it is easy to return to the project folder.
+
+{phang}{bf:{stata `"c myproject"'}}{p_end}
+
+{pstd}Any computer with {cmd:myproject} in the {cmd:fastcd} database
+can use this one command:
+no globals necessary.
+
+{pstd}Now returning to the training folder:
+
+{phang}{bf:{stata `"cd .."'}}{p_end}
