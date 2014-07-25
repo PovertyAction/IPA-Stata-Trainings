@@ -45,16 +45,21 @@ The second option, {bf:firstrow} is also important, in that it tells Stata to tr
 row of the Excel data as Stata variable names.
 
 {pstd}Let's import the same data again, except that now it's stored as a comma delimited (.csv) file. The command
-to be used here is {helpb import delimited:import delimited}.
+to be used here is {helpb import delimited:import delimited} if you're using Stata 13 or above:
 
 {pstd}{bf:{stata `"import delimited using "Raw/Demo Info.csv", clear varnames(1)"'}}{p_end}
 {pstd}{bf:{stata `"browse"'}}{p_end}
 
-{pstd}Note the different option for specifying that the first row should be the variable
+{pstd}or the equivalent {helpb insheet:insheet} if using Stata 12 or below:
+
+{pstd}{bf:{stata `"insheet using "Raw/Demo Info.csv", clear names"'}}{p_end}
+{pstd}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Note the different options for specifying that the first row should be the variable
 name for delimited data, but the same {bf:clear} option as before. Here we have
 imported a comma delimited file, but Stata can read in text files which use other
-kinds of delimeters as well, such as spaces, tabs and semicolons. See the
-{helpb import delimited:help file} for more.
+kinds of delimeters as well, such as spaces, tabs, and semicolons. See the
+{helpb insheet:help file} for more.
 
 {pstd}After any data import, it is critical to inspect our data to verify everything worked
 as intended. Given we have so few variables and observations here, a {cmd:browse}

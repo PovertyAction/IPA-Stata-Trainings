@@ -35,16 +35,21 @@ The second option, {bf:firstrow} is also important, in that it tells Stata to tr
 row of the Excel data as Stata variable names. 
 
 Let's import the same data again, except that now it's stored as a comma delimited (.csv) file. The command
-to be used here is {helpb import delimited:import delimited}. */
+to be used here is {helpb import delimited:import delimited} if you're using Stata 13 or above: */
 
 import delimited using {DATA_DEMOCSV}, clear varnames(1)
 browse
 
-/* Note the different option for specifying that the first row should be the variable
+*or the equivalent {helpb insheet:insheet} if using Stata 12 or below: 
+
+insheet using {DATA_DEMOCSV}, clear names
+browse
+
+/* Note the different options for specifying that the first row should be the variable
 name for delimited data, but the same {bf:clear} option as before. Here we have
 imported a comma delimited file, but Stata can read in text files which use other
-kinds of delimeters as well, such as spaces, tabs and semicolons. See the
-{helpb import delimited:help file} for more. 
+kinds of delimeters as well, such as spaces, tabs, and semicolons. See the
+{helpb insheet:help file} for more. 
 
 After any data import, it is critical to inspect our data to verify everything worked
 as intended. Given we have so few variables and observations here, a {cmd:browse}
@@ -68,7 +73,7 @@ modifications might you want to make to this dataset?
 
 {USE}
 
-/*When working with data, you will often want to add additional variables to existing
+/* When working with data, you will often want to add additional variables to existing
 observations. For instance, you've collected baseline data and now want to add endline
 data so as to compare changes across key variables. This task will involve
 {helpb merge:merging} datasets. A critical point to consider when merging
