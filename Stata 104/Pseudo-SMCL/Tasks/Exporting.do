@@ -34,7 +34,7 @@ Now navigate into the "Raw/Tables and Graphs" folder to check out the file. Let'
 of the above syntax. First, we define which variables we want to export (here they are
 hhid, suveyid, sex, age, and educ). Then we define the file path where we want to export to (note that
 quotes are necessary here because there are spaces in the file path). Finally, we include two options:
-{bf:first(var)} indicates we want the variable name as the first row in Excel, and {bf:replace} which overwrites
+{bf:firstrow(var)} indicates we want the variable name as the first row in Excel, and {bf:replace} which overwrites
 any existing file with the same name. Feel free to test this out: re-run the command but change the list
 of variables to export. Though remember to close the Excel file before doing so! 
 
@@ -43,18 +43,30 @@ is to export the {helpb label:value labels} rather than the underlying values of
 variables (e.g. 'Male' and 'Female' rather than 1 and 2). If you want to export these values instead, specify
 the option {bf:nolabel} at the end of the command. 
 
-Let's briefly touch on {helpb export delimited:export delimited}. 
+Let's briefly touch on exporting to text delimited formats: 
+
+In Stata 13, the command to use is {helpb export delimited:export delimited}. 
 
 {TRYITCMD}
 export delimited using "Raw/Tables and Graphs/text_delimited", replace
+{DEF}
+
+And in Stata 12 and below it is {helpb outsheet:outsheet}: 
+
+{TRYITCMD}
+outsheet using "Raw/Tables and Graphs/text_delimited.csv", comma replace
 {DEF}
  
 Here we export the entire dataset as a text delimited (.csv) file. Again navigate to the "Raw/Tables and Graphs"
 folder to open the file. Note that here, we didn't need to specify an option
 to output the variable name as the first row, but still used the {bf:replace} option. 
 
-Also, note that for both {cmd:export} variations, you can limit the output to just a certain subset
-of the data, using the {helpb if:if} and {helpb in:in} qualifiers. Feel free to play around with the above
+Notice for the {cmd:outsheet} command, we need to specify the {bf:.csv} in the file path, as well
+as the {bf:comma} option, as the default option is to export in a tab delimited format. Note that {cmd:outsheet}
+has been superseded by {cmd:export delimited} as of Stata 13. 
+
+When using all of the above {cmd:export} variations, you can limit the output to just a certain subset
+of the data, using the {helpb if:if} and {helpb in:in} qualifiers. Feel free to play around with these
 commands to gain more understanding of how they work. 
 
 {hline}{marker exporttables}
