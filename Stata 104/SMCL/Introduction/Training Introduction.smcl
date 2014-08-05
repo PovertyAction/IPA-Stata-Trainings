@@ -109,6 +109,13 @@ Click each to install them.
 {hline 2} essentially a fuzzy merge{p_end}
 {pstd}{bf:{stata "ssc install strgroup":strgroup}}{p_end}
 {phang}{space 2}o Match strings based on their Levenshtein edit distance{p_end}
+{pstd}{bf:{stata "ssc install orth_out":orth_out}}{p_end}
+{phang}{space 2}o Outputes summary stats and orthogonality tables{p_end}
+{pstd}{bf:{stata "ssc install estout":estout}}{p_end}
+{phang}{space 2}o Makes regression tables from stored estimates{p_end}
+{pstd}{bf:{stata "ssc install eclplot":eclplot}}{p_end}
+{phang}{space 2}o Plots estimates with confidence limits{p_end}
+
 
 {pstd}{bf}{...}{it}{...}{ul on}{...}
 (All pages have a footer like the one below

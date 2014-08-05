@@ -88,6 +88,12 @@ Click each to install them.
 {hline 2} essentially a fuzzy merge{p_end}
 {P}{bf:{stata "ssc install strgroup":strgroup}}{p_end}
 {phang}  o Match strings based on their Levenshtein edit distance{p_end}
+{P}{bf:{stata "ssc install orth_out":orth_out}}{p_end}
+{phang}  o Outputes summary stats and orthogonality tables{p_end}
+{P}{bf:{stata "ssc install estout":estout}}{p_end}
+{phang}  o Makes regression tables from stored estimates{p_end}
+{P}{bf:{stata "ssc install eclplot":eclplot}}{p_end}
+{phang}  o Plots estimates with confidence limits{p_end}
 
 {BF}{IT}{UL}
 (All pages have a footer like the one below
