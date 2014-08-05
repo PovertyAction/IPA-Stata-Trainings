@@ -77,20 +77,8 @@ it will appear as Problem Set Question 3.
 Finally, this training uses or refers to the following user-written programs.
 Click each to install them.
 
-{P}{bf:{stata "ssc install dummies2":dummies2}}{p_end}
-{phang}  o Create indicator variables from categorical variable or vice versa{p_end}
-{P}{bf:{stata "ssc install dummieslab":dummieslab}}{p_end}
-{phang}  o Generate dummy variables from categorical variable using value label names{p_end}
 {P}{bf:{stata "ssc install egenmore":egenmore}}{p_end}
 {phang}  o Extensions to generate (more extras){p_end}
-{P}{bf:{stata "ssc install labutil":labutil}}{p_end}
-{phang}  o Modules for managing value and variable labels{p_end}
-{P}{bf:{stata "ssc install labutil2":labutil2}}{p_end}
-{phang}  o Bundle of programs to manage value and variable labels{p_end}
-{P}{bf:{stata "net search renvars":renvars}}{p_end}
-{phang}  o Rename groups of variables{p_end}
-{P}{bf:{stata "ssc install todummy":todummy}}{p_end}
-{phang}  o Create dummy variables
 
 {BF}{IT}{UL}
 (All pages have a footer like the one below
