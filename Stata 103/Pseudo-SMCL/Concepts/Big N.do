@@ -9,7 +9,7 @@
 display _N
 
 /* To return to that most important of checks {hline 2}
-that the unique ID is in fact unique}{hline 2}
+that the unique ID is in fact unique {hline 2}
 {cmd:_N} can be used to determine
 whether there are duplicate IDs.
 
