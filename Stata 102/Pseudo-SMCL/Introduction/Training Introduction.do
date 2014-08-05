@@ -77,14 +77,16 @@ it will appear as Problem Set Question 3.
 Finally, this training uses or refers to the following user-written programs.
 Click each to install them.
 
-{P}{bf:{stata "ssc install dummies2":dummies2}}{p_end}
-{phang}  o Create indicator variables from categorical variable or vice versa{p_end}
+{P}{bf:{stata "ssc install labutil":labutil}}{p_end}
+{phang}  o Modules for managing value and variable labels{p_end}
+{P}{bf:{stata "ssc install labutil2":labutil2}}{p_end}
+{phang}  o Bundle of programs to manage value and variable labels{p_end}
 {P}{bf:{stata "ssc install cfout":cfout}}{p_end}
 {phang}  o Compare two datasets, optionally saving the list of differences to file{p_end}
 {P}{bf:{stata "ssc install cfby":cfby}}{p_end}
 {phang}  o Compare two files to get the number differences "by" a common variable{p_end}
 {P}{bf:{stata "ssc install odkmeta":odkmeta}}{p_end}
-{phang}  o Creates do-file to import ODK meta into Stata{p_end}
+{phang}  o Creates do-file to import ODK metadata into Stata{p_end}
 {P}{bf:{stata "ssc install outreg2, replace":outreg2}}{p_end}
 {phang}  o Arrange regression, summary, and tabulation into an illustrative table{p_end}
 {P}{bf:{stata "ssc install estout":estout}}{p_end}
