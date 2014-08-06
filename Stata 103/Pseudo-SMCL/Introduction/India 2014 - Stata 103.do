@@ -10,7 +10,9 @@ for valuable contributions to the course.
 This training introduces essential Stata concepts
 and shows how to practically apply them to a variety of data tasks.
 Completing the training provides the basis for the more advanced data management
-and cleaning tasks that are introduced in {bf:Stata 104}. 
+and cleaning tasks that are introduced in {bf:Stata 104}. If you have any questions
+about this training or have suggestions for improvements, email
+IPA Research Support at researchsupport@poverty-action.org
 
 {INTRO}
 {DUMMIES}

@@ -8,7 +8,8 @@ for valuable contributions to the course.
 This training introduces foundational Stata concepts
 and will allow the user to complete essential data manipulation and analysis tasks. 
 Completing the training provides the basis for the more advanced Stata concepts
-introduced in {bf:Stata 103}. 
+introduced in {bf:Stata 103}. If you have any questions about this training or
+have suggestions for improvements, email IPA Research Support at researchsupport@poverty-action.org
 
 {INTRO}
 {RESOURCES}
