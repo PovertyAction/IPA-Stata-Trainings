@@ -100,7 +100,7 @@ unique ID should be kept in string format, but let's change it just for the purp
 destring hhid, generate(hhid_num)
 {DEF} 
 
-We have now created a string version of {bf:hhid} called {bf:hhid_num}. Let's {cmd:browse}, {cmd:describe} and {cmd:summarize}
+We have now created a numeric version of {bf:hhid} called {bf:hhid_num}. Let's {cmd:browse}, {cmd:describe} and {cmd:summarize}
 both variables. */
 
 browse hhid hhid_num
@@ -161,7 +161,7 @@ Why did this occur?
 {hline}
 
 As we have seen, {cmd:destring} and {cmd:tostring} offer a relatively simple way of converting
-from a string variable to a numeric one and vice versa. One major disadvantage, is that
+from a string variable to a numeric one and vice versa. One major disadvantage is that
 {cmd:tostring} does not preserve any value labels associated with the variable.
 Without the {cmd:force} or {cmd:ignore()} options, {cmd:destring} cannot
 be used with a variable unless it is composed solely of numbers. The solution to these issues is to use
@@ -211,7 +211,7 @@ use {cmd:encode} or use {cmd:destring} with option {cmd:ignore()} or {cmd:force}
 
 If a numeric variable is not value labeled, convert it to string using {cmd:tostring}.
 If the variable is value labeled,
-you can use {cmd:encode} to retain the value label text or
+you can use {cmd:decode} to retain the value label text or
 {cmd:tostring} for just the numeric values.
 
 For more on the history of these sets of commands, see this interesting Stata
