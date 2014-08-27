@@ -1,5 +1,5 @@
-The training start page is "New Hampshire 2013 Advanced.smcl".
-To get started, double-click "New Hampshire 2013 Advanced.smcl" or
+The training start page is "Stata 201.smcl".
+To get started, double-click "Stata 201.smcl" or
 open it from within Stata through File » View.
 
 Matt White

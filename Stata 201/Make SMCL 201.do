@@ -340,7 +340,7 @@ Column 5: The args part of {view args:text}.
 Column 6: The text part of {view args:text}. */
 #d ;
 loc codeslinks
-	{START}			0	0	1	"New Hampshire 2013 Advanced.smcl"				"High Intermediate Start"
+	{START}			0	0	1	"Stata 201.smcl"								"High Intermediate Start"
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"	""
 	{MACROS}		1	1	1	"SMCL/Modules/Macros.smcl"						""
 	{RESHAPE}		1	1	1	"SMCL/Modules/reshape.smcl"						"{bf:reshape}"
@@ -619,15 +619,15 @@ forv i = 1/`:list sizeof infiles' {
 }
 
 * Move the start page to a different directory.
-loc intro New Hampshire 2013 Advanced.smcl
+loc intro Stata 201.smcl
 copy  "SMCL/Introduction/`intro'" "`intro'", replace
 erase "SMCL/Introduction/`intro'"
-//view "`intro'"
-cd "`curdir'"
 
 
 /* -------------------------------------------------------------------------- */
 					/* finish up			*/
+
+cd "`curdir'"
 
 timer off 1
 timer list 1
