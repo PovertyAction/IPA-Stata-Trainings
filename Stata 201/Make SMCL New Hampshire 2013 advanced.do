@@ -514,6 +514,8 @@ foreach i of numlist 2 46 48 {
 foreach dir in SMCL Do {
 	foreach subdir of loc dirstruct {
 		loc files : dir "`dir'/`subdir'" file *
+		loc placeholder empty.txt
+		loc files : list files - placeholder
 		foreach file of loc files {
 			erase "`dir'/`subdir'/`file'"
 		}
