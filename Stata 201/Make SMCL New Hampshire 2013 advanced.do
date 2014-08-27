@@ -625,10 +625,6 @@ forv i = 1/`:list sizeof infiles' {
 	#d cr
 }
 
-* Back up "Do to SMCL.do".
-loc date = strofreal(date(c(current_date), "DMY"), "%tdCCYY.NN.DD")
-copy "`otherstata'/Do to SMCL.do" "Archived/Do to SMCL/Do to SMCL `date'.do", replace
-
 * Move the start page to a different directory.
 loc intro New Hampshire 2013 Advanced.smcl
 copy  "SMCL/Introduction/`intro'" "`intro'", replace
