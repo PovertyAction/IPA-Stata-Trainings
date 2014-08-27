@@ -44,6 +44,8 @@ After this, the command `c stata_training` will change the working directory to 
 
 `fastcd` is the name of the SSC package, not the command itself; the command is named `c`. To change the working directory, type `c` in Stata, not `fastcd`. To view the help file, type `help fastcd`, not `help c`.
 
+Finally, add the `ado` directory and all its subdirectories to your [ado-path](http://www.stata.com/help.cgi?adopath).
+
 Pseudo-SMCL
 -----------
 
