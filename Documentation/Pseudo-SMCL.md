@@ -1,7 +1,73 @@
 Guide to Pseudo-SMCL
 ====================
 
-All three trainings make use of a modified form of SMCL named "pseudo-SMCL." The following is a guide to the pseudo-SMCL directives.
+Courses 102 and above are written in a modified form of SMCL that we have uninventively named "pseudo-SMCL." Pseudo-SMCL files are converted to SMCL files before being shared: their role is solely to facilitate the efficient creation of SMCL files, and they are not distributed to trainees on their own. Pseudo-SMCL files look like do-files, with runnable commands on their own lines and text in comments. [`Do to SMCL.do`](/Do to SMCL.do) converts such do-files to SMCL files, with comments converted to text in paragraph mode and commands enclosed in SMCL `{stata}` directives.
+
+For instance, a pseudo-SMCL file may appear as follows:
+
+```
+* Load the auto dataset.
+
+sysuse auto
+
+* Summarize a variable.
+
+summarize foreign
+```
+
+This example is so similar to a do-file that it is even runnable. `Do to SMCL.do` will then convert it to a nice SMCL file that can be used for training:
+
+```
+{pstd}Load the auto dataset.
+
+{phang}{bf:{stata `"sysuse auto"'}}{p_end}
+
+{pstd}Summarize a variable.
+
+{phang}{bf:{stata `"summarize foreign"'}}{p_end}
+```
+
+SMCL directives in pseudo-SMCL comments pass through as-is to the SMCL file. The following pseudo-SMCL:
+
+```
+* Load the {it:auto} dataset.
+
+sysuse auto
+```
+
+is converted to:
+
+```
+{pstd}Load the {it:auto} dataset.
+
+{phang}{bf:{stata `"sysuse auto"'}}{p_end}
+```
+
+Code blocks such as loops are saved in a do-file outside the SMCL file. For each block, the SMCL file contains a `{stata}` directive that runs the corresponding block within the do-file.
+
+Pseudo-SMCL also contains its own directives, listed in the sections below. By convention, their names are all uppercase. For instance, `{DEF}` is a pseudo-SMCL directive that restores the text style to its default: it is equivalent to the SMCL `{txt}{sf}{ul off}{...}`. Pseudo-SMCL directives are implemented through simple text substitutions: for example, `Do to SMCL.do` simply replaces all instances of `{DEF}` in pseudo-SMCL files with `{txt}{sf}{ul off}{...}`.
+
+Pseudo-SMCL directives are implemented through simple substitutions, which means that while SMCL directives are not allowed on command lines, pseudo-SMCL directives are. For instance, the directive `{DATA}` may be associated with the dataset name `auto`. Then the following pseudo-SMCL:
+
+```
+* Load the auto dataset.
+
+sysuse {DATA}
+```
+
+is converted to:
+
+```
+{pstd}Load the auto dataset.
+
+{phang}{bf:{stata `"sysuse auto"'}}{p_end}
+```
+
+Note that the addition of pseudo-SMCL directives to command lines makes those files no longer runnable as do-files. There are other differences between pseudo-SMCL and do-files. For instance, do-files are more permissive as to where comment indicators may be placed.
+
+Pseudo-SMCL is not consistent across the training courses: the exact substitutions may differ between 102 and 103, for instance. Each course is associated with its own pseudo-SMCL conversion do-file, usually named `Make SMCL *.do`, which calls `Do to SMCL.do` with the list of the course's pseudo-SMCL directives.
+
+There are a few more advanced pseudo-SMCL directives. For instance, `#define` allows the definition of pseudo-SMCL directives on the fly from within pseudo-SMCL files. These newly defined directives may even be used in other pseudo-SMCL files.
 
 ### Conventions and abbreviations
 

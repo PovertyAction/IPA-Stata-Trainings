@@ -41,3 +41,5 @@ After this, the command `c train202` will change the working directory to `Stata
 
 Pseudo-SMCL
 -----------
+
+Courses 102 and above are written in a modified form of SMCL that we have uninventively named "pseudo-SMCL." See [this guide](/Documentation/Pseudo-SMCL.md) for details.
