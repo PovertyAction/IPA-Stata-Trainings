@@ -19,7 +19,8 @@ loc eol `=char(13)'`=char(10)'
 * Width of text boxes (not including indent)
 loc boxwidth 80
 
-c adv13
+c stata_training
+cd "Stata 201"
 u "Raw/New Hampshire 2013 police 3", clear
 unab all : _all
 assert `:length loc all' > 245

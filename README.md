@@ -20,7 +20,7 @@ The `Session Notes` folder contains notes from New Haven Stata trainings.
 User-written programs
 ---------------------
 
-Type the following commands in Stata to install the user-written programs used for the Stata training courses:
+Type the following commands in Stata to install the user-written programs used for Stata training development. These programs are not required for trainees who wish to complete the courses, but rather for those who wish to contribute to the training.
 
 ```
 ssc install fastcd
@@ -29,13 +29,18 @@ ssc install fastcd
 Next, set up `fastcd` to work on your computer as follows:
 
 ```
+* Change the working directory to the location of Stata_Training on
+* your computer.
+cd ...
+c cur stata_training
+
 * Change the working directory to the location of Stata_Training/Stata 202 on
 * your computer.
 cd ...
 c cur train202
 ```
 
-After this, the command `c train202` will change the working directory to `Stata_Training/Stata 202`.
+After this, the command `c stata_training` will change the working directory to `Stata_Training`; `c train202` will change it to `Stata_Training/Stata 202`.
 
 `fastcd` is the name of the SSC package, not the command itself; the command is named `c`. To change the working directory, type `c` in Stata, not `fastcd`. To view the help file, type `help fastcd`, not `help c`.
 
