@@ -189,11 +189,6 @@ timer on 1
 
 loc curdir "`c(pwd)'"
 
-c otherstata
-loc otherstata "`c(pwd)'"
-
-c adv13
-
 foreach dir of loc dirstruct {
 	loc files : dir "Pseudo-SMCL/`dir'" file "*.do", respect
 	foreach file of loc files {
@@ -536,7 +531,7 @@ forv i = 1/`:list sizeof infiles' {
 	loc isans    : word `i' of `ans'
 
 	#d ;
-	do "`otherstata'/Do to SMCL.do"
+	do "../Do to SMCL.do"
 		infile("`infile'") smclfile("`smclfile'") dofile("`dofile'")
 		subinstr(
 			`define'
