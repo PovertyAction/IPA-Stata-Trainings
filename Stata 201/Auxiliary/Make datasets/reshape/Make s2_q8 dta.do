@@ -29,5 +29,5 @@ lab var id "Unique ID"
 lab var s2_q8 "Of the 12 options, choose up to 4."
 
 compress
-c adv 13
-svold "Raw/New Hampshire 2013 s2_q8", replace 10
+c stata_training
+svold "Stata 201/Raw/s2_q8", replace 10
