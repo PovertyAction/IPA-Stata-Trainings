@@ -1,2 +1,3 @@
 *.smcl
 Do/*/*.do
+Raw/*.dta
