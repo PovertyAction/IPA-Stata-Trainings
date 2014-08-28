@@ -416,7 +416,7 @@ forv i = 1/`:list sizeof infiles' {
 			"{DATA_S2_Q8}"    = `""Raw/New Hampshire 2013 s2_q8""' \
 			"{DATA_PROJ1}"    = `""Raw/New Hampshire 2013 projects 1""' \
 			"{DATA_PROJ2}"    = `""Raw/New Hampshire 2013 projects 2""' \
-			"{DATA_HH}"       = `""Raw/New Hampshire 2013 household""' \
+			"{DATA_HH}"       = `""Raw/Household""' \
 
 			"{HEAD}"     = "`head'" \
 			"{HEAD1}"    = `"{view `"{START-}"':"' \
