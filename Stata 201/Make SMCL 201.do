@@ -408,12 +408,6 @@ forv i = 1/`:list sizeof infiles' {
 			"{VAR_WD}"      = "C:\Users\mwhite.IPA\Dropbox\RM&T\New Hampshire 2013 advanced Stata training\My project folder" \
 			"{VAR_WDBASE}"  = "My project folder" \
 
-			"{USE}"           = "use {DATA}, clear" \
-			"{DATA}"          = `""Raw/India 2013 high intermediate""' \
-			"{DATA_BASE}"     = "India 2013 high intermediate" \
-			"{DATA_BACK}"     = `""Raw\India 2013 high intermediate""' \
-			"{DATA_CASTECSV}" = `""Raw/Clean castename.csv""' \
-			"{DATA_CASTEDTA}" = `""Raw/Clean castename""' \
 			"{DATA_POLICE1}"   = `""Raw/New Hampshire 2013 police 1""' \
 			"{DATA_POLICE2}"  = `""Raw/New Hampshire 2013 police 2""' \
 			"{DATA_POLICE3}"  = `""Raw/New Hampshire 2013 police 3""' \
