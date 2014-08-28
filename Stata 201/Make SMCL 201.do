@@ -204,7 +204,6 @@ loc codeslinks
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"	""
 	{MACROS}		1	1	1	"SMCL/Modules/Macros.smcl"						""
 	{RESHAPE}		1	1	1	"SMCL/Modules/reshape.smcl"						"{bf:reshape}"
-	{EXPORT}		0	1	1	"SMCL/Modules/Exporting Tables.smcl"			"Exporting Tables"
 ;
 #d cr
 assert mod(`:list sizeof codeslinks', 6) == 0
