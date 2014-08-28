@@ -34,5 +34,5 @@ lab de cesd
 lab val cesd1 cesd
 
 compress
-c adv13
-svold "Raw/New Hampshire 2013 psych", replace 10
+c stata_training
+svold "Stata 201/Raw/Psych", replace 10
