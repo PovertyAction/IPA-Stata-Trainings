@@ -9,12 +9,6 @@ loc ansdirs	Answers
 loc maxq 2
 conf integer n `maxq'
 assert `maxq' > 0
-* Default indent
-loc p {pstd}
-* End-of-line delimiter for SMCL files
-loc eol `=char(13)'`=char(10)'
-* Width of text boxes (not including indent)
-loc boxwidth 80
 
 c stata_training
 cd "Stata 201"
@@ -356,12 +350,6 @@ loc head
 ;
 #d cr
 
-* New line directives
-loc new ""{NEW}" = "`eol'""
-foreach i of numlist 2 46 48 {
-	loc new "`new' \ "{NEW`i'}" = "`:di _dup(`i') "`eol'"'""
-}
-
 * Erase previous SMCL (not pseudo-SMCL) files and their associated do-files.
 foreach dir in SMCL Do {
 	foreach subdir of loc dirstruct {
@@ -373,6 +361,8 @@ foreach dir in SMCL Do {
 		}
 	}
 }
+
+include "../Shared directives"
 
 * Loop over the pseudo-SMCL files, converting each to a SMCL file and do-file.
 assert `:list sizeof infiles' == `:list sizeof smclfiles' & `:list sizeof infiles' == `:list sizeof dofiles'
@@ -391,17 +381,15 @@ forv i = 1/`:list sizeof infiles' {
 	do "../Do to SMCL.do"
 		infile("`infile'") smclfile("`smclfile'") dofile("`dofile'")
 		subinstr(
+			"{HEAD}"     = "`head'" \
+			"{HEAD1}"    = `"{view `"{START-}"':"' \
+
 			`define'
 			`questions'
-			"{CT}"   = "/{STAR}" \
-			"{CT/}"  = "{STAR}/" \
-			"{STAR}" = "*" \
-			"{SEMI}" = ";" \
-			"{LSQ}"  = "`" \
-			"{DQ}"   = `"""' \
-			"QTITLE" = "`=cond(`isans', "ANS", "--")'" \
-			"{AQ}"   = "`=cond(`isans', "{IT}", "")'" \
+			`shared_subinstr1'
 			`qe'
+			`links'
+			`shared_subinstr2'
 
 			"{VAR_BADK}"    = "`badk'" \
 			"{VAR_LASTVAR}" = "`var_lastvar'" \
@@ -416,53 +404,7 @@ forv i = 1/`:list sizeof infiles' {
 			"{DATA_S2_Q8}"    = `""Raw/New Hampshire 2013 s2_q8""' \
 			"{DATA_PROJ1}"    = `""Raw/New Hampshire 2013 projects 1""' \
 			"{DATA_PROJ2}"    = `""Raw/New Hampshire 2013 projects 2""' \
-			"{DATA_HH}"       = `""Raw/New Hampshire 2013 household""' \
-
-			"{HEAD}"     = "`head'" \
-			"{HEAD1}"    = `"{view `"{START-}"':"' \
-			"{PS!}"      = "{it:Problem set}{BR}" \
-			"{PSANS!}"   = "{it:Answer key}{BR}" \
-			"{FOOT}"     = "{NEW}{hline}" \
-			"{TECH}"     = "{TOP}{NEW}{COL}{it:Technical Tip!}{CEND}{NEW}{MLINE}" \
-			"{TRYITCMD}" = "{TRYIT}{cmd}" \
-			"{TRYIT}"    = "{TOP}{NEW}{COL}{it:It's the first time!} {bf:Try it yourself.}{CEND}{NEW}{BOTTOM}{NEW}{P}{...}" \
-
-			"{GOTOPS}" = "Problem Set: " \
-			"{TOMOD}"  = "Return to Module: " \
-			"{NEXT1}"  = "Next: " \
-			"{NEXT}"   = "Next:     " \
-			"{PREV}"   = "Previous: " \
-			"{ALTMAP}" = `"{view `"{ALTTOC-}"':Alternative Courses}{BR}"' \
-			"{NEXT1C}" = "Next Concept: " \
-			"{NEXTC}"  = "Next Concept:     " \
-			"{PREVC}"  = "Previous Concept: " \
-			"{NEXT1T}" = "Next Task: " \
-			"{NEXT3T}" = "Next Task:    " \
-			"{NEXTT}"  = "Next Task:     " \
-			"{PREVT}"  = "Previous Task: " \
-
-			`links'
-
-			"{TOP}"    = "{COLSET}{NEW}{TLINE}" \
-			"{COLSET}" = "{p2colset 5 `=`boxwidth' + 4' 0 0}{...}" \
-			"{TLINE}"  = "{P}{c TLC}{hline `=`boxwidth' - 2'}{c TRC}{p_end}" \
-			"{BLANK}"  = "{COL}{CEND}" \
-			"{COL}"    = "{p2col:{c |} " \
-			"{CEND}"   = "}{c |}{p_end}" \
-			"{MLINE}"  = "{P}{c LT}{hline `=`boxwidth' - 2'}{c RT}{p_end}" \
-			"{BOTTOM}" = "{BLINE}{NEW}{RESET}" \
-			"{BLINE}"  = "{P}{c BLC}{hline `=`boxwidth' - 2'}{c BRC}{p_end}" \
-			"{RESET}"  = "{p2colreset}{...}" \
-
-			"{P}"   = "`p'" \
-			"{BR}"  = "{break}" \
-			"{DEF}" = "{txt}{sf}{ul off}{...}" \
-			"{BF}"  = "{bf}{...}" \
-			"{IT}"  = "{it}{...}" \
-			"{UL}"  = "{ul on}{...}" \
-			"{CMD}" = "{cmd}{...}" \
-			"{O2}"  = "{O} {O} " \
-			`new'
+			"{DATA_HH}"       = `""Raw/New Hampshire 2013 household""'
 		)
 		preserve
 		, /* comma so that I can specify "," to -subinstr()- without -do-

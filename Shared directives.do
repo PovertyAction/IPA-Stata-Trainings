@@ -28,7 +28,10 @@ foreach i of numlist 2 46 48 {
 }
 
 #d ;
-loc shared_subinstr (
+loc shared_subinstr1 (
+	"QTITLE" = "\`=cond(\`isans', "ANS", "--")'" \
+);
+loc shared_subinstr2 (
 	"{CT}"   = "/{STAR}" \
 	"{CT/}"  = "{STAR}/" \
 	"{STAR}" = "*" \
@@ -36,7 +39,6 @@ loc shared_subinstr (
 	"{DQ}"   = `"""' \
 	"{LSQ}"  = "`" \
 
-	"QTITLE" = "\`=cond(\`isans', "ANS", "--")'" \
 	"{AQ}"   = "\`=cond(\`isans', "{IT}", "")'" \
 
 	"{PS!}"      = "{it:Problem set}{BR}" \
@@ -82,5 +84,10 @@ loc shared_subinstr (
 	`new'
 );
 #d cr
-mata: st_local("shared_subinstr", substr(st_local("shared_subinstr"), 2, ///
-	strlen(st_local("shared_subinstr")) - 2))
+forv i = 1/2 {
+	mata: st_local("shared_subinstr`i'", ///
+		substr(st_local("shared_subinstr`i'"), 2, ///
+		strlen(st_local("shared_subinstr`i'")) - 2))
+}
+* For backwards compatibility
+mata: st_local("shared_subinstr", st_local("shared_subinstr2"))
