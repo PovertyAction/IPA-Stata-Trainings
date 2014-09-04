@@ -1,5 +1,4 @@
 /*
-Author: Matt White, Innovations for Poverty Action, mwhite@poverty-action.org
 Purpose: Convert a pseudo-SMCL file to a SMCL file and do-file. Pseudo-SMCL is like
 	SMCL, with the following differences:
 	1. Pseudo-SMCL looks more like a do-file than a SMCL file, although it may

@@ -1,5 +1,3 @@
-* Author: Matt White, Innovations for Poverty Action, mwhite@poverty-action.org
-
 vers 13
 
 * The directory structure (directories and subdirectories) of the Pseudo-SMCL,

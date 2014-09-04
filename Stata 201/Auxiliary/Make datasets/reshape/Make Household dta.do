@@ -24,12 +24,15 @@ drop n
 cou if mi(age5)
 assert r(N) & r(N) < _N
 
+preserve
+reshape long age female married, i(hhid)
 cou if age < 10 & married
 assert r(N)
+restore
 
 lab de yesno 1 yes 0 no
 lab val female* married* yesno
 
-c adv13
+c stata_training
 compress
-svold "Raw/New Hampshire 2013 household", replace 10
+svold "Stata 201/Raw/Household", replace 10

@@ -1,6 +1,3 @@
-* Author: Matt White, Innovations for Poverty Action, mwhite@poverty-action.org
-* Date of last revision: September 9, 2013
-
 vers 13
 
 * The directory structure (directories and subdirectories) of the Pseudo-SMCL,
@@ -12,14 +9,9 @@ loc ansdirs	Answers
 loc maxq 2
 conf integer n `maxq'
 assert `maxq' > 0
-* Default indent
-loc p {pstd}
-* End-of-line delimiter for SMCL files
-loc eol `=char(13)'`=char(10)'
-* Width of text boxes (not including indent)
-loc boxwidth 80
 
-c adv13
+c stata_training
+cd "Stata 201"
 u "Raw/New Hampshire 2013 police 3", clear
 unab all : _all
 assert `:length loc all' > 245
@@ -40,146 +32,6 @@ foreach id in 1101008 1113003 {
 assert s1_q2 == 1        if inlist(hhid, "1101008", "1113003")
 assert s1_q3 == "KUMHAR" if inlist(hhid, "1101008", "1113003")
 
-/* Guide to pseudo-SMCL directives:
-
-----------conventions and abbreviations----------
-/			The opposite of another directive
-!			A title/caption
-.			Followed by "."
--			A part/piece/substring
---			Followed by {hline}
-...			Not followed by a page break (when a page break is the default)
-{DATA_*}	Location of a dataset
-MOD			Module
-PS			Problem set
-ANS			Answer key
-PREV		Previous
-
-----------essentials----------
-{BLOCK}		Designate a command as part of a block. It will be rendered as text,
-			and "Click here to execute" will appear below the block.
-"{O} "		Stands for "observation." {O} by itself is meaningless: it must be
-			follwed by a space. Splits a pseudo-SMCL line into two lines in the
-			SMCL file at the position of {O}. Used for lines too long for
-			"Do to SMCL.do" (such as the header box) or (rarely) to start a new
-			new paragraph.
-
-----------problem sets----------
-{CT}		Starts the comment delimiter -/*-.
-{CT/}		Ends the comment delimiter -*/-.
-{SEMI}		Semicolon: ";".
-{DQ}		Double quote: `"""'
-{LSQ}		Left single quote: "`".
-
-Question/exercise headers (see above for more; exercises are now called
-questions)
-{Q#}		Header for question #
-{Q#.}		Header for question # followed by "."
-{Q#--}		Header for question # followed by {hline}
-{Q#ANS}		Header for the answer to question #
-
-QTITLE		Stands for "question title." {Q#QTITLE} becomes {Q#--} if !`isans'
-			and {Q#ANS} otherwise.
-{AQ}		Stands for "answer quote". If !`isans', does nothing. Otherwise,
-			formats the quotation of a problem set question by italicizing it.
-
-----------variables----------
-{VAR*}		Used to save frequently referenced text unrelated to formatting.
-
-----------data----------
-{DATA}				The location of the training dataset
-{DATA_BASE}			The base name of the training dataset
-{DATA_BACK}			The location of the training dataset with backslashes instead of
-					forward slashes
-{USE}				The -use- command to load {DATA}
-{DATA_CASTECSV}		The location of the caste names .csv file
-{DATA_CASTEDTA}		The location of the caste names .dta file
-
-----------headers, footers, and boxes----------
-{HEAD}		The header box that links back to the start page. See above: search
-			for "header directive."
-{HEAD1}		Used in {HEAD}
-{PS!}		The problem set caption
-{PSANS!}	The caption for a problem set answer key
-{FOOT}		The page footer
-{TECH}		The top of a technical tips box
-{TRYIT}		A "try it yourself" box
-{TRYITCMD}	A "try it yourself" box followed by {cmd}
-
-----------footer links----------
-{GOTOPS}	Prefaces a link to a problem set.
-{TOMOD}		Prefaces a link to a module.
-{NEXT}		"Next" prefacing a link to the next page, aligned with a proceeding
-			"Previous"
-{NEXT1}		"Next" followed by one space, not aligned with a proceeding
-			"Previous"
-{NEXTC}		"Next concept" prefacing a link to the next concept, aligned with a
-			proceeding "Previous concept"
-{NEXT1C}	"Next concept" followed by one space, not aligned with a proceeding
-			"Previous task"
-{NEXTT}		"Next task" prefacing a link to the next task, aligned with a
-			proceeding "Previous task"
-{NEXT1T}	"Next task" followed by one space, not aligned with a proceeding
-			"Previous task"
-{NEXT2T}	Unused/obsolete
-{NEXT3T}	"Next task" aligned with a preceding "Next concept"
-{PREV}		Prefaces a link to the previous page.
-{PREVC}		Prefaces a link to the previous concept.
-{PREVT}		Prefaces a link to the previous task.
-{PREV2T}	Unused/obsolete
-{ALTMAP}	Stands for "alternative map." Links to the Alternative Table of
-			Contents.
-
-----------page links----------
-See above: search for "page links."
-{[Mod. code]}		Links to a module.
-{[Mod. code]!}		Title of a module
-{[Mod. code]...}	Links to a module, but isn't followed by a page break (a
-					page break is the default).
-{[Mod. code]-}		The location of a module's SMCL file
-{[Mod. code]_PS}	Links to a module's problem set.
-{[Mod. code]_PS2}	Links to a module's problem set, but with the simple link
-					text "Problem set" rather than the module title.
-{[Mod. code]_ANS}	Links to a module's answer key.
-{[Mod. code]_PS2}	Links to a module's answer key, but with the simple link
-					text "Answer key" rather than the module title.
-
-----------box formatting----------
-{TOP}		Top of a box
-{BOTTOM}	Bottom of a box
-{COLSET}	{p2colset} with arguments
-{RESET}		{p2colreset}{...}
-{TLINE}		Top line of a box
-{MLINE}		Line in the middle of a box
-{BLINE}		Bottom line of a box
-{COL}		Start of a line in a box
-{CEND}		Stands for "column end." End of a line in a box.
-{BLANK}		A blank line in a box
-
-----------formatting----------
-{P}			Default paragraph indent: {pstd}.
-{BR}		Synonym for {break}
-{O#}		{O} repeated # times
-{NEW}		The end-of-line delimiter. Cannot be used to make "Do to SMCL.do"
-			start a new paragraph: use {O} instead.
-{NEW#}		Skip # lines. See above: search for "new line directives."
-{DEF}		Stands for "default". Default text style: turns off bold, italics,
-			underline, {cmd}, etc.
-{BF}		{bf}{...}
-{IT}		{it}{...}
-{UL}		{ul on}{...}
-{CMD}		{cmd}{...}
-
-----------automatic problem set directive creation----------
-In the problem set do-files, the following directives are used to automatically
-create new directives. The following directives are not used in this do-file.
-See above: search "automatic problem set directive creation."
-{PSQ:[directive]}	Create a new directive {[directive]} for the text that
-					follows. The directive ends when another {PSQ:} directive or
-					{FOOT} is encountered.
-#define				Define a new directive.
-*/
-
 
 /* -------------------------------------------------------------------------- */
 					/* convert				*/
@@ -188,11 +40,6 @@ timer clear 1
 timer on 1
 
 loc curdir "`c(pwd)'"
-
-c otherstata
-loc otherstata "`c(pwd)'"
-
-c adv13
 
 foreach dir of loc dirstruct {
 	loc files : dir "Pseudo-SMCL/`dir'" file "*.do", respect
@@ -347,11 +194,10 @@ Column 5: The args part of {view args:text}.
 Column 6: The text part of {view args:text}. */
 #d ;
 loc codeslinks
-	{START}			0	0	1	"New Hampshire 2013 Advanced.smcl"				"High Intermediate Start"
+	{START}			0	0	1	"Stata 201.smcl"								"High Intermediate Start"
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"	""
 	{MACROS}		1	1	1	"SMCL/Modules/Macros.smcl"						""
 	{RESHAPE}		1	1	1	"SMCL/Modules/reshape.smcl"						"{bf:reshape}"
-	{EXPORT}		0	1	1	"SMCL/Modules/Exporting Tables.smcl"			"Exporting Tables"
 ;
 #d cr
 assert mod(`:list sizeof codeslinks', 6) == 0
@@ -497,28 +343,26 @@ loc head
 {c |}{HEAD1} Innovations for Poverty Action{space 12}}{c |}{BR}{O}
 {c |}{HEAD1} The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{BR}{O}
 {c |}{HEAD1}{space 43}}{c |}{BR}{O}
-{c |}{HEAD1} Staff Training - New Hampshire 2013{space 7}}{c |}{BR}{O}
-{c |}{HEAD1} Advanced Stata{space 28}}{c |}{BR}{O}
+{c |}{HEAD1} Global Staff Training{space 21}}{c |}{BR}{O}
+{c |}{HEAD1} Stata 201{space 33}}{c |}{BR}{O}
 {sf}{...}{O}
 {c BLC}{hline 43}{c BRC}
 ;
 #d cr
 
-* New line directives
-loc new ""{NEW}" = "`eol'""
-foreach i of numlist 2 46 48 {
-	loc new "`new' \ "{NEW`i'}" = "`:di _dup(`i') "`eol'"'""
-}
-
 * Erase previous SMCL (not pseudo-SMCL) files and their associated do-files.
 foreach dir in SMCL Do {
 	foreach subdir of loc dirstruct {
 		loc files : dir "`dir'/`subdir'" file *
+		loc placeholder empty.txt
+		loc files : list files - placeholder
 		foreach file of loc files {
 			erase "`dir'/`subdir'/`file'"
 		}
 	}
 }
+
+include "../Shared directives"
 
 * Loop over the pseudo-SMCL files, converting each to a SMCL file and do-file.
 assert `:list sizeof infiles' == `:list sizeof smclfiles' & `:list sizeof infiles' == `:list sizeof dofiles'
@@ -534,87 +378,33 @@ forv i = 1/`:list sizeof infiles' {
 	loc isans    : word `i' of `ans'
 
 	#d ;
-	do "`otherstata'/Do to SMCL.do"
+	do "../Do to SMCL.do"
 		infile("`infile'") smclfile("`smclfile'") dofile("`dofile'")
 		subinstr(
+			"{HEAD}"     = "`head'" \
+			"{HEAD1}"    = `"{view `"{START-}"':"' \
+
 			`define'
 			`questions'
-			"{CT}"   = "/{STAR}" \
-			"{CT/}"  = "{STAR}/" \
-			"{STAR}" = "*" \
-			"{SEMI}" = ";" \
-			"{LSQ}"  = "`" \
-			"{DQ}"   = `"""' \
-			"QTITLE" = "`=cond(`isans', "ANS", "--")'" \
-			"{AQ}"   = "`=cond(`isans', "{IT}", "")'" \
+			`shared_subinstr1'
 			`qe'
+			`links'
+			`shared_subinstr2'
 
 			"{VAR_BADK}"    = "`badk'" \
 			"{VAR_LASTVAR}" = "`var_lastvar'" \
 			"{VAR_WD}"      = "C:\Users\mwhite.IPA\Dropbox\RM&T\New Hampshire 2013 advanced Stata training\My project folder" \
 			"{VAR_WDBASE}"  = "My project folder" \
 
-			"{USE}"           = "use {DATA}, clear" \
-			"{DATA}"          = `""Raw/India 2013 high intermediate""' \
-			"{DATA_BASE}"     = "India 2013 high intermediate" \
-			"{DATA_BACK}"     = `""Raw\India 2013 high intermediate""' \
-			"{DATA_CASTECSV}" = `""Raw/Clean castename.csv""' \
-			"{DATA_CASTEDTA}" = `""Raw/Clean castename""' \
 			"{DATA_POLICE1}"   = `""Raw/New Hampshire 2013 police 1""' \
 			"{DATA_POLICE2}"  = `""Raw/New Hampshire 2013 police 2""' \
 			"{DATA_POLICE3}"  = `""Raw/New Hampshire 2013 police 3""' \
-			"{DATA_PSYCH}"    = `""Raw/New Hampshire 2013 psych""' \
+			"{DATA_PSYCH}"    = `""Raw/Psych""' \
 			"{DATA_S2Q8}"     = "{DATA_S2_Q8}" \
-			"{DATA_S2_Q8}"    = `""Raw/New Hampshire 2013 s2_q8""' \
+			"{DATA_S2_Q8}"    = `""Raw/s2_q8""' \
 			"{DATA_PROJ1}"    = `""Raw/New Hampshire 2013 projects 1""' \
 			"{DATA_PROJ2}"    = `""Raw/New Hampshire 2013 projects 2""' \
-			"{DATA_HH}"       = `""Raw/New Hampshire 2013 household""' \
-
-			"{HEAD}"     = "`head'" \
-			"{HEAD1}"    = `"{view `"{START-}"':"' \
-			"{PS!}"      = "{it:Problem set}{BR}" \
-			"{PSANS!}"   = "{it:Answer key}{BR}" \
-			"{FOOT}"     = "{NEW}{hline}" \
-			"{TECH}"     = "{TOP}{NEW}{COL}{it:Technical Tip!}{CEND}{NEW}{MLINE}" \
-			"{TRYITCMD}" = "{TRYIT}{cmd}" \
-			"{TRYIT}"    = "{TOP}{NEW}{COL}{it:It's the first time!} {bf:Try it yourself.}{CEND}{NEW}{BOTTOM}{NEW}{P}{...}" \
-
-			"{GOTOPS}" = "Problem Set: " \
-			"{TOMOD}"  = "Return to Module: " \
-			"{NEXT1}"  = "Next: " \
-			"{NEXT}"   = "Next:     " \
-			"{PREV}"   = "Previous: " \
-			"{ALTMAP}" = `"{view `"{ALTTOC-}"':Alternative Courses}{BR}"' \
-			"{NEXT1C}" = "Next Concept: " \
-			"{NEXTC}"  = "Next Concept:     " \
-			"{PREVC}"  = "Previous Concept: " \
-			"{NEXT1T}" = "Next Task: " \
-			"{NEXT3T}" = "Next Task:    " \
-			"{NEXTT}"  = "Next Task:     " \
-			"{PREVT}"  = "Previous Task: " \
-
-			`links'
-
-			"{TOP}"    = "{COLSET}{NEW}{TLINE}" \
-			"{COLSET}" = "{p2colset 5 `=`boxwidth' + 4' 0 0}{...}" \
-			"{TLINE}"  = "{P}{c TLC}{hline `=`boxwidth' - 2'}{c TRC}{p_end}" \
-			"{BLANK}"  = "{COL}{CEND}" \
-			"{COL}"    = "{p2col:{c |} " \
-			"{CEND}"   = "}{c |}{p_end}" \
-			"{MLINE}"  = "{P}{c LT}{hline `=`boxwidth' - 2'}{c RT}{p_end}" \
-			"{BOTTOM}" = "{BLINE}{NEW}{RESET}" \
-			"{BLINE}"  = "{P}{c BLC}{hline `=`boxwidth' - 2'}{c BRC}{p_end}" \
-			"{RESET}"  = "{p2colreset}{...}" \
-
-			"{P}"   = "`p'" \
-			"{BR}"  = "{break}" \
-			"{DEF}" = "{txt}{sf}{ul off}{...}" \
-			"{BF}"  = "{bf}{...}" \
-			"{IT}"  = "{it}{...}" \
-			"{UL}"  = "{ul on}{...}" \
-			"{CMD}" = "{cmd}{...}" \
-			"{O2}"  = "{O} {O} " \
-			`new'
+			"{DATA_HH}"       = `""Raw/New Hampshire 2013 household""'
 		)
 		preserve
 		, /* comma so that I can specify "," to -subinstr()- without -do-
@@ -623,20 +413,16 @@ forv i = 1/`:list sizeof infiles' {
 	#d cr
 }
 
-* Back up "Do to SMCL.do".
-loc date = strofreal(date(c(current_date), "DMY"), "%tdCCYY.NN.DD")
-copy "`otherstata'/Do to SMCL.do" "Archived/Do to SMCL/Do to SMCL `date'.do", replace
-
 * Move the start page to a different directory.
-loc intro New Hampshire 2013 Advanced.smcl
+loc intro Stata 201.smcl
 copy  "SMCL/Introduction/`intro'" "`intro'", replace
 erase "SMCL/Introduction/`intro'"
-//view "`intro'"
-cd "`curdir'"
 
 
 /* -------------------------------------------------------------------------- */
 					/* finish up			*/
+
+cd "`curdir'"
 
 timer off 1
 timer list 1
