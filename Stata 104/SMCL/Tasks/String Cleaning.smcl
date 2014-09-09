@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -56,7 +56,7 @@ so that differences in letter case aren't counted as different responses.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}Here, we will standardize the string variable {cmd:castename}.
 First, we have to get a list of its unique values:
@@ -165,7 +165,7 @@ However, copying the table from {cmd:tabulate} above doesn't work. What to do?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}Recreating {cmd:newcaste}:
 
@@ -261,7 +261,7 @@ You can then copy this list to Excel.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}Recreating {cmd:newcaste} by completing
 {view `""SMCL/Tasks/String Cleaning.smcl"##basic"':basic string cleaning}:
@@ -299,7 +299,7 @@ As you can see, {cmd:inlist()} results in much less code than multiple logical e
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}What is an alternative to {cmd:replace}
 that can be used for making multiple, simultaneous replacements?
@@ -309,7 +309,7 @@ Why can't it be used to make replacements to {cmd:castename}?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}Recreating {cmd:newcaste}:
 
@@ -413,7 +413,7 @@ We can then clean those values using other methods.
 
 {pstd}To do this, we'll first make {cmd:newcaste} a copy of {cmd:castename}:
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}{bf:{stata `"generate newcaste = castename"'}}{p_end}
 
@@ -464,7 +464,7 @@ instead of using two different programs.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}Recreating {cmd:newcaste} by implementing
 the basic string cleaning described in
@@ -600,4 +600,4 @@ and for this use more convenient than
 
 {pstd}Next: {view `""SMCL/Tasks/Exporting.smcl""':Exporting}{break}
 Previous: {view `""SMCL/Tasks/Other Data Checks.smcl""':Other Data Checks}{break}
-{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{view `""Stata 104.smcl""':Stata 104 Start}{break}

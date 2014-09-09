@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -49,7 +49,7 @@ has suffered from an action that caused injury, fear, or annoyance.
 {cmd:assaultyn} equals {cmd:Yes} ({cmd:1}).
 Here's how we could check this using {cmd:assert}:
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}{bf:{stata `"assert assaultnum != . if assaultyn == 1"'}}{p_end}
 {pstd}{bf:{stata `"assert assaultnum == . if assaultyn != 1"'}}{p_end}
@@ -102,7 +102,7 @@ What are two solutions to this problem?
 {pstd}One option is to add {cmd:noisily} after {cmd:capture}.
 For example:
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}{cmd:* No output is shown, but because of the capture, it's unclear what this means.}{p_end}
 {pstd}{bf:{stata `"capture assert cycleownyn == 1 | cycleownyn == 2"'}}{p_end}
@@ -126,7 +126,7 @@ which don't require {cmd:capture}.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{it}{...} {bf:(a)}
@@ -244,7 +244,7 @@ so {cmd:_rc} is unchanged and remains {cmd:111}.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}{it}{...} In this dataset, there are multiple pairs of variables that first ask
 whether a given action has taken place,
@@ -304,4 +304,4 @@ but we do want to see what {cmd:list} displays.
 {pstd}{view `""SMCL/Problem sets/Tasks/Logic Checks - problem set.smcl""':Problem set}{break}
 Return to Module: {view `""SMCL/Tasks/Logic Checks.smcl""':Checking Skip Patterns and Logical Consistency}{break}
 
-{pstd}{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{pstd}{view `""Stata 104.smcl""':Stata 104 Start}{break}

@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -36,7 +36,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}Recreating {cmd:newcaste}:
 
@@ -56,7 +56,7 @@ Copy these values to Excel.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}What is an alternative to {cmd:replace}
 that can be used for making multiple, simultaneous replacements?
@@ -96,7 +96,7 @@ many replacements were made using
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{bf:(a)}
@@ -122,7 +122,7 @@ how many unique caste names are there?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}First, recreate {cmd:newcaste}:
 
@@ -169,4 +169,4 @@ while leaving true multiword caste names intact?
 {pstd}{view `""SMCL/Problem sets/Tasks answers/String Cleaning - answers.smcl""':Answers}{break}
 Return to Module: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
 
-{pstd}{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{pstd}{view `""Stata 104.smcl""':Stata 104 Start}{break}

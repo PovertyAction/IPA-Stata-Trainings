@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Exporting}{break}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}While importing in Stata consists solely of reading in
 {it:data}, exporting can take two forms: outputting some or all of the data into
@@ -100,7 +100,7 @@ commands to gain more understanding of how they work.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}While exporting data may well be useful in some cases, the majority of exporting in Stata will likely be in terms
 of outputting actual {it:results}, be it in terms of graphs or tables. This section will introduce some examples of how
@@ -208,4 +208,4 @@ plot coefficients in sophisticated ways. Keep it in mind as needed.
 {hline}
 
 {pstd}Previous: {view `""SMCL/Tasks/String Cleaning.smcl""':String Cleaning}{break}
-{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{view `""Stata 104.smcl""':Stata 104 Start}{break}

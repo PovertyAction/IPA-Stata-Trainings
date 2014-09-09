@@ -21,8 +21,8 @@ Date of last revision: July 18, 2013
 */
 
 *Revised by Harrison Diamond Pollock, hpollock@poverty-action.org.
-*Creating the new 104 training for Kenya 2014
-*Date of last revision: January 15, 2014
+*Creating 104 training for New Hampshire 2014
+*Date of last revision: Sept 9, 2014
 
 vers 10
 
@@ -49,7 +49,7 @@ loc curdir "`c(pwd)'"
 nobreak {
 	* -c- is from the SSC -fastcd- package
 	c stata104
-	u "Raw/India 2014 - Stata 104", clear
+	u "Raw/Stata 104", clear
 	cd "`curdir'"
 }
 cou if sex == 1
@@ -384,7 +384,7 @@ Column 5: The args part of {view args:text}.
 Column 6: The text part of {view args:text}. */
 #d ;
 loc codeslinks
-	{START}			0	0	1	"India 2014 - Stata 104.smcl"						"Stata 104 Start"
+	{START}			0	0	1	"Stata 104.smcl"						                "Stata 104 Start"
 	{ALTTOC}		0	1	1	"SMCL/Introduction/Alternative Table of Contents.smcl"	""
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"			""
 	{SUBSCRIPTING}	1	0	1	"SMCL/Concepts/Explicit Subscripting.smcl"				""
@@ -554,7 +554,7 @@ loc head
 {c |}{HEAD1} Innovations for Poverty Action{space 12}}{c |}{BR}{O}
 {c |}{HEAD1} The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{BR}{O}
 {c |}{HEAD1}{space 43}}{c |}{BR}{O}
-{c |}{HEAD1} Staff Training - India 2014 {space 14}}{c |}{BR}{O}
+{c |}{HEAD1} Staff Training{space 28}}{c |}{BR}{O}
 {c |}{HEAD1} Stata 104{space 33}}{c |}{BR}{O}
 {sf}{...}{O}
 {c BLC}{hline 43}{c BRC}
@@ -613,9 +613,9 @@ forv i = 1/`:list sizeof infiles' {
 			"{VAR9}" = "`VAR9'" \
 
 			"{USE}"           = "use {DATA}, clear" \
-			"{DATA}"          = `""Raw/India 2014 - Stata 104""' \
-			"{DATA_BASE}"     = "India 2014 - Stata 104" \
-			"{DATA_BACK}"     = `""Raw\India 2014 - Stata 104""' \
+			"{DATA}"          = `""Raw/Stata 104""' \
+			"{DATA_BASE}"     = "Stata 104" \
+			"{DATA_BACK}"     = `""Raw\Stata 104""' \
 			"{DATA_CASTECSV}" = `""Raw/Clean castename.csv""' \
 			"{DATA_CASTEDTA}" = `""Raw/Clean castename""' \
 
@@ -677,7 +677,7 @@ loc date = strofreal(date(c(current_date), "DMY"), "%tdCCYY.NN.DD")
 copy "`otherstata'/Do to SMCL.do" "Archived/Do to SMCL/Do to SMCL `date'.do", replace
 
 * Move the start page to a different directory.
-loc intro India 2014 - Stata 104.smcl
+loc intro Stata 104.smcl
 copy  "SMCL/Introduction/`intro'" "`intro'", replace
 erase "SMCL/Introduction/`intro'"
 

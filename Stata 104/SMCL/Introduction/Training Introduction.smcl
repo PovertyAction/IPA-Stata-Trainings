@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 104.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 104.smcl""': Stata 104{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}{break}
 {bf}{...}{it}{...}{ul on}{...}
@@ -45,7 +45,7 @@ We've made some changes in order to aid training, but you can find the original 
 We're reaping the benefits of data publication, without which this data wouldn't be available to us.
 Let's load the dataset:
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 104", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 104", clear"'}}{p_end}
 
 {pstd}{bf:{stata `"describe, short"'}}{p_end}
 
@@ -116,7 +116,6 @@ Click each to install them.
 {pstd}{bf:{stata "ssc install eclplot":eclplot}}{p_end}
 {phang}{space 2}o Plots estimates with confidence limits{p_end}
 
-
 {pstd}{bf}{...}{it}{...}{ul on}{...}
 (All pages have a footer like the one below
 with links to the next and previous modules, the start page,
@@ -126,4 +125,4 @@ as well as the problem set, if there is one.)
 {hline}
 
 {pstd}Next: {DUMMIES}
-{view `""India 2014 - Stata 104.smcl""':Stata 104 Start}{break}
+{view `""Stata 104.smcl""':Stata 104 Start}{break}
