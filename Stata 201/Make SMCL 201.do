@@ -12,7 +12,7 @@ assert `maxq' > 0
 
 c stata_training
 cd "Stata 201"
-u "Raw/New Hampshire 2013 police 3", clear
+u "Raw/Police 3", clear
 unab all : _all
 assert `:length loc all' > 245
 loc badk = wordcount(substr("`all'", 1, 245))
@@ -23,7 +23,7 @@ loc var_lastvar = word(substr("`all'", 1, 245), ///
 	wordcount(substr("`all'", 1, 245)))
 assert !`:list var_lastvar in all'
 
-u "Raw/New Hampshire 2013 police 2", clear
+u "Raw/Police 2", clear
 
 foreach id in 1101008 1113003 {
 	cou if hhid == "`id'"
@@ -396,9 +396,9 @@ forv i = 1/`:list sizeof infiles' {
 			"{VAR_WD}"      = "C:\Users\mwhite.IPA\Dropbox\RM&T\New Hampshire 2013 advanced Stata training\My project folder" \
 			"{VAR_WDBASE}"  = "My project folder" \
 
-			"{DATA_POLICE1}"   = `""Raw/New Hampshire 2013 police 1""' \
-			"{DATA_POLICE2}"   = `""Raw/New Hampshire 2013 police 2""' \
-			"{DATA_POLICE3}"   = `""Raw/New Hampshire 2013 police 3""' \
+			"{DATA_POLICE1}"   = `""Police 1""' \
+			"{DATA_POLICE2}"   = `""Police 2""' \
+			"{DATA_POLICE3}"   = `""Police 3""' \
 			"{DATA_PSYCH}"     = `""Raw/Psych""' \
 			"{DATA_S2Q8}"      = "{DATA_S2_Q8}" \
 			"{DATA_S2_Q8}"     = `""Raw/s2_q8""' \
