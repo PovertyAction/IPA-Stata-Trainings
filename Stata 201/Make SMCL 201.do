@@ -396,15 +396,15 @@ forv i = 1/`:list sizeof infiles' {
 			"{VAR_WD}"      = "C:\Users\mwhite.IPA\Dropbox\RM&T\New Hampshire 2013 advanced Stata training\My project folder" \
 			"{VAR_WDBASE}"  = "My project folder" \
 
-			"{DATA_POLICE1}"   = `""Police 1""' \
-			"{DATA_POLICE2}"   = `""Police 2""' \
-			"{DATA_POLICE3}"   = `""Police 3""' \
-			"{DATA_PSYCH}"     = `""Raw/Psych""' \
+			"{DATA_POLICE1}"   = `""Raw/Police 1""' \
+			"{DATA_POLICE2}"   = `""Raw/Police 2""' \
+			"{DATA_POLICE3}"   = `""Raw/Police 3""' \
+			"{DATA_PSYCH}"     = `"Raw/Psych"' \
 			"{DATA_S2Q8}"      = "{DATA_S2_Q8}" \
-			"{DATA_S2_Q8}"     = `""Raw/s2_q8""' \
+			"{DATA_S2_Q8}"     = `"Raw/s2_q8"' \
 			"{DATA_OLYMPICS1}" = `""Raw/Olympics 1""' \
 			"{DATA_OLYMPICS2}" = `""Raw/Olympics 2""' \
-			"{DATA_HH}"        = `""Raw/New Hampshire 2013 household""'
+			"{DATA_HH}"        = `"Raw/Household"'
 		)
 		preserve
 		, /* comma so that I can specify "," to -subinstr()- without -do-
