@@ -61,17 +61,20 @@ for exporting regression and summary statistics results.
 
 There are an extremely useful set of commands that have been developed at IPA for reconciling
 differences between multiple datasets. They are useful for a variety of purposes, but were
-designed when comparing differences when doing double data entry. Here are three:
+designed when comparing differences when doing double data entry:
 
-{bf:cfout} allows you to reconcile two entries of data and outputs an
-excel sheet with the differences for easy checking against the original surveys.
+{bf:cfout} reconciles two entries of data and outputs an excel sheet
+with the differences for easy checking against the original surveys.
+It also produces discrepancy rate statistics, including statistics by
+data entry operator, making it simple to see the error rates of each
+operator and incentivize the data entry accordingly.
 
-{bf:cfby} produces discrepancy rate statistics, including statistics by data
-entry operator, making it easy to see the error rates of each operator
-and incentivize the data entry accordingly. 
-
-{bf:readreplace} inputs the corrections from double-entry reconciliation back into the dataset.
-{bf:Note:} {cmd:readreplace} is installed along with {cmd:cfout}. 
+The associated {cmd:readreplace} modifies the dataset currently in memory
+by making replacements that are specified in an external dataset, the replacements file.
+The list of differences outputed by {cmd:cfout} is designed to be used by
+{cmd:readreplace}. After the addition of a new variable to the {cmd:cfout} differences
+file that holds the new (correct) values, the file can be used as the
+{cmd:readreplace} replacements file.
 
 All of these commands can be found on SSC. For more on data entry quality control, see our Box
 {browse "https://ipastorage.box.com/s/ejpuvpzfs1tmxwew3q4l":resources} on the topic. 
