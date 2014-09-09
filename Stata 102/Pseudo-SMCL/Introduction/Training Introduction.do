@@ -83,8 +83,8 @@ Click each to install them.
 {phang}  o Bundle of programs to manage value and variable labels{p_end}
 {P}{bf:{stata "ssc install cfout":cfout}}{p_end}
 {phang}  o Compare two datasets, optionally saving the list of differences to file{p_end}
-{P}{bf:{stata "ssc install cfby":cfby}}{p_end}
-{phang}  o Compare two files to get the number differences "by" a common variable{p_end}
+{P}{bf:{stata "ssc install readreplace":readreplace}}{p_end}
+{phang}  o Make replacements that are specified in an external dataset{p_end}
 {P}{bf:{stata "ssc install odkmeta":odkmeta}}{p_end}
 {phang}  o Creates do-file to import ODK metadata into Stata{p_end}
 {P}{bf:{stata "ssc install outreg2, replace":outreg2}}{p_end}
