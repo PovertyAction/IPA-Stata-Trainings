@@ -18,7 +18,7 @@ reshape wide sport, i(country year) j(j)
 
 {RESHAPE_Q1B}
 
-* Here's one approach:
+* Here is one approach:
 
 generate sportchange = 0
 forvalues i = 1/46 {

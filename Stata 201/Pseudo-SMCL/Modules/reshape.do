@@ -111,7 +111,7 @@ Danny wants to transform this dataset: */
 
 browse
 
-* To this one:
+* to this one:
 
 {BLOCK}clear
 {BLOCK}input id f1 f2 f3 f4 f5 f6
@@ -131,7 +131,7 @@ browse
 /* Danny talks about "left alignment,"
 but another way to think about the task is
 that Danny wants to sort {it:across} the {cmd:f} variables.
-First, he wants to sort the missing {cmd:f} values after the nonmissing ones,
+First he wants to sort the missing {cmd:f} values after the nonmissing ones,
 then he wants to sort the nonmissing {cmd:f} values
 according to their original relative order.
 
@@ -174,18 +174,18 @@ browse
 
 /* Thinking about the left-right sort (a sort {it:across},
 not {it:within} variables) as tranpose-sort-tranpose was
-so compelling to me that after deciding that transposing in Stata
-was too laborious,
+so compelling to me that after deciding that transposing was
+too laborious in Stata,
 my response to Danny involved transposing then sorting using Mata.
 
 Neither Stata nor Mata has a simple command or function for
 left-right sorting.
 Transposing becomes appealing simply as a means of
-transforming the dataset to one for which
+transforming the dataset into one for which
 {cmd:sort}, {cmd:gsort}, and other sorting tools are useful.
 
 So is Mata the solution for Danny?
-Well, it's probably telling that this module is on {cmd:reshape}, not Mata.
+Well, it is probably telling that this module is on {cmd:reshape}, not Mata.
 It turned out that a much easier solution was possible with {cmd:reshape}:
 
 {stata run Do/Modules/reshape 2:Click here to input the original dataset.} */
