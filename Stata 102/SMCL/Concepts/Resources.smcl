@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -188,7 +188,7 @@ seen one of these options in {bf:Stata 101}, {cmd:detail}, which produces additi
 
 {pstd}Let's look at 2 examples of one of the above qualifiers and an option with the {cmd:summarize} command:
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 
 {pstd}{bf:{stata `"summarize age if sex == 1, detail"'}}{p_end}
 {pstd}{bf:{stata `"summarize sex age in 1/10, detail"'}}{p_end}
@@ -216,5 +216,5 @@ get more accustomed to using them.
 
 {pstd}Next: {view `""SMCL/Concepts/Commands.smcl""':Commands}{break}
 Previous: {view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}
-{view `""India 2014 - Stata 102.smcl""':Stata 102 Start}{break}
+{view `""Stata 102.smcl""':Stata 102 Start}{break}
 

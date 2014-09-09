@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Naming and Labeling Variables}{break}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 
 {pstd}Variables are the stuff of Stata.
 After all, a Stata dataset is just a collection of variables.
@@ -60,7 +60,7 @@ Thus, attending to variable properties is typically the first task in the data c
 {p2col:{c |} {bf:{stata list gear_ratio}}}{c |}{p_end}
 {p2col:{c |} {bf:{stata format gear_ratio %9.3f}}}{c |}{p_end}
 {p2col:{c |} {bf:{stata list gear_ratio}}}{c |}{p_end}
-{p2col:{c |} {bf:{stata use "Raw/India 2014 - Stata 102", clear}}}{c |}{p_end}
+{p2col:{c |} {bf:{stata use "Raw/Stata 102", clear}}}{c |}{p_end}
 {pstd}{c BLC}{hline 78}{c BRC}{p_end}
 {p2colreset}{...}
 
@@ -145,7 +145,7 @@ If you have an earlier version of Stata, commands such as {cmd:renpfix} and the
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 
 {pstd}We will now review {helpb label:labelling}.
 There are two main types of labels: variable labels and value labels.
@@ -406,4 +406,4 @@ for working with variable and value labels:
 
 {pstd}Next: {view `""SMCL/Concepts/Variable Types.smcl""':Variable Types}{break}
 Previous: {view `""SMCL/Concepts/Commands.smcl""':Commands}{break}
-{view `""India 2014 - Stata 102.smcl""':Stata 102 Start}{break}
+{view `""Stata 102.smcl""':Stata 102 Start}{break}

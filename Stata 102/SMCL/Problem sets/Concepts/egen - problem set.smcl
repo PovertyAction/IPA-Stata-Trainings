@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -33,7 +33,7 @@
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{bf:(a)}
@@ -58,7 +58,7 @@ those 40 and younger and for those older.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 {pstd}{txt}{sf}{ul off}{...}
 
 {pstd}{bf:(a)}
@@ -97,4 +97,4 @@ from most other {cmd:egen} functions?
 {pstd}{EGEN_ANS2}
 Return to Module: {EGEN}
 
-{pstd}{view `""India 2014 - Stata 102.smcl""':Stata 102 Start}{break}
+{pstd}{view `""Stata 102.smcl""':Stata 102 Start}{break}

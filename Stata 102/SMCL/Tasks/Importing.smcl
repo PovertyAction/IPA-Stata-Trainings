@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 102.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 102.smcl""': Stata 102{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -81,7 +81,7 @@ modifications might you want to make to this dataset?
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 
 {pstd}When working with data, you will often want to add additional variables to existing
 observations. For instance, you've collected baseline data and now want to add endline
@@ -114,7 +114,7 @@ command {cmd:isid}:
 We'll use this dataset as our {bf:using} dataset, as we'll merge it into our main
 data, which will be the {bf:master} dataset. Let's now complete the merge:
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 
 {pstd}{bf:{stata `"merge m:1 hhid using "Raw/New Variables.dta""'}}{p_end}
 
@@ -186,7 +186,7 @@ at an example:
 
 {pstd}which we will now append to our main dataset:
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 102", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 102", clear"'}}{p_end}
 {pstd}{bf:{stata `"append using "Raw/New Observations.dta""'}}{p_end}
 
 {pstd}{bf:{stata `"sort hhid"'}}{p_end}
@@ -267,4 +267,4 @@ See the {helpb fastcd:help file} for more.
 {hline}
 
 {pstd}Previous: {view `""SMCL/Concepts/Loops.smcl""':Loops}{break}
-{view `""India 2014 - Stata 102.smcl""':Stata 102 Start}{break}
+{view `""Stata 102.smcl""':Stata 102 Start}{break}
