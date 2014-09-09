@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -97,7 +97,7 @@ the values of {cmd:_N} and {cmd:_n} are unpredictable.
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 103", clear"'}}{p_end}
 
 {pstd}{it}{...} Create a variable named {cmd:sexn} that is the number of respondents
 of a given sex. For example, if {cmd:sex = Male}, {cmd:sexn} should equal {cmd:590}.
@@ -115,7 +115,7 @@ of a given sex. For example, if {cmd:sex = Male}, {cmd:sexn} should equal {cmd:5
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 103", clear"'}}{p_end}
 
 {pstd}{it}{...} Create a variable named {cmd:treatment} that is {cmd:1} or {cmd:0}.
 Use {cmd:by}, {cmd:_N}, and {cmd:_n}
@@ -146,7 +146,7 @@ and {cmd:treatment = 0} to the second half of males and the second half of femal
 
 {hline}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 103", clear"'}}{p_end}
 
 {pstd}{it}{...} Using the {cmd:by} {it:varlist1} {cmd:(}{it:varlist2}{cmd:)} syntax,
 create a variable named {cmd:over30} that is
@@ -174,4 +174,4 @@ again using a logical expression, this time to create a dummy variable:
 {pstd}{view `""SMCL/Problem sets/Concepts/by - problem set.smcl""':Problem set}{break}
 Return to Module: {view `""SMCL/Concepts/by.smcl""':{bf:by}}{break}
 
-{pstd}{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{pstd}{view `""Stata 103.smcl""':Stata 103 Start}{break}

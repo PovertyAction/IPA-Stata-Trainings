@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Logical Expressions and Dummy Variables}{break}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 103", clear"'}}{p_end}
 
 {pstd}Suppose you want to create a dummy variable named {cmd:female} that is {cmd:1} if the
 respondent is female ({cmd:sex == 2}) and {cmd:0} otherwise. One way to do this is:
@@ -112,4 +112,4 @@ variables, {cmd:xi} works with string variables in addition to numeric.
 
 {pstd}Next: {view `""SMCL/Concepts/Explicit Subscripting.smcl""':Explicit Subscripting}{break}
 Previous: {view `""SMCL/Introduction/Training Introduction.smcl""':Training Introduction}{break}
-{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""Stata 103.smcl""':Stata 103 Start}{break}

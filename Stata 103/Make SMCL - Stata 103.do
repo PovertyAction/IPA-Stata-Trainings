@@ -21,9 +21,9 @@ Date of last revision: July 18, 2013
 */
 
 /* Author: Harrison Diamond Pollock, IPA, hpollock@poverty-action.org
-Purpose: revise to produce files for India 2014 - Stata 103 training
+Purpose: revise to produce files for New Hampshire Stata 103 training
 Changes to file solely to comport with new file names, produce new files
-Date of last revision: Jul 22, 2014
+Date of last revision: Sept 8, 2014
 */ 
 
 
@@ -52,7 +52,7 @@ loc curdir "`c(pwd)'"
 nobreak {
 	* -c- is from the SSC -fastcd- package
 	c stata103
-	u "Raw/India 2014 - Stata 103", clear
+	u "Raw/Stata 103", clear
 	cd "`curdir'"
 }
 cou if sex == 1
@@ -387,7 +387,7 @@ Column 5: The args part of {view args:text}.
 Column 6: The text part of {view args:text}. */
 #d ;
 loc codeslinks
-	{START}			0	0	1	"India 2014 - Stata 103.smcl"						"Stata 103 Start"
+	{START}			0	0	1	"Stata 103.smcl"						                "Stata 103 Start"
 	{INTRO}			0	0	1	"SMCL/Introduction/Training Introduction.smcl"			""
 	{DUMMIES}		0	0	1	"SMCL/Concepts/Logical Expressions and Dummy Variables.smcl"	""
 	{SUBSCRIPTING}	1	0	1	"SMCL/Concepts/Explicit Subscripting.smcl"				""
@@ -551,7 +551,7 @@ loc head
 {c |}{HEAD1} Innovations for Poverty Action{space 12}}{c |}{BR}{O}
 {c |}{HEAD1} The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{BR}{O}
 {c |}{HEAD1}{space 43}}{c |}{BR}{O}
-{c |}{HEAD1} Staff Training - India 2014 {space 14}}{c |}{BR}{O}
+{c |}{HEAD1} Staff Training{space 28}}{c |}{BR}{O}
 {c |}{HEAD1} Stata 103{space 33}}{c |}{BR}{O}
 {sf}{...}{O}
 {c BLC}{hline 43}{c BRC}
@@ -610,9 +610,9 @@ forv i = 1/`:list sizeof infiles' {
 			"{VAR9}" = "`VAR9'" \
 
 			"{USE}"           = "use {DATA}, clear" \
-			"{DATA}"          = `""Raw/India 2014 - Stata 103""' \
-			"{DATA_BASE}"     = "India 2014 - Stata 103" \
-			"{DATA_BACK}"     = `""Raw\India 2014 - Stata 103""' \
+			"{DATA}"          = `""Raw/Stata 103""' \
+			"{DATA_BASE}"     = "Stata 103" \
+			"{DATA_BACK}"     = `""Raw\Stata 103""' \
 			"{DATA_CASTECSV}" = `""Raw/Clean castename.csv""' \
 			"{DATA_CASTEDTA}" = `""Raw/Clean castename""' \
 
@@ -674,7 +674,7 @@ loc date = strofreal(date(c(current_date), "DMY"), "%tdCCYY.NN.DD")
 copy "`otherstata'/Do to SMCL.do" "Archived/Do to SMCL/Do to SMCL `date'.do", replace
 
 * Move the start page to a different directory.
-loc intro India 2014 - Stata 103.smcl
+loc intro Stata 103.smcl
 copy  "SMCL/Introduction/`intro'" "`intro'", replace
 erase "SMCL/Introduction/`intro'"
 

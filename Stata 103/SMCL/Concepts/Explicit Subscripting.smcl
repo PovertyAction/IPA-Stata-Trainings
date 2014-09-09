@@ -2,17 +2,17 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
 {pstd}{bf:Explicit Subscripting}{break}
 
-{pstd}{bf:{stata `"use "Raw/India 2014 - Stata 103", clear"'}}{p_end}
+{pstd}{bf:{stata `"use "Raw/Stata 103", clear"'}}{p_end}
 
 {marker loop}{...}
 {pstd}It looks like the two observations for {cmd:hhid "1802011"} are very similar:
@@ -89,4 +89,4 @@ followed by the values corresponding to John Doe (observation {cmd:597}) and Jan
 
 {pstd}Next: {view `""SMCL/Concepts/For-Loops and Macros.smcl""':For-Loops and Macros}{break}
 Previous: {view `""SMCL/Concepts/Logical Expressions and Dummy Variables.smcl""':Logical Expressions and Dummy Variables}{break}
-{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""Stata 103.smcl""':Stata 103 Start}{break}

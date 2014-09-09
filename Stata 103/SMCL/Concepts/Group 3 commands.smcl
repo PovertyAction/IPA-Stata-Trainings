@@ -2,11 +2,11 @@
 {txt}{...}
 {pstd}{c TLC}{hline 43}{c TRC}{break}
 {bf}{...}
-{c |}{view `""India 2014 - Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""':{space 43}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Staff Training - India 2014 {space 14}}{c |}{break}
-{c |}{view `""India 2014 - Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 103.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Staff Training{space 28}}{c |}{break}
+{c |}{view `""Stata 103.smcl""': Stata 103{space 33}}{c |}{break}
 {sf}{...}
 {c BLC}{hline 43}{c BRC}
 
@@ -33,4 +33,4 @@
 {hline}
 
 {pstd}Previous: {view `""SMCL/Concepts/by.smcl""':{bf:by}}{break}
-{view `""India 2014 - Stata 103.smcl""':Stata 103 Start}{break}
+{view `""Stata 103.smcl""':Stata 103 Start}{break}
