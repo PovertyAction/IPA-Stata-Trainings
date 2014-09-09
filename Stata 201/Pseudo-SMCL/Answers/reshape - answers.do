@@ -10,27 +10,32 @@
 
 {RESHAPE_Q1A}
 
-reshape long project, i(id date)
+reshape long sport, i(country year)
 
 drop _j
-bysort id date (project): generate j = _n
-reshape wide project, i(id date) j(j)
+bysort country year (sport): generate j = _n
+reshape wide sport, i(country year) j(j)
 
 {RESHAPE_Q1B}
 
 * Here's one approach:
 
-generate projectchange = 0
-forvalues i = 1/6 {
-	bysort id (date): replace projectchange = 1 ///
-		if project`i' != project`i'[_n - 1] & _n > 1
+generate sportchange = 0
+forvalues i = 1/46 {
+	bysort country (year): replace sportchange = 1 ///
+		if sport`i' != sport`i'[_n - 1] & _n > 1
 }
 
 {RESHAPE_Q1C}
 
-bysort id (projectchange): generate anychange = projectchange[_N]
+bysort country (sportchange): generate nochange = !sportchange[_N]
 
-tabulate id if anychange
+* Or in two steps:
+
+bysort country: egen anychange = max(sportchange)
+generate nochange = !anychange
+
+tabulate country if nochange
 
 /* {hline}
 

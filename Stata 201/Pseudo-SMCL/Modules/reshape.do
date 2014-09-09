@@ -205,56 +205,56 @@ browse
 
 {hline}
 
-This variant on the ER dataset has a variable named {cmd:projects} that
-is the list of an employee's projects: */
+This variant on the Olympics dataset has a variable named {cmd:sports} that
+is the list of a country's medaling sports: */
 
-use {DATA_PROJ2}, clear
+use {DATA_OLYMPICS2}, clear
 
 browse
 
-/* However, again, the order of projects is a mess.
+/* However, again, the order of the sports is a mess.
 
 By first {helpb split}ting the variable,
 we can use the same steps as Question 1 to recreate the variable: */
 
-rename projects project
-split project, parse(", ")
-drop project
-destring project*, replace
+rename sports sport
+split sport, parse(", ")
+drop sport
+destring sport*, replace
 
 browse
 
-reshape long project, i(id date)
-drop if missing(project)
+reshape long sport, i(country year)
+drop if missing(sport)
 
 browse
 
-sort id date project
+sort country year sport
 
 browse
 
-* Now recreating {cmd:projects} from {cmd:project}:
+* Now recreating {cmd:sports} from {cmd:sport}:
 
-generate projects = ""
+generate sports = ""
 
-by id date (project): replace projects = projects[_n - 1] + ///
-	cond(missing(projects[_n - 1]), "", ", ") + string(project)
+by country year (sport): replace sports = sports[_n - 1] + ///
+	cond(missing(sports[_n - 1]), "", ", ") + string(sport)
 
 browse
 
-by id date (project): replace projects = projects[_N]
+by country year (sport): replace sports = sports[_N]
 
 browse
 
 * And finally, the second {cmd:reshape}:
 
-reshape wide project, i(id date) j(_j)
+reshape wide sport, i(country year) j(_j)
 
-keep id date projects
+keep country year sports
 
 browse
 
-/* {cmd:projects} was a variable whose values were themselves lists.
+/* {cmd:sports} was a variable whose values were themselves lists.
 Using {cmd:reshape}, we sorted those lists.
 We have now seen two different uses of {cmd:reshape} for atypical sorting. */
 

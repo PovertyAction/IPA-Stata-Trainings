@@ -397,14 +397,14 @@ forv i = 1/`:list sizeof infiles' {
 			"{VAR_WDBASE}"  = "My project folder" \
 
 			"{DATA_POLICE1}"   = `""Raw/New Hampshire 2013 police 1""' \
-			"{DATA_POLICE2}"  = `""Raw/New Hampshire 2013 police 2""' \
-			"{DATA_POLICE3}"  = `""Raw/New Hampshire 2013 police 3""' \
-			"{DATA_PSYCH}"    = `""Raw/Psych""' \
-			"{DATA_S2Q8}"     = "{DATA_S2_Q8}" \
-			"{DATA_S2_Q8}"    = `""Raw/s2_q8""' \
-			"{DATA_PROJ1}"    = `""Raw/New Hampshire 2013 projects 1""' \
-			"{DATA_PROJ2}"    = `""Raw/New Hampshire 2013 projects 2""' \
-			"{DATA_HH}"       = `""Raw/New Hampshire 2013 household""'
+			"{DATA_POLICE2}"   = `""Raw/New Hampshire 2013 police 2""' \
+			"{DATA_POLICE3}"   = `""Raw/New Hampshire 2013 police 3""' \
+			"{DATA_PSYCH}"     = `""Raw/Psych""' \
+			"{DATA_S2Q8}"      = "{DATA_S2_Q8}" \
+			"{DATA_S2_Q8}"     = `""Raw/s2_q8""' \
+			"{DATA_OLYMPICS1}" = `""Raw/Olympics 1""' \
+			"{DATA_OLYMPICS2}" = `""Raw/Olympics 2""' \
+			"{DATA_HH}"        = `""Raw/New Hampshire 2013 household""'
 		)
 		preserve
 		, /* comma so that I can specify "," to -subinstr()- without -do-
