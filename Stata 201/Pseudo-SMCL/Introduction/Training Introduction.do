@@ -6,7 +6,7 @@ You can click it to return to the start page.)
 
 {INTRO!}
 
-The fact that we're using SMCL means
+The fact that we are using SMCL means
 that we can run commands from within the training files.
 For example: */
 
@@ -27,18 +27,18 @@ or to locations in a Stata manual.
 These links work like those in an Internet browser,
 so you can always press the Back button
 to return to your exact previous location.
-Further, if you right-click on a link,
+If you right-click on a link,
 you have the option to open it in a new tab or window.
 Links to Stata manuals, such as {bf:{mansection U:[U] Stata User's Guide}},
 function only in Stata 11 and higher.
 
 Throughout the training,
-you'll see text boxes like the one below holding technical tips.
+you will see text boxes like the one below holding technical tips.
 Although not essential,
 these tips can help you reach the next level of Stata mastery.
 If the text box is misaligned,
 resize your viewer to a larger size and click the Reload button.
-Alternatively, right click on the page, click Font,
+Alternatively, right click on the page, select Font,
 then select a smaller font size.
 
 {TECH}
@@ -46,8 +46,8 @@ then select a smaller font size.
 {BOTTOM}
 
 When a command is introduced for the first time,
-it'll usually appear as text instead of a link.
-It'll be preceded by a text box reminder
+it will usually appear as text instead of a link.
+It will be preceded by a text box reminder
 to type out the command fully in the Command window.
 ({it:Don't just copy and paste!})
 For example:
