@@ -2,8 +2,8 @@
 
 {MACROS!}
 
-In this module, I'll discuss advanced macro manipulation.
-I'll touch on these topics:
+In this module, we will discuss advanced macro manipulation.
+We will touch on these topics:
 
 {view `"{MACROS-}##extended_fcn"':1. Extended macro functions}{BR}
 {view `"{MACROS-}##expressions"':2. Macros and expressions}{BR}
@@ -50,7 +50,7 @@ First, let's load the auto dataset: */
 
 sysuse auto, clear
 
-/* Here's an example of an extended macro function:
+/* Here is an example of an extended macro function:
 
 {TRYITCMD}
 local varlab : variable label make{BR}
@@ -101,7 +101,7 @@ Using the two lists {cmd:`nolabvars'} and {cmd:`strvars'},
 how can we create a list of variables in the former category,
 that is, variables that are numeric but without a value label?
 
-Here's one option, with a loop: */
+Here is one option, with a loop: */
 
 {BLOCK}ds, not(vallab)
 {BLOCK}local nolabvars `r(varlist)'
@@ -275,7 +275,7 @@ rename s1_q5 age
 rename s1_q6 education
 
 /* This isn't too bad for this dataset, which has few variables,
-but it's repetitive,
+but it is repetitive,
 and it would be inefficient for larger datasets.
 
 An alternative is to loop over
@@ -515,7 +515,7 @@ display "`newvars'"
 If extended macro functions and {cmd:lstrfun} are not sufficient,
 you will have to use Mata.
 
-I will give a brief example of Mata.
+We will now see a brief example of Mata.
 You don't need to learn this now.
 
 Mata's {helpb mf_st_local:st_local()} obtains the content of Stata locals: */
@@ -658,7 +658,7 @@ One is the first element of the list {hline 2} though
 we could already get this using the {cmd:word} extended macro function.
 {cmd:gettoken} also returns the remainder of the list, that is,
 the list with the first element removed,
-and it's this novel capability that makes {cmd:gettoken} worth learning. */
+and it is this novel capability that makes {cmd:gettoken} worth learning. */
 
 {MACROS_Q2}
 
@@ -736,7 +736,7 @@ will use the same globals as someone else's.
 
 The only way to eliminate these risks is to stop using globals.
 If you are working on a complex data project,
-you may find that globals are more of a headache than they're worth.
+you may find that globals are more of a headache than they are worth.
 In that case, there are other ways to pass information across do-files.
 
 One of these is {cmd:args}.
