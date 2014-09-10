@@ -260,14 +260,14 @@ macro list _files
 {COL}{bf:Note on Stata 13}{CEND}
 {MLINE}
 {COL}The following content was written for Stata 12 and below. Stata 13's new{CEND}
-{COL}long string capabilities have removed the limits discussed below, and not{CEND}
+{COL}{help strings:long string} capabilities have removed the limits discussed below, and not{CEND}
 {COL}all examples will work as intended in Stata 13, even if you set the {helpb version}.{CEND}
 {BLANK}
 {COL}However, even if you have Stata 13, it is important that you understand the{CEND}
-{COL}constraints outlined below: after all, Stata 13's release was just three{CEND}
-{COL}months ago. Many of our colleagues will continue to use earlier versions for{CEND}
-{COL}some time, and you may need to write code that works on their computers. You{CEND}
-{COL}may also sometimes be required to debug code written for earlier versions.{CEND}
+{COL}constraints outlined below. Many of our colleagues will continue to use{CEND}
+{COL}earlier versions for some time, and you may need to write code that works on{CEND}
+{COL}their computers. You may also be required to debug code written for earlier{CEND}
+{COL}versions.{CEND}
 {BOTTOM} */
 
 use {DATA_POLICE2}, clear
@@ -334,14 +334,19 @@ use {DATA_POLICE2}, clear
 	{BLOCK}rename `var' `newvar'
 {BLOCK}}
 
-* Let's consider a similar case.
+/* The bottom chunk of code is more complex,
+but it is short and does not require changes.
+Now updating the {cmd:rename}s entails simply modifying
+{cmd:`vars'} and {cmd:`newvars'}.
+
+Let's consider a similar case. */
 
 use {DATA_POLICE3}, clear
 
 describe
 
 /* These variable names came directly from the CAI program,
-but now in Stata we want to make them all lowercase.
+but now that we are in Stata, we want to make them all lowercase.
 
 First of all, how many variables are there?
 We used that number in the loop above,
@@ -353,7 +358,7 @@ display "`vars'"
 display wordcount("`vars'")
 
 * Wait a second.
-* This variable list has way more variables than {cmd:{VAR_BADK}}:
+* This variable list has way more than {cmd:{VAR_BADK}} variables:
 
 describe, short
 
@@ -440,8 +445,7 @@ display "`var{VAR_BADK}'"
 /* A couple of notes on these.
 
 First, {cmd:`vars'} in {cmd:word count} and {cmd:word} cannot be
-enclosed in double quotes;
-the result would be wrong.
+enclosed in double quotes: the result would be wrong.
 
 Second, {cmd:word count} and {cmd:word} actually have to do with "tokens,"
 not words.
@@ -469,7 +473,7 @@ display length(`"`sentence'"')
 display word(`"`sentence'"', 1)
 
 /* Recall that strings that themselves contain double quotes ({cmd:"})
-must be enclosed in {help quotes##double:"compound" double quotes} ({cmd:`"""'})
+must be enclosed in {help quotes##double:"compound" double quotes} ({cmd:`""'}),
 not the normal "simple" double quotes ({cmd:""}).
 
 Now, the {cmd:word} extended macro function returns the first token,
@@ -481,15 +485,15 @@ display `"`word1'"'
 /* To put it another way,
 the {cmd:word count} and {cmd:word} extended macro functions
 have to do with elements of macro lists.
-In macro lists, double quotes can be used
-to join multiple words as a single element.
+In macro lists, double quotes are used to
+join multiple words as a single element.
 {cmd:word count `sentence'} counts
 the number of elements (tokens) of the macro list {cmd:`sentence'},
 just as {cmd:word 1 of `sentence'} returns
 the {cmd:1}st element/token (not necessarily word).
 
 Together with the {cmd:list} extended macro function,
-{cmd:word} and {cmd:word count} round out the most essential tools for
+{cmd:word count} and {cmd:word} round out the most essential tools for
 using macro lists in Stata.
 
 {cmd:length()} and {cmd:subinstr()} also have
@@ -512,7 +516,7 @@ then loop over parallel lists,
 but we also know that {cmd:lower()} cannot handle
 a string as long as {cmd:"`vars'"}.
 
-How about using an extended macro function instead?
+How about using an extended macro function?
 Unfortunately, this is not possible,
 because many string functions, including {cmd:lower()},
 do not have an extended macro function equivalent.
