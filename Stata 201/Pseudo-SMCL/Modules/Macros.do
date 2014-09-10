@@ -637,7 +637,9 @@ browse dupvars
 
 obtains the first token of the macro {it:macname3},
 stores it in {it:macname1},
-and returns the rest of {it:macname3} in {it:macname2}. For example: */
+and returns the rest of {it:macname3} in {it:macname2}.
+It is useful whenever you want to remove the first element of a list.
+For example: */
 
 use {DATA_POLICE2}, clear
 
