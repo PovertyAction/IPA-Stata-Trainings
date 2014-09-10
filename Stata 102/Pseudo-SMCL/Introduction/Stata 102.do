@@ -1,8 +1,8 @@
 /* {HEAD}
 
-{it:Gean Spektor, Harrison Diamond Pollock, and Matthew White}
+{it:Gean Spektor and Harrison Diamond Pollock}
 
-Thanks to Niall Keleher and Jeffery McManus
+Thanks to Matthew White, Niall Keleher, and Jeffery McManus
 for valuable contributions to the course.
 
 This training introduces foundational Stata concepts
