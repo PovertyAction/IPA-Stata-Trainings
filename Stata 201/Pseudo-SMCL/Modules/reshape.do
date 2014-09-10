@@ -293,7 +293,7 @@ We have now seen two different uses of {cmd:reshape} for atypical sorting. */
 {NEW46}
 
 You can count on {cmd:reshape} to manipulate variables that are lists.
-However, in some cases, a loop might suffice: */
+However, in some cases, a loop may suffice: */
 
 use {DATA_S2Q8}, clear
 
@@ -310,3 +310,13 @@ browse
 replace s2_q8 = strtrim(s2_q8)
 
 browse
+
+/* That was actually pretty easy.
+We already had a tool to search the list ({helpb strpos()}),
+so reshaping in order to leverage {cmd:xi} was unnecessary.
+Yet often there are tools for variables (columns) where
+there are none for observations (rows). Sorting is an example.
+Mastering {cmd:reshape} means knowing the options for variable lists, as well as
+the cases where there is a tool for a single variable but
+not a list, when {cmd:reshape} is often the best course. */
+

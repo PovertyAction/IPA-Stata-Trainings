@@ -51,7 +51,7 @@ How many countries always win the same medals? */
 /* For variables that are lists, such as {cmd:sports},
 {cmd:reshape} allows manipulation beyond sorting.
 
-The following is a dataset of one variable, {cmd:s2_q8},
+The following is a dataset of one list variable, {cmd:s2_q8},
 a question that allowed respondents to choose up to 4 of 12 possible options: */
 
 use {DATA_S2Q8}, clear
@@ -59,10 +59,10 @@ use {DATA_S2Q8}, clear
 browse
 
 /* You can see that {cmd:s2_q8} is already internally sorted.
-However, it's still not possible to use the variable for analysis.
+However, it is still not possible to use the variable for analysis.
 
 Using {cmd:reshape}, create dummy variables for all 12 options.
-For each value, if a list contains that value, the value's dummy variable should equal {cmd:1};
+For each option, if a list contains that option, the option's dummy variable should equal {cmd:1};
 otherwise it should equal {cmd:0}. For example: */
 
 list in 1
