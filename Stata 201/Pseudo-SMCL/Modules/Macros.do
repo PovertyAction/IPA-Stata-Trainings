@@ -21,7 +21,7 @@ You already know multiple ways to define macros.
 You can assign a string to a macro,
 using enclosing {help quotes##double:double quotes} or not: */
 
-* {cmd:* Enclosing "Hello world" in double quotes}
+* {cmd:* Enclosing "Hello world!" in double quotes}
 local string "Hello world!"
 display "`string'"
 
@@ -168,6 +168,9 @@ This is because we are referring to the locals themselves, not their values;
 we do not want to expand the locals, substituting them for their values.
 Extended macro functions usually (though not always)
 look like this, expecting local macro names without the single quotes.
+This makes the functions more robust.
+For example, {cmd:list x in y} works correctly even if
+{cmd:`x'} or {cmd:`y'} itself contains the word {cmd:in}.
 
 {cmd:list} can also return the union of two lists, that is,
 the list of elements found in one or both of two lists: */
@@ -221,10 +224,22 @@ Stata has many objects, including variables, macros,
 {help scalar:scalars}, and {help matrix:matrices},
 but it does not have a specific list object:
 there are no arrays other than matrices, which are strictly numeric.
-(In contrast, {help Mata} has both numeric and string vectors and matrices,
-as well as its own {help mf_asarray:array} object.)
+(In contrast, {help Mata} has both numeric and string vectors and matrices.)
 It is often possible to fill this gap with locals,
 which act like lists with the {cmd:list} and other extended macro functions.
+
+{TECH}
+{COL}You caught me: Stata actually does support arrays as part of its {help class}{CEND}
+{COL}programming. For instance, the following is allowed:{CEND}
+{BLANK}{BF}
+{COL}{stata ".x = {1, 4, 9}"}{CEND}
+{COL}{stata "display `.x[3]'"}{CEND}
+{BLANK}{DEF}
+{COL}Yet the array syntax is clunky and not widely adopted within the Stata{CEND}
+{COL}community. There are also few utilities for managing arrays {hline 2} not even an{CEND}
+{COL}equivalent of the {cmd:list} extended macro function. If you seek more advanced{CEND}
+{COL}list manipulation, you will probably wish to explore Mata.{CEND}
+{BOTTOM}
 
 I would also be remiss to discuss extended macro functions without
 mentioning one of the most popular functions, {helpb extended_fcn:dir}.
