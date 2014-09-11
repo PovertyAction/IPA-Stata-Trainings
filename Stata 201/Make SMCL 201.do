@@ -393,7 +393,7 @@ forv i = 1/`:list sizeof infiles' {
 
 			"{VAR_BADK}"    = "`badk'" \
 			"{VAR_LASTVAR}" = "`var_lastvar'" \
-			"{VAR_WD}"      = "C:\Users\mwhite.IPA\Dropbox\RM&T\New Hampshire 2013 advanced Stata training\My project folder" \
+			"{VAR_WD}"      = "C:\Users\mwhite.IPA\Documents\GitHub\Stata_Training\Stata 201\My project folder" \
 			"{VAR_WDBASE}"  = "My project folder" \
 
 			"{DATA_POLICE1}"   = `""Raw/Police 1""' \

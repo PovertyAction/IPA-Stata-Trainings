@@ -2,8 +2,8 @@
 
 {MACROS!}
 
-In this module, I'll discuss advanced macro manipulation.
-I'll touch on these topics:
+In this module, we will discuss advanced macro manipulation.
+We will touch on these topics:
 
 {view `"{MACROS-}##extended_fcn"':1. Extended macro functions}{BR}
 {view `"{MACROS-}##expressions"':2. Macros and expressions}{BR}
@@ -21,7 +21,7 @@ You already know multiple ways to define macros.
 You can assign a string to a macro,
 using enclosing {help quotes##double:double quotes} or not: */
 
-* {cmd:* Enclosing "Hello world" in double quotes}
+* {cmd:* Enclosing "Hello world!" in double quotes}
 local string "Hello world!"
 display "`string'"
 
@@ -50,7 +50,7 @@ First, let's load the auto dataset: */
 
 sysuse auto, clear
 
-/* Here's an example of an extended macro function:
+/* Here is an example of an extended macro function:
 
 {TRYITCMD}
 local varlab : variable label make{BR}
@@ -101,7 +101,7 @@ Using the two lists {cmd:`nolabvars'} and {cmd:`strvars'},
 how can we create a list of variables in the former category,
 that is, variables that are numeric but without a value label?
 
-Here's one option, with a loop: */
+Here is one option, with a loop: */
 
 {BLOCK}ds, not(vallab)
 {BLOCK}local nolabvars `r(varlist)'
@@ -168,6 +168,9 @@ This is because we are referring to the locals themselves, not their values;
 we do not want to expand the locals, substituting them for their values.
 Extended macro functions usually (though not always)
 look like this, expecting local macro names without the single quotes.
+This makes the functions more robust.
+For example, {cmd:list x in y} works correctly even if
+{cmd:`x'} or {cmd:`y'} itself contains the word {cmd:in}.
 
 {cmd:list} can also return the union of two lists, that is,
 the list of elements found in one or both of two lists: */
@@ -221,10 +224,22 @@ Stata has many objects, including variables, macros,
 {help scalar:scalars}, and {help matrix:matrices},
 but it does not have a specific list object:
 there are no arrays other than matrices, which are strictly numeric.
-(In contrast, {help Mata} has both numeric and string vectors and matrices,
-as well as its own {help mf_asarray:array} object.)
+(In contrast, {help Mata} has both numeric and string vectors and matrices.)
 It is often possible to fill this gap with locals,
 which act like lists with the {cmd:list} and other extended macro functions.
+
+{TECH}
+{COL}You caught me: Stata actually does support arrays as part of its {help class}{CEND}
+{COL}programming. For instance, the following is allowed:{CEND}
+{BLANK}{BF}
+{COL}{stata ".x = {1, 4, 9}"}{CEND}
+{COL}{stata "display `.x[3]'"}{CEND}
+{BLANK}{DEF}
+{COL}Yet the array syntax is clunky and not widely adopted within the Stata{CEND}
+{COL}community. There are also few utilities for managing arrays {hline 2} not even an{CEND}
+{COL}equivalent of the {cmd:list} extended macro function. If you seek more advanced{CEND}
+{COL}list manipulation, you will probably wish to explore Mata.{CEND}
+{BOTTOM}
 
 I would also be remiss to discuss extended macro functions without
 mentioning one of the most popular functions, {helpb extended_fcn:dir}.
@@ -245,14 +260,14 @@ macro list _files
 {COL}{bf:Note on Stata 13}{CEND}
 {MLINE}
 {COL}The following content was written for Stata 12 and below. Stata 13's new{CEND}
-{COL}long string capabilities have removed the limits discussed below, and not{CEND}
+{COL}{help strings:long string} capabilities have removed the limits discussed below, and not{CEND}
 {COL}all examples will work as intended in Stata 13, even if you set the {helpb version}.{CEND}
 {BLANK}
 {COL}However, even if you have Stata 13, it is important that you understand the{CEND}
-{COL}constraints outlined below: after all, Stata 13's release was just three{CEND}
-{COL}months ago. Many of our colleagues will continue to use earlier versions for{CEND}
-{COL}some time, and you may need to write code that works on their computers. You{CEND}
-{COL}may also sometimes be required to debug code written for earlier versions.{CEND}
+{COL}constraints outlined below. Many of our colleagues will continue to use{CEND}
+{COL}earlier versions for some time, and you may need to write code that works on{CEND}
+{COL}their computers. You may also be required to debug code written for earlier{CEND}
+{COL}versions.{CEND}
 {BOTTOM} */
 
 use {DATA_POLICE2}, clear
@@ -275,7 +290,7 @@ rename s1_q5 age
 rename s1_q6 education
 
 /* This isn't too bad for this dataset, which has few variables,
-but it's repetitive,
+but it is repetitive,
 and it would be inefficient for larger datasets.
 
 An alternative is to loop over
@@ -319,14 +334,19 @@ use {DATA_POLICE2}, clear
 	{BLOCK}rename `var' `newvar'
 {BLOCK}}
 
-* Let's consider a similar case.
+/* The bottom chunk of code is more complex,
+but it is short and does not require changes.
+Now updating the {cmd:rename}s entails simply modifying
+{cmd:`vars'} and {cmd:`newvars'}.
+
+Let's consider a similar case. */
 
 use {DATA_POLICE3}, clear
 
 describe
 
 /* These variable names came directly from the CAI program,
-but now in Stata we want to make them all lowercase.
+but now that we are in Stata, we want to make them all lowercase.
 
 First of all, how many variables are there?
 We used that number in the loop above,
@@ -338,7 +358,7 @@ display "`vars'"
 display wordcount("`vars'")
 
 * Wait a second.
-* This variable list has way more variables than {cmd:{VAR_BADK}}:
+* This variable list has way more than {cmd:{VAR_BADK}} variables:
 
 describe, short
 
@@ -425,8 +445,7 @@ display "`var{VAR_BADK}'"
 /* A couple of notes on these.
 
 First, {cmd:`vars'} in {cmd:word count} and {cmd:word} cannot be
-enclosed in double quotes;
-the result would be wrong.
+enclosed in double quotes: the result would be wrong.
 
 Second, {cmd:word count} and {cmd:word} actually have to do with "tokens,"
 not words.
@@ -454,7 +473,7 @@ display length(`"`sentence'"')
 display word(`"`sentence'"', 1)
 
 /* Recall that strings that themselves contain double quotes ({cmd:"})
-must be enclosed in {help quotes##double:"compound" double quotes} ({cmd:`"""'})
+must be enclosed in {help quotes##double:"compound" double quotes} ({cmd:`""'}),
 not the normal "simple" double quotes ({cmd:""}).
 
 Now, the {cmd:word} extended macro function returns the first token,
@@ -466,15 +485,15 @@ display `"`word1'"'
 /* To put it another way,
 the {cmd:word count} and {cmd:word} extended macro functions
 have to do with elements of macro lists.
-In macro lists, double quotes can be used
-to join multiple words as a single element.
+In macro lists, double quotes are used to
+join multiple words as a single element.
 {cmd:word count `sentence'} counts
 the number of elements (tokens) of the macro list {cmd:`sentence'},
 just as {cmd:word 1 of `sentence'} returns
 the {cmd:1}st element/token (not necessarily word).
 
 Together with the {cmd:list} extended macro function,
-{cmd:word} and {cmd:word count} round out the most essential tools for
+{cmd:word count} and {cmd:word} round out the most essential tools for
 using macro lists in Stata.
 
 {cmd:length()} and {cmd:subinstr()} also have
@@ -497,7 +516,7 @@ then loop over parallel lists,
 but we also know that {cmd:lower()} cannot handle
 a string as long as {cmd:"`vars'"}.
 
-How about using an extended macro function instead?
+How about using an extended macro function?
 Unfortunately, this is not possible,
 because many string functions, including {cmd:lower()},
 do not have an extended macro function equivalent.
@@ -515,14 +534,14 @@ display "`newvars'"
 If extended macro functions and {cmd:lstrfun} are not sufficient,
 you will have to use Mata.
 
-I will give a brief example of Mata.
+We will now see a brief example of Mata.
 You don't need to learn this now.
 
 Mata's {helpb mf_st_local:st_local()} obtains the content of Stata locals: */
 
 mata: st_local("vars")
 
-* This can be converted to lowercase using {helpb strlower()},
+* This can be converted to lowercase using {helpb mf_strlower:strlower()},
 * Mata's version of {cmd:lower()}.
 
 mata: strlower(st_local("vars"))
@@ -618,7 +637,9 @@ browse dupvars
 
 obtains the first token of the macro {it:macname3},
 stores it in {it:macname1},
-and returns the rest of {it:macname3} in {it:macname2}. For example: */
+and returns the rest of {it:macname3} in {it:macname2}.
+It is useful whenever you want to remove the first element of a list.
+For example: */
 
 use {DATA_POLICE2}, clear
 
@@ -658,7 +679,7 @@ One is the first element of the list {hline 2} though
 we could already get this using the {cmd:word} extended macro function.
 {cmd:gettoken} also returns the remainder of the list, that is,
 the list with the first element removed,
-and it's this novel capability that makes {cmd:gettoken} worth learning. */
+and it is this novel capability that makes {cmd:gettoken} worth learning. */
 
 {MACROS_Q2}
 
@@ -672,7 +693,12 @@ You often need to pass information from one do-file to another,
 for example, from a master do-file to the do-files it runs.
 What are the options?
 
-One possibility is to use globals: */
+Side note... Let's talk about modular programming.{BR}
+{space 2}o How long does a do-file have to be before it's too long?{BR}
+{space 2}o Do conceptually distinct sections of your do-file have
+the potential to interact, for instance, through shared locals?
+
+Returning... One possibility is to use globals: */
 
 sysuse auto, clear
 
@@ -711,8 +737,9 @@ using the globals {cmd:$y} and {cmd:$x}
 and overwriting the original value of {cmd:$x}, {cmd:weight}.
 
 Here, we could get around this by being careful
-to define {cmd:$y} and {cmd:$x}
-right before we run {cmd:"Analysis - globals.do"}.
+to wait to define {cmd:$y} and {cmd:$x} until
+right before we run {cmd:"Analysis - globals.do"}
+(though that's easier said than done).
 For example, we could have redefined {cmd:$y} and {cmd:$x}
 as {cmd:mpg} and {cmd:weight}
 before the last run of {cmd:"Analysis - globals.do"} above.
@@ -731,12 +758,12 @@ However, there are ways to minimize these risks.
 First, do-files that are passed information through globals
 should not modify those globals,
 in case a master do-file will later run another do-file with the same globals.
-Second, using longer global names decreases the chances that your do-files
+Second, using longer global names decreases the chance that your do-files
 will use the same globals as someone else's.
 
 The only way to eliminate these risks is to stop using globals.
 If you are working on a complex data project,
-you may find that globals are more of a headache than they're worth.
+you may find that globals are more of a headache than they are worth.
 In that case, there are other ways to pass information across do-files.
 
 One of these is {cmd:args}.
@@ -767,7 +794,7 @@ There is also potential for bugs.
 
 This brings us to the next option: {cmd:syntax}.
 Below, {cmd:mpg} and {cmd:weight} have been specified to the do-file
-through options {cmd:y()} and {cmd:x()}. */
+through options {cmd:y()} and {cmd:x()}: */
 
 sysuse auto, clear
 
@@ -797,7 +824,7 @@ cd "{VAR_WDBASE}"
 c cur myproject
 c
 
-* Now no matter what our working directory is...
+* Now no matter what the working directory is...
 
 cd "C:\"
 
@@ -806,7 +833,7 @@ cd "C:\"
 c myproject
 
 /* Any computer with {cmd:myproject} in the {cmd:fastcd} database
-can use this one command:
+can use this command:
 no globals necessary.
 
 Now returning to the training folder: */

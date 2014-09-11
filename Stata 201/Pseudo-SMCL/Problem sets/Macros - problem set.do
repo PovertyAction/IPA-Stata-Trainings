@@ -38,7 +38,7 @@ label list cesd
 {PSQ:MACROS_Q2}
 
 /* Modify the {view `"{MACROS-}##combinations_loop"':loop over combinations}
-from earlier in the module
+from the {cmd:gettoken} section of the module
 to loop over all combinations
 of {it:three} of {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}.
 That is, find all observations for which
