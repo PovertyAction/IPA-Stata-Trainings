@@ -33,13 +33,13 @@ local vars s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5
 local nvars : word count `vars'
 forvalues i = 1/`nvars' {
 	gettoken var1 vars : vars
-	local rest1 `vars'
+	local rest `vars'
 
-	local nrest1 : word count `rest1'
-	forvalues j = 1/`nrest1' {
-		gettoken var2 rest1 : rest1
+	local nrest : word count `rest'
+	forvalues j = 1/`nrest' {
+		gettoken var2 rest : rest
 
-		foreach var3 of local rest1 {
+		foreach var3 of local rest {
 			duplicates tag `var1' `var2' `var3', generate(loopdup)
 			replace loopdup = 0 if missing(`var1', `var2', `var3')
 			replace dup = 1 if loopdup

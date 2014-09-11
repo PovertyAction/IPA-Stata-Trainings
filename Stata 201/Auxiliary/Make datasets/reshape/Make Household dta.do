@@ -11,12 +11,13 @@ lab var hhid "Household ID"
 gen n = ceil(5 * runiform())
 forv i = 1/5 {
 	gen age`i' = ceil(79 * runiform()) + 2 if n >= `i'
+	replace age`i' = ceil(9 * runiform()) if n >= `i' & runiform() < .2
 	lab var age`i' "Age (#`i'/5)"
 
 	gen female`i' = runiform() < .53 if n >= `i'
 	lab var female`i' "Female (#`i'/5)"
 
-	gen married`i' = runiform() < .1 if n >= `i'
+	gen married`i' = runiform() < .2 if n >= `i'
 	lab var married`i' "HH member is married (#`i'/5)"
 }
 drop n
@@ -27,6 +28,9 @@ assert r(N) & r(N) < _N
 preserve
 reshape long age female married, i(hhid)
 cou if age < 10 & married
+assert r(N)
+bys hhid: egen N = total(age < 10 & married)
+cou if N > 1
 assert r(N)
 restore
 

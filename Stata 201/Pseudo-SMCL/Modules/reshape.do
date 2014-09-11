@@ -45,17 +45,45 @@ transforming the member-level dataset to a household dataset?
 
 reshape wide age female married, i(hhid) j(memid)
 
-/* How could we use {cmd:reshape}
-as part of code to list all household members
-who are younger than {cmd:10} but recorded as married?
-Is this any easier than looping over the household member variables?
+/* Let's say we wanted to list all household members who
+are younger than {cmd:10} but recorded as married.
+Without {cmd:reshape}, we might attempt an ugly loop: */
+
+generate which = ""
+local MAX_MEMBERS 5
+forvalues i = 1/`MAX_MEMBERS' {
+	replace which = which + "`i' " if age`i' < 10 & married`i'
+}
+list hhid which age* married* if !missing(which)
+drop which
+
+/* Even the output is a little hard to parse.
+{cmd:reshape} gives us an elegant alternative: any guesses how?
 
 {NEW46} */
 
 reshape long age female married, i(hhid) j(memid)
 list if age < 10 & married
 
-/* {hline}{marker sort_across}
+/* We will see throughout this module that
+{cmd:reshape} is often preferable to looping.
+Of course, {it:often} is different from {it:always},
+and we will also see times when looping is the better choice.
+Yet the key takeaway is that {cmd:reshape} is a powerful tool in
+any Stata user's kit.
+
+In the example above, we wanted to know about household {it:members},
+hence we {cmd:reshape}d the dataset so that
+its observations matched the unit of interest.
+Questions about entire households probably would not require a {cmd:reshape}.
+Cleans that involve a {cmd:reshape} often start with a question:
+what unit am I really interested in? what do I wish my dataset looked like?
+
+{cmd:reshape} is powerful because it forces us to see new datasets within
+our current one. In that sense, {cmd:{DATA_HH}} is not just a household dataset,
+but also a potential individual-level dataset.
+
+{hline}{marker sort_across}
 
 {bf:1. Sorting across variables}
 
@@ -83,7 +111,7 @@ Danny wants to transform this dataset: */
 
 browse
 
-* To this one:
+* to this one:
 
 {BLOCK}clear
 {BLOCK}input id f1 f2 f3 f4 f5 f6
@@ -103,7 +131,7 @@ browse
 /* Danny talks about "left alignment,"
 but another way to think about the task is
 that Danny wants to sort {it:across} the {cmd:f} variables.
-First, he wants to sort the missing {cmd:f} values after the nonmissing ones,
+First he wants to sort the missing {cmd:f} values after the nonmissing ones,
 then he wants to sort the nonmissing {cmd:f} values
 according to their original relative order.
 
@@ -115,7 +143,7 @@ The desired results are achieved.
 (Don't worry about learning {cmd:xpose} well:
 we will soon learn a superior alternative {hline 2} any guesses what?)
 
-{stata run Do/Modules/reshape 1:Click here to input the original dataset.} */
+{stata run Do/Modules/reshape 2:Click here to input the original dataset.} */
 
 keep in 1
 
@@ -146,21 +174,21 @@ browse
 
 /* Thinking about the left-right sort (a sort {it:across},
 not {it:within} variables) as tranpose-sort-tranpose was
-so compelling to me that after deciding that transposing in Stata
-was too laborious,
+so compelling to me that after deciding that transposing was
+too laborious in Stata,
 my response to Danny involved transposing then sorting using Mata.
 
 Neither Stata nor Mata has a simple command or function for
 left-right sorting.
 Transposing becomes appealing simply as a means of
-transforming the dataset to one for which
+transforming the dataset into one for which
 {cmd:sort}, {cmd:gsort}, and other sorting tools are useful.
 
 So is Mata the solution for Danny?
-Well, it's probably telling that this module is on {cmd:reshape}, not Mata.
+Well, it is probably telling that this module is on {cmd:reshape}, not Mata.
 It turned out that a much easier solution was possible with {cmd:reshape}:
 
-{stata run Do/Modules/reshape 1:Click here to input the original dataset.} */
+{stata run Do/Modules/reshape 2:Click here to input the original dataset.} */
 
 reshape long f, i(id)
 
@@ -205,56 +233,56 @@ browse
 
 {hline}
 
-This variant on the ER dataset has a variable named {cmd:projects} that
-is the list of an employee's projects: */
+This variant on the Olympics dataset has a variable named {cmd:sports} that
+is the list of a country's medaling sports: */
 
-use {DATA_PROJ2}, clear
+use {DATA_OLYMPICS2}, clear
 
 browse
 
-/* However, again, the order of projects is a mess.
+/* However, again, the order of the sports is a mess.
 
 By first {helpb split}ting the variable,
 we can use the same steps as Question 1 to recreate the variable: */
 
-rename projects project
-split project, parse(", ")
-drop project
-destring project*, replace
+rename sports sport
+split sport, parse(", ")
+drop sport
+destring sport*, replace
 
 browse
 
-reshape long project, i(id date)
-drop if missing(project)
+reshape long sport, i(country year)
+drop if missing(sport)
 
 browse
 
-sort id date project
+sort country year sport
 
 browse
 
-* Now recreating {cmd:projects} from {cmd:project}:
+* Now recreating {cmd:sports} from {cmd:sport}:
 
-generate projects = ""
+generate sports = ""
 
-by id date (project): replace projects = projects[_n - 1] + ///
-	cond(missing(projects[_n - 1]), "", ", ") + string(project)
+by country year (sport): replace sports = sports[_n - 1] + ///
+	cond(missing(sports[_n - 1]), "", ", ") + string(sport)
 
 browse
 
-by id date (project): replace projects = projects[_N]
+by country year (sport): replace sports = sports[_N]
 
 browse
 
 * And finally, the second {cmd:reshape}:
 
-reshape wide project, i(id date) j(_j)
+reshape wide sport, i(country year) j(_j)
 
-keep id date projects
+keep country year sports
 
 browse
 
-/* {cmd:projects} was a variable whose values were themselves lists.
+/* {cmd:sports} was a variable whose values were themselves lists.
 Using {cmd:reshape}, we sorted those lists.
 We have now seen two different uses of {cmd:reshape} for atypical sorting. */
 
@@ -265,7 +293,7 @@ We have now seen two different uses of {cmd:reshape} for atypical sorting. */
 {NEW46}
 
 You can count on {cmd:reshape} to manipulate variables that are lists.
-However, in some cases, a loop might suffice: */
+However, in some cases, a loop may suffice: */
 
 use {DATA_S2Q8}, clear
 
@@ -282,3 +310,13 @@ browse
 replace s2_q8 = strtrim(s2_q8)
 
 browse
+
+/* That was actually pretty easy.
+We already had a tool to search the list ({helpb strpos()}),
+so reshaping in order to leverage {cmd:xi} was unnecessary.
+Yet often there are tools for variables (columns) where
+there are none for observations (rows). Sorting is an example.
+Mastering {cmd:reshape} means knowing the options for variable lists, as well as
+the cases where there is a tool for a single variable but
+not a list, when {cmd:reshape} is often the best course. */
+

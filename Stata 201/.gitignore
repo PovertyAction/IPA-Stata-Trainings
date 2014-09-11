@@ -1,3 +1,4 @@
 *.smcl
 Do/*/*.do
 Raw/*.dta
+!Raw/Police *.dta
