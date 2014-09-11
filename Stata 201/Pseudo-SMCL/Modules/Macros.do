@@ -693,7 +693,12 @@ You often need to pass information from one do-file to another,
 for example, from a master do-file to the do-files it runs.
 What are the options?
 
-One possibility is to use globals: */
+Side note... Let's talk about modular programming.{BR}
+{space 2}o How long does a do-file have to be before it's too long?{BR}
+{space 2}o Do conceptually distinct sections of your do-file have
+the potential to interact, for instance, through shared locals?
+
+Returning... One possibility is to use globals: */
 
 sysuse auto, clear
 
@@ -732,8 +737,9 @@ using the globals {cmd:$y} and {cmd:$x}
 and overwriting the original value of {cmd:$x}, {cmd:weight}.
 
 Here, we could get around this by being careful
-to define {cmd:$y} and {cmd:$x}
-right before we run {cmd:"Analysis - globals.do"}.
+to wait to define {cmd:$y} and {cmd:$x} until
+right before we run {cmd:"Analysis - globals.do"}
+(though that's easier said than done).
 For example, we could have redefined {cmd:$y} and {cmd:$x}
 as {cmd:mpg} and {cmd:weight}
 before the last run of {cmd:"Analysis - globals.do"} above.
@@ -752,7 +758,7 @@ However, there are ways to minimize these risks.
 First, do-files that are passed information through globals
 should not modify those globals,
 in case a master do-file will later run another do-file with the same globals.
-Second, using longer global names decreases the chances that your do-files
+Second, using longer global names decreases the chance that your do-files
 will use the same globals as someone else's.
 
 The only way to eliminate these risks is to stop using globals.
@@ -788,7 +794,7 @@ There is also potential for bugs.
 
 This brings us to the next option: {cmd:syntax}.
 Below, {cmd:mpg} and {cmd:weight} have been specified to the do-file
-through options {cmd:y()} and {cmd:x()}. */
+through options {cmd:y()} and {cmd:x()}: */
 
 sysuse auto, clear
 
@@ -818,7 +824,7 @@ cd "{VAR_WDBASE}"
 c cur myproject
 c
 
-* Now no matter what our working directory is...
+* Now no matter what the working directory is...
 
 cd "C:\"
 
@@ -827,7 +833,7 @@ cd "C:\"
 c myproject
 
 /* Any computer with {cmd:myproject} in the {cmd:fastcd} database
-can use this one command:
+can use this command:
 no globals necessary.
 
 Now returning to the training folder: */
