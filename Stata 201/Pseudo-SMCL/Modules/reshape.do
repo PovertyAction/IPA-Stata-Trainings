@@ -54,7 +54,7 @@ local MAX_MEMBERS 5
 forvalues i = 1/`MAX_MEMBERS' {
 	replace which = which + "`i' " if age`i' < 10 & married`i'
 }
-list which age* married* if !missing(which)
+list hhid which age* married* if !missing(which)
 drop which
 
 /* Even the output is a little hard to parse.
