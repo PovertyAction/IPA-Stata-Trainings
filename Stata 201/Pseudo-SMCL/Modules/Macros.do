@@ -541,7 +541,7 @@ Mata's {helpb mf_st_local:st_local()} obtains the content of Stata locals: */
 
 mata: st_local("vars")
 
-* This can be converted to lowercase using {helpb strlower()},
+* This can be converted to lowercase using {helpb mf_strlower:strlower()},
 * Mata's version of {cmd:lower()}.
 
 mata: strlower(st_local("vars"))
