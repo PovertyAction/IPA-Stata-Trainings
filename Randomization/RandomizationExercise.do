@@ -42,7 +42,7 @@ gen random= uniform()
 
 Now, the next step is to assign treatment and control to schools.
 
-First, let us start by {stata sort random: sorting by random number}.
+First, let us start by {stata sort random:sorting by random number}.
 This is done using the following command line:
 
 {cmd:sort random}
@@ -129,7 +129,7 @@ gen treatment = strata_index <= (strata_size/2)
 
 {hline}
 
-{bf: EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}
+{bf:EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}
 
 {hline}
 
