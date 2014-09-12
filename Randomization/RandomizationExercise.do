@@ -36,7 +36,7 @@ More seriously, the choice of seed doesn't matter for now.
 
 Sharing the secret with all of you... */
 
-generate random = uniform()
+generate random = runiform()
 
 /* {bf:3. Assigning treatment and control}
 
@@ -93,7 +93,7 @@ In this example, we will randomize schools after stratifying them by language an
 
 {stata sort schoolid:Sort by school ID}{BR}
 {stata set seed 20140402:Set seed}{BR}
-{stata generate random = uniform():Generate random number}
+{stata generate random = runiform():Generate random number}
 
 {bf:2. Stratification by language and gender}
 
@@ -140,7 +140,7 @@ Let us now additionally stratify by pre-test mean (which is a continuous variabl
 
 {stata sort language gender pretest_mean:Sort by language gender and pre-test mean}{BR}
 {stata set seed 20140402:Set seed}{BR}
-{stata generate random = uniform():Generate random number}
+{stata generate random = runiform():Generate random number}
 
 {it:Why is this sorting different as compared to the previous one?}
 
