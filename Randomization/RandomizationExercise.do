@@ -1,8 +1,8 @@
-/* {pstd}{bf}
-{ul:RANDOMIZATION IN STATA}{break}
-Rohit Naimpally{break}
+/* {P}{bf}
+{ul:RANDOMIZATION IN STATA}{BR}
+Rohit Naimpally{BR}
 16 September 2014
-{sf}{...}
+{DEF}
 
 {cmd:* Load the Balsakhi dataset.} */
 use RandomizationExercise_balsakhi_data, clear
@@ -50,7 +50,7 @@ This is done using the following command line:
 Depending on how comfortable you are with Stata, you can try out either
 of the following to generate the treatment variable:
 
-{cmd:generate treatment = 0}{break}
+{cmd:generate treatment = 0}{BR}
 {cmd:replace treatment = 1 if _n <= _N / 2}
 
 Or you can combine this in one step ... */
@@ -91,8 +91,8 @@ In this example, we will randomize schools after stratifying them by language an
 
 {bf:1. Usual generation of the random number}
 
-{stata sort schoolid:Sort by school ID}{break}
-{stata set seed 20140402:Set seed}{break}
+{stata sort schoolid:Sort by school ID}{BR}
+{stata set seed 20140402:Set seed}{BR}
 {stata generate random = uniform():Generate random number}
 
 {bf:2. Stratification by language and gender}
@@ -138,8 +138,8 @@ Let us now additionally stratify by pre-test mean (which is a continuous variabl
 
 {bf:1. Usual generation of the random number}
 
-{stata sort language gender pretest_mean:Sort by language gender and pre-test mean}{break}
-{stata set seed 20140402:Set seed}{break}
+{stata sort language gender pretest_mean:Sort by language gender and pre-test mean}{BR}
+{stata set seed 20140402:Set seed}{BR}
 {stata generate random = uniform():Generate random number}
 
 {it:Why is this sorting different as compared to the previous one?}
