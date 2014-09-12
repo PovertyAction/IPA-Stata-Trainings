@@ -107,7 +107,24 @@ Lastly, let us sort by school ID again and look at the result of our effort: */
 sort schoolid
 browse
 
-/* {hline}{marker stratified}
+/* {...}
+{TECH}
+{COL}In case there are sort-order ties on the random number variable {hline 2} if the{CEND}
+{COL}variable contains duplicates, which happens more often than you may{CEND}
+{COL}imagine {hline 2} it is actually {browse "http://blog.stata.com/2012/08/03/using-statas-random-number-generators-part-2-drawing-without-replacement/":best practice} to generate and sort on two random{CEND}
+{COL}variables:{CEND}
+{BLANK}
+{BF}
+{COL}{stata sort schoolid}{CEND}
+{COL}{stata generate random1 = runiform()}{CEND}
+{COL}{stata generate random2 = runiform()}{CEND}
+{COL}{stata sort random1 random2}{CEND}
+{COL}{stata generate treatment = _n <= _N / 2}{CEND}
+{DEF}
+{BLANK}
+{BOTTOM}
+
+{hline}{marker stratified}
 
 {bf:EXAMPLE 2:STRATIFICATION AND RANDOMIZATION}
 
