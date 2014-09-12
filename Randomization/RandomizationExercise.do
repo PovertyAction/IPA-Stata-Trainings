@@ -12,11 +12,10 @@ browse
 
 /* The dataset has five variables. What do these variables mean? Do you need them for the randomization?
 
-We will discuss three types of randomization:
+We will discuss two common types of randomization:
 
 {view "{RAND}##simple":1. Simple randomization}{BR}
 {view "{RAND}##stratified":2. Stratified randomization}{BR}
-{view "{RAND}##stratified_continuous":3. Stratification by discrete {it:and} continuous variables}
 
 {hline}{marker simple}
 
@@ -168,54 +167,7 @@ generate treatment = strata_index <= strata_size / 2
 
 browse
 
-/* {hline}{marker stratified_continuous}
-
-{bf:EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}
-
-{hline}
-
-{cmd:* Reset the dataset.} */
-{USE}
-
-/* The previous example discussed stratification by discrete variables only,
-namely {cmd:language} and {cmd:gender}.
-Let us now additionally stratify by pre-test mean (which is a continuous variable) as well.
-
-{bf:1. Usual generation of the random number} */
-
-* {cmd:* Set the seed.}
-set seed 20140402
-* {cmd:* Sort by language, gender, and pre-test mean.}
-sort language gender pretest_mean
-* {cmd:* Generate the random number variable.}
-generate random = runiform()
-
-/* {it:Why is this sorting different as compared to the previous one?}
-
-{bf:2. Stratification by language, gender and pre-test mean}
-
-First, figure out how many schools are there in each stratum. */
-
-by language gender: generate strata_size = _N
-
-/* We now want to split the schools into "groups" of 2, where each group represents one treatment and one control group and they have similar pre-test means.
-
-To do this: */
-
-by language gender: generate group = group(strata_size / 2)
-
-* {bf:3. Assigning treatment and control within the strata}
-
-bysort language gender group (random): generate groupindex = _n
-generate treatment = groupindex == 2
-
-/* {it:How should one read the logical expression used to generate the treatment variable here?}
-
-{stata "bysort language gender group (random): generate treatment_the_cool_way = _n - 1":Challenge! Assigning treatment in one step}
-
-{stata ttest pretest_mean, by(treatment):Are the means the same?}
-
-{bf:Now go randomize everything. Eggs or pancakes for breakfast? RANDOMIZE!}
+/* {bf:Now go randomize everything. Eggs or pancakes for breakfast? RANDOMIZE!}
 
 Actually, the correct answer to the above is: both. */
 
