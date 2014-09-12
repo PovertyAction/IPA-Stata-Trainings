@@ -10,7 +10,13 @@ browse
 
 /* The dataset has five variables. What do these variables mean? Do you need them for the randomization?
 
-{hline}
+We will discuss three types of randomization:
+
+{view "{RAND}##simple":1. Simple randomization}{BR}
+{view "{RAND}##stratified":2. Stratified randomization}{BR}
+{view "{RAND}##stratified_continuous":3. Stratification by discrete {it:and} continuous variables}
+
+{hline}{marker simple}
 
 {bf:EXAMPLE 1: SIMPLE RANDOMIZATION}
 
@@ -82,7 +88,7 @@ of schools to be treatment and the top half control?
 
 Lastly, let us {stata sort schoolid:sort by school ID} again and {stata browse:look at the result of our effort!}
 
-{hline}
+{hline}{marker stratified}
 
 {bf:EXAMPLE 2:STRATIFICATION AND RANDOMIZATION}
 
@@ -129,7 +135,7 @@ generate treatment = strata_index <= strata_size / 2
 
 /* Let us now {stata browse:check the result}.
 
-{hline}
+{hline}{marker stratified_continuous}
 
 {bf:EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}
 

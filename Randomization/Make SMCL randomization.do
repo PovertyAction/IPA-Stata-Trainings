@@ -10,7 +10,8 @@ do "../Do to SMCL.do"
 	subinstr(
 		`shared_subinstr1'
 		`shared_subinstr2'
-		"{USE}" = "use RandomizationExercise_balsakhi_data, clear"
+		"{RAND}" = "RandomizationExercise.smcl" \
+		"{USE}"  = "use RandomizationExercise_balsakhi_data, clear"
 	)
 	preserve viewsmcl
 	, /* comma so that we can specify "," to -subinstr()- without
