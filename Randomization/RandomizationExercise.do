@@ -4,8 +4,10 @@ Rohit Naimpally{BR}
 16 September 2014
 {DEF}
 
-{cmd:* Load the Balsakhi dataset.} */
+Let's load the Balsakhi dataset: */
+
 {USE}
+
 browse
 
 /* The dataset has five variables. What do these variables mean? Do you need them for the randomization?
