@@ -27,7 +27,7 @@ Why? */
 set seed 20140402
 
 /* Why that number specifically? Because that is a landmark date: The day India won the
-cricket World Cup final. You could just as easily select another number, like 19830625
+cricket World Cup final. You could just as easily select another number, like {cmd:19830625}
 (the day on which India won its other final.)
 
 More seriously, the choice of seed doesn't matter for now.
@@ -57,24 +57,25 @@ Or you can combine this in one step ... */
 
 generate treatment = _n <= _N / 2
 
-/* The logical expression above can be read as "Generate a variable called
-"treatment" that takes on the value 1 whenever the observation number is
-less than or equal to half of the total number of observations, and 0
+/* The logical expression above can be read as "create a variable named
+{cmd:treatment} that takes on the value {cmd:1} whenever
+the observation number ({cmd:_n}) is less than or equal to half of
+the total number of observations ({cmd:_N}), and {cmd:0}
 whenever the observation number is more than half of the total number of
 observations." For more about such logical expressions, refer to the Stata
 103 training module.
 
 What is important to note here is that I have assigned the top half of
 schools to the treatment condition and the bottom half of schools to the
-control condition (where treatment is designated by the treatment variable
-taking on the value "1" and control is designated by the treatment variable
-taking on the value "0".
+control condition (where treatment is designated by the {cmd:treatment} variable
+taking on the value {cmd:1} and control is designated by the {cmd:treatment} variable
+taking on the value {cmd:0}.
 
 Note that there are other ways of doing this as well:
 
 For example, I could have set the bottom half of schools to be treatment and
 because it is all {it:random}, it would not have mattered! How would the
-"gen treatment" command have looked if I had decided to set the bottom half
+{cmd:generate treatment} command have looked if I had decided to set the bottom half
 of schools to be treatment and the top half control?
 
 Lastly, let us {stata sort schoolid:sort by school ID} again and {stata browse:look at the result of our effort!}
@@ -106,16 +107,16 @@ by language gender: generate strata_size = _N
 
 bysort language gender (random): generate strata_index = _n
 
-/* What I've now done is to create a variable called "strata_index" that takes on the
+/* What I've now done is to create a variable called {cmd:strata_index} that takes on the
 observation number for each observation within a given language and gender group.
-For instance, the value of strata_index for the 16th observation in a particular
-language and gender combination will be "16".
+For instance, the value of {cmd:strata_index} for the {cmd:16}th observation in a particular
+language and gender combination will be {cmd:16}.
 
-Moreover, notice the syntax of the bysort command here: I have sorted on three
-variables: language, gender, and random. However, the "by" command is only applied
-to the language and gender groups i.e. the strata_index variable is generated for each
-language and gender combination rather than for each language, gender, and random
-combination. For more on the bysort syntax, consult the Stata 103 training module.
+Moreover, notice the syntax of the {helpb bysort} command here: I have sorted on three
+variables: {cmd:language}, {cmd:gender}, and {cmd:random}. However, the {cmd:by} command is only applied
+to the {cmd:language} and {cmd:gender} groups, i.e., the {cmd:strata_index} variable is generated for each
+{cmd:language} and {cmd:gender} combination rather than for each {cmd:language}, {cmd:gender}, and {cmd:random}
+combination. For more on the {cmd:bysort} syntax, consult the Stata 103 training module.
 
 {bf:2. Assigning treatment and control within the strata}
 
@@ -133,7 +134,8 @@ generate treatment = strata_index <= strata_size / 2
 
 {hline}
 
-The previous example discussed stratification by discrete variables only, namely language and gender.
+The previous example discussed stratification by discrete variables only,
+namely {cmd:language} and {cmd:gender}.
 Let us now additionally stratify by pre-test mean (which is a continuous variable) as well.
 
 {bf:1. Usual generation of the random number}
