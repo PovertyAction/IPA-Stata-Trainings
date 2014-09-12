@@ -63,12 +63,12 @@ generate random = runiform()
 
 Now, the next step is to assign treatment and control to schools.
 
-First, let us start by {stata sort random:sorting by random number}.
-This is done using the following command line:
+First, let us start by sorting by random number.
+This is done using the following command line: */
 
-{cmd:sort random}
+sort random
 
-Depending on how comfortable you are with Stata, you can try out either
+/* Depending on how comfortable you are with Stata, you can try out either
 of the following to generate the treatment variable:
 
 {cmd:generate treatment = 0}{BR}
@@ -99,9 +99,12 @@ because it is all {it:random}, it would not have mattered! How would the
 {cmd:generate treatment} command have looked if I had decided to set the bottom half
 of schools to be treatment and the top half control?
 
-Lastly, let us {stata sort schoolid:sort by school ID} again and {stata browse:look at the result of our effort!}
+Lastly, let us sort by school ID again and look at the result of our effort: */
 
-{hline}{marker stratified}
+sort schoolid
+browse
+
+/* {hline}{marker stratified}
 
 {bf:EXAMPLE 2:STRATIFICATION AND RANDOMIZATION}
 
@@ -112,13 +115,16 @@ Lastly, let us {stata sort schoolid:sort by school ID} again and {stata browse:l
 
 /* In this example, we will randomize schools after stratifying them by language and gender.
 
-{bf:1. Usual generation of the random number}
+{bf:1. Usual generation of the random number} */
 
-{stata set seed 20140402:Set seed}{BR}
-{stata sort schoolid:Sort by school ID}{BR}
-{stata generate random = runiform():Generate random number}
+* {cmd:* Set the seed.}
+set seed 20140402
+* {cmd:* Sort by school ID.}
+sort schoolid
+* {cmd:* Generate the random number variable.}
+generate random = runiform()
 
-{bf:2. Stratification by language and gender}
+/* {bf:2. Stratification by language and gender}
 
 This isn't rocket science either. What you want to do is the following: */
 
@@ -146,9 +152,11 @@ We can now use similar syntax to what we used in the simple randomization: */
 
 generate treatment = strata_index <= strata_size / 2
 
-/* Let us now {stata browse:check the result}.
+* Let us now check the result:
 
-{hline}{marker stratified_continuous}
+browse
+
+/* {hline}{marker stratified_continuous}
 
 {bf:EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}
 
@@ -161,13 +169,16 @@ generate treatment = strata_index <= strata_size / 2
 namely {cmd:language} and {cmd:gender}.
 Let us now additionally stratify by pre-test mean (which is a continuous variable) as well.
 
-{bf:1. Usual generation of the random number}
+{bf:1. Usual generation of the random number} */
 
-{stata set seed 20140402:Set seed}{BR}
-{stata sort language gender pretest_mean:Sort by language, gender, and pre-test mean}{BR}
-{stata generate random = runiform():Generate random number}
+* {cmd:* Set the seed.}
+set seed 20140402
+* {cmd:* Sort by language, gender, and pre-test mean.}
+sort language gender pretest_mean
+* {cmd:* Generate the random number variable.}
+generate random = runiform()
 
-{it:Why is this sorting different as compared to the previous one?}
+/* {it:Why is this sorting different as compared to the previous one?}
 
 {bf:2. Stratification by language, gender and pre-test mean}
 
