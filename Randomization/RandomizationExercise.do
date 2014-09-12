@@ -25,7 +25,7 @@ We will discuss three types of randomization:
 {USE}
 
 /* In this example, we will simply randomize the schools into treatment and control
-groups. Let us start by {stata sort schoolid:sorting by school ID}.
+groups.
 
 {bf:1. Setting seed}
 
@@ -42,7 +42,18 @@ More seriously, the choice of seed doesn't matter for now.
 
 {bf:2. Generating Random Numbers}
 
-Sharing the secret with all of you... */
+We want to create a variable of random numbers.
+Before that, we must {cmd:sort} by a unique ID.
+This is important for the reproducibility of the randomization:
+if the sort order is not replicable,
+it will not be possible to create the same random number variable.
+In this dataset, {cmd:schoolid}, the school ID, uniquely identifies
+observations: */
+
+isid schoolid
+sort schoolid
+
+* Sharing the secret with all of you...
 
 generate random = runiform()
 
@@ -101,8 +112,8 @@ Lastly, let us {stata sort schoolid:sort by school ID} again and {stata browse:l
 
 {bf:1. Usual generation of the random number}
 
-{stata sort schoolid:Sort by school ID}{BR}
 {stata set seed 20140402:Set seed}{BR}
+{stata sort schoolid:Sort by school ID}{BR}
 {stata generate random = runiform():Generate random number}
 
 {bf:2. Stratification by language and gender}
@@ -150,8 +161,8 @@ Let us now additionally stratify by pre-test mean (which is a continuous variabl
 
 {bf:1. Usual generation of the random number}
 
-{stata sort language gender pretest_mean:Sort by language gender and pre-test mean}{BR}
 {stata set seed 20140402:Set seed}{BR}
+{stata sort language gender pretest_mean:Sort by language, gender, and pre-test mean}{BR}
 {stata generate random = runiform():Generate random number}
 
 {it:Why is this sorting different as compared to the previous one?}
