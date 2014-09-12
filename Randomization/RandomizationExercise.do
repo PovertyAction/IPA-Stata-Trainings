@@ -41,6 +41,10 @@ cricket World Cup final. You could just as easily select another number, like {c
 (the day on which India won its other final.)
 
 More seriously, the choice of seed doesn't matter for now.
+When you write a real-life randomization,
+do not choose dates or other numbers with human meaning,
+but rather use a service like {browse "http://www.random.org/":random.org} to
+randomly generate a seed.
 
 {bf:2. Generating Random Numbers}
 
@@ -69,12 +73,12 @@ This is done using the following command line: */
 sort random
 
 /* Depending on how comfortable you are with Stata, you can try out either
-of the following to generate the treatment variable:
+of the following to generate the treatment variable: */
 
-{cmd:generate treatment = 0}{BR}
-{cmd:replace treatment = 1 if _n <= _N / 2}
+generate treatment = 0
+replace treatment = 1 if _n <= _N / 2
 
-Or you can combine this in one step ... */
+* Or you can combine this in one step:
 
 generate treatment = _n <= _N / 2
 
@@ -90,7 +94,7 @@ What is important to note here is that I have assigned the top half of
 schools to the treatment condition and the bottom half of schools to the
 control condition (where treatment is designated by the {cmd:treatment} variable
 taking on the value {cmd:1} and control is designated by the {cmd:treatment} variable
-taking on the value {cmd:0}.
+taking on the value {cmd:0}).
 
 Note that there are other ways of doing this as well:
 
