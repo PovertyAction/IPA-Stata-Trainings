@@ -132,7 +132,7 @@ generate random = runiform()
 
 This isn't rocket science either. What you want to do is the following: */
 
-by language gender: generate strata_size = _N
+bysort language gender: generate strata_size = _N
 
 * This tells us how many schools there are in a language-gender group.
 * Now let us assign a serial number to each school in a language-gender group.
@@ -149,8 +149,16 @@ variables: {cmd:language}, {cmd:gender}, and {cmd:random}. However, the {cmd:by}
 to the {cmd:language} and {cmd:gender} groups, i.e., the {cmd:strata_index} variable is generated for each
 {cmd:language} and {cmd:gender} combination rather than for each {cmd:language}, {cmd:gender}, and {cmd:random}
 combination. For more on the {cmd:bysort} syntax, consult the Stata 103 training module.
+An alternative would have been: */
 
-{bf:2. Assigning treatment and control within the strata}
+sort language gender random
+by language gender: generate strata_index = _n
+
+/* This clarifies that while we are also {it:sorting} on {cmd:random},
+we are repeating the {cmd:generate} command for only combinations of
+{cmd:language} and {cmd:gender}.
+
+{bf:3. Assigning treatment and control within the strata}
 
 We can now use similar syntax to what we used in the simple randomization: */
 
