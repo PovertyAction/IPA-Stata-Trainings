@@ -5,7 +5,7 @@ Rohit Naimpally{BR}
 {DEF}
 
 {cmd:* Load the Balsakhi dataset.} */
-use RandomizationExercise_balsakhi_data, clear
+{USE}
 browse
 
 /* The dataset has five variables. What do these variables mean? Do you need them for the randomization?
@@ -14,9 +14,11 @@ browse
 
 {bf:EXAMPLE 1: SIMPLE RANDOMIZATION}
 
-{hline}
+{hline} */
 
-In this example, we will simply randomize the schools into treatment and control
+{USE}
+
+/* In this example, we will simply randomize the schools into treatment and control
 groups. Let us start by {stata sort schoolid:sorting by school ID}.
 
 {bf:1. Setting seed}
@@ -80,15 +82,16 @@ of schools to be treatment and the top half control?
 
 Lastly, let us {stata sort schoolid:sort by school ID} again and {stata browse:look at the result of our effort!}
 
-{stata use RandomizationExercise_balsakhi_data, clear:Reset the dataset}
-
 {hline}
 
 {bf:EXAMPLE 2:STRATIFICATION AND RANDOMIZATION}
 
 {hline}
 
-In this example, we will randomize schools after stratifying them by language and gender.
+{cmd:* Reset the dataset.} */
+{USE}
+
+/* In this example, we will randomize schools after stratifying them by language and gender.
 
 {bf:1. Usual generation of the random number}
 
@@ -126,15 +129,16 @@ generate treatment = strata_index <= strata_size / 2
 
 /* Let us now {stata browse:check the result}.
 
-{stata use RandomizationExercise_balsakhi_data, clear:Reset the dataset}
-
 {hline}
 
 {bf:EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}
 
 {hline}
 
-The previous example discussed stratification by discrete variables only,
+{cmd:* Reset the dataset.} */
+{USE}
+
+/* The previous example discussed stratification by discrete variables only,
 namely {cmd:language} and {cmd:gender}.
 Let us now additionally stratify by pre-test mean (which is a continuous variable) as well.
 
