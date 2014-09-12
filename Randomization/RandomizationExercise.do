@@ -1,39 +1,45 @@
-{smcl}
-{com}{reset}
-{center: {bf: {ul: RANDOMIZATION IN STATA}}}
-{center: {bf: Rohit Naimpally}}
-{center: {bf: 16 September 2014}}
+/* {pstd}{bf}
+{ul:RANDOMIZATION IN STATA}{break}
+Rohit Naimpally{break}
+16 September 2014
+{sf}{...}
 
-{stata use "RandomizationExercise_balsakhi_data", clear :Load the Balsakhi Dataset}
-{stata browse}
+{cmd:* Load the Balsakhi dataset.} */
+use RandomizationExercise_balsakhi_data, clear
+browse
 
-{txt}The dataset has five variables. What do these variables mean? Do you need them for the randomization?
+/* The dataset has five variables. What do these variables mean? Do you need them for the randomization?
 
 {hline}
-{center:{bf:EXAMPLE 1: SIMPLE RANDOMIZATION}}
+
+{bf:EXAMPLE 1: SIMPLE RANDOMIZATION}
+
 {hline}
 
 In this example, we will simply randomize the schools into treatment and control
 groups. Let us start by {stata sort schoolid:sorting by school ID}.
 
 {bf:1. Setting seed}
+
 Apart from the actual randomization, this is the most important part of the do-file.
-Why?
+Why? */
 
-{center:{stata set seed 20140402}}
+set seed 20140402
 
-Why that number specifically? Because that is a landmark date: The day India won the
+/* Why that number specifically? Because that is a landmark date: The day India won the
 cricket World Cup final. You could just as easily select another number, like 19830625
 (the day on which India won its other final.)
 
 More seriously, the choice of seed doesn't matter for now.
 
 {bf:2. Generating Random Numbers}
-Sharing the secret with all of you...
 
-{center:{stata gen random= uniform()}}
+Sharing the secret with all of you... */
 
-{bf:3. Assigning treatment and control}
+gen random= uniform()
+
+/* {bf:3. Assigning treatment and control}
+
 Now, the next step is to assign treatment and control to schools.
 
 First, let us start by {stata sort random: sorting by random number}.
@@ -44,14 +50,14 @@ This is done using the following command line:
 Depending on how comfortable you are with Stata, you can try out either
 of the following to generate the treatment variable:
 
-{cmd:gen treatment = 0}
+{cmd:gen treatment = 0}{break}
 {cmd:replace treatment = 1 if _n <= _N/2}
 
-Or you can combine this in one step ...
+Or you can combine this in one step ... */
 
-{center:{stata gen treatment= _n<=_N/2}}
+gen treatment= _n<=_N/2
 
-The logical expression above can be read as "Generate a variable called
+/* The logical expression above can be read as "Generate a variable called
 "treatment" that takes on the value 1 whenever the observation number is
 less than or equal to half of the total number of observations, and 0
 whenever the observation number is more than half of the total number of
@@ -76,28 +82,31 @@ Lastly, let us {stata sort schoolid:sort by school ID} again and {stata br:look 
 {stata use "RandomizationExercise_balsakhi_data", clear:Reset the dataset}
 
 {hline}
-{center:{bf:EXAMPLE 2:STRATIFICATION AND RANDOMIZATION}}
+
+{bf:EXAMPLE 2:STRATIFICATION AND RANDOMIZATION}
+
 {hline}
 
 In this example, we will randomize schools after stratifying them by language and gender.
 
 {bf:1. Usual generation of the random number}
-{stata sort schoolid:Sort by school ID}
-{stata set seed 20140402:Set seed}
+
+{stata sort schoolid:Sort by school ID}{break}
+{stata set seed 20140402:Set seed}{break}
 {stata gen random= uniform():Generate random number}
 
 {bf:2. Stratification by language and gender}
 
-This isn't rocket science either. What you want to do is the following:
+This isn't rocket science either. What you want to do is the following: */
 
-{center:{stata "by language gender: gen strata_size = _N"}}
+by language gender: gen strata_size = _N
 
-This tells us how many schools there are in a language-gender group.
-Now let us assign a serial number to each school in a language-gender group.
+* This tells us how many schools there are in a language-gender group.
+* Now let us assign a serial number to each school in a language-gender group.
 
-{center:{stata "bys language gender (random): gen strata_index = _n"}}
+bys language gender (random): gen strata_index = _n
 
-What I've now done is to create a variable called "strata_index" that takes on the
+/* What I've now done is to create a variable called "strata_index" that takes on the
 observation number for each observation within a given language and gender group.
 For instance, the value of strata_index for the 16th observation in a particular
 language and gender combination will be "16".
@@ -110,51 +119,55 @@ combination. For more on the bysort syntax, consult the Stata 103 training modul
 
 {bf:2. Assigning treatment and control within the strata}
 
-We can now use similar syntax to what we used in the simple randomization:
+We can now use similar syntax to what we used in the simple randomization: */
 
-{center:{stata gen treatment = strata_index <= (strata_size/2)}}
+gen treatment = strata_index <= (strata_size/2)
 
-Let us now {stata br:check the result}.
+/* Let us now {stata br:check the result}.
 
 {stata use "RandomizationExercise_balsakhi_data", clear:Reset the dataset}
 
 {hline}
-{center: {bf: EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}}
+
+{bf: EXAMPLE 3: STRATIFICATION BY DISCRETE AND CONTINUOUS VARIABLES}
+
 {hline}
 
 The previous example discussed stratification by discrete variables only, namely language and gender.
 Let us now additionally stratify by pre-test mean (which is a continuous variable) as well.
 
 {bf:1. Usual generation of the random number}
-{stata sort language gender pretest_mean:Sort by language gender and pre-test mean}
-{stata set seed 20140402:Set seed}
+
+{stata sort language gender pretest_mean:Sort by language gender and pre-test mean}{break}
+{stata set seed 20140402:Set seed}{break}
 {stata gen random= uniform():Generate random number}
 
 {it:Why is this sorting different as compared to the previous one?}
 
 {bf:2. Stratification by language, gender and pre-test mean}
 
-First, figure out how many schools are there in each stratum.
+First, figure out how many schools are there in each stratum. */
 
-{center:{stata "by language gender:gen strata_size = _N"}}
+by language gender:gen strata_size = _N
 
-We now want to split the schools into "groups" of 2, where each group represents one treatment and one control group and they have similar pre-test means.
+/* We now want to split the schools into "groups" of 2, where each group represents one treatment and one control group and they have similar pre-test means.
 
-To do this:
+To do this: */
 
-{center:{stata "by language gender: gen group=group(strata_size/2)"}}
+by language gender: gen group=group(strata_size/2)
 
-{bf:3. Assigning treatment and control within the strata}
+* {bf:3. Assigning treatment and control within the strata}
 
-{stata "bys language gender group (random): gen groupindex = _n"}
-{stata gen treatment = groupindex == 2}
+bys language gender group (random): gen groupindex = _n
+gen treatment = groupindex == 2
 
-{it:How should one read the logical expression used to generate the treatment variable here?}
+/* {it:How should one read the logical expression used to generate the treatment variable here?}
 
 {stata "bys language gender group (random): gen treatment_the_cool_way = _n -1":Challenge! Assigning treatment in one step}
 
 {stata "ttest pretest_mean, by(treatment)":Are the means the same?}
 
-{center:{bf:Now go randomize everything. Eggs or pancakes for breakfast? RANDOMIZE!}}
+{bf:Now go randomize everything. Eggs or pancakes for breakfast? RANDOMIZE!}
 
-{center:Actually, the correct answer to the above is: both.}
+Actually, the correct answer to the above is: both. */
+
