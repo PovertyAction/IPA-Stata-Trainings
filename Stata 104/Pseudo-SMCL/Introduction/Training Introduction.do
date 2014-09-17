@@ -102,5 +102,5 @@ as well as the problem set, if there is one.)
 {DEF}
 {FOOT}
 
-{NEXT1}{DUMMIES}
+{NEXT1}{RESULTS}
 {START} */
