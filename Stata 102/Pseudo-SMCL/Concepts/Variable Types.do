@@ -67,7 +67,7 @@ You can learn more about each subset through the data types {helpb datatypes:hel
 {COL}values are designated as two quotation marks without a space in between: ""{CEND}
 {COL}For numerics, the equivalent designation is the period/dot: .{CEND}
 {COL}Don't worry if you don't remember these distinctions right now,{CEND}
-{COL}we'll return to these concepts throughout the trainings{CEND}
+{COL}we'll return to these concepts throughout the trainings.{CEND}
 {BOTTOM}
 
 {hline}{marker destring}
