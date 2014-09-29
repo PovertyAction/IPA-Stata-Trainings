@@ -5,7 +5,7 @@
 {USE}
 
 /* While importing in Stata consists solely of reading in
-{it:data}, exporting can take two forms: outputting some or all of the data into
+{it:data}, exporting can take several forms: outputting some or all of the data into
 another data format, or outputting Stata {it:results} in terms of graphs
 or tables. This module will cover all of these exporting functions. 
 
@@ -32,9 +32,9 @@ export excel hhid surveyid sex age educ using "Raw/Tables and Graphs/excel", fir
 
 Now navigate into the "Raw/Tables and Graphs" folder to check out the file. Let's describe the key elements
 of the above syntax. First, we define which variables we want to export (here they are
-hhid, suveyid, sex, age, and educ). Then we define the file path where we want to export to (note that
+hhid, surveyid, sex, age, and educ). Then we define the file path where we want to export to (note that
 quotes are necessary here because there are spaces in the file path). Finally, we include two options:
-{bf:firstrow(var)} indicates we want the variable name as the first row in Excel, and {bf:replace} which overwrites
+{bf:firstrow(variables)} indicates we want the variable name as the first row in Excel, and {bf:replace} overwrites
 any existing file with the same name. Feel free to test this out: re-run the command but change the list
 of variables to export. Though remember to close the Excel file before doing so! 
 
@@ -91,7 +91,7 @@ orth_out age literateyn educ using "Raw/Tables and Graphs/orth_table", by(sex) s
 {DEF}
 
 Like almost all results-exporting commands, {cmd:orth_out} takes a large number of options, of which we've used
-but a few here. Like always check out the detailed {helpb orth_out:help file} for more on the many ways to 
+but a few here. Like always, check out the detailed {helpb orth_out:help file} for more on the many ways to 
 customize the command. There are few key points to make. First, notice the table appeared both
 in the Stata Results window and as an Excel file in our "Tables and Graphs" folder.
 Next, let's identify the key syntax elements:

@@ -22,7 +22,7 @@ Date of last revision: July 18, 2013
 
 *Revised by Harrison Diamond Pollock, hpollock@poverty-action.org.
 *Creating 104 training for New Hampshire 2014
-*Date of last revision: Sept 9, 2014
+*Date of last revision: Sept 16, 2014
 
 vers 10
 
