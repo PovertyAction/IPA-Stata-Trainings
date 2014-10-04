@@ -28,7 +28,7 @@
 {pstd}In Stata, loops are used to repeat a command multiple times or to execute
 a series of commands that are related. There are several commands that work as loops;
 {cmd:foreach} is by far the most widely used, so we will focus on it in this module.
-Once you understand the syntax of one of the type of loops, you can learn any of them easily.
+Once you understand the syntax of one type of loop, you can learn any of them easily.
 
 {hline}{marker foreach}
 
@@ -44,7 +44,7 @@ foreach {it:item} in list_item1 list_item2 list_item3 {{break}
 }
 {txt}{sf}{ul off}{...}
 
-{pstd}where {it:item} is the {view `""SMCL/Concepts/Macros and Locals.smcl""':local macro} that is used to signify each item of the list.
+{pstd}where {it:item} is the {view `""SMCL/Concepts/Macros and Locals.smcl""':local macro} that is used to signify each item in the list.
 So, as Stata loops through the command for each item on the list, it will
 substitute each list_item into the macro, performing the following:
 
@@ -83,7 +83,7 @@ and the output of the loop would have been identical.
 {pstd}{c LT}{hline 78}{c RT}{p_end}
 {p2col:{c |} {bf:What's in a name?}}{c |}{p_end}
 {pstd}{c LT}{hline 78}{c RT}{p_end}
-{p2col:{c |} The same rules generally apply to all Stata names, whether it's of a}{c |}{p_end}
+{p2col:{c |} The same rules generally apply to all Stata names, whether it's a}{c |}{p_end}
 {p2col:{c |} variable, macro, or something else. From {helpb varname:help varname}:}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}
 {p2col:{c |} "Variable names may be 1 to 32 characters long and must start with {cmd:a-z}, {cmd:A-Z},}{c |}{p_end}
@@ -153,8 +153,7 @@ such as loops within loops.
 {pstd}{c TLC}{hline 78}{c TRC}{p_end}
 {p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
 {pstd}{c LT}{hline 78}{c RT}{p_end}
-{p2col:{c |} For more tips on Stata programming style, see these resources, available on}{c |}{p_end}
-{p2col:{c |} Box:}{c |}{p_end}
+{p2col:{c |} For more tips on Stata programming style, see these resources:}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}
 {p2col:{c |} {browse "http://www.stata-journal.com/sjpdf.html?articlenum=pr0018":{it:Suggestions on Stata programming style}}}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}

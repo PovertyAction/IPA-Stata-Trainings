@@ -4,7 +4,7 @@
 
 {USE}
 
-/* All IPA/J-PAL datasets have a unique ID {hline 2} a variable that uniquely identifies each observation.
+/* Almost all datasets have a unique ID {hline 2} a variable that uniquely identifies each observation.
 Unique IDs can distinguish respondents from each other, so that
 John Doe is identified by the value {cmd:1} of variable {cmd:uniqueid}, Jane Smith is
 identified by the value {cmd:2}, and so on.
@@ -52,7 +52,7 @@ to clean the ID? A unique ID is important for all sorts of reasons: */
 Unique ID problems are serious and can be very hard to solve when a lot of time has passed.
 Therefore, you should immediately clean the IDs for all incoming data.
 
-The Research Protocols state that respondents should have not just one but {it:two} unique IDs.
+It is common to assign respondents not just one but {it:two} unique IDs.
 This makes it much easier to resolve ID problems.
 
 {marker isid}{...}

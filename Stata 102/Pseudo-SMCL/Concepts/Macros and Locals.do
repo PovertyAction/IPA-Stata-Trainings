@@ -18,7 +18,7 @@
 Up until now, we have worked solely with {view `"{TYPES-}"':variables} in Stata.
 A Stata dataset is simply a collection of variables, sets of values,
 which can be manipulated and analyzed in a variety of ways. However,
-when writing code, variables have a number of drawbacks. In this chapter,
+when writing code, variables have a number of drawbacks. In this module,
 we’ll introduce an essential Stata concept, the macro.
 We’ll explore macros through one particular type, the local.  
 

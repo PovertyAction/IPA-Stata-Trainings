@@ -67,6 +67,8 @@ blog or learning site.
 
 {bf:3. The Help Command}
 
+{hline}
+
 The {cmd:help} command is an essential Stata tool. Every Stata command's documentation and help file can be
 accessed using {cmd:help}. Stata help files display the appropriate syntax for commands
 and describe the various ways in which in can be used. We'll utilize the {cmd:help} command throughout
@@ -123,7 +125,7 @@ to a specified number of observations.
 [,{it:options}]: This means that additional specifications are allowed for this command, which are listed after
 a comma. All possible options are listed in the help file, directly underneath the main command in the {bf:Syntax}
 section. They are described in more detail in the {bf:Options} section of the help file. You've already
-seen one of these options in {bf:Stata 101}, {cmd:detail}, which produces additional summary statistics.
+seen one of these options in {bf:Stata 101}: {cmd:detail}, which produces additional summary statistics.
 
 Let's look at 2 examples of one of the above qualifiers and an option with the {cmd:summarize} command: */ 
 

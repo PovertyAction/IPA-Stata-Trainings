@@ -80,7 +80,7 @@ You can learn more about each subset through the data types {helpb datatypes:hel
 {p2col:{c |} values are designated as two quotation marks without a space in between: ""}{c |}{p_end}
 {p2col:{c |} For numerics, the equivalent designation is the period/dot: .}{c |}{p_end}
 {p2col:{c |} Don't worry if you don't remember these distinctions right now,}{c |}{p_end}
-{p2col:{c |} we'll return to these concepts throughout the trainings}{c |}{p_end}
+{p2col:{c |} we'll return to these concepts throughout the trainings.}{c |}{p_end}
 {pstd}{c BLC}{hline 78}{c BRC}{p_end}
 {p2colreset}{...}
 

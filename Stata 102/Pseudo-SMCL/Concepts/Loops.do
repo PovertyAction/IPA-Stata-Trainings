@@ -18,7 +18,7 @@
 In Stata, loops are used to repeat a command multiple times or to execute
 a series of commands that are related. There are several commands that work as loops;
 {cmd:foreach} is by far the most widely used, so we will focus on it in this module.
-Once you understand the syntax of one of the type of loops, you can learn any of them easily. 
+Once you understand the syntax of one type of loop, you can learn any of them easily. 
 
 {hline}{marker foreach}
 
@@ -34,7 +34,7 @@ foreach {it:item} in list_item1 list_item2 list_item3 {{BR}
 }
 {DEF}
 
-where {it:item} is the {view `"{MACROS-}"':local macro} that is used to signify each item of the list.
+where {it:item} is the {view `"{MACROS-}"':local macro} that is used to signify each item in the list.
 So, as Stata loops through the command for each item on the list, it will
 substitute each list_item into the macro, performing the following:
 
@@ -68,7 +68,7 @@ and the output of the loop would have been identical.
 {TECH}
 {COL}{bf:What's in a name?}{CEND}
 {MLINE}
-{COL}The same rules generally apply to all Stata names, whether it's of a{CEND}
+{COL}The same rules generally apply to all Stata names, whether it's a{CEND}
 {COL}variable, macro, or something else. From {helpb varname:help varname}:{CEND}
 {BLANK}
 {COL}"Variable names may be 1 to 32 characters long and must start with {cmd:a-z}, {cmd:A-Z},{CEND}
@@ -132,8 +132,7 @@ This is an important practice to adopt, especially when using more complex const
 such as loops within loops. 
 
 {TECH}
-{COL}For more tips on Stata programming style, see these resources, available on{CEND}
-{COL}Box:{CEND}
+{COL}For more tips on Stata programming style, see these resources:{CEND}
 {BLANK}
 {COL}{browse "http://www.stata-journal.com/sjpdf.html?articlenum=pr0018":{it:Suggestions on Stata programming style}}{CEND}
 {BLANK}

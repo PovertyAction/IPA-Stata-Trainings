@@ -139,7 +139,7 @@ They are typically 1, 2, and 3, where 1 means that the observation came from the
 dataset, and was not found in the using dataset,
 2 means that the observation was only present in the using dataset,
 and 3 means that the observation was present in both datasets and was merged.
-When merging always pay special attention to this indicator variable and make sure that
+When merging, always pay special attention to this indicator variable and make sure that
 the merge was conducted properly and all the observations that should have matched up actually matched up. 
 Let's tabulate {bf:_merge} here: */
 
@@ -157,7 +157,7 @@ drop _merge
 
 {hline} 
 
-Another means of adding one dataset to another is through {helpb append:appending}. 
+Another means of adding one dataset to another is by {helpb append:appending}. 
 Appending is crucially different from merging: while a merge adds additional variables
 to given observations, appending adds additional observations to existing variables. 
 Think of appending as adding to a dataset's length while merging adds to its width. 
@@ -211,7 +211,7 @@ the concept of {bf:relative references}.
 Relative references involve creating some sort of shorthand that Stata recognizes
 to mean a certain location, and to then only change that one
 line when switching users, moving data, etc. Subsequently, all new locations are
-made {it:relative} to that initial location. 
+made {it:relative} to the initial location. 
 
 There are a few ways to use relative references. One is by using a 
 {view `"{MACROS-}"':local} or global (introduced in {bf:Stata 103}) macro to set a particular
