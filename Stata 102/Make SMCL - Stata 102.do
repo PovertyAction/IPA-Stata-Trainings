@@ -21,8 +21,8 @@ Date of last revision: July 18, 2013
 */
 
 /* Author: Harrison Diamond Pollock, IPA, hpollock@poverty-action.org
-Purpose: revise to produce files for New Hampshire 2014 - Stata 102 training
-Last revision: Sept 8, 2014
+Purpose: revise to produce files for Stata 102 External Training
+Last revision: Oct 3, 2014
 */ 
 
 
