@@ -73,8 +73,7 @@ it's easy to tell what's in the loop and what's not.
 {pstd}{c TLC}{hline 78}{c TRC}{p_end}
 {p2col:{c |} {it:Technical Tip!}}{c |}{p_end}
 {pstd}{c LT}{hline 78}{c RT}{p_end}
-{p2col:{c |} For more tips on Stata programming style, see these resources, available on}{c |}{p_end}
-{p2col:{c |} Box:}{c |}{p_end}
+{p2col:{c |} For more tips on Stata programming style, see these resources:}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}
 {p2col:{c |} {browse "http://www.stata-journal.com/sjpdf.html?articlenum=pr0018":{it:Suggestions on Stata programming style}}}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}
@@ -468,12 +467,12 @@ If you are already confused, it might be best to come back to it later – it’s a 
 {pstd}{stata `"run "Do/Concepts/For-Loops and Macros.do" 4"':Click here to execute.}
 
 {pstd}At the beginning of the loop, `i’ was set to 1.
-For the first loop, the {cmd:while} command read: if 1 < 15,
+For the first loop, the {cmd:while} command reads: if 1 < 15,
 Stata would display “Round 1”, and then reset `i’ to 2 (one more than it was before).
 Since the condition was in fact met, (1 is less than 15), Stata then cycled through the loop 14 times,
 making `i’ first 2, then 3, etc, until `i’ hit 15.
 Then, once the condition imposed on the {cmd:while} loop was no longer true
-(15 is not less than 15), Stata stopped performing the operation and moved on to the next command.
+(15 is not less than 15), Stata stopped performing the operation and the loop was ended.
 
 
 {hline}

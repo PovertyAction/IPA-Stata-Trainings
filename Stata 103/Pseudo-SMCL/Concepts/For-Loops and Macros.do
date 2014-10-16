@@ -55,8 +55,7 @@ This formatting makes the code more readable;
 it's easy to tell what's in the loop and what's not.
 
 {TECH}
-{COL}For more tips on Stata programming style, see these resources, available on{CEND}
-{COL}Box:{CEND}
+{COL}For more tips on Stata programming style, see these resources:{CEND}
 {BLANK}
 {COL}{browse "http://www.stata-journal.com/sjpdf.html?articlenum=pr0018":{it:Suggestions on Stata programming style}}{CEND}
 {BLANK}
@@ -399,12 +398,12 @@ while  `i' < 15 {
 }
 
 /* At the beginning of the loop, `i’ was set to 1.
-For the first loop, the {cmd:while} command read: if 1 < 15, 
+For the first loop, the {cmd:while} command reads: if 1 < 15, 
 Stata would display “Round 1”, and then reset `i’ to 2 (one more than it was before). 
 Since the condition was in fact met, (1 is less than 15), Stata then cycled through the loop 14 times,
 making `i’ first 2, then 3, etc, until `i’ hit 15.
 Then, once the condition imposed on the {cmd:while} loop was no longer true 
-(15 is not less than 15), Stata stopped performing the operation and moved on to the next command. 
+(15 is not less than 15), Stata stopped performing the operation and the loop was ended. 
 
 {FOOT}
 
