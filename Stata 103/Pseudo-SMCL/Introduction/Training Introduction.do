@@ -49,7 +49,6 @@ If you get really lost, you can always just reload the dataset.
 
 Throughout the training, you'll see text boxes like the one below holding technical tips.
 Although not essential, these tips can help you reach the next level of Stata mastery.
-During live training, we will sometimes skip these.
 If the text box is misaligned, resize your viewer to a larger size and click the Reload button.
 Alternatively, right click on the page, click Font, then select a smaller font size.
 
