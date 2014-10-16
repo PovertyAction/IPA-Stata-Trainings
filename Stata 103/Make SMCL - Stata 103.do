@@ -21,9 +21,9 @@ Date of last revision: July 18, 2013
 */
 
 /* Author: Harrison Diamond Pollock, IPA, hpollock@poverty-action.org
-Purpose: revise to produce files for New Hampshire Stata 103 training
+Purpose: revise to produce files for external Stata 103 training
 Changes to file solely to comport with new file names, produce new files
-Date of last revision: Sept 8, 2014
+Date of last revision: Oct 3, 2014
 */ 
 
 
