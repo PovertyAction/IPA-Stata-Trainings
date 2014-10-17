@@ -420,8 +420,6 @@ We can then clean those values using other methods.
 {pstd}We'll then use the {cmd:update replace} options of {helpb merge}
 to replace {cmd:newcaste} with its value from the .csv file.
 
-{pstd}We'll merge using the suggestions from the {view `"{MERGING-}"':module on merging}.
-
 {pstd}Stata 11 or higher:
 
 {p2colset 5 84 0 0}{...}

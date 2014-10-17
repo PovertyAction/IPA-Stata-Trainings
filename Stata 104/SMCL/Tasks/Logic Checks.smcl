@@ -113,7 +113,7 @@ or your assumption was false and your do-file stopped with an error.
 {p2col:{c |} }{c |}{p_end}
 {p2col:{c |} {bf:{stata assert (own4wheeleryn == 1) + (own4wheelernum != .) != 1}}}{c |}{p_end}
 {p2col:{c |} }{c |}{p_end}
-{p2col:{c |} Logical expressions evaluate to either {bf:1} or {bf:0}.} Each logical expression in}{c |}{p_end}
+{p2col:{c |} Logical expressions evaluate to either {bf:1} or {bf:0}. Each logical expression in}{c |}{p_end}
 {p2col:{c |} the command evaluates to {cmd:1} or {cmd:0}, then those results are summed. So}{c |}{p_end}
 {p2col:{c |} {cmd:(own4wheeleryn == 1) + (own4wheelernum != .)} can take on three values: {cmd:0}, if}{c |}{p_end}
 {p2col:{c |} both expressions are false; {cmd:1}, if one expression is true and the other is}{c |}{p_end}

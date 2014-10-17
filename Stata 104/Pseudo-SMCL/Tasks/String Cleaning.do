@@ -294,8 +294,6 @@ generate newcaste = castename
 /* We'll then use the {cmd:update replace} options of {helpb merge}
 to replace {cmd:newcaste} with its value from the .csv file.
 
-We'll merge using the suggestions from the {view `"{MERGING-}"':module on merging}.
-
 Stata 11 or higher:
 
 {TRYITCMD}
