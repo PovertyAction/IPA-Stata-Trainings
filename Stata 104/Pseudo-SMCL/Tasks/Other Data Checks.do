@@ -131,13 +131,6 @@ ssc install mdesc
 {hline}
 
 There are many data checks you can implement that we haven't discussed.
-Many of them are listed
-in the guide to computer-assisted interviewing (CAI) high-frequency checks,
-available on Box
-{browse "https://ipastorage.box.com/s/iqd61emtjj8povugfhd4":here}.
-Most of these checks apply to both CAI and paper-and-pencil projects.
-The guide also includes sample code for almost all the checks it covers.
-
 It's highly recommended that you run data checks as soon as possible after the data is collected.
 If the data is received in batches, run checks on each batch.
 

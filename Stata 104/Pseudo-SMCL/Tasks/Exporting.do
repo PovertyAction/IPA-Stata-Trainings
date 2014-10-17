@@ -109,7 +109,7 @@ the table as a whole would compare key variables for differences between the tre
 {hline}
 
 Let's now introduce exporting regression results from Stata. There are a large number of commands in this
-area. Some of the most popular at IPA are {cmd:outreg2}, {cmd:xml_tab}, and {cmd:estout}. 
+area. Some of the most popular are {cmd:outreg2}, {cmd:xml_tab}, and {cmd:estout}. 
 The simplest of these commands is {cmd:esttab} (along with {cmd:eststo}) so we will introduce its functionality here. 
 
 First let's make sure we've installed the needed commands: */
@@ -132,8 +132,8 @@ The essence here is that we run and store regression results which are then used
 appended to the existing table (even with the replace option). 
 
 There is of course much additional complexity with this and the other regression exporting commands
-mentioned above. We will leave it here for now, but it is highly encouraged to engage with IPA's many Stata
-help resources (such as Research Support and Random Help) as you delve further into this topic. 
+mentioned above. We will leave it here for now, but it is highly encouraged to engage with additional
+resources such as online Stata materials and the commands' {bf:help} files. 
 
 {hline}{marker exportgraphs}
 
@@ -157,9 +157,8 @@ And another with {helpb graph bar:graph bar} and then exporting it as a {bf:.png
 graph bar age, over(sex)
 graph export "Raw/Tables and Graphs/graph.png", replace
 
-/*As with regression exporting, there is a wealth of possiblities when it comes to graphing
-in Stata. Spending time experimenting yourself and utilizing IPA's resources
-(see {bf:Stata 102}) is your best bet to improve your skills. 
+/* As with regression exporting, there is a wealth of possiblities when it comes to graphing
+in Stata. Spending time experimenting with the commands is a great way improve your skills. 
 
 Finally, a useful {helpb ssc:SSC} command for graphing is {cmd:eclplot}, as it can quite powerfully
 plot coefficients in sophisticated ways. Keep it in mind as needed. 
