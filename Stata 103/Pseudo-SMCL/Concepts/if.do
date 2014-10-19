@@ -129,8 +129,7 @@ foreach var of varlist _all {
 
 These are the observation numbers of the two observations with {cmd:hhid "1802011"}.
 
-Touching on {view `"{LOOPS-}##style"':style} again,
-notice above that for every left brace, I indented once.
+Touching on style, notice above that for every left brace, I indented once.
 My code stays indented until the right brace.
 Thus, it's easy to tell what's in the loop and what's not, and what's in the {cmd:if} block and what's not. */
 
