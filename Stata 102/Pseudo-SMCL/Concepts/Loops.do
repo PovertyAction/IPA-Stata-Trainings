@@ -35,7 +35,7 @@ foreach {it:item} in list_item1 list_item2 list_item3 {{BR}
 {DEF}
 
 where {it:item} is the {view `"{MACROS-}"':local macro} that is used to signify each item in the list.
-So, as Stata loops through the command for each item on the list, it will
+So, as Stata loops through the command for each item in the list, it will
 substitute each list_item into the macro, performing the following:
 
 {CMD}
@@ -191,7 +191,27 @@ foreach i in 1 2 3 purple cow "purple cow" {
 	display "`i'"
 }
 
-/* In this module, we have only discussed one particular variation of the {cmd:foreach} command,
+/*Don't think of {cmd:display} as searching for and then accessing the contents of the local macro {cmd:`i'}.
+Instead, the value of {cmd:`i'} is essentially "copied and pasted" into the command before it is executed.
+Stata completes the substitution, replacing {cmd:`var'} with its value,
+and {it:then} {cmd:display} is executed.
+{cmd:display} has no idea that a local macro was used,
+because the substitution was done before the command was executed.
+
+{bf:Note} that it is not necessary for the local macro to be used inside the loop, as has
+been the case for all loops up until now. Here is an example: */
+
+foreach x in 1 2 4 {
+	display "Hello world!"
+}
+
+/* The local macro (`x') never appears in the loop, and "Hello World!" is simply
+displayed three times, correponding to the number of items in the list. It might
+not seem immediately obvious in what situations you would ever {it:not} want to include
+the local macro within the loop. In {bf:Stata 103} we'll see one such example: counting
+the number of variables in our dataset. 
+
+In this module, we have only discussed one particular variation of the {cmd:foreach} command,
 specifically {cmd:foreach...in}. In {bf: Stata 103} we'll discuss using
 {cmd: of varlist} and {cmd: of numlist} along with {cmd:foreach} for added functionality.
 As always, feel free to check out the {cmd:foreach} {help foreach:help file} to learn more
