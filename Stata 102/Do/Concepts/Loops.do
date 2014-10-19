@@ -36,3 +36,14 @@ foreach i in 1 2 3 purple cow "purple cow" {
 	}
 	if `trace' set trace off
 }
+else if `example' == 4 {
+	if `trace' set trace on
+	noi {
+
+foreach x in 1 2 4 {
+    display "Hello world!"
+}
+
+	}
+	if `trace' set trace off
+}
