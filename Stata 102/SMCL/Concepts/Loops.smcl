@@ -222,7 +222,7 @@ command:
 
 {pstd}Don't think of {cmd:display} as searching for and then accessing the contents of the local macro {cmd:`i'}.
 Instead, the value of {cmd:`i'} is essentially "copied and pasted" into the command before it is executed.
-Stata completes the substitution, replacing {cmd:`var'} with its value,
+Stata completes the substitution, replacing {cmd:`i'} with its value,
 and {it:then} {cmd:display} is executed.
 {cmd:display} has no idea that a local macro was used,
 because the substitution was done before the command was executed.
