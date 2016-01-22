@@ -1,0 +1,56 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Stata 201.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 201.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': Global Staff Training{space 21}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': Stata 201{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}As a Stata pro, you are already very comfortable with essential Stata concepts,
+such as the following:
+
+{pstd}Explicit subscripting{break}
+For-loops and macros{break}
+The {helpb ifcmd:if} command vs. the {helpb if} qualifier{break}
+Stored results{break}
+{helpb _N}{break}
+{helpb _n}{break}
+{helpb by}{break}
+{helpb egen}
+
+{pstd}Thus, the purpose of this course is not to train you on fundamentals like these,
+but instead to fill any gaps in your knowledge,
+to extend your deep understanding of Stata,
+and to present the most efficient solutions to common data tasks.
+
+{pstd}This course is meant to be challenging,
+and if you are not already very familiar with the essential concepts above,
+you should join another training now.
+Stata 103 and 104 are both rigorous courses
+designed to solidify your understanding of these concepts.
+
+{pstd}This training is split into two modules.
+While all Stata beginners start the same,
+Stata pros can have different skill sets from one another.
+While you may know the content of one module very well,
+you could be less familiar with the other.
+We will cover the following modules:
+
+{pstd}{view `""SMCL/Modules/Macros.smcl""':Macros}{break}
+{p_end}{p 6 6 2}o {view `""SMCL/Answers/Macros - answers.smcl""':Answer key}{break}{p_end}{pstd}
+{view `""SMCL/Modules/reshape.smcl""':{bf:reshape}}{break}
+{p_end}{p 6 6 2}o {view `""SMCL/Answers/reshape - answers.smcl""':Answer key}{break}{p_end}{pstd}
+
+{pstd}The training material is written in SMCL (pronounced "smickle"), Stata's output language.
+Since multiple SMCL files will be used, your working directory needs to be set correctly using {cmd:cd}.
+Now, {bf:{ul:set your working directory to the directory that contains this SMCL file.}}
+If you opened this file by double-clicking on it, you probably do not need to change your working directory.
+
+{pstd}Before embarking on the first module,
+let's do a brief introduction to the training and its format:
+{view `""SMCL/Introduction/Training Introduction.smcl""':click here}.
+
