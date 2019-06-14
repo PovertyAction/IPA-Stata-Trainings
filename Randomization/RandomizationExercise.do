@@ -144,35 +144,35 @@ sort schoolid
 * {cmd:* Generate the random number variable.}
 generate random = runiform()
 
-/* {bf:2. Stratification by language and gender}
+/* {bf:2. Stratification by language and school type}
 
 This isn't rocket science either. What you want to do is the following: */
 
-bysort language gender: generate strata_size = _N
+bysort language school_type: generate strata_size = _N
 
-* This tells us how many schools there are in a language-gender group.
-* Now let us assign a serial number to each school in a language-gender group.
+* This tells us how many schools there are in a language-school type group.
+* Now let us assign a serial number to each school in a language-school type group.
 
-bysort language gender (random): generate strata_index = _n
+bysort language school_type (random): generate strata_index = _n
 
 /* What I've now done is to create a variable called {cmd:strata_index} that takes on the
-observation number for each observation within a given language and gender group.
+observation number for each observation within a given language and school type group.
 For instance, the value of {cmd:strata_index} for the {cmd:16}th observation in a particular
-language and gender combination will be {cmd:16}.
+language and school type combination will be {cmd:16}.
 
 Moreover, notice the syntax of the {helpb bysort} command here: I have sorted on three
-variables: {cmd:language}, {cmd:gender}, and {cmd:random}. However, the {cmd:by} command is only applied
-to the {cmd:language} and {cmd:gender} groups, i.e., the {cmd:strata_index} variable is generated for each
-{cmd:language} and {cmd:gender} combination rather than for each {cmd:language}, {cmd:gender}, and {cmd:random}
+variables: {cmd:language}, {cmd:school_type}, and {cmd:random}. However, the {cmd:by} command is only applied
+to the {cmd:language} and {cmd:school_type} groups, i.e., the {cmd:strata_index} variable is generated for each
+{cmd:language} and {cmd:school_type} combination rather than for each {cmd:language}, {cmd:school_type}, and {cmd:random}
 combination. For more on the {cmd:bysort} syntax, consult the Stata 103 training module.
 An alternative would have been: */
 
-sort language gender random
-by language gender: generate strata_index = _n
+sort language school_type random
+by language school_type: generate strata_index = _n
 
 /* This clarifies that while we are also {it:sorting} on {cmd:random},
 we are repeating the {cmd:generate} command for only combinations of
-{cmd:language} and {cmd:gender}.
+{cmd:language} and {cmd:school_type}.
 
 {bf:3. Assigning treatment and control within the strata}
 
