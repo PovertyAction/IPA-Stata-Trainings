@@ -1,10 +1,10 @@
 /* 
 Name: Sample Do-file Class 2 Ex 1.do
 Date Created: December 18, 2011
-Date Last Modified: January 12, 2012
+Date Last Modified: September 10, 2019
 Created by: AS
-Modified By: GS
-Last modified by: GS
+Modified By: GS, LS
+Last modified by: LS
 Uses data: intro.dta
 Creates data: 
 Description: This file is a part of exercises that are designed as an introduction to Stata for beginners, used at IPA-JPAL Staff Training. 
@@ -23,7 +23,7 @@ some of the common practices for do-file organization
 
 *Opening the data:
 	
-	use "C:\Documents and Settings\asolomon\Desktop/intro.dta"
+	use "intro.dta"
 	
 *Avg of the attendance rate & frequency
 
