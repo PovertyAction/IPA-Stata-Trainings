@@ -55,12 +55,12 @@ Last updated on: 5/28/12
 	
 *Learning and/or
 	sum math if female==1 & school==3
-	sum math if school==1 | school==
+	sum math if school==1 | school==2
 	
 	sum reading if math<65 | math>90
-	sum reading if (math<65 | math>90) & school == 1
+	sum reading if (math<65 | math>90) & school==1
 	
-	sum math if female==1 (school==1 | school==2)
+	sum math if female==1 & (school==1 | school==2)
 	
 ***CHAPTER 4***
 	
