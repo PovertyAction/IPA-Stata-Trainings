@@ -1,16 +1,33 @@
 /*
-This dofile contains all of the commands for chapters 1-5 and the accompanying exercises
-from the Beginners' Stata Manual from the IPA/JPAL staff training.
+Name: Sample do-file Ch 1-5.do
+Purpose: This dofile contains all of the commands for chapters 1-5 and the accompanying exercises
+for the IPA/JPAL "Stata 101" training.
 
-Created by: Gean Spektor (any questions to gspektor@poverty-action.org)
-Modified by: --
-Last updated on: 5/28/12
+Uses data: intro.dta
+Creates data: intro_modified.dta 
+
+Originally created by: Gean Spektor
+Originally created on: December 18, 2011 
+Last modified by: Lindsey Shaughnessy
+Last modified on: September 10, 2019
+Questions/support from: researchsupport@poverty-action.org 
+
 */
+
+***STANDARD OPENING COMMANDS*** 
+clear 
+set more off 
+version 10.0 
+cap log close 
+
 	
 ***CHAPTER 1***
 
+*Set the directory below to where you have copied the "Stata 101" folder, such as 
+	cd "C:\Users\YourComputer\Desktop\Stata 101"
+
 *Opening the dataset
-	use intro.dta
+	use data\intro.dta
 	
 *Learning what a command is
 	display "hello!"
