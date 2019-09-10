@@ -1,29 +1,33 @@
 /* 
 Name: Sample Do-file Class 2 Ex 1.do
-Date Created: December 18, 2011
-Date Last Modified: September 10, 2019
-Created by: AS
-Modified By: GS, LS
-Last modified by: LS
-Uses data: intro.dta
-Creates data: 
-Description: This file is a part of exercises that are designed as an introduction to Stata for beginners, used at IPA-JPAL Staff Training. 
-This particular do-file is created during Class 2 of the absolute beginners (Level 1) series in order to give the trainees their first experience with a do-file and demonstrate 
-some of the common practices for do-file organization
+Purpose: This dofile contains all of the commands for chapter 6 and the accompanying exercises
+for the IPA/JPAL "Stata 101" training.
+
+Uses data: intro.dta 
+Creates data: N/A 
+
+Originally created by: Gean Spektor, Arielle Solomon
+Originally created on: December 18, 2011
+Last modified by: Lindsey Shaughnessy
+Last modified on: September 10, 2019
+Questions/support from: researchsupport@poverty-action.org
 */
 
-*Opening commands:
+*Standard opening commands:
 
 	clear
 	set more off
-	set mem 10m
 	version 10.0
 	cap log close
 
 
+*Set the directory below to where you have copied the "Stata 101" folder, such as 
+
+	cd "C:\Users\YourComputer\Desktop\Stata 101"
+
 *Opening the data:
 	
-	use "intro.dta"
+	use "data\intro.dta"
 	
 *Avg of the attendance rate & frequency
 
