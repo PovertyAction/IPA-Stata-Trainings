@@ -1,0 +1,233 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Stata 201.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 201.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': Global Staff Training{space 21}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': Stata 201{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:{bf:reshape}}{break}
+{it:Answer key}{break}
+
+{pstd}{view `""SMCL/Answers/reshape - answers.smcl"##q1"':Question 1}{break}
+{view `""SMCL/Answers/reshape - answers.smcl"##q2"':Question 2}{break}
+
+{hline}{marker q1}
+
+{pstd}{bf:Answer to Question 1}
+
+{hline}
+
+{pstd}{it}{...} We have a dataset of summer Olympic medal wins:
+
+{phang}{bf:{stata `"use "Raw/Olympics 1", clear"'}}{p_end}
+
+{pstd}{it}{...} Each observation is a list of sports in which a country medaled.
+{it}{...} Observations are identified by country and the year of the Olympics:
+
+{phang}{bf:{stata `"isid country year"'}}{p_end}
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}{it}{...} However, the sport variables are a mess.
+It is not clear how they are ordered (time? medal class?),
+but we want them to be alphabetical.
+{txt}{sf}{ul off}{...}
+
+{pstd}{it}{...} {bf:(a)}
+
+{pstd}Sort across the sport variables,
+so that {cmd:sport1} is a country's alphabetically first sport,
+{cmd:sport2} the second, and so on.
+(The sport variables are numeric,
+but the values of the value label are sorted by sport name:
+{bf:{stata label list sport}})
+{txt}{sf}{ul off}{...}
+
+{phang}{bf:{stata `"reshape long sport, i(country year)"'}}{p_end}
+
+{phang}{bf:{stata `"drop _j"'}}{p_end}
+{phang}{bf:{stata `"bysort country year (sport): generate j = _n"'}}{p_end}
+{phang}{bf:{stata `"reshape wide sport, i(country year) j(j)"'}}{p_end}
+
+{pstd}{it}{...} {bf:(b)}
+
+{pstd}Create a variable named {cmd:sportchange} that is {cmd:1}
+if a country's sports list changed since its last medaling year,
+and {cmd:0} if not.
+There are multiple approaches to {bf:(b)}!
+{txt}{sf}{ul off}{...}
+
+{pstd}Here is one approach:
+
+{phang}{cmd}generate sportchange = 0{txt}{p_end}
+{phang}{cmd}forvalues i = 1/46 {{txt}{p_end}
+{phang2}{cmd}bysort country (year): replace sportchange = 1 ///{txt}{p_end}
+{phang3}{cmd}if sport`i' != sport`i'[_n - 1] & _n > 1{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Answers/reshape - answers.do" 1"':Click here to execute.}
+
+{pstd}{it}{...} {bf:(c)}
+
+{pstd}Create a variable named {cmd:nochange} that is {cmd:1}
+if a country has never seen a change in its sports list from
+one medaling year to the next, and {cmd:0} otherwise.
+How many countries always win the same medals?
+{txt}{sf}{ul off}{...}
+
+{phang}{bf:{stata `"bysort country (sportchange): generate nochange = !sportchange[_N]"'}}{p_end}
+
+{pstd}Or in two steps:
+
+{phang}{bf:{stata `"bysort country: egen anychange = max(sportchange)"'}}{p_end}
+{phang}{bf:{stata `"generate nochange = !anychange"'}}{p_end}
+
+{phang}{bf:{stata `"tabulate country if nochange"'}}{p_end}
+
+{hline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{hline}{marker q2}
+
+{pstd}{bf:Answer to Question 2}
+
+{hline}
+
+{pstd}{it}{...} For variables that are lists, such as {cmd:sports},
+{cmd:reshape} allows manipulation beyond sorting.
+
+{pstd}The following is a dataset of one list variable, {cmd:s2_q8},
+a question that allowed respondents to choose up to 4 of 12 possible options:
+
+{phang}{bf:{stata `"use Raw/s2_q8, clear"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}{it}{...} You can see that {cmd:s2_q8} is already internally sorted.
+However, it is still not possible to use the variable for analysis.
+
+{pstd}Using {cmd:reshape}, create dummy variables for all 12 options.
+For each option, if a list contains that option, the option's dummy variable should equal {cmd:1};
+otherwise it should equal {cmd:0}. For example:
+
+{phang}{bf:{stata `"list in 1"'}}{p_end}
+
+{pstd}{it}{...} In observation 1, the dummy variable for option {cmd:1} would equal {cmd:0},
+since the list does not contain {cmd:1}.
+However, the dummy variable for option {cmd:5} would equal {cmd:1}.
+{txt}{sf}{ul off}{...}
+
+{pstd}The key is realizing that it is straightforward to create a set of
+dummy variables from a single variable.
+There are multiple approaches to this; {helpb xi} is one.
+This is a theme in our use of {cmd:reshape}:
+if we want to use a command designed for a single variable but
+are currently working with a list of variables,
+we may first need to prepare the dataset with {cmd:reshape}.
+
+{pstd}As with {cmd:"Raw/Olympics 2"}, our first task is to {cmd:split s2_q8} so that
+it is a list of variables rather than a variable that is a list:
+
+{phang}{bf:{stata `"split s2_q8, generate(response)"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"reshape long response, i(id)"'}}{p_end}
+{phang}{bf:{stata `"drop if missing(response)"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"destring response, replace"'}}{p_end}
+
+{pstd}Now our variable is in a form that we can feed to {cmd:xi}:
+
+{phang}{bf:{stata `"xi i.response, noomit"'}}{p_end}
+{phang}{bf:{stata `"renpfix _Iresponse s2_q8"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Transforming the dataset back to wide form requires
+that the dummy variables be constant within {cmd:id}:
+
+{phang}{cmd}foreach var of varlist s2_q8_* {{txt}{p_end}
+{phang2}{cmd}bysort id (`var'): replace `var' = `var'[_N]{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Answers/reshape - answers.do" 2"':Click here to execute.}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Perhaps unnecessary, we may run the following to ensure
+that all dummy variables were created:
+
+{phang}{cmd}forvalues i = 1/12 {{txt}{p_end}
+{phang2}{cmd}capture generate s2_q8_`i' = 0{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Answers/reshape - answers.do" 3"':Click here to execute.}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Now returning the dataset to wide form:
+
+{phang}{bf:{stata `"reshape wide response, i(id) j(_j)"'}}{p_end}
+{phang}{bf:{stata `"drop response*"'}}{p_end}
+
+{pstd}or
+
+{phang}{bf:{stata `"drop response _j"'}}{p_end}
+{phang}{bf:{stata `"duplicates drop"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
