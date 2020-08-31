@@ -1,0 +1,61 @@
+{smcl}
+{txt}{...}
+{hline}{marker q1}
+
+{pstd}{bf:Question 1}
+
+{hline}
+
+{pstd}The following dataset contains variables from psychological scales:
+
+{phang}{bf:{stata `"use Raw/Psych, clear"'}}{p_end}
+
+{phang}{bf:{stata `"tabulate scheier1"'}}{p_end}
+{phang}{bf:{stata `"tabulate cesd1"'}}{p_end}
+
+{pstd}Let's say we want to use both {cmd:scheier1} and {cmd:cesd1} in an index.
+For ease, we want their scales to point in the same direction.
+Right now this is not the case:
+
+{phang}{bf:{stata `"label list scheier"'}}{p_end}
+{phang}{bf:{stata `"label list cesd"'}}{p_end}
+
+{pstd}Create a new variable named {cmd:schierrev1}
+that is {cmd:scheier} with a reverse scale,
+with {cmd:scheier1 1} ({cmd:always}) equal to {cmd:scheierrev1 5},
+{cmd:scheier1 2} ({cmd:sometimes}) equal to {cmd:scheierrev 4},
+and so on.
+Reverse not just the values of {cmd:schier1},
+but also the value label {cmd:schier}.
+
+{pstd}To check that you got it right:
+
+{pstd}{cmd:tabulate scheier1 scheierrev1}
+
+{pstd}{bf:Hint:} Use the {helpb extended_fcn:label} extended macro function.
+{cmd:label} {it:valuelabelname #} assigns
+value label {it:valuelabelname}'s text for {it:#} to a macro. For example:
+
+{phang}{bf:{stata `"local example : label cesd 1"'}}{p_end}
+{phang}{bf:{stata `"display "`example'""'}}{p_end}
+{pstd}{cmd:* Confirm the result using -label list-.}{p_end}
+{phang}{bf:{stata `"label list cesd"'}}{p_end}
+{pstd}{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Question 2}
+
+{hline}
+
+{pstd}Modify the {view `""SMCL/Modules/Macros.smcl"##combinations_loop"':loop over combinations}
+from the {cmd:gettoken} section of the module
+to loop over all combinations
+of {it:three} of {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}.
+That is, find all observations for which
+at least three of the variables {cmd:s1_q2 s1_q2_other s1_q3 s1_q4 s1_q5}
+have the same nonmissing values as another observation.
+{txt}{sf}{ul off}{...}
+
+{phang}{cmd}
+{hline}{txt}{p_end}

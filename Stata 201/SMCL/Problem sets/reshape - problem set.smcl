@@ -1,0 +1,81 @@
+{smcl}
+{txt}{...}
+{hline}{marker q1}
+
+{pstd}{bf:Question 1}
+
+{hline}
+
+{pstd}We have a dataset of summer Olympic medal wins:
+
+{phang}{bf:{stata `"use "Raw/Olympics 1", clear"'}}{p_end}
+
+{pstd}Each observation is a list of sports in which a country medaled.
+Observations are identified by country and the year of the Olympics:
+
+{phang}{bf:{stata `"isid country year"'}}{p_end}
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}However, the sport variables are a mess.
+It is not clear how they are ordered (time? medal class?),
+but we want them to be alphabetical.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Sort across the sport variables,
+so that {cmd:sport1} is a country's alphabetically first sport,
+{cmd:sport2} the second, and so on.
+(The sport variables are numeric,
+but the values of the value label are sorted by sport name:
+{bf:{stata label list sport}})
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Create a variable named {cmd:sportchange} that is {cmd:1}
+if a country's sports list changed since its last medaling year,
+and {cmd:0} if not.
+There are multiple approaches to {bf:(b)}!
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Create a variable named {cmd:nochange} that is {cmd:1}
+if a country has never seen a change in its sports list from
+one medaling year to the next, and {cmd:0} otherwise.
+How many countries always win the same medals?
+{txt}{sf}{ul off}{...}
+
+{hline}{marker q2}
+
+{pstd}{bf:Question 2}
+
+{hline}
+
+{pstd}For variables that are lists, such as {cmd:sports},
+{cmd:reshape} allows manipulation beyond sorting.
+
+{pstd}The following is a dataset of one list variable, {cmd:s2_q8},
+a question that allowed respondents to choose up to 4 of 12 possible options:
+
+{phang}{bf:{stata `"use Raw/s2_q8, clear"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}You can see that {cmd:s2_q8} is already internally sorted.
+However, it is still not possible to use the variable for analysis.
+
+{pstd}Using {cmd:reshape}, create dummy variables for all 12 options.
+For each option, if a list contains that option, the option's dummy variable should equal {cmd:1};
+otherwise it should equal {cmd:0}. For example:
+
+{phang}{bf:{stata `"list in 1"'}}{p_end}
+
+{pstd}In observation 1, the dummy variable for option {cmd:1} would equal {cmd:0},
+since the list does not contain {cmd:1}.
+However, the dummy variable for option {cmd:5} would equal {cmd:1}.
+{txt}{sf}{ul off}{...}
+
+{phang}{cmd}
+{hline}{txt}{p_end}
