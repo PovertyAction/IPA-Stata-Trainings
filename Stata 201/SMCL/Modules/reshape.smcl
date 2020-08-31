@@ -1,0 +1,645 @@
+{smcl}
+{txt}{...}
+{pstd}{c TLC}{hline 43}{c TRC}{break}
+{bf}{...}
+{c |}{view `""Stata 201.smcl""': Innovations for Poverty Action{space 12}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': The Abdul Latif Jameel Poverty Action Lab{space 1}}{c |}{break}
+{c |}{view `""Stata 201.smcl""':{space 43}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': Global Staff Training{space 21}}{c |}{break}
+{c |}{view `""Stata 201.smcl""': Stata 201{space 33}}{c |}{break}
+{sf}{...}
+{c BLC}{hline 43}{c BRC}
+
+{pstd}{bf:{bf:reshape}}{break}
+
+{pstd}In this module, I will discuss advanced uses of {helpb reshape}.
+I will touch on these two uses:
+
+{pstd}{view `""SMCL/Modules/reshape.smcl"##sort_across"':1. Sorting across variables}{break}
+{view `""SMCL/Modules/reshape.smcl"##list_vars"':2. Manipulating variables that are lists}
+
+{hline}{marker preface}
+
+{pstd}{bf:Preface: A reshape warm-up}
+
+{hline}
+
+{pstd}We are about to discuss exciting ways to use the {cmd:reshape} command.
+Before that, let's stretch our {cmd:reshape} muscles.
+
+{phang}{bf:{stata `"use Raw/Household, clear"'}}{p_end}
+
+{phang}{bf:{stata `"describe"'}}{p_end}
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}We have loaded a household dataset:
+every observation is a household,
+and many variables are repeated for each household member.
+For example, {cmd:age1} is the age of household member {cmd:1},
+{cmd:age2} is the age of member {cmd:2}, and so on.
+
+{pstd}How can we use {cmd:reshape} to transform the data to
+a member-level dataset
+in which every observation is not a household,
+but rather a household {it:member}?
+In the new dataset, there will be a single {cmd:age} variable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{phang}{bf:{stata `"reshape long age female married, i(hhid) j(memid)"'}}{p_end}
+
+{pstd}How do we {cmd:reshape} it back,
+transforming the member-level dataset to a household dataset?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{phang}{bf:{stata `"reshape wide age female married, i(hhid) j(memid)"'}}{p_end}
+
+{pstd}Let's say we wanted to list all household members who
+are younger than {cmd:10} but recorded as married.
+Without {cmd:reshape}, we might attempt an ugly loop:
+
+{phang}{cmd}generate which = ""{txt}{p_end}
+{phang}{cmd}local MAX_MEMBERS 5{txt}{p_end}
+{phang}{cmd}forvalues i = 1/`MAX_MEMBERS' {{txt}{p_end}
+{phang2}{cmd}replace which = which + "`i' " if age`i' < 10 & married`i'{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+{phang}{cmd}list hhid which age* married* if !missing(which){txt}{p_end}
+{phang}{cmd}drop which{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/reshape.do" 1"':Click here to execute.}
+
+{pstd}Even the output is a little hard to parse.
+{cmd:reshape} gives us an elegant alternative: any guesses how?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{phang}{bf:{stata `"reshape long age female married, i(hhid) j(memid)"'}}{p_end}
+{phang}{bf:{stata `"list if age < 10 & married"'}}{p_end}
+
+{pstd}We will see throughout this module that
+{cmd:reshape} is often preferable to looping.
+Of course, {it:often} is different from {it:always},
+and we will also see times when looping is the better choice.
+Yet the key takeaway is that {cmd:reshape} is a powerful tool in
+any Stata user's kit.
+
+{pstd}In the example above, we wanted to know about household {it:members},
+hence we {cmd:reshape}d the dataset so that
+its observations matched the unit of interest.
+Questions about entire households probably would not require a {cmd:reshape}.
+Cleans that involve a {cmd:reshape} often start with a question:
+what unit am I really interested in? what do I wish my dataset looked like?
+
+{pstd}{cmd:reshape} is powerful because it forces us to see new datasets within
+our current one. In that sense, {cmd:Raw/Household} is not just a household dataset,
+but also a potential individual-level dataset.
+
+{hline}{marker sort_across}
+
+{pstd}{bf:1. Sorting across variables}
+
+{hline}
+
+{pstd}This is an actual request from {help Statalist}. Danny Tu writes:
+
+{pstd}"I would like to re-structure my panel data
+which currently sit in the fixed column format ... to left adjusted format."
+
+{pstd}Danny wants to transform this dataset:
+
+{phang}{cmd}clear{txt}{p_end}
+{phang}{cmd}input id f1 f2 f3 f4 f5 f6{txt}{p_end}
+{phang}{cmd}1 . 12 23 . . 56{txt}{p_end}
+{phang}{cmd}2 . 62 . . . .{txt}{p_end}
+{phang}{cmd}3 881 . 453 34 55 .{txt}{p_end}
+{phang}{cmd}4 . 92 . . . .{txt}{p_end}
+{phang}{cmd}5 . 62 . . . .{txt}{p_end}
+{phang}{cmd}6 . . . . . 67{txt}{p_end}
+{phang}{cmd}7 91 . . . 87 .{txt}{p_end}
+{phang}{cmd}8 . . . 66 . .{txt}{p_end}
+{phang}{cmd}9 . . 53 . . 76{txt}{p_end}
+{phang}{cmd}end{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/reshape.do" 2"':Click here to execute.}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}to this one:
+
+{phang}{cmd}clear{txt}{p_end}
+{phang}{cmd}input id f1 f2 f3 f4 f5 f6{txt}{p_end}
+{phang}{cmd}1 12 23 56 . . .{txt}{p_end}
+{phang}{cmd}2 62 . . . . .{txt}{p_end}
+{phang}{cmd}3 881 453 34 55 . .{txt}{p_end}
+{phang}{cmd}4 92 . . . . .{txt}{p_end}
+{phang}{cmd}5 62 . . . . .{txt}{p_end}
+{phang}{cmd}6 67 . . . . .{txt}{p_end}
+{phang}{cmd}7 91 87 . . . .{txt}{p_end}
+{phang}{cmd}8 66 . . . . .{txt}{p_end}
+{phang}{cmd}9 53 76 . . . .{txt}{p_end}
+{phang}{cmd}end{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/reshape.do" 3"':Click here to execute.}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Danny talks about "left alignment,"
+but another way to think about the task is
+that Danny wants to sort {it:across} the {cmd:f} variables.
+First he wants to sort the missing {cmd:f} values after the nonmissing ones,
+then he wants to sort the nonmissing {cmd:f} values
+according to their original relative order.
+
+{pstd}Another way to make this point is through transposing the dataset.
+As an example, we will transpose one observation using {helpb xpose},
+sort it according to Danny's rules,
+then transpose it back.
+The desired results are achieved.
+(Don't worry about learning {cmd:xpose} well:
+we will soon learn a superior alternative {hline 2} any guesses what?)
+
+{pstd}{stata run Do/Modules/reshape 2:Click here to input the original dataset.}
+
+{phang}{bf:{stata `"keep in 1"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"xpose, clear varname"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"generate id = _varname == "id""'}}{p_end}
+{phang}{bf:{stata `"generate miss = missing(v1)"'}}{p_end}
+{phang}{bf:{stata `"generate n = _n"'}}{p_end}
+{phang}{bf:{stata `"gsort -id miss n"'}}{p_end}
+{phang}{bf:{stata `"drop id miss n"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}{cmd:_varname} needs to be changed so that the new sort order sticks
+after the second tranpose:
+
+{phang}{bf:{stata `"replace _varname = "f" + string(_n - 1) in 2/L"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"xpose, clear"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Thinking about the left-right sort (a sort {it:across},
+not {it:within} variables) as tranpose-sort-tranpose was
+so compelling to me that after deciding that transposing was
+too laborious in Stata,
+my response to Danny involved transposing then sorting using Mata.
+
+{pstd}Neither Stata nor Mata has a simple command or function for
+left-right sorting.
+Transposing becomes appealing simply as a means of
+transforming the dataset into one for which
+{cmd:sort}, {cmd:gsort}, and other sorting tools are useful.
+
+{pstd}So is Mata the solution for Danny?
+Well, it is probably telling that this module is on {cmd:reshape}, not Mata.
+It turned out that a much easier solution was possible with {cmd:reshape}:
+
+{pstd}{stata run Do/Modules/reshape 2:Click here to input the original dataset.}
+
+{phang}{bf:{stata `"reshape long f, i(id)"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}One way to think about this structure is
+that each observation has been transposed separately
+and then stacked together.
+You can think of it as the result of {cmd:xpose} for each observation
+appended together,
+where {cmd:_varname} has been replaced by an index for variables
+(a variable unique ID), {cmd:_j}.
+
+{phang}{bf:{stata `"generate miss = missing(f)"'}}{p_end}
+{phang}{bf:{stata `"sort id miss _j"'}}{p_end}
+{phang}{bf:{stata `"drop miss"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Just as with {cmd:xpose} when we needed to change {cmd:_varname},
+we now need to change {cmd:_j} so that the new sort order remains
+when we {cmd:reshape wide}, transposing back.
+
+{phang}{bf:{stata `"drop _j"'}}{p_end}
+{phang}{bf:{stata `"by id: generate j = _n"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"reshape wide f, i(id) j(j)"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{hline}{marker q1}
+
+{pstd}{bf:Question 1}
+
+{hline}
+
+{pstd}We have a dataset of summer Olympic medal wins:
+
+{phang}{bf:{stata `"use "Raw/Olympics 1", clear"'}}{p_end}
+
+{pstd}Each observation is a list of sports in which a country medaled.
+Observations are identified by country and the year of the Olympics:
+
+{phang}{bf:{stata `"isid country year"'}}{p_end}
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}However, the sport variables are a mess.
+It is not clear how they are ordered (time? medal class?),
+but we want them to be alphabetical.
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(a)}
+
+{pstd}Sort across the sport variables,
+so that {cmd:sport1} is a country's alphabetically first sport,
+{cmd:sport2} the second, and so on.
+(The sport variables are numeric,
+but the values of the value label are sorted by sport name:
+{bf:{stata label list sport}})
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(b)}
+
+{pstd}Create a variable named {cmd:sportchange} that is {cmd:1}
+if a country's sports list changed since its last medaling year,
+and {cmd:0} if not.
+There are multiple approaches to {bf:(b)}!
+{txt}{sf}{ul off}{...}
+
+{pstd}{bf:(c)}
+
+{pstd}Create a variable named {cmd:nochange} that is {cmd:1}
+if a country has never seen a change in its sports list from
+one medaling year to the next, and {cmd:0} otherwise.
+How many countries always win the same medals?
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{hline}{marker list_vars}
+
+{pstd}{bf:2. Manipulating variables that are lists}
+
+{hline}
+
+{pstd}This variant on the Olympics dataset has a variable named {cmd:sports} that
+is the list of a country's medaling sports:
+
+{phang}{bf:{stata `"use "Raw/Olympics 2", clear"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}However, again, the order of the sports is a mess.
+
+{pstd}By first {helpb split}ting the variable,
+we can use the same steps as Question 1 to recreate the variable:
+
+{phang}{bf:{stata `"rename sports sport"'}}{p_end}
+{phang}{bf:{stata `"split sport, parse(", ")"'}}{p_end}
+{phang}{bf:{stata `"drop sport"'}}{p_end}
+{phang}{bf:{stata `"destring sport*, replace"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"reshape long sport, i(country year)"'}}{p_end}
+{phang}{bf:{stata `"drop if missing(sport)"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"sort country year sport"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}Now recreating {cmd:sports} from {cmd:sport}:
+
+{phang}{bf:{stata `"generate sports = """'}}{p_end}
+
+{phang}{cmd}by country year (sport): replace sports = sports[_n - 1] + ///{txt}{p_end}
+{phang2}{cmd}cond(missing(sports[_n - 1]), "", ", ") + string(sport){txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/reshape.do" 4"':Click here to execute.}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"by country year (sport): replace sports = sports[_N]"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}And finally, the second {cmd:reshape}:
+
+{phang}{bf:{stata `"reshape wide sport, i(country year) j(_j)"'}}{p_end}
+
+{phang}{bf:{stata `"keep country year sports"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}{cmd:sports} was a variable whose values were themselves lists.
+Using {cmd:reshape}, we sorted those lists.
+We have now seen two different uses of {cmd:reshape} for atypical sorting.
+
+{hline}{marker q2}
+
+{pstd}{bf:Question 2}
+
+{hline}
+
+{pstd}For variables that are lists, such as {cmd:sports},
+{cmd:reshape} allows manipulation beyond sorting.
+
+{pstd}The following is a dataset of one list variable, {cmd:s2_q8},
+a question that allowed respondents to choose up to 4 of 12 possible options:
+
+{phang}{bf:{stata `"use Raw/s2_q8, clear"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}You can see that {cmd:s2_q8} is already internally sorted.
+However, it is still not possible to use the variable for analysis.
+
+{pstd}Using {cmd:reshape}, create dummy variables for all 12 options.
+For each option, if a list contains that option, the option's dummy variable should equal {cmd:1};
+otherwise it should equal {cmd:0}. For example:
+
+{phang}{bf:{stata `"list in 1"'}}{p_end}
+
+{pstd}In observation 1, the dummy variable for option {cmd:1} would equal {cmd:0},
+since the list does not contain {cmd:1}.
+However, the dummy variable for option {cmd:5} would equal {cmd:1}.
+{txt}{sf}{ul off}{...}
+
+{hline}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{pstd}You can count on {cmd:reshape} to manipulate variables that are lists.
+However, in some cases, a loop may suffice:
+
+{phang}{bf:{stata `"use Raw/s2_q8, clear"'}}{p_end}
+
+{phang}{bf:{stata `"replace s2_q8 = " " + s2_q8 + " ""'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{cmd}forvalues i = 1/12 {{txt}{p_end}
+{phang2}{cmd}generate s2_q8_`i' = strpos(s2_q8, " " + string(`i') + " ") != 0{txt}{p_end}
+{phang}{cmd}}{txt}{p_end}
+
+{pstd}{stata `"run "Do/Modules/reshape.do" 5"':Click here to execute.}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{phang}{bf:{stata `"replace s2_q8 = strtrim(s2_q8)"'}}{p_end}
+
+{phang}{bf:{stata `"browse"'}}{p_end}
+
+{pstd}That was actually pretty easy.
+We already had a tool to search the list ({helpb strpos()}),
+so reshaping in order to leverage {cmd:xi} was unnecessary.
+Yet often there are tools for variables (columns) where
+there are none for observations (rows). Sorting is an example.
+Mastering {cmd:reshape} means knowing the options for variable lists, as well as
+the cases where there is a tool for a single variable but
+not a list, when {cmd:reshape} is often the best course.
+
