@@ -1,52 +1,27 @@
 Stata_Training
 ==============
 
-Houses IPA's Stata training courses and code.
+**About**: The Stata_Training repository houses Stata training courses and code developed by Innovations for Poverty Action (IPA). These Stata training courses are particularly well suited for students and research assistants in the field of development economics. You can start with Stata 101 without ever having used Stata, and advance through the following courses to build up your coding skills and understanding of Stata.
 
-101 is an intro to Stata - remains as a Word doc.
 
-102 is the first version on SMCL, previous versions had appeared as a Word doc.
+**Contributing authors**: Christopher Boyer, Wesley Kirui, Harrison Diamond Pollock, Cristhian Pulido, Rosemarie Sandino, Lindsey Shaughnessy, Gean Spektor, Mathew White.
 
-103 is similar to the training given at Kenya 2014, Duplicates and Variable Properties were removed, and Loops module changed.
+**Course topics and pre-requisites**: Use the table below to determine the most approriate course for yourself.
 
-104 is the version prepared for Kenya 2014, main change since was to remove Logical Expressions module.
 
-201 is the New Hampshire 2013 Advanced training - will be cleaned up.
+|  Course   |    Topics  | Pre-requisites | Format and Software Requirements |
+| --------- | ---------- | -------------- | -------------------------------- |
+| [Stata 101](https://github.com/PovertyAction/IPA-Stata-Trainings/tree/master/Stata%20101) |<li>Overview of Stata</li><li>Browsing data</li><li>Conditions</li><li>Saving and Sorting</li><li>Creating & Changing Variables</li> | None | Microsoft Word: .docx, Microsoft Excel: .xls|
+| [Stata 102](https://github.com/PovertyAction/IPA-Stata-Trainings/tree/master/Stata%20102) |<li>Resources</li><li>Commands</li><li>Labeling Variables</li><li>Variable Types</li><li>IDs & Duplicates</li><li>Macros and Locals</li><li>Loops</li><li>Importing</li>| Stata 101 | Stata: .smcl, .do, .dta | 
+| [Stata 103](https://github.com/PovertyAction/IPA-Stata-Trainings/tree/master/Stata%20103) |<li>Logical Expressions</li><li>Dummy Variables</li><li>Subscripting</li><li>For-loops & macros</li><li>_N and _n</li><li>by</li><li>Egen</li>| Stata 102 | Stata: .smcl, .do, .dta |
+| [Stata 104](https://github.com/PovertyAction/IPA-Stata-Trainings/tree/master/Stata%20104) |<li>r() & e()</li><li>Variable Recoding</li><li>Checking skip patterns</li><li>Check logical consistency</li><li>Other Data Checks</li><li>String Cleaning</li><li>Exporting</li>| Stata 103 | Stata: .smcl, .do, .dta |
+| [Stata 201](https://github.com/PovertyAction/IPA-Stata-Trainings/tree/master/Stata%20201) |<li>Extended macro functions</li><li>Macros and expressions</li><li>Advanced uses of reshape </li>| Stata 104 | Stata: .smcl, .do, .dta |
 
-202 is a module on Mata presented at the March 2014 Data Day - will be expanded upon
 
-The `Session Notes` folder contains notes from New Haven Stata trainings.
 
-User-written programs
----------------------
+If you are having trouble opening SMCL files, please ensure that Stata is installed on your computer and that .smcl files are associated with (automatically opened by) Stata. 
 
-Type the following commands in Stata to install the user-written programs used for Stata training development. These programs are not required for trainees who wish to complete the courses, but rather for those who wish to contribute to the training.
+**Additional support for IPA staff**: The training's authors are only able to provide direct support to IPA staff; you may contact us at researchsupport@poverty-action.org. IPA staff also have access to additional Stata training materials in Moodle.
 
-```
-ssc install fastcd
-```
-
-Next, set up `fastcd` to work on your computer as follows:
-
-```
-* Change the working directory to the location of Stata_Training on
-* your computer.
-cd ...
-c cur stata_training
-
-* Change the working directory to the location of Stata_Training/Stata 202 on
-* your computer.
-cd ...
-c cur train202
-```
-
-After this, the command `c stata_training` will change the working directory to `Stata_Training`; `c train202` will change it to `Stata_Training/Stata 202`.
-
-`fastcd` is the name of the SSC package, not the command itself; the command is named `c`. To change the working directory, type `c` in Stata, not `fastcd`. To view the help file, type `help fastcd`, not `help c`.
-
-Finally, add the `ado` directory and all its subdirectories to your [ado-path](http://www.stata.com/help.cgi?adopath).
-
-Pseudo-SMCL
------------
-
-Courses 102 and above are written in a modified form of SMCL that we have uninventively named "pseudo-SMCL." See [this guide](/Documentation/Pseudo-SMCL.md) for details.
+**Licensing**: Please attribute IPA if you use these courses outside of individual learning purposes.
+See the repository's license file for additional information.
