@@ -1,11 +1,10 @@
-Guide to Pseudo-SMCL
-====================
+# Guide to Pseudo-SMCL
 
 Courses 102 and above are written in a modified form of SMCL that we have uninventively named "pseudo-SMCL." Pseudo-SMCL files are converted to SMCL files before being shared: their role is solely to facilitate the efficient creation of SMCL files, and they are not distributed to trainees on their own. Pseudo-SMCL files look like do-files, with runnable commands on their own lines and text in comments. [`Do to SMCL.do`](/Do to SMCL.do) converts such do-files to SMCL files, with comments converted to text in paragraph mode and commands enclosed in SMCL `{stata}` directives.
 
 For instance, a pseudo-SMCL file may appear as follows:
 
-```
+```stata
 * Load the auto dataset.
 
 sysuse auto
@@ -17,7 +16,7 @@ summarize foreign
 
 This example is so similar to a do-file that it is even runnable. `Do to SMCL.do` will then convert it to a nice SMCL file that can be used for training:
 
-```
+```stata
 {pstd}Load the auto dataset.
 
 {phang}{bf:{stata `"sysuse auto"'}}{p_end}
@@ -29,7 +28,7 @@ This example is so similar to a do-file that it is even runnable. `Do to SMCL.do
 
 SMCL directives in pseudo-SMCL comments pass through as-is to the SMCL file. The following pseudo-SMCL:
 
-```
+```stata
 * Load the {it:auto} dataset.
 
 sysuse auto
@@ -37,7 +36,7 @@ sysuse auto
 
 is converted to:
 
-```
+```stata
 {pstd}Load the {it:auto} dataset.
 
 {phang}{bf:{stata `"sysuse auto"'}}{p_end}
@@ -49,7 +48,7 @@ Pseudo-SMCL also contains its own directives, listed in the sections below. By c
 
 Pseudo-SMCL directives are implemented through simple substitutions, which means that while SMCL directives are not allowed on command lines, pseudo-SMCL directives are. For instance, the directive `{DATA}` may be associated with the dataset name `auto`. Then the following pseudo-SMCL:
 
-```
+```stata
 * Load the auto dataset.
 
 sysuse {DATA}
@@ -57,7 +56,7 @@ sysuse {DATA}
 
 is converted to:
 
-```
+```stata
 {pstd}Load the auto dataset.
 
 {phang}{bf:{stata `"sysuse auto"'}}{p_end}
@@ -69,7 +68,7 @@ Pseudo-SMCL is not consistent across the training courses: the exact substitutio
 
 There are a few more advanced pseudo-SMCL directives. For instance, `#define` allows the definition of pseudo-SMCL directives on the fly from within pseudo-SMCL files. These newly defined directives may even be used in other pseudo-SMCL files.
 
-### Conventions and abbreviations
+## Conventions and abbreviations
 
 Directive | Description
 :-------- | :----------
